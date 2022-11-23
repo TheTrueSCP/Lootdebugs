@@ -1,0 +1,14 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:backbreaker_stout"
+  },
+
+  "count1": 1,
+  "count2": 0,
+  "count3": 0,
+  "count4": 0,
+  "emerald": false
+
+}

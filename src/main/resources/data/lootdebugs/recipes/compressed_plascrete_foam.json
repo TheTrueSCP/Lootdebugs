@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OIO",
+    "=H=",
+    "OIO"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:sand"
+    },
+    "=": {
+      "item": "lootdebugs:dystrum_ingot"
+    },
+    "H": {
+      "item": "lootdebugs:bismor_ingot"
+    },
+    "O": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "item": "lootdebugs:foam",
+    "count": 6
+  }
+}

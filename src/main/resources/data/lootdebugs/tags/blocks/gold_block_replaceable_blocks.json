@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+   "#lootdebugs:platformgun_replaceable_blocks",
+    "#minecraft:deepslate_ore_replaceables",
+    "#minecraft:stone_ore_replaceables",
+    "minecraft:dirt",
+    "minecraft:grass_block",
+    "minecraft:sand"
+  ]
+}

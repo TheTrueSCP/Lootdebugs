@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/smartstout" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/smartstout", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/smartstout", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/smartstout", "y":  270}
+  }
+}

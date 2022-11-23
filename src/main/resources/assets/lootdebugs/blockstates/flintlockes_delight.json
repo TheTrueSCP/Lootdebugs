@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/flintlockes_delight" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/flintlockes_delight", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/flintlockes_delight", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/flintlockes_delight", "y":  270}
+  }
+}

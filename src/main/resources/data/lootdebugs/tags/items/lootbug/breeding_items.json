@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:redstone",
+    "lootdebugs:ommoran_hearthstone",
+    "lootdebugs:nitra",
+    "lootdebugs:nitra_block",
+    "lootdebugs:morkite",
+    "lootdebugs:morkite_block"
+
+
+  ]
+}

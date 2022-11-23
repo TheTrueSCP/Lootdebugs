@@ -1,0 +1,8 @@
+{
+  "variants": {
+
+    "age=0": {"model": "lootdebugs:block/barley_plant_0"},
+    "age=1": {"model": "lootdebugs:block/barley_plant_1"}
+
+  }
+}

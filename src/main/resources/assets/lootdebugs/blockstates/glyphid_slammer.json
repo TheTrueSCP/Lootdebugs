@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/glyphid_slammer", "y":  180},
+    "facing=south": { "model": "lootdebugs:block/glyphid_slammer", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/glyphid_slammer", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/glyphid_slammer", "y":  270}
+  }
+  }

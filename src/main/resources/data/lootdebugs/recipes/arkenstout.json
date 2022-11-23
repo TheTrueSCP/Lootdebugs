@@ -1,0 +1,14 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:arkenstout"
+  },
+
+  "count1": 0,
+  "count2": 0,
+  "count3": 4,
+  "count4": 0,
+  "emerald": false
+
+}

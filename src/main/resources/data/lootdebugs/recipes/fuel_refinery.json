@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "minecraft:glass_pane"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "minecraft:glass_pane"
+        },
+        {
+            "item": "lootdebugs:mixer_barrel"
+        },
+        {
+            "item": "minecraft:glass_pane"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "minecraft:glass_pane"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:fuel_refinery"
+    }
+
+}

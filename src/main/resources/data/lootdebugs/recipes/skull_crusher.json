@@ -1,0 +1,13 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:skull_crusher"
+  },
+
+  "count1": 2,
+  "count2": 0,
+  "count3": 0,
+  "count4": 0,
+  "emerald": false
+}

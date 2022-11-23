@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/dark_morkite" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/dark_morkite", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/dark_morkite", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/dark_morkite", "y":  270}
+  }
+}

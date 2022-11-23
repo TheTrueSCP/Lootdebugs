@@ -1,0 +1,13 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:leaf_lover_special"
+  },
+
+  "count1": 1,
+  "count2": 0,
+  "count3": 0,
+  "count4": 0,
+  "emerald": true
+}

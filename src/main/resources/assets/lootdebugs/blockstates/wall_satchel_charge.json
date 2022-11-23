@@ -1,0 +1,16 @@
+{
+  "variants": {
+
+    "facing=north,activated=false": { "model": "lootdebugs:block/satchel_charge" , "y":  270, "z":  90},
+    "facing=north,activated=true": { "model": "lootdebugs:block/satchel_charge_active" , "y":  270, "z":  90},
+
+    "facing=south,activated=false": { "model": "lootdebugs:block/satchel_charge", "y":  90},
+    "facing=south,activated=true": { "model": "lootdebugs:block/satchel_charge_active", "y":  90},
+
+    "facing=west,activated=false": { "model": "lootdebugs:block/satchel_charge", "y":  180},
+    "facing=west,activated=true": { "model": "lootdebugs:block/satchel_charge_active", "y": 180},
+
+    "facing=east,activated=false": { "model": "lootdebugs:block/satchel_charge", "y":  0},
+    "facing=east,activated=true": { "model": "lootdebugs:block/satchel_charge_active", "y":  0}
+  }
+}

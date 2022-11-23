@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "lootdebugs:nitra_ore"
+  },
+  "result": "lootdebugs:nitra",
+  "experience": 1.0,
+  "cookingtime": 100,
+  "count": 3
+}

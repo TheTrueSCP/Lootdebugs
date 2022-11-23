@@ -1,0 +1,37 @@
+{
+  "parent": "lootdebugs:create_pub",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:oily_oaf"
+    },
+    "title": {
+      "translate": "advancements.brew.drink.title"
+    },
+    "description": {
+      "translate": "advancements.brew.drink.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "drink": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+             "tag": "lootdebugs:drinks"
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "drink"
+    ]
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "lootdebugs:test_block",
+
+    "lootdebugs:nitra_block",
+    "lootdebugs:nitra_ore",
+    "lootdebugs:deepslate_nitra_ore",
+
+    "lootdebugs:morkite_block",
+    "lootdebugs:morkite_ore",
+    "lootdebugs:deepslate_morkite_ore",
+
+    "lootdebugs:raw_dystrum_block",
+    "lootdebugs:dystrum_block",
+    "lootdebugs:dystrum_ore",
+    "lootdebugs:deepslate_dystrum_ore",
+
+    "lootdebugs:bismor_block",
+    "lootdebugs:bismor_ore",
+
+    "lootdebugs:cropper_ore",
+    "lootdebugs:cropper_block",
+
+    "lootdebugs:equipment_table",
+    "lootdebugs:fuel_refinery",
+    "lootdebugs:pub"
+
+  ]
+}

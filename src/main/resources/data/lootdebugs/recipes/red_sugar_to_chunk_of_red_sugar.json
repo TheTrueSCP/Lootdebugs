@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lootdebugs:red_sugar"
+    }
+  ],
+  "result": {
+    "item": "lootdebugs:red_sugar_item",
+    "count": 3
+  }
+}

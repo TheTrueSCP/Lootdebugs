@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "BFB",
+        "#C#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:iron_ingot"
+        },
+        "C": {
+            "item": "minecraft:crafting_table"
+        },
+        "B": {
+            "item": "lootdebugs:bismor_ingot"
+        },
+        "F": {
+            "item": "lootdebugs:cropper_ingot"
+        }
+    },
+    "result": {
+        "item": "lootdebugs:equipment_table"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "lootdebugs:nitra_block"
+        }
+    ],
+    "result": {
+        "item": "lootdebugs:nitra",
+        "count": 9
+    }
+}

@@ -1,0 +1,229 @@
+{
+  "itemGroup.lootbuggroup": "Beuteentkäfern",
+  "block.lootdebugs.test_block": "Test Block",
+  "block.lootdebugs.glyphid_shit": "Glyphid Scheiße",
+  "item.lootdebugs.dafuck": "Was zum Teufel?",
+
+  "player.flares": "Leuchtmitteln",
+
+  "player.class.leaf_lover": "Leaf Lover",
+  "player.class.driller": "Bohrer",
+  "player.class.scout": "Erkunder",
+  "player.class.engineer": "Ingenieur",
+  "player.class.gunner": "Kanonier",
+  "player.class.thetruescp": "TheTrueSCP",
+  "player.class.monsieurhannes": "Monsieur Hannes",
+
+  "tool.wrong_class": "Falsche Klasse, du bist zurzeit",
+  "tool.no_fuel": "Kein Treibstoff im Inventar",
+
+
+  "block.lootdebugs.pub": "Lloyd",
+  "block.lootdebugs.equipment_table": "Gerätetisch",
+  "block.lootdebugs.fuel_press": "Treibstoffpresse",
+  "block.lootdebugs.class_changer": "Class Änderer",
+
+  "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
+  "jei.lootdebugs.pub_brewing": "Beer Brewing",
+
+
+  "lootdebugs.key.rock_and_stone": "Grüßen",
+  "lootdebugs.key.throw_flare": "Throw Flare",
+
+  "item.lootdebugs.jet": "Schubdüse",
+  "item.lootdebugs.drill_head": "Bohrerkopf",
+  "item.lootdebugs.coil": "Spule",
+  "item.lootdebugs.power_cell": "Energiezelle",
+  "item.lootdebugs.mixer_barrel": "Vermischungsfass",
+  "item.lootdebugs.flare_igniter": "Leuchtfeuer Entzünder",
+
+  "item.lootdebugs.company_standard_pickaxe": "Kompanie Standard Spitzhacke",
+  "item.lootdebugs.drills": "Verstärkte Abbau Bohrer",
+  "item.lootdebugs.platform_gun": "Platform Schuss Waffe",
+  "item.lootdebugs.flare_gun": "Fackel Schusswaffe",
+  "item.lootdebugs.grappling_hook": "Greif Haken",
+  "item.lootdebugs.laser_pointer": "Licht Punkter",
+  "block.lootdebugs.satchel_charge": "Schulranzenladung",
+  "block.lootdebugs.shield_emitter_block": "Schild",
+
+  "item.lootdebugs.nitra_on_a_stick": "Nitra on a Stick",
+
+  "item.lootdebugs.liquid_morkite_bucket": "Liquid Morkite Bucket",
+
+  "item.lootdebugs.fuel": "Treibstoffkanister",
+  "item.lootdebugs.empty_fuel_canister": "Leerer Treibstoffkanister",
+  "item.lootdebugs.foam": "kompressierter Begebahrer Schaum",
+  "item.lootdebugs.shoot_flare": "Schießbares Leuchtsignal",
+  "block.lootdebugs.plascrete_foam": "Begehbarer Schaum Version 2",
+  "block.lootdebugs.plascrete_foam_mk2": "Begehbarer Schaum Version 1",
+  "item.lootdebugs.ommoran_hearthstone_locator": "Ommoran Hearthstone Locator",
+
+
+  "item.lootdebugs.mk1_company_standard_driller_helmet": "MK1 Driller Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_driller_chestplate": "MK1 Driller Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_driller_leggings": "MK1 Driller Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_driller_boots": "MK1 Driller Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_scout_helmet": "MK1 Scout Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_scout_chestplate": "MK1 Driller Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_scout_leggings": "MK1 Scout Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_scout_boots": "MK1 Scout Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_engineer_helmet": "MK1 Engineer Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_engineer_chestplate": "MK1 Engineer Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_engineer_leggings": "MK1 Engineer Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_engineer_boots": "MK1 Engineer Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_gunner_helmet": "MK1 Gunner Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_gunner_chestplate": "MK1 Gunner Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_gunner_leggings": "MK1 Gunner Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_gunner_boots": "MK1 Gunner Suit Boots",
+
+
+  "entity.lootdebugs.lootbug_golden": "Goldene Beutelarve",
+  "entity.lootdebugs.lootbug": "Beutelarve",
+
+  "item.lootdebugs.lootbug_spawn_egg": "Beutelarve Spawn Ei",
+  "item.lootdebugs.lootbug_golden_spawn_egg": "Goldene Beutelarve Spawn Ei",
+
+
+  "lootbug.lootbug_idle": "Beutelarve am chillen",
+  "lootbug.lootbug_death": "Beutelarve Tod",
+  "lootbug.lootbug_reaction": "Beutelarve Reaktion",
+  "lootbug.lootbug_hurt": "Beutelarve wurde Verletzt",
+  "rickroll.rickroll": "Never Gonna Give You Up",
+  "rockandstone.mining_shanty": "Spielt Mining Shanty",
+  "rockandstone.salute": "Spieler Salutiert",
+  "beer.smartstout": "Klugscheißer labert",
+  "ore.morkite_mining": "Morkite Abbauen",
+  "lloyd.lloyd_reaction": "lloyd Reaktion",
+
+  "tools.shoot": "Werkzeug hat Geschossen",
+  "tools.foam.harden": "Platform Waffe hat Geschossen",
+  "tools.drills": "Bohrer bohrt",
+  "tools.pickaxe.powerattack": "Powerattack performed",
+  "tools.ping.setmark": "Schau da",
+  "tools.ping.dirt": "Dreck!",
+  "tools.ping.morkite": "Morkit gefunden!",
+  "tools.ping.dystrum": "Dystrum!",
+  "tools.ping.red_sugar": "Roter Zucker!",
+  "tools.ping.gold": "Gold!",
+  "tools.ping.mushroom": "MUSHROOM",
+  "tools.ping.gold.were_rich": "WERE RICH!",
+  "tools.ping.nitra": "Nitra!",
+  "tools.ping.worthless": "Das ist Nutzlos",
+  "tools.ping.mark": "Markierung",
+  "tools.ping.lootbug": "Lootbug There",
+
+
+  "item.lootdebugs.barley_bulb": "Barleybirne",
+  "item.lootdebugs.starch_nut": "Stärkenuss",
+  "item.lootdebugs.malt_star": "Malzstern",
+  "item.lootdebugs.yeast_cone": "Hefezapfen",
+  "block.lootdebugs.boolo_cap": "Bulo Kappe",
+  "block.lootdebugs.apoca_bloom": "Apokka Blüte",
+  "block.lootdebugs.barley_plant": "Barley Pflanze",
+  "block.lootdebugs.yeast_plant": "Hefe Pflanze",
+  "block.lootdebugs.starch_plant": "Stärke Pflänze",
+  "block.lootdebugs.malt_plant": "Malz Pflanze",
+
+  "block.lootdebugs.tunnel_rat": "Tunnel Ratte",
+  "block.lootdebugs.oily_oaf": "Öliger Suff",
+  "block.lootdebugs.skull_crusher": "Schädel-Schmetterer",
+  "block.lootdebugs.mug": "Krug",
+  "block.lootdebugs.blackout_stout": "Flüssig-Kater",
+  "block.lootdebugs.arkenstout": "Arktischer Sturm",
+  "block.lootdebugs.backbreaker_stout": "Dicker Rückenbrecher",
+  "block.lootdebugs.flintlockes_delight": "Brandläufiger Genuss",
+  "block.lootdebugs.dark_morkite": "Schwarzes Morkit",
+  "block.lootdebugs.leaf_lover_special": "Spitzöhriges Öko Gebräu",
+  "block.lootdebugs.glyphid_slammer": "Glyphieden Schläger",
+  "block.lootdebugs.seasoned_moonrider": "Herber Mondritt",
+  "block.lootdebugs.smartstout": "Klugscheißer",
+
+
+  "block.lootdebugs.ommoran_hearthstone": "Ommoranier Herzstein",
+  "block.lootdebugs.ommoran_layer_1_outerst": "Ommoranier Mantel",
+  "block.lootdebugs.ommoran_layer_2": "Ommoranier Schale",
+  "block.lootdebugs.ommoran_layer_3": "Ommoranier Kristall",
+  "block.lootdebugs.ommoran_layer_4_innerst": "Ommoranier Bett",
+  "item.lootdebugs.ommoran_hearthstone": "Ommoranier Herzstein",
+
+  "block.lootdebugs.morkite_ore": "Morkit Erz",
+  "block.lootdebugs.deepslate_morkite_ore": "Tiefenschiefer Morkit Erz",
+  "block.lootdebugs.morkite_block": "Morkit Block",
+  "item.lootdebugs.morkite": "Morkit",
+
+  "block.lootdebugs.nitra_ore": "Nitra Erz",
+  "block.lootdebugs.deepslate_nitra_ore": "Tiefenschiefer Nitra Erz",
+  "block.lootdebugs.nitra_block": "Nitra Block",
+  "item.lootdebugs.nitra": "Nitra",
+
+  "block.lootdebugs.cropper_ore": "Croppa Erz",
+  "block.lootdebugs.cropper_block": "Croppa Block",
+  "item.lootdebugs.raw_cropper": "Rohes Croppa",
+  "item.lootdebugs.cropper_ingot": "Croppa Barren",
+
+  "block.lootdebugs.dystrum_ore": "Dystrum Erz",
+  "block.lootdebugs.deepslate_dystrum_ore": "Tiefenschiefer Dystrum Erz",
+  "block.lootdebugs.raw_dystrum_block": "Roher Dystrum Block",
+  "block.lootdebugs.dystrum_block": "Dystrum Block",
+  "item.lootdebugs.raw_dystrum": "Rohes Dystrum",
+  "item.lootdebugs.dystrum_ingot": "Dystrum Barren",
+
+  "block.lootdebugs.bismor_ore": "Bismor Erz",
+  "block.lootdebugs.raw_bismor_block": "Roher Bismor Block",
+  "block.lootdebugs.bismor_block": "Bismor Block",
+  "item.lootdebugs.raw_bismor": "Rohes Bismor",
+  "item.lootdebugs.bismor_ingot": "Bismor Barren",
+
+  "block.lootdebugs.oil_shale": "Ölschiefer",
+
+  "block.lootdebugs.red_sugar": "Roter Zucker",
+  "item.lootdebugs.red_sugar_item": "Roter Zucker Klumpen",
+
+  "item.minecraft.potion.effect.drunkness_potion": "Potion of Drunkness",
+  "item.minecraft.lingering_potion.effect.drunkness_potion": "Lingering Potion of Drunkness",
+  "item.minecraft.splash_potion.effect.drunkness_potion": "Splash Potion of Drunkness",
+
+  "item.lootdebugs.rickroll": "Musik Scheibe",
+  "item.lootdebugs.rickroll.desc": "LOOTDEBUGS FÜRIMMER",
+
+  "item.lootdebugs.mining_shanty": "Musik Scheibe",
+  "item.lootdebugs.mining_shanty.desc": "Mat Zenk - Mining Shanty",
+
+  "effect.lootdebugs.explosive_diarrhoea": "Explosiver Durchfall",
+  "effect.lootdebugs.drunkness": "Betrunkenheit",
+  "effect.lootdebugs.slow_death": "Schwarzaus in",
+
+  "death.attack.blackoutstout": "Das ist das gute Zeug",
+  "death.attack.toodrunkin": "%1$s hatte defenitiv NICHT genug",
+
+  "advancements.lootbug.kill.title": "Du Monster!",
+  "advancements.lootbug.kill.description": "Jesus liebt dich nicht.",
+
+  "advancements.jet.create.title": "Wusch",
+  "advancements.jet.create.description": "Erstelle einen Antrieb für Lloyd",
+
+  "advancements.brew.drink.title": "Fels und Stein, Bruder",
+  "advancements.brew.drink.description": "Braue einen Getränk",
+
+  "advancements.lloyd.get.title": "Last das Brauen beginnen",
+  "advancements.lloyd.get.description": "Erstelle und plaziere Lloyd",
+
+  "advancements.pickup.glyphid_shit.title": "Glyphiden Scheiße??",
+  "advancements.pickup.glyphid_shit.description": "Never gonna give you up, never gonna let you down",
+
+  "advancements.welcome.to.lootdebugs.title": "Wilkommen zu Lootdebugs",
+  "advancements.welcome.to.lootdebugs.description": "Wilkommen zu Lootdebugs, ich hoffe dir gefällt es",
+
+  "advancements.pickup.ommoran_hearthstone.description": "Du hast erfolgreich einen Ommoranier Herzstein gefunden",
+  "advancements.pickup.ommoran_hearthstone.title": "Die Verwaltung wird zufrieden sein",
+
+  "advancements.pickup.company_standard_pickaxe.description": "Du hast erfolgreich einen Ommoranier Herzstein erstellt",
+  "advancements.pickup.company_standard_pickaxe.title": "Karl would approve of this(NEIN, NEIN, DISER SATZ WIRD NICHT VON DEUTSCH ZERSTÖRT)",
+
+  "advancements.pickup.test_block.title": "TEEEEESSSTTT, work that thing? TEEEEEST, HELLLLOO?,TEEEEESST",
+  "advancements.pickup.test_block.description": "Herzlichen Glückwunsch, du hast soeben den allerersten Block gefunden den ich je in der Mod erstellt habe",
+  "item.lootdebugs.ping": "Marker"
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/oily_oaf" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/oily_oaf", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/oily_oaf", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/oily_oaf", "y":  270}
+  }
+}

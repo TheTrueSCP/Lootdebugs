@@ -1,0 +1,436 @@
+Lootdebugs Changelog
+
+Rekord:85 (Tech and Tools Update)
+
+
+
+1.16.5-v1.0 Pre-Alpha 8.10.2021
+
+-Lootbug added
+-Lootbug First Model/Texture added
+
+1.16.5-v1.1 Pre-Alpha 8.10.2021
+
+-added final Lootbug Model/Texture
+
+
+1.16.5-v1.2 Pre-Alpha 9.10.2021
+
+-Added Lootbug Animations
+
+
+1.16.5-v1.3 Pre-Alpha 9.10.2021
+
+-added Lootbug Sounds
+-Escape reflex removed
+-deaktivated Lootbug animations
+
+
+1.16.5-v1.4 Alpha 9.10.2021
+
+-Lootbug Interactions removed
+-Lootbug Animations reintroduced
+-Lootbug Sounds improved
+-Added Creative Register
+-Lootbug Spawnegg added
+
+1.16.5-v1.5 Alpha 14.10.2021
+
+-Lootbug Animation changed
+-Added Lootbug head rotation
+-Added Ommorean Hearthstone Java files
+
+
+
+1.16.5-v1.6 Alpha 16.10.2021
+
+-Lootbug running animations complete
+-Lootbug AI improved
+-Added Ommoran Hearthstone Model
+-Ommoran Hearthstone Waterlogable
+-Lootbugs can be fed with Ommoran Hearthstone
+-Added golden lootbug (if you parry a golden lootbug with a standard or another golden lootbug, you still get a normal one)
+-Nitra Added
+-added Nitra geneartion
+
+
+1.16.5-v1.7 Alpha 16.10.2021
+-Pub class added
+-added mug
+-added Ommoran Hearthstone layers
+-added Ommoran Crust
+-added Ommoran hearthstone layers drop
+
+
+1.16.5-v1.8 Alpha 18.10.2021
+-added Mug
+-Added Oily Oaf and Skull Crusher with effects
+-Hearthstone ar mineable with hand
+-added Boolo Cap, Yeast Cone, Barley Bulb and Apoca Bloom
+-added Boolo Cap, Yeast Cone, Barley Bulb and Apoca Bloom textures
+-added Pub GUI Texture
+-Changed developer name to "the goldbeards" and mod name to "Lootdebugs" [!!!!!WARNING!!!!! WITH THIS VERSION ALL BLOCKS FROM PREVIOUS VERSIONS WILL BE REMOVED/ERASED FORM EARLIER VERSIONS]
+-added Lootbug Gen
+
+1.16.5-v1.9 Alpha-Bugfix 19.10.21
+-added Block-loottables
+-Code made more efficient
+-Items Embellished
+-Pub textur added
+-hitboxes fixed
+
+1.16.5-v2.0 Alpha_to_Beta-Completion_Update 13.11.2021 60
+
+-Mug, Oily Oaf, Pub(Lloyd) and Skull Crusher are now rotateable
+-Ommoran Hearthstone now glows
+-Naming error corrected (OMMORAN_HEARTHSTONE removed)
+-Morkite added
+-Morkite Hardness
+-Better Ommoran Hearthstone added
+-Baby Lootbugs added
+-Baby Lootbug rendering fixed
+-Starch Nut and yeast cone added
+-Starch Nut und Yeast Cone plants added
+-plants now harvestable
+-Language files updated
+-Tunnel Rat Effect Duration set to 6000 ticks(5 min)
+-Pub hardness changed
+-Yeast Plant and Starch Plant Loot added
+-Code now more efficient
+-New translations like LOLCAT and German added
+-Lootbugs can be fed now
+-Jet item added for recipes
+-jet item added
+-Recipes for Pub, jet, Mug, [UNKNOWN] and [UNKNOWN] added [DATA CORRUPTED]
+-ArkenStout added
+-BlackoutStout added
+-Loottable fixed
+-Languages added
+-Morkite Texture fixed
+-Apoca Bloom fixed
+-Barrel Models added
+-Pub now works
+-Apoca Bloom Voxel Shape bug fixed
+-Apoca Bloom Inventory Item Show Bug fixed
+-lootbug Golden Generation added
+-Lootbugs generation amount changed
+-Tag Mug deleted
+-Morkite Generation added
+-Nitra/Morkite Generation fixed
+-DAFUCK added
+-Lootbug Gold Generation changed yet again
+-Lootbugs Reaction Sound added
+-Pub Waterloggable
+-Pub/Ommoran Hearthstone correctly Waterloggable (when placed into water they are now immedietly waterlogged)
+-Langugages Files changed
+-[UNKNOWN] rotation added
+-Plants placebale everywhere
+-Ommoran Hearthstone Generation bug fixed
+-Mod engine upgraded
+-Ore Generation fixed
+-Nitra/Morkite Block added
+-Lloyd glowing added
+-Backbreaker Stout and Flintlockes Delight added
+-Pub GUI Button hover animation
+-Added Leaf Lover Special Datas
+-Slabtags added for better recipes
+-Leaf Lovers Loottable and name added
+-Hops generation added
+-Lootbugs Loottable fixed
+-Languages updated
+-Description changed
+-Hops generation updated
+-LOLCAT updated
+-little Bugfix
+
+1.16.5-v2.1 Beta-Bugfix 17.11.2021 12
+
+-Pub has now Interaction Sounds
+-Drinks rotations fixed
+-Drinks hitboxes fixed
+-Barley Bulb grown hitbox fixed
+-add collectables generation
+-added achievments
+-customized Lootbug Generation
+-drop rate plants fixed
+-fixed collectable generation
+-morkite/nitra ore fortune drop added
+-Star Plant drop fixed
+-Pub interface texture updated
+-Apoca Bloom Image fixed
+-nitra blockm is burnable
+
+
+1.16.5-v2.2 important stability update 18.11.2021
+
+-Ommoran Hearthstone provide power
+-Glyphid Slammer Drop
+-Crafting Recipe lloyd/Jet fixed
+
+
+1.18.1-v3.0 convertion update 1.18.X
+-converted the mod to 1.18.X
+-installed Transfer Stack in slot
+-added new Music Disc
+-Sound fixed
+-Malt Star Rotateable
+-Added Nitra/Morkite Deepslate
+-Updated Nitra Deepslate Texture
+-added 1.18 Worldgen
+-added FlairEntity
+-Add Rotations for MaltStar and Yeast Cone
+-Added Seasons Moonrider(with Function)
+-updated Languages
+-added Ommoran Hearthstone Gen
+-added Music Disc Mining Shanty
+-added Red Sugar
+-added Pub Brew Animation
+-Fixed Lootbug animation
+-removed Flair Entity
+
+1.18.1-v3.0 Tec and Tool test 95
+-added Mining-Drills
+-added Pickaxe material
+-added Pickaxe
+-added Recipes for Pickaxe
+-edited Red Sugar Eat Mechanic
+-added SmartStout
+-added SmartStout Sounds
+-changed Bismut Pickaxe name to Company Standard Pickaxe
+-changed Bismut Ingot name to Dystrum Ingot
+-removed Dystrum Recipe -> We'll add an ore
+-added Company Pickaxe Item Texture
+-added Dystrum Ingot Texture
+-fixed Drills Fuel Consume
+-added Drills model
+-added Drills Sound
+-added Dystrum Block
+-added Raw Dystrum Block
+-added Dystrum ore
+-added Deepslate Dystrum ore
+-added Dystrum Recipes
+-added missing Translations
+-added Cooldown to Pickaxe
+-added Platform Gun
+-added Raw Dystrum
+-changed Dystrum Recips
+-added Platform Gun Texture/Model
+-added Dystrum generation
+-changed Platform Loot table
+-added Flair Gun
+-fixed Platform gun bug
+-added Missing Languages Entries
+-updated to Forge 39.0.59
+-fixed Platform gun bug Finaly
+-disabled Pub generation
+-fixed Lootbug child rendering
+-fixed Ingredients bonmeal bug
+-fixed red sugar generation
+-improved Ingredients Generation
+-translated changelog
+-added Bismor Ore
+-added Bismor Ingot
+-added Bismor Gen
+-added Raw Bismor
+-fixed Platform Gun Shoot Duplication Bug
+-improved Red Sugar Generation
+-improved Bismor Generation
+-added Lootbug Pet animation(finally UwU)
+-added Compressed Plascrete Foam Recipe
+-fixed Pickaxe update
+-added Flare Decay
+-Lootbugs can Climb walls
+-added Arkenstout Frozen Effect
+-salute are now synced over the clients
+-fixed Light Block Collision Shape
+-added Flintlockes Function
+-added Flintlockes Recipe
+-added Bismor Textures
+-changed Platform_Gun Shoot mechanic
+-changed Flare_Gun Shoot mechanic
+-changed PlascreteFoamII Bouncephysic
+-edited Credits and Licences
+-own BeerItem class created
+-added Grappling Hook
+-removed Raw Bismor Block
+-added Shootable Flare Texture
+-JEI Integration
+-added missing translations
+-added Tools Terminal
+-removed Tools Terminal
+-added Raw Dystrum Block
+-added Red Sugar to Red Sugar Item Recipe
+-fixed Cooking Bismor Recipe
+-fixed Bismor Loottable
+-added Tools Recipes
+-changed default blockstates from ingredients
+-Drills Block Update added
+-Tools Water Mechanic added
+-added mixin
+-added Compressed Plascrete Foam Texture
+-added Shoot Flare Texture
+-fixed pickaxe powerhit bug
+-fixed soundvolume
+-changed Plascrete Block Fall Damage
+-added Smartstout Model/Texture
+-added Smartstout Voxelshape
+-ommoran hearthstone water placement added
+-game crashes when using the drills
+-smartstout loottable
+-smartstout cutout
+-drills endless fuel
+-sand sounds plascrete
+-flaregun damage
+-improved Bismor Gen
+-added Custom Flintlockes Delight effect
+-added Custom Blackout Stout effect
+-added Custom Drunkness effect
+-added Custom Death message for Blackout Stout
+-added Custom Death message for too many Beers
+-improved Flare Gun Physics
+-Powerattack do now damage to Mobs
+-Powerattack use now the cooldown
+-Added Shield Block
+-Readded Satchel Charge with Counter
+-added Shield block placing with shield block emitter
+-added Shield mechanics
+-satchel charge has now an active light
+-added shield rendering
+-fixed invisible shield
+-added shields can now destroy arrows
+-shield block is now replaceable
+-animals/neutral npcs can now enter the shield
+-readied Throw Flare
+-shields are now throwable
+-new shields can now renew old shields
+-added Ping
+-satchel charge are now rotatable
+-added Pickaxe power attack sound
+-converted the mod to 1.18.2
+-added Driller MK1 Armor
+-fixed company pickaxe handheld bug
+-improved Drunkness effect
+-added Drills Fuel Item
+-added Drills fuel mechanics
+-improved drills fuel consume
+-fixed drunkness kill bug
+-improved amor values
+-improved company standard pickaxe values
+-reactivated equipment table
+-added equipment table serializer
+-added onDrillMode to Driller
+-improved Driller Drill Physics
+-added Bar to Fuel Canister
+-added Fuel replacement by empty
+-added cropper
+-added empty canister
+-added drill head part
+-added coil part
+-added Drills Recipe
+-added grappling hook recipe
+-fixed cropper display
+-fixed bismor display
+-added Slow Death texture
+-added Fuel Canister textures
+-added Fuel textures
+-added drg based marker logic
+-made marker point translucent
+-added some blocks to "plants can grow"
+-added JEI Integration
+-added Coil Recipe
+-added Drill part recipe
+-added oil shale
+-added flare Ignator
+-added Flare gun recipe
+-added power cell(shield part)
+-added Shield recipe
+-improved ping
+-added mixer barrel
+-added platform gun recipe
+-retextured morkite
+-set empty fuel canister limit to 1
+-added Fuel Press
+-added Fuel Press Mechanics
+-added Missing Translations
+-added a lot of ping sounds
+-added Flare refill mechanics
+-added Dwarf class system
+-added tools test limitations
+-added Rock and Stone spam +-limit
+-improved tool test limitations
+-fixed crash with shoot flare
+-added ping class color render
+-improved grappling hook
+-fixed shoot bug
+-improved grappling hook
+-added Laser Pointer item model
+-added grappling hook string
+-added Nitra on a Stick
+-lootbugs are now controllable with Nitra on a Stick
+-added missing loottable to blocks
+-added equipment table rotate mechanics
+-added equipment table rotate models/shapes
+-armor will now unequip when you are the wrong class
+-added class Change Block
+-changed Class Change Packet
+-removed Class Change Key
+-cleaned up the folder structure
+-changed the creative tab icon
+-added ommoran hearthstone locator
+-added ommoran hearthstone locator texture
+-disabled ping use animation
+-disabled ore gen
+-fixed AbstractShootableEntity Crash
+-added Scout MK1 Armor
+-added Class translations
+-added Class names color
+-added Driller armor textures
+-added Scout armor textures
+-added Scout armor translations
+-added drill left click behavior
+-added drill mechanics with break block animation
+-improved extrablock calculating engine
+-improved drills
+-armor now unequip if you change the class
+-fuellevel is now shown on the texture on the fuel item
+-added ommoran hearthstone locator algorithm to improve the locators precision
+-added more locator frames to make it easier to find the right direction
+-added drill animation
+-improved shield mechanics
+-fixed shield emitter block rendering bug
+-fixed that pings can be moved
+-added potion translations
+-added Pub JEI Integration
+-added Liquid Morkite Bucket
+-fixed satchelcharge ghostblock bug
+-added missing recipes
+-added Engineer Armor Class
+-added Gunner Armor Class
+-added Lootbug t???h
+-little bug-fixes
+-added version checker
+-disabled Experimental Settings Screen
+-fixed pub recipe serializer server bug
+-added pub jei integration
+-fixed visual button press bug
+-Moved weapon parts recipes from Crafting Table to Equipment Crafting Table
+-disabled enchant-ability on Company Standard Pickaxe
+-fixed server crash when throwing flare/flaregun
+-fixed Class Changer terminal button not render properly
+-added mug to brewing recipe
+-added final platform gun mechanic
+-fixed lootbug gold recipe
+-changed equipment table recipe
+-fixed language file plascrete foam mk2||mk1
+-lootbugs go now to beloved items
+-added new Class System, old worlds cant be played anymore(you can delete the playerdata folder, than loading  it should work)
+-added driller mk1 armor recipes
+-added scout mk1 armor recipes
+-added engineer mk1 armor recipes
+-added gunner mk1 armor recipes
+-added class changer model/texture
+
+
+
+
+

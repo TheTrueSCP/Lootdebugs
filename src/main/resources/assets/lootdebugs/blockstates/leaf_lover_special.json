@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/leaf_lover_special" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/leaf_lover_special", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/leaf_lover_special", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/leaf_lover_special", "y":  270}
+  }
+}

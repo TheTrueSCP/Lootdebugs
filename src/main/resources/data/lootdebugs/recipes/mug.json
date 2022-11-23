@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "- -",
+    "#U#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "-": {
+      "item": "minecraft:iron_nugget"
+    },
+    "U": {
+      "item": "minecraft:bucket"
+    },
+
+    "_": {
+      "tag": "lootdebugs:slabs"
+    }
+  },
+  "result": {
+    "item": "lootdebugs:mug"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/pillar_lootbug" , "y":  0},
+    "facing=south": { "model": "lootdebugs:block/pillar_lootbug", "y":  180},
+    "facing=west": { "model": "lootdebugs:block/pillar_lootbug", "y":  270},
+    "facing=east": { "model": "lootdebugs:block/pillar_lootbug", "y":  90}
+  }
+}

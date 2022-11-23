@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": {"model": "lootdebugs:block/cropper_block"}
+  }
+}

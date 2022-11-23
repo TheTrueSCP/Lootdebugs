@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:grass",
+    "minecraft:vine",
+    "minecraft:tall_grass",
+    "minecraft:weeping_vines",
+    "minecraft:twisting_vines",
+    "minecraft:air",
+    "#minecraft:flowers",
+    "minecraft:glow_lichen",
+    "minecraft:fern",
+    "minecraft:large_fern",
+    "minecraft:crimson_roots",
+    "minecraft:warped_roots",
+    "minecraft:wither_rose",
+    "minecraft:dead_bush",
+    "minecraft:seagrass",
+    "minecraft:water",
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom",
+    "minecraft:crimson_fungus",
+    "minecraft:nether_sprouts",
+    "minecraft:snow",
+    "minecraft:spore_blossom"
+  ]
+}

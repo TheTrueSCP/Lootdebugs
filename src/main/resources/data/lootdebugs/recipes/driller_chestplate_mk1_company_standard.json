@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "lootdebugs:bismor_ingot"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "lootdebugs:bismor_ingot"
+        },
+        {
+            "item": "lootdebugs:cropper_ingot"
+        },
+        {
+            "item": "lootdebugs:bismor_ingot"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:mk1_company_standard_driller_chestplate"
+    }
+
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lootdebugs:cropper_ore"
+    }
+  ],
+  "result": {
+    "item": "lootdebugs:raw_cropper",
+    "count": 9
+  }
+}

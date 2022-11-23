@@ -1,0 +1,118 @@
+{
+  "variants": {
+    "face=ceiling,facing=east,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 270,
+      "x": 180
+    },
+    "face=ceiling,facing=east,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 270,
+      "x": 180
+    },
+    "face=ceiling,facing=north,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 180,
+      "x": 180
+    },
+    "face=ceiling,facing=north,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 180,
+      "x": 180
+    },
+    "face=ceiling,facing=south,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "x": 180
+    },
+    "face=ceiling,facing=south,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "x": 180
+    },
+    "face=ceiling,facing=west,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 90,
+      "x": 180
+    },
+    "face=ceiling,facing=west,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 90,
+      "x": 180
+    },
+    "face=floor,facing=east,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 90
+    },
+    "face=floor,facing=east,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 90
+    },
+    "face=floor,facing=north,activated=false": {
+      "model": "lootdebugs:block/satchel_charge"
+    },
+    "face=floor,facing=north,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active"
+    },
+    "face=floor,facing=south,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 180
+    },
+    "face=floor,facing=south,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 180
+    },
+    "face=floor,facing=west,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 270
+    },
+    "face=floor,facing=west,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 270
+    },
+    "face=wall,facing=east,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 90,
+      "x": 90
+      
+    },
+    "face=wall,facing=east,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 90,
+      "x": 90
+      
+    },
+    "face=wall,facing=north,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "x": 90
+      
+    },
+    "face=wall,facing=north,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "x": 90
+      
+    },
+    "face=wall,facing=south,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 180,
+      "x": 90
+      
+    },
+    "face=wall,facing=south,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 180,
+      "x": 90
+      
+    },
+    "face=wall,facing=west,activated=false": {
+      "model": "lootdebugs:block/satchel_charge",
+      "y": 270,
+      "x": 90
+      
+    },
+    "face=wall,facing=west,activated=true": {
+      "model": "lootdebugs:block/satchel_charge_active",
+      "y": 270,
+      "x": 90
+      
+    }
+  }
+}

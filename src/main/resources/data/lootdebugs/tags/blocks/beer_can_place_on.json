@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "lootdebugs:arkenstout",
+    "lootdebugs:backbreaker_stout",
+    "lootdebugs:blackout_stout",
+    "lootdebugs:dark_morkite",
+    "lootdebugs:flintlockes_delight",
+    "lootdebugs:glyphid_slammer",
+    "lootdebugs:leaf_lover_special",
+    "lootdebugs:mug",
+    "lootdebugs:oily_oaf",
+    "lootdebugs:skull_crusher",
+    "lootdebugs:tunnel_rat",
+    "lootdebugs:apoca_bloom",
+    "lootdebugs:barley_plant",
+    "lootdebugs:boolo_cap",
+    "lootdebugs:malt_plant",
+    "lootdebugs:starch_plant",
+    "lootdebugs:yeast_plant",
+    "minecraft:air"
+    ]
+}

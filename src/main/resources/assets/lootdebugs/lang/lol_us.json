@@ -1,0 +1,231 @@
+{
+  "itemGroup.lootbuggroup": "Sliemedoogs",
+  "block.lootdebugs.test_block": "Tiast bluck",
+  "block.lootdebugs.glyphid_shit": "Glyphid poopoo",
+  "item.lootdebugs.dafuck": "Dafuck?",
+
+  "player.flares": "Flares",
+
+  "player.class.leaf_lover": "Leaf Lover",
+  "player.class.driller": "Driller",
+  "player.class.scout": "Scout",
+  "player.class.engineer": "Engineer",
+  "player.class.gunner": "Gunner",
+  "player.class.thetruescp": "TheTrueSCP",
+  "player.class.monsieurhannes": "Monsieur Hannes",
+
+  "tool.wrong_class": "Wrong Class, you are currently",
+  "tool.no_fuel": "No Fuel in Inventory",
+
+
+  "block.lootdebugs.pub": "funni-juice makerr",
+  "block.lootdebugs.equipment_table": "Equipment Table",
+  "block.lootdebugs.fuel_press": "Fuel Press",
+  "block.lootdebugs.class_changer": "Class Changer",
+
+  "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
+  "jei.lootdebugs.pub_brewing": "Beer Brewing",
+
+
+  "lootdebugs.key.rock_and_stone": "ROCK AND STONE",
+  "lootdebugs.key.throw_flare": "Throw Flare",
+
+  "item.lootdebugs.jet": "WHOOOAA, FLYYING THINGGGGG",
+  "item.lootdebugs.drill_head": "Drill Head",
+  "item.lootdebugs.coil": "Coil",
+  "item.lootdebugs.power_cell": "Power Cell",
+  "item.lootdebugs.mixer_barrel": "Mixer Barrel",
+  "item.lootdebugs.flare_igniter": "Flare Igniter",
+
+  "item.lootdebugs.company_standard_pickaxe": "Karl would approve of this",
+  "item.lootdebugs.drills": "Thing dhad maik houls in wals",
+  "item.lootdebugs.platform_gun": "I can climb",
+  "item.lootdebugs.flare_gun": "OIIIIII, ids shinnnnnn",
+  "item.lootdebugs.grappling_hook": "I CANN FLYYYYYYYYYYYYYYYYYY",
+  "item.lootdebugs.laser_pointer": "Laser Pointer",
+  "block.lootdebugs.satchel_charge": "Satchel Charge",
+  "block.lootdebugs.shield_emitter_block": "Shield",
+
+  "item.lootdebugs.nitra_on_a_stick": "Nitra on a Stick",
+
+  "item.lootdebugs.liquid_morkite_bucket": "Liquid Morkite Bucket",
+
+  "item.lootdebugs.fuel": "Fuel Canister",
+  "item.lootdebugs.empty_fuel_canister": "Empty Fuel Canister",
+  "item.lootdebugs.foam": "Compressed Plascrete Foam",
+  "item.lootdebugs.shoot_flare": "Shotable Flares",
+  "block.lootdebugs.plascrete_foam": "Plascrete Foam MKII",
+  "block.lootdebugs.plascrete_foam_mk2": "Plascrete Foam MKII",
+  "item.lootdebugs.ommoran_hearthstone_locator": "Ommoran Hearthstone Locator",
+
+
+  "item.lootdebugs.mk1_company_standard_driller_helmet": "MK1 Driller Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_driller_chestplate": "MK1 Driller Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_driller_leggings": "MK1 Driller Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_driller_boots": "MK1 Driller Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_scout_helmet": "MK1 Scout Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_scout_chestplate": "MK1 Scout Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_scout_leggings": "MK1 Scout Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_scout_boots": "MK1 Scout Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_engineer_helmet": "MK1 Engineer Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_engineer_chestplate": "MK1 Engineer Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_engineer_leggings": "MK1 Engineer Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_engineer_boots": "MK1 Engineer Suit Boots",
+
+  "item.lootdebugs.mk1_company_standard_gunner_helmet": "MK1 Gunner Suit Helmet",
+  "item.lootdebugs.mk1_company_standard_gunner_chestplate": "MK1 Gunner Suit Chestplate",
+  "item.lootdebugs.mk1_company_standard_gunner_leggings": "MK1 Gunner Suit Leggings",
+  "item.lootdebugs.mk1_company_standard_gunner_boots": "MK1 Gunner Suit Boots",
+
+
+  "entity.lootdebugs.lootbug_golden": "shinny slimedoog",
+  "entity.lootdebugs.lootbug": "slimedog",
+
+  "item.lootdebugs.lootbug_spawn_egg": "slimedog spon ec",
+  "item.lootdebugs.lootbug_golden_spawn_egg": "shiny slihmedog spon ec",
+
+
+  "lootbug.lootbug_idle": "cute slimedog havieng fun",
+  "lootbug.lootbug_death": "cute slimedog hecking ded",
+  "lootbug.lootbug_reaction": "cute slimedog notices owo",
+  "lootbug.lootbug_hurt": "poor slimedog hurt >-<",
+  "rickroll.rickroll": "Never Gonna Give You Up",
+  "rockandstone.mining_shanty": "Playing mining shanty",
+  "rockandstone.salute": "ROCK AND STONE",
+  "beer.smartstout": "bik brain",
+  "ore.morkite_mining": "i like this sount",
+  "lloyd.lloyd_reaction": "funni-juice makerr sais hellow",
+
+  "tools.shoot": "BUMMMMMMM, Duul Shuut",
+  "tools.foam.harden": "Pladform gun soht",
+  "tools.drills": "Thing drills throu walls",
+  "tools.pickaxe.powerattack": "Powerattack performed",
+  "tools.ping.setmark": "Look there",
+  "tools.ping.dirt": "Dirt!",
+  "tools.ping.morkite": "Morkite Found!",
+  "tools.ping.dystrum": "Dystrum!",
+  "tools.ping.red_sugar": "Red Sugar!",
+  "tools.ping.gold": "Gold!",
+  "tools.ping.mushroom": "MUSHROOM",
+  "tools.ping.gold.were_rich": "WERE RICH!",
+  "tools.ping.nitra": "Nitra!",
+  "tools.ping.worthless": "This is Worthless",
+  "tools.ping.mark": "Mark",
+  "tools.ping.lootbug": "Lootbug There",
+
+
+  "item.lootdebugs.barley_bulb": "rehd triangelle fwuit",
+  "item.lootdebugs.starch_nut": "yukkeyyyyyyy nut!",
+  "item.lootdebugs.malt_star": "fancey star frood",
+  "item.lootdebugs.yeast_cone": "verry cuool playball",
+  "block.lootdebugs.boolo_cap": "Boolololoo mushruum",
+  "block.lootdebugs.apoca_bloom": "cuute flouwerr",
+  "block.lootdebugs.barley_plant": "stickk witht red thing",
+  "block.lootdebugs.yeast_plant": "playballl plant",
+  "block.lootdebugs.starch_plant": "yukkie nutt thingg",
+  "block.lootdebugs.malt_plant": "fancey star plannt",
+
+  "block.lootdebugs.tunnel_rat": "funni flyie juiice",
+  "block.lootdebugs.oily_oaf": "funney juuce",
+  "block.lootdebugs.skull_crusher": "verrry stronk paw juice",
+  "block.lootdebugs.mug": "fancy bouwl",
+  "block.lootdebugs.blackout_stout": "Ded Juuuce",
+  "block.lootdebugs.arkenstout": "Coeld Juise",
+  "block.lootdebugs.backbreaker_stout": "stronk back juuce",
+  "block.lootdebugs.flintlockes_delight": "AAAAAAAAAAAAAAAAAAAAAAAAAAAA(Died)",
+  "block.lootdebugs.dark_morkite": "blue spik juice",
+  "block.lootdebugs.leaf_lover_special": "Douchbagg",
+  "block.lootdebugs.glyphid_slammer": "spidder blood",
+  "block.lootdebugs.seasoned_moonrider": "Fli meee to th Meowwn",
+  "block.lootdebugs.smartstout": "Smartass",
+
+
+  "block.lootdebugs.ommoran_hearthstone": "uh my godd so fancy yarnbahll!",
+  "block.lootdebugs.ommoran_layer_1_outerst": "hard big-yarnboall stonn",
+  "block.lootdebugs.ommoran_layer_2": " purpuale jarenball stouff",
+  "block.lootdebugs.ommoran_layer_3": "shieny jarnballl stuff",
+  "block.lootdebugs.ommoran_layer_4_innerst": "cute jarenball",
+  "item.lootdebugs.ommoran_hearthstone": "uh my godd so fancy yarnbahll!",
+
+  "block.lootdebugs.morkite_ore": "spikey blue stohne",
+  "block.lootdebugs.deepslate_morkite_ore": "dep spikey blue stohne",
+  "block.lootdebugs.morkite_block": "blu spieks bloggy",
+  "item.lootdebugs.morkite": "blue spik",
+
+  "block.lootdebugs.nitra_ore": "red triangele stne",
+  "block.lootdebugs.deepslate_nitra_ore": "dieepyyy räd triangelee stouhne",
+  "block.lootdebugs.nitra_block": "red triankle gemmy block",
+  "item.lootdebugs.nitra": "red triankle gemmy",
+
+  "block.lootdebugs.cropper_ore": "Croppa Ore",
+  "block.lootdebugs.cropper_block": "Croppa Block",
+  "item.lootdebugs.raw_cropper": "Raw Croppa",
+  "item.lootdebugs.cropper_ingot": "Croppa Ingot",
+
+  "block.lootdebugs.dystrum_ore": "Dystrum Ore",
+  "block.lootdebugs.deepslate_dystrum_ore": "Deepslate Dystrum Ore",
+  "block.lootdebugs.raw_dystrum_block": "Raw Dystrum Block",
+  "block.lootdebugs.dystrum_block": "Dystrum Block",
+  "item.lootdebugs.raw_dystrum": "Raw Dystrum",
+  "item.lootdebugs.dystrum_ingot": "Dystrum Ingot",
+
+  "block.lootdebugs.bismor_ore": "Bismor Ore",
+  "block.lootdebugs.raw_bismor_block": "Raw Bismor Block",
+  "block.lootdebugs.bismor_block": "Bismor Block",
+  "item.lootdebugs.raw_bismor": "Raw Bismor",
+  "item.lootdebugs.bismor_ingot": "Bismor Ingot",
+
+  "block.lootdebugs.oil_shale": "Oil Shale",
+
+  "block.lootdebugs.red_sugar": "Yummi Candi plog",
+  "item.lootdebugs.red_sugar_item": "Yummi Candi",
+
+  "item.minecraft.potion.effect.drunkness_potion": "Potion of Drunkness",
+  "item.minecraft.lingering_potion.effect.drunkness_potion": "Lingering Potion of Drunkness",
+  "item.minecraft.splash_potion.effect.drunkness_potion": "Splash Potion of Drunkness",
+
+  "item.lootdebugs.rickroll": "funny think thad saunds gud",
+  "item.lootdebugs.rickroll.desc": "ohh, noh, yu god kittrolled ",
+
+  "item.lootdebugs.mining_shanty": "funny thing thad saunds gud",
+  "item.lootdebugs.mining_shanty.desc": "Mat Zenk - mining shanty",
+
+  "effect.lootdebugs.explosive_diarrhoea": "Explosive Diarrhoea",
+  "effect.lootdebugs.drunkness": "Drunkness",
+  "effect.lootdebugs.slow_death": "Blackout in",
+
+  "death.attack.blackoutstout": "Thats the go(o)d stuff",
+  "death.attack.toodrunkin": "%1$s has defenetly NOT had enough",
+
+  "advancements.lootbug.kill.title": "No more Lolcat",
+  "advancements.lootbug.kill.description": "You are hereby banned from the Kingdom of cats",
+
+  "advancements.jet.create.title": "uhhhh, this fleiing",
+  "advancements.jet.create.description": "creade a flyng thing",
+
+  "advancements.brew.drink.title": "god stuff",
+  "advancements.brew.drink.description": "brewwwwwwwing...",
+
+  "advancements.lloyd.get.title": "yeah, youve got the funni-juice makerr",
+  "advancements.lloyd.get.description": "brwwwwww",
+
+  "advancements.pickup.glyphid_shit.title": "Glyphid Shit??",
+  "advancements.pickup.glyphid_shit.description": "Never gonna give you up, never gonna let you down",
+
+  "advancements.welcome.to.lootdebugs.title": "Welloome tu slimedohgs",
+  "advancements.welcome.to.lootdebugs.description": "SLIIIIIMMMEDOOOOOOOOGKKKS",
+
+  "advancements.pickup.ommoran_hearthstone.description": "Ohhhhhhh soooo a fancy yahrnbahl",
+  "advancements.pickup.ommoran_hearthstone.title": "OwO Shinny ball",
+
+  "advancements.pickup.company_standard_pickaxe.description": "You sucessfully acquired an Company Standard Pickaxe",
+  "advancements.pickup.company_standard_pickaxe.title": "Karl would approve of this",
+
+  "advancements.pickup.test_block.title": "TEEEEESSSTTT, work that thing? TEEEEEST, HELLLLOO?,TEEEEESST",
+  "advancements.pickup.test_block.description": "Gratulations, you have found the first block that i have ever implemented in the mod",
+  "item.lootdebugs.ping": "Marker",
+  "tooltip.drink.dangerous_for_the_environment": "Dis Stuf cam hurd u and yu famili, ¡!¡ us thad undr u oun risg!¡¡ Dad mänägbbrrrt",
+  "tooltip.drink.not_completed": "Twis Idem is brouken"
+}

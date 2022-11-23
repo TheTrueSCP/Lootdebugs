@@ -1,0 +1,37 @@
+{
+  "type": "lootdebugs:equipment_crafting",
+  "ingredients":
+  [
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item":  "lootdebugs:cropper_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item":  "lootdebugs:cropper_ingot"
+    },
+    {
+      "item": "lootdebugs:coil"
+    },
+    {
+      "item":  "lootdebugs:cropper_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item":  "lootdebugs:cropper_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "lootdebugs:grappling_hook"
+  }
+
+}

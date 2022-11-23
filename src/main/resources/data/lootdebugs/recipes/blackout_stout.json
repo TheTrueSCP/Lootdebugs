@@ -1,0 +1,14 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:blackout_stout"
+  },
+
+  "count1": 0,
+  "count2": 0,
+  "count3": 0,
+  "count4": 3,
+  "emerald": false
+
+}

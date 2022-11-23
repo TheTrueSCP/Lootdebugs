@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/tunnel_rat" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/tunnel_rat", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/tunnel_rat", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/tunnel_rat", "y":  270}
+  }
+}

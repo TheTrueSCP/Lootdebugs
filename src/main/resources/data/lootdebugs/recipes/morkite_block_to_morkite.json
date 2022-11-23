@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "lootdebugs:morkite_block"
+        }
+    ],
+    "result": {
+        "item": "lootdebugs:morkite",
+        "count": 9
+    }
+}

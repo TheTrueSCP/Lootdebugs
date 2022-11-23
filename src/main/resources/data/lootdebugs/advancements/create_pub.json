@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:create_jet",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:pub"
+    },
+    "title": {
+      "translate": "advancements.lloyd.get.title"
+    },
+    "description": {
+      "translate": "advancements.lloyd.get.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "lloyd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:pub"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "lloyd"
+    ]
+  ]
+}

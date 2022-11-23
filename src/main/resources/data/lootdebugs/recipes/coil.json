@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "minecraft:iron_nugget"
+        },
+        {
+            "item": "minecraft:string"
+        },
+        {
+            "item": "minecraft:iron_nugget"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "minecraft:string"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "minecraft:iron_nugget"
+        },
+        {
+            "item": "minecraft:string"
+        },
+        {
+            "item": "minecraft:iron_nugget"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:coil"
+    }
+
+}

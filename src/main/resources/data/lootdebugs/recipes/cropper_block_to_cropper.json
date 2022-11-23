@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "lootdebugs:cropper_block"
+        }
+    ],
+    "result": {
+        "item": "lootdebugs:cropper_ingot",
+        "count": 9
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #D",
+    "ISI",
+    " #D"
+  ],
+  "key": {
+    "D": {
+      "item": "lootdebugs:dystrum_ingot"
+    },
+    "#": {
+      "item": "lootdebugs:bismor_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+    "result": {
+      "item": "lootdebugs:dafuck"
+    }
+}

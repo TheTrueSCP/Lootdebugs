@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lootdebugs:pub"
+    ]
+  },
+  "criteria": {
+    "has_jet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:jet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lootdebugs:pub"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_jet",
+      "has_the_recipe"
+    ]
+  ]
+}

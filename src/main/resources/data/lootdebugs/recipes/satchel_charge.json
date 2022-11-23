@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "minecraft:tnt"
+        },
+        {
+            "item": "minecraft:string"
+        },
+        {
+            "item":  "minecraft:tnt"
+        },
+        {
+            "item": "minecraft:tnt"
+        },
+        {
+            "item": "minecraft:redstone"
+        },
+        {
+            "item": "minecraft:tnt"
+        },
+        {
+            "item": "minecraft:tnt"
+        },
+        {
+            "item": "minecraft:string"
+        },
+        {
+            "item":  "minecraft:tnt"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:satchel_charge"
+    }
+
+}

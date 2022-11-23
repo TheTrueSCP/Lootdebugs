@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F  ",
+    " C ",
+    "   "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:fishing_rod"
+    },
+    "C": {
+      "item": "lootdebugs:nitra"
+    }
+  },
+  "result": {
+    "item": "lootdebugs:nitra_on_a_stick"
+  }
+}

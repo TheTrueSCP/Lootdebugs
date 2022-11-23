@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "lootdebugs:morkite",
+    "lootdebugs:morkite_block",
+    "lootdebugs:oil_shale",
+    "minecraft:coal",
+    "minecraft:coal_block"
+
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "lootdebugs:glyphid_shit"
+    }
+  },
+    "result": {
+      "item": "lootdebugs:test_block"
+    }
+}

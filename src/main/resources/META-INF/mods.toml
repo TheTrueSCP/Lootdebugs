@@ -1,0 +1,106 @@
+
+modLoader="javafml" #mandatory
+# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+loaderVersion="[38,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+# Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
+license="All rights reserved"
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]] #mandatory
+# The modid of the mod
+modId="lootdebugs" #mandatory
+# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
+# ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
+# see the associated build.gradle script for how to populate this completely automatically during a build
+version="${file.jarVersion}" #mandatory
+ # A display name for the mod
+displayName="Lootdebugs" #mandatory
+# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+updateJSONURL="https://raw.githubusercontent.com/TheTrueSCP/lootdebugs_updater/main/update.json" #optional
+# A URL for the "homepage" for this mod, displayed in the mod UI
+displayURL="https://www.curseforge.com/minecraft/mc-mods/lootbugs" #optional
+# A file name (in the root of the mod JAR) containing a logo for display
+logoFile="lootdebugs_logo.png" #optional
+# A text field displayed in the mod UI
+credits="Thanks in particular to Ozensiz for providing some models" #optional
+# A text field displayed in the mod UI
+authors='''
+The Goldbeards:
+
+        Tim Macht (Programmer) aka TheTrueSCP
+        Hannes William Jüriens (Designer) aka MonsieurHannes
+        '''#optional
+# The description text for the mod (multi line!) (#mandatory)
+description='''
+     >>Disclaimer<<
+     !!!THIS IS AN EXPERIMENTAL BUILD AND FOR TEST PURPOSES ONLY, DO NOT USE THIS BUILD ON YOUR SAVES!!!
+     !!!USING AT YOUR OWN RISK!!!
+     This mod is still in development and not Complete yet!
+     This is still the beta phase of this mod, so there might still be some bugs, if you encounter any, please report the bug in the "Issues" tab or
+     contact The True SCP#5608 on Discord.
+     Feedback of any kind can also be given in the comments or per Discord and is greatly appreciated.
+     >>Disclaimer<<
+
+
+     >>FAQ<<
+
+     Can I include Lootdebugs in my Modpack?
+
+     Of course, you playing the mod is nothing we wanna prevent
+
+
+
+     Can Lootdebugs run on a Server?
+     
+      You bet your dwarven ass it can.
+
+     >>FAQ<<
+
+
+
+     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+     Hello Lads,
+     In this mod, we imported ores/minerals like Morkite or Nitra from the awesome game "Deep Rock Galactic" into Minecraft.
+
+     The highlight of this mod is that you can brew beers in a brewery (Lloyd) which have special effects just like in DRG. The recipes are the same as in drg exept a few Drinks. These Recipes are displayed in the Images-Tab Also, Lootbugs will now spawn within the world.
+
+     The ores (Nitra, Morkite, Red sugar), hops for brewing also generate in the world, just like Ommoran Heartstones and Pubs(These was a Structure generation test but i've forget to disable the generation in the 1.18 build :D).
+
+     Lastly, we have our four supported Languages:
+     LOLCAT
+     English (US)
+     English (upside down)
+     last and very much least, German
+
+
+     with regards,
+
+     TheTrueSCP and MonsieurHannes
+
+     Rock and Stone, Lads!
+
+            '''# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.lootdebugs]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[38,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.lootdebugs]]
+    modId="minecraft"
+    mandatory=true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.18,1.19)"
+    ordering="NONE"
+    side="BOTH"
+

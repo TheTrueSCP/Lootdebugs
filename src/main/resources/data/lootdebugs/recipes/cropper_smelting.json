@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "lootdebugs:cropper_ores"
+  },
+  "result": "lootdebugs:cropper_ingot",
+  "experience": 1.0,
+  "cookingtime": 100,
+  "count": 2
+}

@@ -1,0 +1,65 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lootdebugs:item/fuel_0"
+  },
+
+  "overrides": [
+
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.0
+      },
+      "model": "lootdebugs:item/empty_fuel_canister"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.125
+      },
+      "model": "lootdebugs:item/fuel_1"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.25
+      },
+      "model": "lootdebugs:item/fuel_2"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.375
+      },
+      "model": "lootdebugs:item/fuel_3"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.5
+      },
+      "model": "lootdebugs:item/fuel_4"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.625
+      },
+      "model": "lootdebugs:item/fuel_5"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.75
+      },
+      "model": "lootdebugs:item/fuel_6"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 0.875
+      },
+      "model": "lootdebugs:item/fuel_7"
+    },
+    {
+      "predicate": {
+        "lootdebugs:fuel_level": 1
+      },
+      "model": "lootdebugs:item/fuel"
+    }
+  ]
+
+}

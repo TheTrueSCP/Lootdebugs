@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+   "#lootdebugs:platformgun_replaceable_blocks",
+    "lootdebugs:shield_block"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/class_changer" , "y":  0},
+    "facing=south": { "model": "lootdebugs:block/class_changer", "y":  180},
+    "facing=west": { "model": "lootdebugs:block/class_changer", "y":  270},
+    "facing=east": { "model": "lootdebugs:block/class_changer", "y":  90}
+  }
+}

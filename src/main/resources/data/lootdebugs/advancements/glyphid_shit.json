@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:ommoran_hearthstone",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:glyphid_shit"
+    },
+    "title": {
+      "translate": "advancements.pickup.glyphid_shit.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.glyphid_shit.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "shit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:glyphid_shit"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "shit"
+    ]
+  ]
+}

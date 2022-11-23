@@ -1,0 +1,13 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:smartstout"
+  },
+
+  "count1": 0,
+  "count2": 0,
+  "count3": 4,
+  "count4": 2,
+  "emerald": false
+}

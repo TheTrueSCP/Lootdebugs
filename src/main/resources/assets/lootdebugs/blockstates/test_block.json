@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "isplaying=false": {"model": "lootdebugs:block/test_block"},
+    "isplaying=true": {"model": "lootdebugs:block/test_block_rickroll"}
+  }
+}

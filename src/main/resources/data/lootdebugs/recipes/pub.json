@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CDC",
+    "CPC",
+    "IFI"
+  ],
+  "key": {
+    "D": {
+      "item": "lootdebugs:dystrum_ingot"
+    },
+    "C": {
+      "item": "lootdebugs:cropper_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "F": {
+      "item": "lootdebugs:jet"
+    },
+    "P": {
+      "item": "lootdebugs:power_cell"
+    }
+  },
+  "result": {
+    "item": "lootdebugs:pub"
+  }
+}

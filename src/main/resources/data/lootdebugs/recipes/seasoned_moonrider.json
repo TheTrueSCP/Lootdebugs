@@ -1,0 +1,13 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:seasoned_moonrider"
+  },
+
+  "count1": 0,
+  "count2": 0,
+  "count3": 3,
+  "count4": 4,
+  "emerald": false
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/blackout_stout" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/blackout_stout", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/blackout_stout", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/blackout_stout", "y":  270}
+  }
+}

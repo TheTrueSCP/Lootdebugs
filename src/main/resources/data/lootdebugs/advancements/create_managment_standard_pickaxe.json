@@ -1,0 +1,37 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:company_standard_pickaxe"
+    },
+    "title": {
+      "translate": "advancements.pickup.company_standard_pickaxe.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.company_standard_pickaxe.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "jet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:company_standard_pickaxe"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "jet"
+    ]
+  ]
+}

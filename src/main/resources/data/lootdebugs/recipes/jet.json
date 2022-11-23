@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "=W=",
+    "MSM",
+    " = "
+  ],
+  "key": {
+    "=": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "item": "lootdebugs:morkite"
+    },
+    "M": {
+      "item": "lootdebugs:bismor_ingot"
+    },
+
+    "S": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "result": {
+    "item": "lootdebugs:jet"
+  }
+}

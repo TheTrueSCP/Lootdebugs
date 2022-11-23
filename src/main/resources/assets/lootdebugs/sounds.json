@@ -1,0 +1,297 @@
+{
+  "pub.pub_interaction": {
+    "subtitle": "lloyd.lloyd_reaction",
+    "sounds": [
+      "lootdebugs:pub/pub_interaction"
+    ]
+  },
+
+
+  "lootbug.lootbug_idle": {
+    "subtitle": "lootbug.lootbug_idle",
+    "sounds": [
+      "lootdebugs:lootbug/idle1",
+      "lootdebugs:lootbug/idle2",
+      "lootdebugs:lootbug/idle3",
+      "lootdebugs:lootbug/idle4",
+      "lootdebugs:lootbug/idle5",
+      "lootdebugs:lootbug/idle6",
+      "lootdebugs:lootbug/idle7",
+      "lootdebugs:lootbug/idle8"
+
+    ]
+  },
+
+  "lootbug.lootbug_reaction": {
+    "subtitle": "lootbug.lootbug_reaction",
+    "sounds": [
+      "lootdebugs:lootbug/react1",
+      "lootdebugs:lootbug/react2",
+      "lootdebugs:lootbug/react3",
+      "lootdebugs:lootbug/react4",
+      "lootdebugs:lootbug/react5",
+      "lootdebugs:lootbug/react6",
+      "lootdebugs:lootbug/react7",
+      "lootdebugs:lootbug/react8",
+      "lootdebugs:lootbug/react9"
+    ]
+  },
+
+  "lootbug.lootbug_hurt": {
+    "subtitle": "lootbug.lootbug_hurt",
+    "sounds": [
+      "lootdebugs:lootbug/hurt1",
+      "lootdebugs:lootbug/hurt2",
+      "lootdebugs:lootbug/hurt3"
+    ]
+},
+
+  "lootbug.lootbug_death": {
+    "subtitle": "lootbug.lootbug_death",
+    "sounds": [
+      "lootdebugs:lootbug/death1",
+      "lootdebugs:lootbug/death2",
+      "lootdebugs:lootbug/death3",
+      "lootdebugs:lootbug/death4",
+      "lootdebugs:lootbug/death5"
+    ]
+  },
+
+  "rickroll.rickroll": {
+    "subtitle": "rickroll.rickroll",
+    "sounds": [
+      "lootdebugs:rickroll/never_gonna_give_you_up"
+    ]
+  },
+
+  "rockandstone.mining_shanty": {
+    "subtitle": "rockandstone.mining_shanty",
+    "sounds": [
+      "lootdebugs:rockandstone/mining_shanty"
+    ]
+  },
+  "rockandstone.salute": {
+    "subtitle": "rockandstone.salute",
+    "sounds": [
+      "lootdebugs:rockandstone/salute01",
+      "lootdebugs:rockandstone/salute02",
+      "lootdebugs:rockandstone/salute03",
+      "lootdebugs:rockandstone/salute04",
+      "lootdebugs:rockandstone/salute05",
+      "lootdebugs:rockandstone/salute06",
+      "lootdebugs:rockandstone/salute07",
+      "lootdebugs:rockandstone/salute08",
+      "lootdebugs:rockandstone/salute09",
+      "lootdebugs:rockandstone/salute10"
+
+    ]
+  },
+
+  "beer.smartstout": {
+    "subtitle": "beer.smartstout",
+    "sounds": [
+      "lootdebugs:smartstout/line1",
+      "lootdebugs:smartstout/line2",
+      "lootdebugs:smartstout/line3",
+      "lootdebugs:smartstout/line4",
+      "lootdebugs:smartstout/line5",
+      "lootdebugs:smartstout/line6",
+      "lootdebugs:smartstout/line7",
+      "lootdebugs:smartstout/line8",
+      "lootdebugs:smartstout/line9",
+      "lootdebugs:smartstout/line10",
+      "lootdebugs:smartstout/line11",
+      "lootdebugs:smartstout/line12",
+      "lootdebugs:smartstout/line13",
+      "lootdebugs:smartstout/line14",
+      "lootdebugs:smartstout/line15_sound_bug"
+    ]
+  },
+
+  "ore.morkite_mining": {
+    "subtitle": "ore.morkite_mining",
+    "sounds": [
+"lootdebugs:ores/morkite/morkite_mining_1",
+      "lootdebugs:ores/morkite/morkite_mining_2",
+      "lootdebugs:ores/morkite/morkite_mining_3"
+    ]
+  },
+  "tools.shoot": {
+    "subtitle": "tools.shoot",
+    "sounds": [
+      "lootdebugs:tools/tools_shoot"
+    ]
+  },
+
+  "tools.drills": {
+    "subtitle": "tools.drills",
+    "sounds": [
+      "lootdebugs:tools/drills"
+    ]
+  },
+
+  "tools.foam.harden": {
+    "subtitle": "tools.foam.harden",
+    "sounds": [
+      "lootdebugs:tools/plascrete_foam_harden"
+    ]
+  },
+
+  "tools.ping.ping": {
+    "subtitle": "tools.ping.ping",
+    "sounds": [
+      "lootdebugs:tools/ping/ping"
+    ]
+  },
+
+  "tools.pickaxe.powerattack": {
+    "subtitle": "tools.pickaxe.powerattack",
+    "sounds": [
+      "lootdebugs:tools/powerattack"
+    ]
+  },
+
+
+  "tools.ping.setmark": {
+    "subtitle": "tools.ping.setmark",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_setmark_01",
+      "lootdebugs:tools/ping/laserpoint_setmark_02",
+      "lootdebugs:tools/ping/laserpoint_setmark_03",
+      "lootdebugs:tools/ping/laserpoint_setmark_04",
+      "lootdebugs:tools/ping/laserpoint_setmark_05",
+      "lootdebugs:tools/ping/laserpoint_setmark_06",
+      "lootdebugs:tools/ping/laserpoint_setmark_07",
+      "lootdebugs:tools/ping/laserpoint_setmark_08",
+      "lootdebugs:tools/ping/laserpoint_setmark_09",
+      "lootdebugs:tools/ping/laserpoint_setmark_10"
+
+    ]
+  },
+
+  "tools.ping.dirt": {
+    "subtitle": "tools.ping.dirt",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_dirt_01",
+      "lootdebugs:tools/ping/laserpoint_dirt_02",
+      "lootdebugs:tools/ping/laserpoint_dirt_03",
+      "lootdebugs:tools/ping/laserpoint_dirt_04",
+      "lootdebugs:tools/ping/laserpoint_dirt_05"
+
+    ]
+  },
+
+  "tools.ping.morkite": {
+    "subtitle": "tools.ping.morkite",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_morkite_01",
+      "lootdebugs:tools/ping/laserpoint_morkite_02",
+      "lootdebugs:tools/ping/laserpoint_morkite_03",
+      "lootdebugs:tools/ping/laserpoint_morkite_04"
+
+    ]
+  },
+
+  "tools.ping.dystrum": {
+    "subtitle": "tools.ping.dystrum",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_dystrum_01",
+      "lootdebugs:tools/ping/laserpoint_dystrum_02",
+      "lootdebugs:tools/ping/laserpoint_dystrum_03",
+      "lootdebugs:tools/ping/laserpoint_dystrum_04",
+      "lootdebugs:tools/ping/laserpoint_dystrum_05"
+
+    ]
+  },
+
+  "tools.ping.red_sugar": {
+    "subtitle": "tools.ping.red_sugar",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_red_sugar_01",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_02",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_03",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_04",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_05",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_06",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_07",
+      "lootdebugs:tools/ping/laserpoint_red_sugar_08"
+
+
+    ]
+  },
+
+  "tools.ping.gold": {
+    "subtitle": "tools.ping.gold",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_gold_01",
+      "lootdebugs:tools/ping/laserpoint_gold_02",
+      "lootdebugs:tools/ping/laserpoint_gold_03",
+      "lootdebugs:tools/ping/laserpoint_gold_04",
+      "lootdebugs:tools/ping/laserpoint_gold_05",
+      "lootdebugs:tools/ping/laserpoint_gold_06",
+      "lootdebugs:tools/ping/laserpoint_gold_07"
+    ]
+  },
+
+  "tools.ping.gold.were_rich": {
+    "subtitle": "tools.ping.gold.were_rich",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_gold_were_rich"
+    ]
+  },
+
+  "tools.ping.nitra": {
+    "subtitle": "tools.ping.nitra",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_nitra_01",
+      "lootdebugs:tools/ping/laserpoint_nitra_02",
+      "lootdebugs:tools/ping/laserpoint_nitra_03",
+      "lootdebugs:tools/ping/laserpoint_nitra_04",
+      "lootdebugs:tools/ping/laserpoint_nitra_05"
+
+    ]
+  },
+
+  "tools.ping.mushroom": {
+    "subtitle": "tools.ping.mushroom",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_mushroom_01",
+      "lootdebugs:tools/ping/laserpoint_mushroom_02"
+
+    ]
+  },
+  "tools.ping.worthless": {
+    "subtitle": "tools.ping.worthless",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_worthless_01",
+      "lootdebugs:tools/ping/laserpoint_worthless_02",
+      "lootdebugs:tools/ping/laserpoint_worthless_03",
+      "lootdebugs:tools/ping/laserpoint_worthless_04",
+      "lootdebugs:tools/ping/laserpoint_worthless_05",
+      "lootdebugs:tools/ping/laserpoint_worthless_06"
+    ]
+  },
+  "tools.ping.mark": {
+    "subtitle": "tools.ping.mark",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_mark"
+    ]
+  },
+
+  "tools.ping.lootbug_normal": {
+    "subtitle": "tools.ping.lootbug",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_lootbug_01",
+      "lootdebugs:tools/ping/laserpoint_lootbug_02",
+      "lootdebugs:tools/ping/laserpoint_lootbug_03",
+      "lootdebugs:tools/ping/laserpoint_lootbug_04"
+    ]
+  },
+  "tools.ping.lootbug_pacifist": {
+    "subtitle": "tools.ping.lootbug",
+    "sounds": [
+      "lootdebugs:tools/ping/laserpoint_lootbug_01",
+      "lootdebugs:tools/ping/laserpoint_lootbug_03"
+    ]
+  }
+}

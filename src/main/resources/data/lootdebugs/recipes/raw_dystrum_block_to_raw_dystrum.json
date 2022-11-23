@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lootdebugs:raw_dystrum_block"
+    }
+  ],
+  "result": {
+    "item": "lootdebugs:raw_dystrum",
+    "count": 9
+  }
+}

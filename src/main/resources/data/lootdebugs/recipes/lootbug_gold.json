@@ -1,0 +1,13 @@
+{
+  "type": "lootdebugs:pub_brewing",
+
+  "output": {
+    "item": "lootdebugs:lootbug_gold"
+  },
+
+  "count1": 64,
+  "count2": 64,
+  "count3": 64,
+  "count4": 64,
+  "emerald": false
+}

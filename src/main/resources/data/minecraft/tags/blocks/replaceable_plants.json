@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+"lootdebugs:light_block",
+    "lootdebugs:shield_block"
+  ]
+}

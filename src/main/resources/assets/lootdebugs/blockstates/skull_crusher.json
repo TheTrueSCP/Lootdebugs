@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/skull_crusher" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/skull_crusher", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/skull_crusher", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/skull_crusher", "y":  270}
+  }
+}

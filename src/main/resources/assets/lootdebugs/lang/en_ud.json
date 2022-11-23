@@ -1,0 +1,229 @@
+{
+   "itemGroup.lootbuggroup": "Ꞁooʇpǝqnᵷs",
+   "block.lootdebugs.test_block": "⟘ǝsʇ ᗺꞁoɔʞ",
+   "block.lootdebugs.glyphid_shit": "⅁ꞁʎdɥᴉp sɥᴉʇ",
+   "item.lootdebugs.dafuck": "ᗡɐɟnɔʞ¿",
+
+   "player.flares": "Flares",
+
+   "player.class.leaf_lover": "Leaf Lover",
+   "player.class.driller": "Driller",
+   "player.class.scout": "Scout",
+   "player.class.engineer": "Engineer",
+   "player.class.gunner": "Gunner",
+   "player.class.thetruescp": "TheTrueSCP",
+   "player.class.monsieurhannes": "Monsieur Hannes",
+
+   "tool.wrong_class": "Wrong Class, you are currently",
+   "tool.no_fuel": "No Fuel in Inventory",
+
+
+   "block.lootdebugs.pub": "Ꞁꞁoʎp",
+   "block.lootdebugs.equipment_table": "Ǝbnᴉdɯǝuʇ ⟘ɐqꞁǝ",
+   "block.lootdebugs.fuel_press": "Ⅎnǝꞁ ԁɹǝss",
+   "block.lootdebugs.class_changer": "Class Changer",
+
+   "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
+   "jei.lootdebugs.pub_brewing": "Beer Brewing",
+
+
+   "lootdebugs.key.rock_and_stone": "Sɐꞁnʇǝ",
+   "lootdebugs.key.throw_flare": "Throw Flare",
+
+   "item.lootdebugs.jet": "Րǝʇ",
+   "item.lootdebugs.drill_head": "ᗡɹᴉꞁꞁ hǝɐp",
+   "item.lootdebugs.coil": "Ɔoᴉꞁ",
+   "item.lootdebugs.power_cell": "Ԁoʍǝɹ ɔǝꞁꞁ",
+   "item.lootdebugs.mixer_barrel": "Wᴉxǝɹ ᗺɐɹɹǝꞁ",
+   "item.lootdebugs.flare_igniter": "Ⅎꞁɐɹǝ iᵷuᴉʇǝɹ",
+
+   "item.lootdebugs.company_standard_pickaxe": "Ɔoɯdɐuʎ sʇɐupɐɹp ԁᴉɔʞɐxǝ",
+   "item.lootdebugs.drills": "ᴚǝᴉuɟoɹɔǝp wᴉuᴉuᵷ ᗡɹᴉꞁꞁs",
+   "item.lootdebugs.platform_gun": "Ԁꞁɐʇɟoɹɯ ⅁nu",
+   "item.lootdebugs.flare_gun": "Ⅎꞁɐɹǝ ⅁nu",
+   "item.lootdebugs.grappling_hook": "⅁ɹɐddꞁᴉuᵷ hooʞ",
+   "item.lootdebugs.laser_pointer": "Ꞁɐsǝɹ ԁoᴉuʇǝɹ",
+   "block.lootdebugs.satchel_charge": "Sɐʇɔɥǝꞁ ɔɥɐɹᵷǝ",
+   "block.lootdebugs.shield_emitter_block": "Sɥᴉǝꞁp",
+
+   "item.lootdebugs.nitra_on_a_stick": "Nitra on a Stick",
+
+   "item.lootdebugs.liquid_morkite_bucket": "Liquid Morkite Bucket",
+
+   "item.lootdebugs.fuel": "Ⅎnǝꞁ ɔɐuᴉsʇǝɹ",
+   "item.lootdebugs.empty_fuel_canister": "Ǝɯdʇʎ ⅎnǝꞁ ɔɐuᴉsʇǝɹ",
+   "item.lootdebugs.foam": "Ɔoɯdɹǝssǝp ԁꞁɐsɔɹǝʇǝ ⅎoɐɯ",
+   "item.lootdebugs.shoot_flare": "Sɥoʇɐqꞁǝ ⅎꞁɐɹǝs",
+   "block.lootdebugs.plascrete_foam": "Ԁꞁɐsɔɹǝʇǝ ⅎoɐɯ wʞii",
+   "block.lootdebugs.plascrete_foam_mk2": "Plascrete Foam MKII",
+   "item.lootdebugs.ommoran_hearthstone_locator": "Ommoran Hearthstone Locator",
+
+
+   "item.lootdebugs.mk1_company_standard_driller_helmet": "MK1 Driller Suit Helmet",
+   "item.lootdebugs.mk1_company_standard_driller_chestplate": "MK1 Driller Suit Chestplate",
+   "item.lootdebugs.mk1_company_standard_driller_leggings": "MK1 Driller Suit Leggings",
+   "item.lootdebugs.mk1_company_standard_driller_boots": "MK1 Driller Suit Boots",
+
+   "item.lootdebugs.mk1_company_standard_scout_helmet": "MK1 Scout Suit Helmet",
+   "item.lootdebugs.mk1_company_standard_scout_chestplate": "MK1 Scout Suit Chestplate",
+   "item.lootdebugs.mk1_company_standard_scout_leggings": "MK1 Scout Suit Leggings",
+   "item.lootdebugs.mk1_company_standard_scout_boots": "MK1 Scout Suit Boots",
+
+   "item.lootdebugs.mk1_company_standard_engineer_helmet": "MK1 Engineer Suit Helmet",
+   "item.lootdebugs.mk1_company_standard_engineer_chestplate": "MK1 Engineer Suit Chestplate",
+   "item.lootdebugs.mk1_company_standard_engineer_leggings": "MK1 Engineer Suit Leggings",
+   "item.lootdebugs.mk1_company_standard_engineer_boots": "MK1 Engineer Suit Boots",
+
+   "item.lootdebugs.mk1_company_standard_gunner_helmet": "MK1 Gunner Suit Helmet",
+   "item.lootdebugs.mk1_company_standard_gunner_chestplate": "MK1 Gunner Suit Chestplate",
+   "item.lootdebugs.mk1_company_standard_gunner_leggings": "MK1 Gunner Suit Leggings",
+   "item.lootdebugs.mk1_company_standard_gunner_boots": "MK1 Gunner Suit Boots",
+
+
+   "entity.lootdebugs.lootbug_golden": "⅁oꞁpǝu ꞁooʇqnᵷ",
+   "entity.lootdebugs.lootbug": "Ꞁooʇqnᵷ",
+
+   "item.lootdebugs.lootbug_spawn_egg": "Ꞁooʇqnᵷ sdɐʍu ǝᵷᵷ",
+   "item.lootdebugs.lootbug_golden_spawn_egg": "⅁oꞁpǝu ꞁooʇqnᵷ sdɐʍu ǝᵷᵷ",
+
+
+   "lootbug.lootbug_idle": "Ꞁooʇqnᵷ ᴉpꞁǝ",
+   "lootbug.lootbug_death": "Ꞁooʇqnᵷ pǝɐʇɥ",
+   "lootbug.lootbug_reaction": "Ꞁooʇqnᵷ ᴚǝɐɔʇᴉou",
+   "lootbug.lootbug_hurt": "Ꞁooʇqnᵷ hnɹʇ",
+   "rickroll.rickroll": "Never Gonna Give You Up",
+   "rockandstone.mining_shanty": "Ԁꞁɐʎᴉuᵷ ɯᴉuᴉuᵷ sɥɐuʇʎ",
+   "rockandstone.salute": "Ԁꞁɐʎǝɹ sɐꞁnʇǝ",
+   "beer.smartstout": "Sɯɐɹʇɐss",
+   "ore.morkite_mining": "Wᴉuᴉuᵷ woɹʞᴉʇǝ",
+   "lloyd.lloyd_reaction": "Ꞁꞁoʎp ᴚǝɐɔʇᴉou",
+
+   "tools.shoot": "⟘ooꞁ sɥooʇ",
+   "tools.foam.harden": "Ԁꞁɐʇɟoɹɯ ⅁nu sɥooʇ",
+   "tools.drills": "ᗡɹᴉꞁꞁǝɹ ᗡɹᴉꞁꞁs",
+   "tools.pickaxe.powerattack": "Ԁoʍǝɹɐʇʇɐɔʞ dǝɹɟoɹɯǝp",
+   "tools.ping.setmark": "Ꞁooʞ ʇɥǝɹǝ",
+   "tools.ping.dirt": "ᗡᴉɹʇ¡",
+   "tools.ping.morkite": "Woɹʞᴉʇǝ ⅎonup¡",
+   "tools.ping.dystrum": "ᗡʎsʇɹnɯ¡",
+   "tools.ping.red_sugar": "ᴚǝp snᵷɐɹ¡",
+   "tools.ping.gold": "⅁oꞁp¡",
+   "tools.ping.mushroom": "W∩shᴚoow",
+   "tools.ping.gold.were_rich": "Mǝᴚǝ ᴚiɔh¡",
+   "tools.ping.nitra": "Nᴉʇɹɐ¡",
+   "tools.ping.worthless": "⟘ɥᴉs ᴉs moɹʇɥꞁǝss",
+   "tools.ping.mark": "Wɐɹʞ",
+   "tools.ping.lootbug": "Lootbug There",
+
+
+   "item.lootdebugs.barley_bulb": "ᗺɐɹꞁǝʎ ᗺnꞁq",
+   "item.lootdebugs.starch_nut": "Sʇɐɹɔɥ nnʇ",
+   "item.lootdebugs.malt_star": "Wɐꞁʇ sʇɐɹ",
+   "item.lootdebugs.yeast_cone": "⅄ǝɐsʇ ɔouǝ",
+   "block.lootdebugs.boolo_cap": "ᗺooꞁo ɔɐd",
+   "block.lootdebugs.apoca_bloom": "Ɐdoɔɐ ᗺꞁooɯ",
+   "block.lootdebugs.barley_plant": "ᗺɐɹꞁǝʎ ԁꞁɐuʇ",
+   "block.lootdebugs.yeast_plant": "⅄ǝɐsʇ ԁꞁɐuʇ",
+   "block.lootdebugs.starch_plant": "Sʇɐɹɔɥ ԁꞁɐuʇ",
+   "block.lootdebugs.malt_plant": "Wɐꞁʇ ԁꞁɐuʇ",
+
+   "block.lootdebugs.tunnel_rat": "⟘nuuǝꞁ ᴚɐʇ",
+   "block.lootdebugs.oily_oaf": "Oᴉꞁʎ oɐɟ",
+   "block.lootdebugs.skull_crusher": "Oᴉꞁʎ oɐɟ",
+   "block.lootdebugs.mug": "Wnᵷ",
+   "block.lootdebugs.blackout_stout": "ᗺꞁɐɔʞonʇ sʇonʇ",
+   "block.lootdebugs.arkenstout": "Ɐɹʞǝusʇonʇ",
+   "block.lootdebugs.backbreaker_stout": "ᗺɐɔʞqɹǝɐʞǝɹ sʇonʇ",
+   "block.lootdebugs.flintlockes_delight": "Ⅎꞁᴉuʇꞁoɔʞǝs ᗡǝꞁᴉᵷɥʇ",
+   "block.lootdebugs.dark_morkite": "ᗡɐɹʞ woɹʞᴉʇǝ",
+   "block.lootdebugs.leaf_lover_special": "Ꞁǝɐɟ ꞁoʌǝɹ sdǝɔᴉɐꞁ",
+   "block.lootdebugs.glyphid_slammer": "⅁ꞁʎdɥᴉp sꞁɐɯɯǝɹ",
+   "block.lootdebugs.seasoned_moonrider": "Sǝɐsouǝp woouɹᴉpǝɹ",
+   "block.lootdebugs.smartstout": "Sɯɐɹʇsʇonʇ",
+
+
+   "block.lootdebugs.ommoran_hearthstone": "Oɯɯoɹɐu hǝɐɹʇɥsʇouǝ",
+   "block.lootdebugs.ommoran_layer_1_outerst": "Oɯɯoɹɐu ɔɹnsʇ",
+   "block.lootdebugs.ommoran_layer_2": "Oɯɯoɹɐu sɥǝꞁꞁ",
+   "block.lootdebugs.ommoran_layer_3": "Oɯɯoɹɐu ɔɹʎsʇɐꞁ",
+   "block.lootdebugs.ommoran_layer_4_innerst": "Oɯɯoɹɐu ᗺǝppᴉuᵷ",
+   "item.lootdebugs.ommoran_hearthstone": "Oɯɯoɹɐu hǝɐɹʇɥsʇouǝ",
+
+   "block.lootdebugs.morkite_ore": "Woɹʞᴉʇǝ oɹǝ",
+   "block.lootdebugs.deepslate_morkite_ore": "ᗡǝǝdsꞁɐʇǝ woɹʞᴉʇǝ oɹǝ",
+   "block.lootdebugs.morkite_block": "Woɹʞᴉʇǝ ᗺꞁoɔʞ",
+   "item.lootdebugs.morkite": "Woɹʞᴉʇǝ",
+
+   "block.lootdebugs.nitra_ore": "Nᴉʇɹɐ oɹǝ",
+   "block.lootdebugs.deepslate_nitra_ore": "ᗡǝǝdsꞁɐʇǝ nᴉʇɹɐ oɹǝ",
+   "block.lootdebugs.nitra_block": "Nᴉʇɹɐ ᗺꞁoɔʞ",
+   "item.lootdebugs.nitra": "Nᴉʇɹɐ",
+
+   "block.lootdebugs.cropper_ore": "Ɔɹoddɐ oɹǝ",
+   "block.lootdebugs.cropper_block": "Ɔɹoddɐ ᗺꞁoɔʞ",
+   "item.lootdebugs.raw_cropper": "ᴚɐʍ ɔɹoddɐ",
+   "item.lootdebugs.cropper_ingot": "Ɔɹoddɐ iuᵷoʇ",
+
+   "block.lootdebugs.dystrum_ore": "ᗡʎsʇɹnɯ oɹǝ",
+   "block.lootdebugs.deepslate_dystrum_ore": "ᗡǝǝdsꞁɐʇǝ ᗡʎsʇɹnɯ oɹǝ",
+   "block.lootdebugs.raw_dystrum_block": "ᴚɐʍ ᗡʎsʇɹnɯ ᗺꞁoɔʞ",
+   "block.lootdebugs.dystrum_block": "ᗡʎsʇɹnɯ ᗺꞁoɔʞ",
+   "item.lootdebugs.raw_dystrum": "ᴚɐʍ ᗡʎsʇɹnɯ",
+   "item.lootdebugs.dystrum_ingot": "ᗡʎsʇɹnɯ iuᵷoʇ",
+
+   "block.lootdebugs.bismor_ore": "ᗺᴉsɯoɹ oɹǝ",
+   "block.lootdebugs.raw_bismor_block": "ᴚɐʍ ᗺᴉsɯoɹ ᗺꞁoɔʞ",
+   "block.lootdebugs.bismor_block": "ᗺᴉsɯoɹ ᗺꞁoɔʞ",
+   "item.lootdebugs.raw_bismor": "ᴚɐʍ ᗺᴉsɯoɹ",
+   "item.lootdebugs.bismor_ingot": "ᗺᴉsɯoɹ iuᵷoʇ",
+
+   "block.lootdebugs.oil_shale": "Oil Shale",
+
+   "block.lootdebugs.red_sugar": "ᴚǝp snᵷɐɹ",
+   "item.lootdebugs.red_sugar_item": "Ɔɥnuʞ oɟ ᴚǝp snᵷɐɹ",
+
+   "item.minecraft.potion.effect.drunkness_potion": "Potion of Drunkness",
+   "item.minecraft.lingering_potion.effect.drunkness_potion": "Lingering Potion of Drunkness",
+   "item.minecraft.splash_potion.effect.drunkness_potion": "Splash Potion of Drunkness",
+
+   "item.lootdebugs.rickroll": "Wnsᴉɔ ᗡᴉsɔ",
+   "item.lootdebugs.rickroll.desc": "Ꞁoo⟘ᗡǝᗺ∩⅁s ⅎoᴚǝλǝᴚ",
+
+   "item.lootdebugs.mining_shanty": "Wnsᴉɔ ᗡᴉsɔ",
+   "item.lootdebugs.mining_shanty.desc": "Wɐʇ zǝuʞ - ɯᴉuᴉuᵷ sɥɐuʇʎ",
+
+   "effect.lootdebugs.explosive_diarrhoea": "Ǝxdꞁosᴉʌǝ ᗡᴉɐɹɹɥoǝɐ",
+   "effect.lootdebugs.drunkness": "ᗡɹnuʞuǝss",
+   "effect.lootdebugs.slow_death": "ᗺꞁɐɔʞonʇ ᴉu",
+
+   "death.attack.blackoutstout": "⟘ɥɐʇs ʇɥǝ ᵷo)o(p sʇnɟɟ",
+   "death.attack.toodrunkin": "%1$s ɥɐs pǝɟǝuǝʇꞁʎ no⟘ ɥɐp ǝuonᵷɥ",
+
+   "advancements.lootbug.kill.title": "⅄on Wons⟘ǝᴚ¡",
+   "advancements.lootbug.kill.description": "So ʎon ʞuoʍ ɥoʍ soɯǝ sᴉus ɐɹǝ nuɟoɹᵷᴉʌɐqꞁǝ¿",
+
+   "advancements.jet.create.title": "Mhoooooooossshhh",
+   "advancements.jet.create.description": "Ɔɹǝɐʇǝ ɐ րǝʇ",
+
+   "advancements.brew.drink.title": "ᴚoɔʞ ɐup sʇouǝ' ᗺɹoʇɥǝɹ",
+   "advancements.brew.drink.description": "ᗺɹǝʍ ɐ ᗡɹᴉuʞ",
+
+   "advancements.lloyd.get.title": "Ꞁǝǝǝʇʇʇʇ,s ᵷǝʇ ʇɥǝ ᗺɹǝʍᴉuᵷ sʇɐɹʇǝpp",
+   "advancements.lloyd.get.description": "Ɔɹǝɐʇǝ ɐup ԁꞁɐɔǝ ꞁꞁoʎp",
+
+   "advancements.pickup.glyphid_shit.title": "⅁ꞁʎdɥᴉp sɥᴉʇ¿¿",
+   "advancements.pickup.glyphid_shit.description": "Nǝʌǝɹ ᵷouuɐ ᵷᴉʌǝ ʎon nd' uǝʌǝɹ ᵷouuɐ ꞁǝʇ ʎon poʍu",
+
+   "advancements.welcome.to.lootdebugs.title": "Mǝꞁɔoɯǝ ʇo ꞁooʇpǝqnᵷs",
+   "advancements.welcome.to.lootdebugs.description": "Mǝꞁɔoɯǝ ʇo ꞁooʇpǝqnᵷs' ᴉ ɥodǝ ʎon ʍᴉꞁꞁ ǝuɾoʎ ᴉʇ",
+
+   "advancements.pickup.ommoran_hearthstone.description": "⅄on snɔǝssɟnꞁꞁʎ ɐɔbnᴉɹǝp ɐu oɯɯoɹɐu hǝɐɹʇɥsʇouǝ",
+   "advancements.pickup.ommoran_hearthstone.title": "Wɐuɐᵷǝɯǝuʇ ʍᴉꞁꞁ qǝ dꞁǝɐsǝp",
+
+   "advancements.pickup.company_standard_pickaxe.description": "⅄on snɔǝssɟnꞁꞁʎ ɐɔbnᴉɹǝp ɐu ɔoɯdɐuʎ sʇɐupɐɹp ԁᴉɔʞɐxǝ",
+   "advancements.pickup.company_standard_pickaxe.title": "Ʞɐɹꞁ ʍonꞁp ɐddɹoʌǝ oɟ ʇɥᴉs",
+
+   "advancements.pickup.test_block.title": "⟘ǝǝǝǝǝsss⟘⟘⟘' ʍoɹʞ ʇɥɐʇ ʇɥᴉuᵷ¿ ⟘ǝǝǝǝǝs⟘' hǝꞁꞁꞁꞁoo¿'⟘ǝǝǝǝǝss⟘",
+   "advancements.pickup.test_block.description": "⅁ɹɐʇnꞁɐʇᴉous' ʎon ɥɐʌǝ ɟonup ʇɥǝ ɟᴉɹsʇ qꞁoɔʞ ʇɥɐʇ ᴉ ɥɐʌǝ ǝʌǝɹ ᴉɯdꞁǝɯǝuʇǝp ᴉu ʇɥᴉs ɯop",
+   "item.lootdebugs.ping": "Wɐɹʞǝɹ"
+}

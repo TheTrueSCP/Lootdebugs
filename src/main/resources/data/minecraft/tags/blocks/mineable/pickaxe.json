@@ -1,0 +1,40 @@
+{
+  "replace": false,
+  "values": [
+   "lootdebugs:test_block",
+
+    "lootdebugs:nitra_block",
+    "lootdebugs:nitra_ore",
+    "lootdebugs:deepslate_nitra_ore",
+
+    "lootdebugs:morkite_block",
+    "lootdebugs:morkite_ore",
+    "lootdebugs:deepslate_morkite_ore",
+
+
+    "lootdebugs:ommoran_hearthstone",
+    "lootdebugs:ommoran_layer_1_outerst",
+    "lootdebugs:ommoran_layer_2",
+    "lootdebugs:ommoran_layer_3",
+    "lootdebugs:ommoran_layer_4_innerst",
+
+   "lootdebugs:raw_dystrum_block",
+   "lootdebugs:dystrum_block",
+   "lootdebugs:dystrum_ore",
+   "lootdebugs:deepslate_dystrum_ore",
+
+   "lootdebugs:bismor_block",
+   "lootdebugs:bismor_ore",
+
+   "lootdebugs:oil_shale",
+
+   "lootdebugs:cropper_ore",
+   "lootdebugs:cropper_block",
+
+
+
+   "lootdebugs:pub",
+   "lootdebugs:equipment_table",
+   "lootdebugs:fuel_refinery"
+  ]
+}

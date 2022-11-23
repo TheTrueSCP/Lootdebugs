@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/pub" },
+    "facing=south": { "model": "lootdebugs:block/pub", "y":  180},
+    "facing=west": { "model": "lootdebugs:block/pub", "y":  270},
+    "facing=east": { "model": "lootdebugs:block/pub", "y":  90}
+  }
+}

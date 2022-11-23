@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "lootdebugs:item/nitra_on_a_stick"
+  }
+}
