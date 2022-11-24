@@ -22,11 +22,13 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -56,7 +58,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     private final Inventory inventory = new Inventory(30);
     private final ItemBasedSteering steering = new ItemBasedSteering(this.entityData, DATA_BOOST_TIME, DATA_SADDLE_ID);
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(LootbugEntity.class, EntityDataSerializers.BYTE);
-    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.REDSTONE, ModItems.OMM0RAN_HEARTHSTONE.get(), ModItems.NITRA.get(), ModBlocks.NITRA_BLOCK.get().asItem(), ModItems.MORKITE.get(), ModItems.MORKITE_BLOCK.get());
+    public static final Ingredient TEMPTATION_ITEMS = Ingredient.of(ModTags.Items.LOOTBUG_TEMPTATION_ITEMS);
 
 
     public LootbugEntity(EntityType<? extends Animal> entityType, Level world) {
@@ -70,7 +72,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_BREEDING_ITEMS, 40));
+        this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 40));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, TEMPTATION_ITEMS, false));
         //   this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -130,6 +132,13 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
                 petting();
             }
 
+            return InteractionResult.SUCCESS;
+        }
+        else if(playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS))
+        {
+            inventory.add(new ItemStack(playerIn.getItemInHand(hand).getItem(), 1));
+            playerIn.getItemInHand(hand).shrink(1);
+            petting();
             return InteractionResult.SUCCESS;
         }
         else if (!playerIn.getItemInHand(hand).isEmpty() && !playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_BREEDING_ITEMS) && !this.isVehicle() && !playerIn.isSecondaryUseActive())
@@ -498,24 +507,15 @@ return true;
         return false;
     }
 
-
-//spawning
-    public static boolean checkLootbugSpawnRules(EntityType<LootbugEntity> lootbugEntityEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos pos, Random random)
+    @Override
+    public boolean checkSpawnRules(LevelAccessor pLevel, MobSpawnType pSpawnReason)
     {
-        return checkMobSpawnRules(serverLevelAccessor, mobSpawnType, pos, random);
+
+        return true;
     }
 
-    public static boolean isDarkEnoughToSpawn(ServerLevelAccessor pLevel, BlockPos pPos, Random pRandom) {
-        if (pLevel.getBrightness(LightLayer.BLOCK, pPos) <= 7)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean checkMobSpawnRules(ServerLevelAccessor pLevel, MobSpawnType pReason, BlockPos pPos, Random pRandom) {
-        BlockPos blockpos = pPos.below();
-        System.out.println("" + (blockpos.getY() <= 20) + isDarkEnoughToSpawn(pLevel, pPos, pRandom));
-        return pReason == MobSpawnType.SPAWNER || (blockpos.getY() <= 20) && isDarkEnoughToSpawn(pLevel, pPos, pRandom);
+    public static <T extends Mob> boolean checkLootbugSpawnRules(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, Random random)
+    {
+        return blockPos.getY() <= 20;
     }
 }

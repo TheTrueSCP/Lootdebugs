@@ -1,10 +1,13 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal;
 
+import io.netty.handler.codec.mqtt.MqttProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -15,16 +18,20 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import org.jetbrains.annotations.Nullable;
 
 public class ClassChangeBlock extends BaseEntityBlock  {
 
+
+    public static final IntegerProperty LAST_INTERACTED_CLASS = IntegerProperty.create("last_interacted_class", 0, 6);
 
     public static VoxelShape NORTH = Shapes.or(
             Block.box(2.25, 0.25, 8.25, 13.75, 4.75, 15.25),
@@ -438,7 +445,8 @@ public class ClassChangeBlock extends BaseEntityBlock  {
             Block.box(14.25, 0.5, -0.25, 15.25, 1.5, 1.75)
     );
 
-    public ClassChangeBlock(Properties properties) {
+    public ClassChangeBlock(Properties properties)
+    {
         super(properties);
     }
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -476,9 +484,11 @@ public class ClassChangeBlock extends BaseEntityBlock  {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             BlockEntity entityBelow = pLevel.getBlockEntity(pPos.below());
 
-            if(entity instanceof ClassChangeTile) {
+            if(entity instanceof ClassChangeTile)
+            {
 
 
+                //pLevel.setBlock(pPos, pLevel.getBlockState(pPos).setValue(LAST_INTERACTED_CLASS, ), 3);
                     NetworkHooks.openGui(((ServerPlayer) pPlayer), (ClassChangeTile) entity, pPos);
 
             } else {
@@ -528,6 +538,6 @@ public class ClassChangeBlock extends BaseEntityBlock  {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING, LAST_INTERACTED_CLASS);
     }
 }

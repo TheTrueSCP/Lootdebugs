@@ -1,37 +1,41 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.Zipline;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Block.Tools.Zipline.ZiplineBlock;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
+import org.lwjgl.system.CallbackI;
 
 public class ZiplineBlockTile extends BlockEntity {
 
     public ZiplineBlockTile(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModTileEntities.ZIPLINE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
-
-    public void tick()
+    public <T extends BlockEntity> void tick(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType)
     {
-        if(this.level.getBlockState(getBlockPos()).getBlock() instanceof ZiplineBlock ZB) 
+
+        if(pState.getBlock() instanceof ZiplineBlock ZB)
         {
-            if(ZB.moving && ZB.player != null)
+            if(ZB.moving && ZB.lastPlayer != null && pLevel.getBlockState(ZB.linkedBlockPos).getBlock() instanceof ZiplineBlock)
             {
-                Vec3 vec3 = new Vec3((ZB.connectedBlockX - this.getBlockPos().getX()) * -1, (ZB.connectedBlockY - this.getBlockPos().getY()) * -1, (ZB.connectedBlockZ - this.getBlockPos().getZ()) * -1);//calculate Movement from Entity to hook
-                ZB.player.setDeltaMovement(ZB.player.getDeltaMovement().add(vec3).normalize());//Normalize Vec cause the vec would be to fast
-
-                if(vec3.distanceTo(new Vec3(ZB.connectedBlockX, ZB.connectedBlockY, ZB.connectedBlockZ)) < 2)
+                if(level.getPlayerByUUID(ZB.lastPlayer) != null)
                 {
-                    ZB.moving = false;
-                    ZB.player = null;
-                }
+                    Vec3 vec3 = new Vec3((ZB.linkedBlockPos.getX() - this.getBlockPos().getX()), (ZB.linkedBlockPos.getY() - this.getBlockPos().getY()), (ZB.linkedBlockPos.getZ() - this.getBlockPos().getZ()));//calculate Movement from Entity to hook
+                    System.out.println(vec3);
+                    level.getPlayerByUUID(ZB.lastPlayer).setDeltaMovement(vec3.normalize());//Normalize Vec cause the vec would be to fast
 
+                    if(vec3.distanceTo(Vec3.atCenterOf(ZB.linkedBlockPos)) <= 2)
+                    {
+                        ZB.moving = false;
+                        ZB.lastPlayer = null;
+                    }
+                }
             }
 
         }
-
-        
     }
 }

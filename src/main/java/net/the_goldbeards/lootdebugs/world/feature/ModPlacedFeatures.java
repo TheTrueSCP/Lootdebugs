@@ -30,23 +30,17 @@ public class ModPlacedFeatures
             ModConfiguredFeatures.OIL_SHALE_ORE, (ModOrePlacement.commonOrePlacement(4, // VeinsPerChunk
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0),VerticalAnchor.aboveBottom(40)))));
 
-    public static final Holder<PlacedFeature> CROPPER_ORE_PLACED = PlacementUtils.register("cropper_ore_placed",
-            ModConfiguredFeatures.CROPPER_ORE, (ModOrePlacement.commonOrePlacementInSquare(4,2, // VeinsPerChunk
-                    HeightRangePlacement.triangle(VerticalAnchor.absolute(-30),VerticalAnchor.absolute(0)))));
-
-
 
 
 
     public static final Holder<PlacedFeature> INGREDIENTS = PlacementUtils.register("ingredients_placed",
-            ModConfiguredFeatures.Ingredients, RarityFilter.onAverageOnceEvery(1) ,HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-60), VerticalAnchor.aboveBottom(110)));
+            ModConfiguredFeatures.INGREDIENTS, CountPlacement.of(2) ,HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(110)));
 
     public static final Holder<PlacedFeature> RED_SUGAR = PlacementUtils.register("red_sugar_placed",
-            ModConfiguredFeatures.RED_SUGAR, RarityFilter.onAverageOnceEvery(3), HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-60), VerticalAnchor.aboveBottom(100)));
+            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
 
-    public static final Holder<PlacedFeature> BISMOR_EXPOSED = PlacementUtils.register("bismor_placed",
-            ModConfiguredFeatures.BISMOR_EXPOSED, RarityFilter.onAverageOnceEvery(4), HeightRangePlacement.triangle(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(110)));//old 60
-
+    public static final Holder<PlacedFeature> MINERALS = PlacementUtils.register("minerals_placed",
+            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
 
 
 }

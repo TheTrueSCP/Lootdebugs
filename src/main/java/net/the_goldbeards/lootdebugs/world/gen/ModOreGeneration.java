@@ -26,9 +26,6 @@ public class ModOreGeneration
             base.add(ModPlacedFeatures.NITRA_ORE_PLACED);
             base.add( ModPlacedFeatures.MORKITE_ORE_PLACED);
             base.add( ModPlacedFeatures.DYSTRUM_ORE_PLACED);
-            //base.add( ModPlacedFeatures.BISMOR_ORE_PLACED);
-            //base.add( ModPlacedFeatures.BISMOR_EXPOSED);
-           // base.add(ModPlacedFeatures.CROPPER_ORE_PLACED);
             base.add( ModPlacedFeatures.OIL_SHALE_ORE_PLACED);
 
         }

@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:raw_dystrum"
+    },
+    "title": {
+      "translate": "advancements.pickup.dystrum.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.dystrum.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "dystrum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:raw_dystrum"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "dystrum"
+    ]
+  ]
+}

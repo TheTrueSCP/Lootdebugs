@@ -19,6 +19,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.client.event.InputEvent;
@@ -202,11 +203,6 @@ public class ForgeClientEventBusSubscriber
 
         Level level = event.getWorld();
         AABB aabb = event.getTarget().getType().getDimensions().makeBoundingBox(event.getTarget().position());
-
-        double xLength = aabb.maxX - aabb.minX;
-        double YLength = aabb.maxY - aabb.minY;
-        double ZLength = aabb.maxZ - aabb.minZ;
-
 
 
         //for loops aabb -> minX to maxX... level.getBlockstate([forloop values]).setBlock(Blocks.GOLD_BLOCK);

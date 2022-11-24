@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:raw_cropper"
+    },
+    "title": {
+      "translate": "advancements.pickup.cropper.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.cropper.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cropper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:raw_cropper"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cropper"
+    ]
+  ]
+}

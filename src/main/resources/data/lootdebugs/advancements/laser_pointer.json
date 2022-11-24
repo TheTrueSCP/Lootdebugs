@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:laser_pointer"
+    },
+    "title": {
+      "translate": "advancements.pickup.laser_pointer.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.laser_pointer.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "laser_pointer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:laser_pointer"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "laser_pointer"
+    ]
+  ]
+}

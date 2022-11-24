@@ -4,10 +4,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.LogicButton;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
@@ -15,11 +17,16 @@ import net.the_goldbeards.lootdebugs.Server.ChangeClass.ChangeClassPacket;
 import net.the_goldbeards.lootdebugs.Server.PacketHandler;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 
+import static net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeBlock.LAST_INTERACTED_CLASS;
+
 public class ClassChangeScreen extends AbstractContainerScreen<ClassChangeContainer>
 {
 
     private ClassChangeTile classChangeTile;
     private Player player;
+    private Level level;
+    private BlockPos pos;
+
     private static final ResourceLocation GUI = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_change_gui.png");
     private static final ResourceLocation CONTINUE_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/recipe_button.png");
 
@@ -27,6 +34,8 @@ public class ClassChangeScreen extends AbstractContainerScreen<ClassChangeContai
         super(pMenu, pPlayerInventory, pTitle);
        classChangeTile = (ClassChangeTile) pMenu.blockEntity;
        player = pPlayerInventory.player;
+       level = classChangeTile.getLevel();
+       pos = classChangeTile.getBlockPos();
 
     }
 
@@ -38,6 +47,7 @@ public class ClassChangeScreen extends AbstractContainerScreen<ClassChangeContai
         this.addRenderableWidget(new LogicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Driller));//Driller
+            this.classChangeTile.getLevel().setBlock(pos, this.classChangeTile.getBlockState().setValue(LAST_INTERACTED_CLASS, 1), 3);
 
         }));
 
@@ -45,18 +55,21 @@ public class ClassChangeScreen extends AbstractContainerScreen<ClassChangeContai
         this.addRenderableWidget(new LogicButton(this.leftPos + 40, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Engineer));
+            this.classChangeTile.getLevel().setBlock(pos, this.classChangeTile.getBlockState().setValue(LAST_INTERACTED_CLASS, 2), 3);
 
         }));
 
         this.addRenderableWidget(new LogicButton(this.leftPos + 60, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Scout));
+            this.classChangeTile.getLevel().setBlock(pos, this.classChangeTile.getBlockState().setValue(LAST_INTERACTED_CLASS, 3), 3);
 
         }));
 
         this.addRenderableWidget(new LogicButton(this.leftPos + 80, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Gunner));
+            this.classChangeTile.getLevel().setBlock(pos, this.classChangeTile.getBlockState().setValue(LAST_INTERACTED_CLASS, 4), 3);
 
 
         }));

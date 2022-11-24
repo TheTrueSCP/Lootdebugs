@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:mixer_barrel",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:platform_gun"
+    },
+    "title": {
+      "translate": "advancements.pickup.platform_gun.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.platform_gun.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "platform_gun": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:platform_gun"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "platform_gun"
+    ]
+  ]
+}

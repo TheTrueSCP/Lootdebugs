@@ -429,6 +429,10 @@ Rekord:85 (Tech and Tools Update)
 -added engineer mk1 armor recipes
 -added gunner mk1 armor recipes
 -added class changer model/texture
+-added older builds
+-lootbugs now generate in caves
+-added advancements
+-added lootdebugs logo item
 
 
 

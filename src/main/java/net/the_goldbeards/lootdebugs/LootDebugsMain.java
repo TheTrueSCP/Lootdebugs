@@ -14,6 +14,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
+import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
+import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
 import net.the_goldbeards.lootdebugs.Server.PacketHandler;
 import net.the_goldbeards.lootdebugs.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.BeardSlot.BeardSlotCap;
@@ -85,6 +87,8 @@ public class LootDebugsMain
     private void setup(final FMLCommonSetupEvent event)
     {
         SpawnPlacements.register(ModEntities.LOOTBUG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LootbugEntity::checkLootbugSpawnRules);
+        SpawnPlacements.register(ModEntities.LOOTBUG_GOLDEN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LootbugGoldenEntity::checkLootbugGoldenSpawnRules);
+        SpawnPlacements.register(ModEntities.LOOTBUG_OLD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LootbugOldEntity::checkLootbugOldSpawnRules);
 
        /* event.enqueueWork(() -> {
 

@@ -1,0 +1,37 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:mk1_company_standard_scout_chestplate"
+    },
+    "title": {
+      "translate": "advancements.pickup.scout_mk1_suit.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.scout_mk1_suit.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "scout_mk1_suit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "lootdebugs:mk1_scout_suit"
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "scout_mk1_suit"
+    ]
+  ]
+}

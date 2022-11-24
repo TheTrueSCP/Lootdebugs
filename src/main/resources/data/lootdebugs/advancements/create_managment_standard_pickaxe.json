@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:lootdebugs",
+  "parent": "lootdebugs:equipment_table",
   "display": {
     "icon": {
       "item": "lootdebugs:company_standard_pickaxe"

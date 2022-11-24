@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lootdebugs:mk1_company_standard_driller_helmet",
+    "lootdebugs:mk1_company_standard_driller_chestplate",
+    "lootdebugs:mk1_company_standard_driller_leggings",
+    "lootdebugs:mk1_company_standard_driller_boots"
+
+  ]
+}

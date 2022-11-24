@@ -1,11 +1,15 @@
 package net.the_goldbeards.lootdebugs.Block.Tools.Zipline;
 
+import net.minecraft.advancements.critereon.StartRidingTrigger;
+import net.minecraft.advancements.critereon.UsedTotemTrigger;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,35 +18,29 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.Zipline.ZiplineBlockTile;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public class ZiplineBlock extends BaseEntityBlock
 {
-    public int connectedBlockX = 10;
-    public int connectedBlockY = 10;
-    public int connectedBlockZ = 10;
-
+    public BlockPos linkedBlockPos = new BlockPos(10, 10, 10);
 
     public boolean moving = false;
-    public Player player;
+    public UUID lastPlayer;
 
     public ZiplineBlock(Properties p_49224_)
     {
         super(p_49224_);
     }
 
-    public void setConnectedBlocks(int x, int y, int z) {
-        this.connectedBlockX = x;
-        this.connectedBlockY = y;
-        this.connectedBlockZ = z;
+    public void setConnectedBlocks(BlockPos linkedBlockPos)
+    {
+        this.linkedBlockPos = linkedBlockPos;
     }
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         moving = true;
-        this.player = pPlayer;
-
-
-
-
+        this.lastPlayer = pPlayer.getUUID();
         return InteractionResult.SUCCESS;
     }
 
@@ -61,7 +59,7 @@ public class ZiplineBlock extends BaseEntityBlock
             }
             return (lvl, pos, blockState, t) -> {
                 if (t instanceof ZiplineBlockTile BE) {
-                    BE.tick();
+                    BE.tick(pLevel, pState, pBlockEntityType);
                 }
             };
         }

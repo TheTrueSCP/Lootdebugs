@@ -1,14 +1,19 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+
+import java.util.Random;
 
 public class LootbugGoldenEntity extends LootbugEntity
 {
@@ -60,5 +65,10 @@ public class LootbugGoldenEntity extends LootbugEntity
     @Override
     public float getSteeringSpeed() {
         return (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 4F;
+    }
+
+    public static <T extends Mob> boolean checkLootbugGoldenSpawnRules(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, Random random)
+    {
+        return blockPos.getY() <= 20 && random.nextFloat(0, 1) > 0.75f;
     }
 }

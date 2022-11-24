@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:flare_igniter"
+    },
+    "title": {
+      "translate": "advancements.pickup.flare_igniter.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.flare_igniter.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "flare_igniter": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:flare_igniter"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "flare_igniter"
+    ]
+  ]
+}

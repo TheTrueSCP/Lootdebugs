@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:ommoran_hearthstone_locator"
+    },
+    "title": {
+      "translate": "advancements.pickup.ommoran_hearthstone_locator.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.ommoran_hearthstone_locator.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "hearthstone_locator": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:ommoran_hearthstone_locator"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "hearthstone_locator"
+    ]
+  ]
+}

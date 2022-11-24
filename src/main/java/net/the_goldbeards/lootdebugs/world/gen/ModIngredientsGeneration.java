@@ -28,6 +28,7 @@ public class ModIngredientsGeneration
 
             baseDec.add(ModPlacedFeatures.INGREDIENTS);
             baseDec.add( ModPlacedFeatures.RED_SUGAR);
+            baseDec.add( ModPlacedFeatures.MINERALS);
         }
     }
 }

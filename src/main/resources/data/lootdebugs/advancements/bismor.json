@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:raw_bismor"
+    },
+    "title": {
+      "translate": "advancements.pickup.bismor.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.bismor.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bismor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:raw_bismor"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bismor"
+    ]
+  ]
+}

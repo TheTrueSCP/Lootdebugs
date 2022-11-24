@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:shield"
+    },
+    "title": {
+      "translate": "advancements.pickup.shield.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.shield.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "shield": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:shield"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "shield"
+    ]
+  ]
+}

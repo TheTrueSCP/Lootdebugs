@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:drill_head"
+    },
+    "title": {
+      "translate": "advancements.pickup.drill_head.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.drill_head.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "drill_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:drill_head"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "drill_head"
+    ]
+  ]
+}

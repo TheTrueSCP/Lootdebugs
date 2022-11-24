@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:lootdebugs",
+  "parent": "lootdebugs:ommoran_hearthstone_locator",
   "display": {
     "icon": {
       "item": "lootdebugs:ommoran_hearthstone"
@@ -13,7 +13,7 @@
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
   "criteria": {
     "hearthstone": {

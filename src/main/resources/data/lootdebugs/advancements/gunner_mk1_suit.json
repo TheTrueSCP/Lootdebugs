@@ -1,0 +1,37 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:mk1_company_standard_gunner_chestplate"
+    },
+    "title": {
+      "translate": "advancements.pickup.gunner_mk1_suit.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.gunner_mk1_suit.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "gunner_mk1_suit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "lootdebugs:mk1_gunner_suit"
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "gunner_mk1_suit"
+    ]
+  ]
+}

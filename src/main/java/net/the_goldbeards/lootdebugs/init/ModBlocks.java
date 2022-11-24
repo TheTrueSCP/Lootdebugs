@@ -202,7 +202,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> EQUIPMENT_TABLE = registryBlock("equipment_table",
             () -> new EquipmentTableBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
 
-    public static final RegistryObject<Block> FUEL_PRESS = registryBlock("fuel_refinery",
+    public static final RegistryObject<Block> FUEL_REFINERY = registryBlock("fuel_refinery",
             () -> new FuelRefineryBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
 
     public static final RegistryObject<Block> CLASS_CHANGER = registryBlock("class_changer",

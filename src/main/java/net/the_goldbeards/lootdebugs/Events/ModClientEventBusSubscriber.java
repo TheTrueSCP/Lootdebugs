@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +31,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.GuiUtils;
+import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -65,15 +68,14 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientEventBusSubscriber
 {
-    public static final KeyMapping ROCK_AND_STONE = new KeyMapping("lootdebugs.key.rock_and_stone", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "Lootdebugs");
-    public static final KeyMapping THROW_FLARE = new KeyMapping("lootdebugs.key.throw_flare", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "Lootdebugs");
+    public static final KeyMapping ROCK_AND_STONE = new KeyMapping("lootdebugs.key.rock_and_stone", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "keyGroup.lootdebugs");
+    public static final KeyMapping THROW_FLARE = new KeyMapping("lootdebugs.key.throw_flare", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "keyGroup.lootdebugs");
 
+    public static final ResourceLocation drunknessOverlay = new ResourceLocation("lootdebugs", "textures/gui/drunkness_overlay.png");
     public static Player getPlayer()
     {
         return Minecraft.getInstance().player;
     }
-
-    private static final ResourceLocation NAUSEA_LOCATION = new ResourceLocation("textures/misc/nausea.png");
 
     int widthMid = Minecraft.getInstance().screen.width / 2;
     int heightMid = Minecraft.getInstance().screen.height / 2;
@@ -95,6 +97,7 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK_HOOK.get(), GrapplingHookHookRender::new);
         event.registerEntityRenderer(ModEntities.PING_ENTITY.get(), PingRender::new);
         event.registerEntityRenderer(ModEntities.SHIELD_ENTITY.get(), ShieldRender::new);
+        event.registerEntityRenderer(ModEntities.ZIPLINE_ENTITY.get(), ZiplineRender::new);
 
         //Weapons
         event.registerEntityRenderer(ModEntities.SATCHEL_CHARGE.get(), SatchelChargeRender::new);
@@ -152,58 +155,20 @@ public class ModClientEventBusSubscriber
 
     }
 
-    public static void renderBlurry(final FMLClientSetupEvent event)
+    @SubscribeEvent
+    public static void renderDrunknessOverlay(FMLClientSetupEvent event)
     {
-        OverlayRegistry.registerOverlayTop("drunknessOverlay", (gui, mStack, partialTicks, screenWidth, screenHeight) ->
-        {
-            float k = Mth.lerp(partialTicks, Minecraft.getInstance().player.oPortalTime, Minecraft.getInstance().player.portalTime);
-            
-            if (k > 0.0F && Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) &&  Minecraft.getInstance().options.screenEffectScale < 1.0F) 
+        IIngameOverlay MyHudOverlay = OverlayRegistry.registerOverlayTop("drunkness", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
+            if(Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()))
             {
-                float tick = (k * (1.0F - Minecraft.getInstance().options.screenEffectScale));
-
-                int i = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-                int j = Minecraft.getInstance().getWindow().getGuiScaledHeight();
-
-                renderConfusionOverlay(tick);
-
-                GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, i, j, 0);
+                Minecraft minecraft = Minecraft.getInstance();
+                if (minecraft.gameMode == null) return;
+                if (minecraft.level == null) return;
+                TextureManager tm = minecraft.getTextureManager();
+                gui.setupOverlayRenderState(true, false, drunknessOverlay);
+                GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, screenWidth, screenHeight, 0);
             }
         });
-
-    }
-
-    private static void renderConfusionOverlay(float pScalar) {
-        int i = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-        int j = Minecraft.getInstance().getWindow().getGuiScaledHeight();
-        double d0 = Mth.lerp((double)pScalar, 2.0D, 1.0D);
-        float f = 0.2F * pScalar;
-        float f1 = 0.4F * pScalar;
-        float f2 = 0.2F * pScalar;
-        double d1 = (double)i * d0;
-        double d2 = (double)j * d0;
-        double d3 = ((double)i - d1) / 2.0D;
-        double d4 = ((double)j - d2) / 2.0D;
-        RenderSystem.disableDepthTest();
-        RenderSystem.depthMask(false);
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-        RenderSystem.setShaderColor(f, f1, f2, 1.0F);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, NAUSEA_LOCATION);
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferbuilder = tesselator.getBuilder();
-        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferbuilder.vertex(d3, d4 + d2, -90.0D).uv(0.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(d3 + d1, d4 + d2, -90.0D).uv(1.0F, 1.0F).endVertex();
-        bufferbuilder.vertex(d3 + d1, d4, -90.0D).uv(1.0F, 0.0F).endVertex();
-        bufferbuilder.vertex(d3, d4, -90.0D).uv(0.0F, 0.0F).endVertex();
-        tesselator.end();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.disableBlend();
-        RenderSystem.depthMask(true);
-        RenderSystem.enableDepthTest();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -362,6 +327,11 @@ public class ModClientEventBusSubscriber
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.APOCA_BLOOM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOOLO_CAP.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GLYPHID_SHIT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.BARLEY_PLANT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.MALT_PLANT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.YEAST_PLANT.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.STARCH_PLANT.get(), RenderType.cutout());
+
 
 
         ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_MORKITE.get(), RenderType.translucent());

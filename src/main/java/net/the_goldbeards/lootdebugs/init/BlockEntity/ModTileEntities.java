@@ -48,8 +48,8 @@ public class ModTileEntities
                     BlockEntityType.Builder.of(LightBlockTile::new, ModBlocks.LIGHT_BLOCK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<FuelRefineryTile>> FUEL_PRESS_ENTITY =
-            BLOCK_ENTITYS.register("fuel_press_entity", () ->
-                    BlockEntityType.Builder.of(FuelRefineryTile::new, ModBlocks.FUEL_PRESS.get()).build(null));
+            BLOCK_ENTITYS.register("fuel_refinery_entity", () ->
+                    BlockEntityType.Builder.of(FuelRefineryTile::new, ModBlocks.FUEL_REFINERY.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<ClassChangeTile>> CLASS_CHANGE_ENTITY =
             BLOCK_ENTITYS.register("class_change_entity", () ->

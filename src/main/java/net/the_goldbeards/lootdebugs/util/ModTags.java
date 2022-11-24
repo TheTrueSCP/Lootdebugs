@@ -44,7 +44,11 @@ public class ModTags
 
     public static class Items
     {
-        public static final TagKey<Item> LOOTBUG_BREEDING_ITEMS = createTag("lootbug/breeding_items");
+        public static final TagKey<Item> LOOTBUG_BREEDING_ITEMS = createTag("lootbug/lootbug_breeding_items");
+
+        public static final TagKey<Item> LOOTBUG_TEMPTATION_ITEMS = createTag("lootbug/lootbug_temptation_items");
+
+        public static final TagKey<Item> LOOTBUG_CONSUMABLE_ITEMS = createTag("lootbug/consumable_item_items");
 
         public static final TagKey<Item> FUELPRESS_WOOD = createTag("fuelpress/wood");
 

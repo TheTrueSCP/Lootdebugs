@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:create_pub",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:yeast_cone"
+    },
+    "title": {
+      "translate": "advancements.pickup.yeast_cone.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.yeast_cone.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "yeast_cone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:yeast_cone"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "yeast_cone"
+    ]
+  ]
+}

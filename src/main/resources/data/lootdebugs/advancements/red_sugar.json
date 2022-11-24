@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:lootdebugs",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:red_sugar"
+    },
+    "title": {
+      "translate": "advancements.pickup.red_sugar.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.red_sugar.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "red_sugar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:red_sugar"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "red_sugar"
+    ]
+  ]
+}

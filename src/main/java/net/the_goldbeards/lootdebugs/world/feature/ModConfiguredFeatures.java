@@ -37,10 +37,6 @@ public class ModConfiguredFeatures
             OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.DYSTRUM_ORE.get().defaultBlockState()),
             OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_DYSTRUM_ORE.get().defaultBlockState()));
 
-    public static final List<OreConfiguration.TargetBlockState> OVERWORLD_BISMOR_ORES = List.of(
-            OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.BISMOR_ORE.get().defaultBlockState()),
-            OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.BISMOR_ORE.get().defaultBlockState()));
-
     public static final List<OreConfiguration.TargetBlockState> OVERWORLD_OIL_SHALE_ORES = List.of(
             OreConfiguration.target(OreFeatures.STONE_ORE_REPLACEABLES, ModBlocks.OIL_SHALE.get().defaultBlockState()),
             OreConfiguration.target(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, ModBlocks.OIL_SHALE.get().defaultBlockState()));
@@ -69,24 +65,26 @@ public class ModConfiguredFeatures
 
 
 
-    public static final Holder<? extends ConfiguredFeature<RandomPatchConfiguration, ?>>Ingredients = FeatureUtils.register("ingredients_configured",//Set, which plant has more weight
-           Feature.RANDOM_PATCH, new RandomPatchConfiguration(5, 10, 4, //32 Default -> Test with 64 tries
-                    PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>INGREDIENTS = FeatureUtils.register("ingredients_configured",//Set, which plant has more weight
+            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration( //32 Default -> Test with 64 tries
+                     new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(ModBlocks.BARLEY_PLANT.get().defaultBlockState(), 10)
                             .add(ModBlocks.STARCH_PLANT.get().defaultBlockState(), 8)
                             .add(ModBlocks.YEAST_PLANT.get().defaultBlockState(), 6)
                             .add(ModBlocks.MALT_PLANT.get().defaultBlockState(), 7)
                             .add(ModBlocks.APOCA_BLOOM.get().defaultBlockState(),7)
-                            .add(ModBlocks.BOOLO_CAP.get().defaultBlockState(), 9))))));
+                            .add(ModBlocks.BOOLO_CAP.get().defaultBlockState(), 9))));
 
 
-    public static final Holder<? extends ConfiguredFeature<RandomPatchConfiguration, ?>>RED_SUGAR = FeatureUtils.register("red_sugar_configured",//Set, which plant has more weight
-            Feature.RANDOM_PATCH, new RandomPatchConfiguration(40, 12, 12, PlacementUtils.onlyWhenEmpty(//32 Default -> Test with 64 tries
-                    Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())))));
+    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>RED_SUGAR = FeatureUtils.register("red_sugar_configured",//Set, which plant has more weight
+            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                    BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())));
 
-    public static final Holder<? extends ConfiguredFeature<RandomPatchConfiguration, ?>> BISMOR_EXPOSED = FeatureUtils.register("bismor_exposed_configured",//Set, which plant has more weight
-            Feature.RANDOM_PATCH, new RandomPatchConfiguration(11, 12, 3, PlacementUtils.onlyWhenEmpty( //32 Default -> Test with 64 tries
-                    Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.BISMOR_ORE.get())))));
+    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>MINERALS = FeatureUtils.register("minerals_configured",//Set, which plant has more weight
+            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                    new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                            .add(ModBlocks.CROPPER_ORE.get().defaultBlockState(), 10)
+                            .add(ModBlocks.BISMOR_ORE.get().defaultBlockState(), 10))));
 
 
 }

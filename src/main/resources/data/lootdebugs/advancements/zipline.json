@@ -1,0 +1,37 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:zipline"
+    },
+    "title": {
+      "translate": "advancements.pickup.zipline.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.zipline.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "zipline": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:zipline"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "zipline"
+    ]
+  ]
+}

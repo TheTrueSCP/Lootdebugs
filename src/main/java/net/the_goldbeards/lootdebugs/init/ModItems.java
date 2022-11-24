@@ -47,6 +47,9 @@ public class ModItems
     }
 
 //Important Stuff
+public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
+        () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> RICKROLL = ITEMS.register("rickroll",
             () -> new RecordItem(1, ModSounds.RICKROLL, new Item.Properties()));
 
@@ -121,7 +124,7 @@ public class ModItems
     public static final RegistryObject<Item> DRILL_HEAD = ITEMS.register("drill_head",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> SPOOL = ITEMS.register("coil",
+    public static final RegistryObject<Item> COIL = ITEMS.register("coil",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> POWER_CELL = ITEMS.register("power_cell",

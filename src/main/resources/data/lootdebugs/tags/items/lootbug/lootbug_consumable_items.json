@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:raw_gold",
+    "minecraft:redstone",
+    "lootdebugs:nitra",
+    "lootdebugs:red_sugar_item",
+    "lootdebugs:raw_bismor",
+    "lootdebugs:raw_cropper",
+    "lootdebugs:raw_dystrum",
+    "minecraft:lapis_lazuli",
+    "minecraft:emerald",
+    "minecraft:diamond"
+  ]
+}

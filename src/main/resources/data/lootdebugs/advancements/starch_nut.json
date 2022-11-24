@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:create_pub",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:starch_nut"
+    },
+    "title": {
+      "translate": "advancements.pickup.starch_nut.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.starch_nut.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "starch_nut": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:starch_nut"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "starch_nut"
+    ]
+  ]
+}

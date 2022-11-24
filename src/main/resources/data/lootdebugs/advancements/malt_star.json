@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:create_pub",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:malt_star"
+    },
+    "title": {
+      "translate": "advancements.pickup.malt_star.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.malt_star.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "malt_star": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:malt_star"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "malt_star"
+    ]
+  ]
+}

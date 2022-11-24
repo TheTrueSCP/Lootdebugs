@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:mixer_barrel"
+    },
+    "title": {
+      "translate": "advancements.pickup.mixer_barrel.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.mixer_barrel.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mixer_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:mixer_barrel"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mixer_barrel"
+    ]
+  ]
+}

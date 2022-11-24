@@ -9,7 +9,7 @@ public class ModGroup {
     public static final CreativeModeTab LOOTDEBUGS_TAB = new CreativeModeTab("lootbuggroup") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModItems.COMPANY_STANDARD_PICKAXE.get());
+            return new ItemStack(ModItems.LOGO.get());
         }
     };
 }

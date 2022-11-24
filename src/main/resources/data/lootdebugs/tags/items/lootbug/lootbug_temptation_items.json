@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#lootdebugs:lootbug/lootbug_consumable_items",
+    "#lootdebugs:lootbug/lootbug_breeding_items"
+  ]
+}

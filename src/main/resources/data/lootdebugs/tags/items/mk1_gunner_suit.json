@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lootdebugs:mk1_company_standard_gunner_helmet",
+    "lootdebugs:mk1_company_standard_gunner_chestplate",
+    "lootdebugs:mk1_company_standard_gunner_leggings",
+    "lootdebugs:mk1_company_standard_gunner_boots"
+
+  ]
+}

@@ -15,9 +15,14 @@ import java.util.List;
 
 public class ModEntityGeneration
 {
-    public static void onEntitySpawn(final BiomeLoadingEvent event) {
+    public static void onEntitySpawn(final BiomeLoadingEvent event)
+    {
 
-        addEntityToAllUndergroundBiomesExceptThese(event, ModEntities.LOOTBUG.get(),  60, 1, 3,
+        event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.LOOTBUG.get(), 40, 1, 4));
+        event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.LOOTBUG_GOLDEN.get(), 2, 1, 1));
+        event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.LOOTBUG_OLD.get(), 1, 1, 1));
+
+        /*addEntityToAllUndergroundBiomesExceptThese(event, ModEntities.LOOTBUG.get(),  60, 1, 3,
                 //Oceans
                 Biomes.OCEAN,
                 Biomes.COLD_OCEAN,
@@ -174,8 +179,9 @@ public class ModEntityGeneration
         // Goes through each entry in the biomes and sees if it matches the current biome we are loading
         boolean isBiomeSelected = Arrays.stream(biomes).map(ResourceKey::location)
                 .map(Object::toString).anyMatch(s -> s.equals(event.getName().toString()));
-        if(isBiomeSelected) {
-            event.getSpawns().addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(type, weight, minCount, maxCount));
+        if(isBiomeSelected)
+        {
+            event.getSpawns().addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(type, weight, minCount, maxCount));
         }
     }
 
