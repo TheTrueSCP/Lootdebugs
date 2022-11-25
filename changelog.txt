@@ -426,13 +426,15 @@ Rekord:85 (Tech and Tools Update)
 -added new Class System, old worlds cant be played anymore(you can delete the playerdata folder, than loading  it should work)
 -added driller mk1 armor recipes
 -added scout mk1 armor recipes
--added engineer mk1 armor recipes
+-a^dded engineer mk1 armor recipes
 -added gunner mk1 armor recipes
 -added class changer model/texture
 -added older builds
 -lootbugs now generate in caves
 -added advancements
 -added lootdebugs logo item
+-fixed minerals generation
+-edited language files
 
 
 

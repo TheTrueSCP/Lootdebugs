@@ -40,7 +40,7 @@ public class ModPlacedFeatures
             ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
 
     public static final Holder<PlacedFeature> MINERALS = PlacementUtils.register("minerals_placed",
-            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
+            ModConfiguredFeatures.MINERALS, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
 
 
 }

@@ -15,7 +15,8 @@
   "player.class.thetruescp": "TheTrueSCP" ,
   "player.class.monsieurhannes": "Monsieur Hannes",
 
-  "tool.wrong_class" : "Wrong Class, ",
+  "tool.wrong_class" : "Wrong Class, you must be ",
+  "tool.wrong_class_after" : " to use this tool",
   "tool.no_fuel": "No Fuel in Inventory",
   "tool.on_block_drill_mode": "On block drill mode",
 
@@ -320,7 +321,7 @@
   "advancements.pickup.boolo_cap.description": "Dont put it on your head...",
 
   "advancements.pickup.red_sugar.title": "Red Sugar",
-  "advancements.pickup.red_sugar.description": "Wait you ate all the Red Sugar, we need that!",
+  "advancements.pickup.red_sugar.description": "Wait you ate all the Red Sugar? We need that!",
 
   "advancements.pickup.driller_mk1_suit.title": "Driller Mk1",
   "advancements.pickup.driller_mk1_suit.description": "You, Driller, go Drilling!",
