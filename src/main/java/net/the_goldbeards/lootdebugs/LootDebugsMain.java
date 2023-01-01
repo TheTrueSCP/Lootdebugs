@@ -55,6 +55,7 @@ public class LootDebugsMain
         ModPotions.register(eventBus);
         ModRecipes.register(eventBus);
         ModFluids.register(eventBus);
+        ModFeatures.register(eventBus);
 
 
 

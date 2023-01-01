@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.Shield.ShieldEmitterBlockTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlockTile;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 

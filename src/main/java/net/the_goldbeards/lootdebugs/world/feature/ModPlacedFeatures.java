@@ -3,6 +3,7 @@ package net.the_goldbeards.lootdebugs.world.feature;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class ModPlacedFeatures
@@ -34,13 +35,19 @@ public class ModPlacedFeatures
 
 
     public static final Holder<PlacedFeature> INGREDIENTS = PlacementUtils.register("ingredients_placed",
-            ModConfiguredFeatures.INGREDIENTS, CountPlacement.of(2) ,HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(110)));
+            ModConfiguredFeatures.INGREDIENTS, CountPlacement.of(16) ,HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(110)));
 
     public static final Holder<PlacedFeature> RED_SUGAR = PlacementUtils.register("red_sugar_placed",
-            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
+            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(20), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
 
     public static final Holder<PlacedFeature> MINERALS = PlacementUtils.register("minerals_placed",
-            ModConfiguredFeatures.MINERALS, CountPlacement.of(2), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
+            ModConfiguredFeatures.MINERALS, CountPlacement.of(4), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(90)));
+
+    public static final Holder<PlacedFeature> LIQUID_MORKITE_SPRING = PlacementUtils.register("liquid_morkite_spring_placed",
+        ModConfiguredFeatures.LIQUID_MORKITE_SPRING, CountPlacement.of(2), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
+
+    public static final Holder<PlacedFeature> LIQUID_MORKITE_LAKE = PlacementUtils.register("liquid_morkite_lake_placed",
+            ModConfiguredFeatures.LIQUID_MORKITE_LAKE, RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.absolute(0))));
 
 
 }

@@ -1,0 +1,37 @@
+{
+  "variants": {
+    "facing=east,half=lower": {
+      "model": "lootdebugs:block/zipline_lower",
+      "y": 270
+    },
+    "facing=east,half=upper": {
+      "model": "lootdebugs:block/zipline_upper",
+      "y": 270
+    },
+
+    "facing=north,half=lower": {
+      "model": "lootdebugs:block/zipline_lower",
+      "y": 180
+    },
+    "facing=north,half=upper": {
+      "model": "lootdebugs:block/zipline_upper",
+      "y": 180
+    },
+
+    "facing=south,half=lower": {
+      "model": "lootdebugs:block/zipline_lower"
+    },
+    "facing=south,half=upper": {
+      "model": "lootdebugs:block/zipline_upper"
+    },
+
+    "facing=west,half=lower": {
+      "model": "lootdebugs:block/zipline_lower",
+      "y": 90
+    },
+    "facing=west,half=upper": {
+      "model": "lootdebugs:block/zipline_upper",
+      "y": 90
+    }
+  }
+}

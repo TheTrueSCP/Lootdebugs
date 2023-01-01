@@ -24,7 +24,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.Shield.ShieldBlockTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlockTile;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,22 +1,28 @@
 package net.the_goldbeards.lootdebugs.world.feature;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.LakeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SpringConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
+import net.the_goldbeards.lootdebugs.init.ModFeatures;
+import net.the_goldbeards.lootdebugs.init.ModFluids;
+import net.the_goldbeards.lootdebugs.world.feature.custom.SimpleIngredientsGeneration.SimpleIngredientsConfiguration;
 
 import java.util.List;
 
@@ -65,26 +71,34 @@ public class ModConfiguredFeatures
 
 
 
-    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>INGREDIENTS = FeatureUtils.register("ingredients_configured",//Set, which plant has more weight
-            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration( //32 Default -> Test with 64 tries
-                     new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+    public static final Holder<? extends ConfiguredFeature<SimpleIngredientsConfiguration, ?>> INGREDIENTS = FeatureUtils.register("ingredients_configured",//Set, which plant has more weight
+            ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,//32 Default -> Test with 64 tries
+                     new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(ModBlocks.BARLEY_PLANT.get().defaultBlockState(), 10)
                             .add(ModBlocks.STARCH_PLANT.get().defaultBlockState(), 8)
                             .add(ModBlocks.YEAST_PLANT.get().defaultBlockState(), 6)
                             .add(ModBlocks.MALT_PLANT.get().defaultBlockState(), 7)
                             .add(ModBlocks.APOCA_BLOOM.get().defaultBlockState(),7)
-                            .add(ModBlocks.BOOLO_CAP.get().defaultBlockState(), 9))));
+                            .add(ModBlocks.BOOLO_CAP.get().defaultBlockState(), 9))))));
 
 
-    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>RED_SUGAR = FeatureUtils.register("red_sugar_configured",//Set, which plant has more weight
-            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                    BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())));
+    public static final Holder<? extends ConfiguredFeature<SimpleIngredientsConfiguration, ?>> RED_SUGAR = FeatureUtils.register("red_sugar_configured",//Set, which plant has more weight
+            ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())))));
 
-    public static final Holder<? extends ConfiguredFeature<SimpleBlockConfiguration, ?>>MINERALS = FeatureUtils.register("minerals_configured",//Set, which plant has more weight
-            Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                    new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+    public static final Holder<? extends ConfiguredFeature<SimpleIngredientsConfiguration, ?>> MINERALS = FeatureUtils.register("minerals_configured",//Set, which plant has more weight
+            ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(
+                    PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
+                    new SimpleBlockConfiguration(
+                            new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                             .add(ModBlocks.CROPPER_ORE.get().defaultBlockState(), 10)
-                            .add(ModBlocks.BISMOR_ORE.get().defaultBlockState(), 10))));
+                            .add(ModBlocks.BISMOR_ORE.get().defaultBlockState(), 10))))));
 
+
+
+    public static final Holder<? extends ConfiguredFeature<SpringConfiguration, ?>>LIQUID_MORKITE_SPRING = FeatureUtils.register("liquid_morkite_spring_configured",
+            Feature.SPRING, new SpringConfiguration(ModFluids.LIQUID_MORKITE.get().defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, Blocks.DEEPSLATE)));
+
+    public static final Holder<? extends ConfiguredFeature<LakeFeature.Configuration, ?>>LIQUID_MORKITE_LAKE = FeatureUtils.register("liquid_morkite_lake_configured",
+            Feature.LAKE, new LakeFeature.Configuration(BlockStateProvider.simple(ModFluids.LIQUID_MORKITE_BLOCK.get().defaultBlockState()), BlockStateProvider.simple(Blocks.DEEPSLATE)));
 
 }

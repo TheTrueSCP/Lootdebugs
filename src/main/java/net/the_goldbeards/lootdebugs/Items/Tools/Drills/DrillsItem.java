@@ -32,8 +32,8 @@ import net.minecraftforge.common.ForgeHooks;
 import net.the_goldbeards.lootdebugs.Items.Tools.FuelDiggingItem;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
 import net.the_goldbeards.lootdebugs.util.ModTags;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import org.jetbrains.annotations.Nullable;
 
 public class DrillsItem extends FuelDiggingItem
@@ -70,7 +70,7 @@ public class DrillsItem extends FuelDiggingItem
 			pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
 			{
 
-				HelpfullStuff.ItemNBTHelper.putString(pStack,"drills_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+				UsefullStuff.ItemNBTHelper.putString(pStack,"drills_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
 
 
 			});
@@ -80,15 +80,15 @@ public class DrillsItem extends FuelDiggingItem
 		//Have Fuel in Inv
 		if(pEntity instanceof Player player)
 		{
-			HelpfullStuff.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveFuelFromItem(pStack, player));
+			UsefullStuff.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveFuelFromItem(pStack, player));
 
 		}
 
 		if(pEntity instanceof Player player && pIsSelected)
 		{
-			if(!HelpfullStuff.ItemNBTHelper.getString(pStack, "drills_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+			if(!UsefullStuff.ItemNBTHelper.getString(pStack, "drills_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
 			{
-				player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+				player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
 
 			}
 
@@ -165,7 +165,7 @@ public class DrillsItem extends FuelDiggingItem
 			{
 
 				if (stack.getItem() instanceof DrillsItem && haveFuelFromItem(stack, player) && canToolBeUsed(stack)) {
-					HelpfullStuff.ItemHelpers.rotateDrills(world, stack);//Play Anim
+					UsefullStuff.ItemHelpers.rotateDrills(world, stack);//Play Anim
 				}
 
 				int xpDropEvent = ForgeHooks.onBlockBreakEvent(world, ((ServerPlayer)player).gameMode.getGameModeForPlayer(), (ServerPlayer)player, pos);
@@ -205,7 +205,7 @@ public class DrillsItem extends FuelDiggingItem
 
 	public boolean canToolBeUsed(ItemStack pUsedStack)
 	{
-		return HelpfullStuff.ItemNBTHelper.getString(pUsedStack, "drills_dwarfclass").equals(dwarfClassToUse.name());//you can only use the tool if you are the right dwarf
+		return UsefullStuff.ItemNBTHelper.getString(pUsedStack, "drills_dwarfclass").equals(dwarfClassToUse.name());//you can only use the tool if you are the right dwarf
 	}
 
 	@Override
@@ -314,7 +314,7 @@ public class DrillsItem extends FuelDiggingItem
 
 	private boolean haveFuel(ItemStack pStack)
 	{
-		return HelpfullStuff.ItemNBTHelper.getBoolean(pStack,"havefuelininventory");
+		return UsefullStuff.ItemNBTHelper.getBoolean(pStack,"havefuelininventory");
 	}
 
 	private boolean isNoBreakableBlock(BlockState block)

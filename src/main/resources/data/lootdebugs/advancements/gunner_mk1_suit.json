@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:equipment_table",
+  "parent": "lootdebugs:class_changer",
   "display": {
     "icon": {
       "item": "lootdebugs:mk1_company_standard_gunner_chestplate"

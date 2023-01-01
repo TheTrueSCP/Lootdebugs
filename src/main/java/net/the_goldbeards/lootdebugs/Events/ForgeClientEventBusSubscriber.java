@@ -19,7 +19,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.client.event.InputEvent;
@@ -31,6 +30,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
 import net.the_goldbeards.lootdebugs.Items.Tools.Drills.DrillsItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
+import net.the_goldbeards.lootdebugs.Server.ChangeDirection.ChangeDirectionPacket;
 import net.the_goldbeards.lootdebugs.Server.Flare.ThrowFlarePacket;
 import net.the_goldbeards.lootdebugs.Server.PacketHandler;
 import net.the_goldbeards.lootdebugs.Server.RockAndStone.RockAndStonePacket;
@@ -40,12 +40,11 @@ import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.ModEffects;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
 import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
 import net.the_goldbeards.lootdebugs.util.ModTags;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
-import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.ROCK_AND_STONE;
-import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.THROW_FLARE;
+import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.*;
 
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ForgeClientEventBusSubscriber
@@ -84,6 +83,11 @@ public class ForgeClientEventBusSubscriber
         {
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ThrowFlarePacket());
         }
+
+        if (CHANGE_DIRECTION.isDown())
+        {
+            PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeDirectionPacket());
+        }
     }
 
     //UI
@@ -103,7 +107,7 @@ public class ForgeClientEventBusSubscriber
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap -> {
 
                 IClassData.Classes dwarfClass = classCap.getDwarfClass();
-                event.getLeft().add(HelpfullStuff.ClassTranslator.getClassColor(dwarfClass) + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClass).getString());
+                event.getLeft().add(UsefullStuff.ClassTranslator.getClassColor(dwarfClass) + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClass).getString());
 
             });
 
@@ -153,11 +157,11 @@ public class ForgeClientEventBusSubscriber
             if(!stack.isEmpty() && stack.getItem() instanceof DrillsItem)
             {
 
-                if(player instanceof Player &&!player.isShiftKeyDown() && !HelpfullStuff.ItemNBTHelper.getBoolean(stack, "onBlockMode"))
+                if(player instanceof Player &&!player.isShiftKeyDown() && !UsefullStuff.ItemNBTHelper.getBoolean(stack, "onBlockMode"))
                 {
                     //Render for every Block which is breaking the block-break animation
                     ImmutableList<BlockPos> blocks = ((DrillsItem)stack.getItem()).getExtraBlocksDug(world, (Player)player, event.getTarget());
-                    HelpfullStuff.drawAdditionalBlockbreak(event, (Player)player, blocks);
+                    UsefullStuff.drawAdditionalBlockbreak(event, (Player)player, blocks);
                 }
             }
         }
@@ -172,7 +176,7 @@ public class ForgeClientEventBusSubscriber
     {
 
         Level level = event.getWorld();
-        if(event.getPlayer().hasEffect(ModEffects.GOLD_TOUCH.get()))
+        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()))
         {
             if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
             {
@@ -186,7 +190,7 @@ public class ForgeClientEventBusSubscriber
     {
 
         Level level = event.getWorld();
-        if(event.getPlayer().hasEffect(ModEffects.GOLD_TOUCH.get()))
+        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()))
         {
             if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
             {
@@ -206,7 +210,7 @@ public class ForgeClientEventBusSubscriber
 
 
         //for loops aabb -> minX to maxX... level.getBlockstate([forloop values]).setBlock(Blocks.GOLD_BLOCK);
-        if(event.getPlayer().hasEffect(ModEffects.GOLD_TOUCH.get()) && event.getEntity().getType() != EntityType.PLAYER)
+        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()) && event.getEntity().getType() != EntityType.PLAYER)
         {
             if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
             {

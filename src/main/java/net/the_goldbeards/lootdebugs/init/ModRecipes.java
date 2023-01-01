@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.recipe.EquipmentTableRecipe;
+import net.the_goldbeards.lootdebugs.recipe.FuelRefineryRecipe;
 import net.the_goldbeards.lootdebugs.recipe.PubRecipe;
 
 public class ModRecipes
@@ -19,6 +20,9 @@ public class ModRecipes
 
     public static final RegistryObject<RecipeSerializer<PubRecipe>> BEER_BREWING_SERIALIZER =
             SERIALIZERS.register("pub_brewing", () -> PubRecipe.Serializer.INSTANCE);
+
+    public static final RegistryObject<RecipeSerializer<FuelRefineryRecipe>> FUEL_REFINERY_SERIALIZER =
+            SERIALIZERS.register("fuel_refining", () -> FuelRefineryRecipe.Serializer.INSTANCE);
 
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);

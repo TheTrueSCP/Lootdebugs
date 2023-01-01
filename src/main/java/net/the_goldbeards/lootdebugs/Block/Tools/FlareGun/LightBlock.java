@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.LightBlock.LightBlockTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlockTile;
 import org.jetbrains.annotations.Nullable;
 
 public class LightBlock extends BaseEntityBlock

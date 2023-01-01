@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:flare_igniter",
+  "parent": "lootdebugs:equipment_table",
   "display": {
     "icon": {
       "item": "lootdebugs:flare_gun"

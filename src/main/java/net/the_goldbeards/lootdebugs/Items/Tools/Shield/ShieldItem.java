@@ -26,7 +26,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.the_goldbeards.lootdebugs.Entities.Tools.ShieldEntity;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 public class ShieldItem extends BlockItem {
 
@@ -44,7 +44,7 @@ public class ShieldItem extends BlockItem {
             pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
 
-                HelpfullStuff.ItemNBTHelper.putString(pStack,"shield_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+                UsefullStuff.ItemNBTHelper.putString(pStack,"shield_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
 
 
             });
@@ -53,9 +53,9 @@ public class ShieldItem extends BlockItem {
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!HelpfullStuff.ItemNBTHelper.getString(pStack, "shield_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "shield_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
             }
 
         }
@@ -72,10 +72,6 @@ public class ShieldItem extends BlockItem {
             return InteractionResult.FAIL;
         }
 
-        if(!pContext.getPlayer().isCrouching())
-        {
-            return InteractionResult.PASS;
-        }
         if (!pContext.canPlace()) {
             return InteractionResult.FAIL;
         } else {

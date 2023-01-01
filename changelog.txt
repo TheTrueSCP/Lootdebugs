@@ -434,9 +434,38 @@ Rekord:85 (Tech and Tools Update)
 -added advancements
 -added lootdebugs logo item
 -fixed minerals generation
+-JEI integration: added pub recipe result slot cycle between mug and result
 -edited language files
-
-
+-improved satchel charge place mechanics
+-added zipline
+-changed bismor on-ground scale
+-fixed cropper loottable
+-changed slightly lootbug (golden) drop
+-improved morkite (block) burning time (balancing)
+-added crafting recipe for red sugar
+-removed locator recipe
+-class changer drops now if mined
+-increased smartstout volume
+-added freeze/lootbug_touch effect translation
+-fixed death message translation
+-fixed lootbug riding bug
+-changed lootbug tags
+-fixed shield placing bug
+-added shield emitter model
+-ping color now synced with other clients
+-flare color now synced with other clients
+-updated ping textures
+-updated/added flare textures
+-fixed fuel refinery voxelshape
+-rewrote zipline item code
+-you can now change the zipline direction while moving
+-fixed zipline suffocate in block bug
+-added satchel charge detonator item
+-added missing translations
+-added zipline string rendering
+-added fuel tooltip
+-fixed ommoran hearthstone locator select bug
+-fixed ingredients gen... again
 
 
 

@@ -18,7 +18,6 @@ import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.recipe.PubRecipe;
-import org.checkerframework.checker.guieffect.qual.UI;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -79,19 +78,19 @@ public class PubRecipeCategory implements IRecipeCategory<PubRecipe> {
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80,65).addItemStacks(outputs);
     }
 
-    @Override
-    public ResourceLocation getUid() {
-        return null;
-    }
-
-    @Override
-    public Class<? extends PubRecipe> getRecipeClass() {
-        return null;
-    }
 
     private Item BarleyOrEmerald(boolean emerald)
     {
         return emerald ? Items.EMERALD : ModItems.BARLEY_BULB.get();
     }
 
+    @Override
+    public ResourceLocation getUid() {
+        return getRecipeType().getUid();
+    }
+
+    @Override
+    public Class<? extends PubRecipe> getRecipeClass() {
+        return getRecipeType().getRecipeClass();
+    }
 }

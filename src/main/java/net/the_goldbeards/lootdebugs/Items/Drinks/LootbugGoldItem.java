@@ -14,7 +14,7 @@ public class LootbugGoldItem extends BeerItem {
     @Override
     public void addEffects(LivingEntity entityLiving) {
 
-        entityLiving.addEffect(new MobEffectInstance(ModEffects.GOLD_TOUCH.get(), 600, 14));
+        entityLiving.addEffect(new MobEffectInstance(ModEffects.LOOTBUG_TOUCH.get(), 600, 14));
         entityLiving.addEffect(new MobEffectInstance(MobEffects.SATURATION, 4, 0));
 
 

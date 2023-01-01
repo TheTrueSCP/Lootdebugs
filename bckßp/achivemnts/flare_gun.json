@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:flare_igniter",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:flare_gun"
+    },
+    "title": {
+      "translate": "advancements.pickup.flare_gun.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.flare_gun.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "flare_gun": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:flare_gun"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "flare_gun"
+    ]
+  ]
+}

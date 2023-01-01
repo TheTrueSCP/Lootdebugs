@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/fuel_refinery" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/fuel_refinery", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/fuel_refinery", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/fuel_refinery", "y":  270}
+  }
+}

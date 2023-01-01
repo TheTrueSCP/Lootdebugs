@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:drill_head",
+  "parent": "lootdebugs:equipment_table",
   "display": {
     "icon": {
       "item": "lootdebugs:drills"

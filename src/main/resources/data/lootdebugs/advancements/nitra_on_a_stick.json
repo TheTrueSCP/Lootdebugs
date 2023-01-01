@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:nitra",
+  "parent": "lootdebugs:lootdebugs",
   "display": {
     "icon": {
       "item": "lootdebugs:nitra_on_a_stick"
@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.pickup.nitra_on_a_stick.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": true

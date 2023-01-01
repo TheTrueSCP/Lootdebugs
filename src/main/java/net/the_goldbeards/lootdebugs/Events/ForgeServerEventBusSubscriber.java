@@ -7,5 +7,4 @@ import net.the_goldbeards.lootdebugs.LootDebugsMain;
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.DEDICATED_SERVER)
 public class ForgeServerEventBusSubscriber
 {
-
 }

@@ -31,10 +31,11 @@
    "lootdebugs:cropper_ore",
    "lootdebugs:cropper_block",
 
-
+   "lootdebugs:zipline_block",
 
    "lootdebugs:pub",
    "lootdebugs:equipment_table",
-   "lootdebugs:fuel_refinery"
+   "lootdebugs:fuel_refinery",
+   "lootdebugs:class_changer"
   ]
 }

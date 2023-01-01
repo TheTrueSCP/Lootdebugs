@@ -10,9 +10,10 @@ import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
-import net.the_goldbeards.lootdebugs.Entities.Projectiles.GrapplingHookHookEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.*;
-import net.the_goldbeards.lootdebugs.Entities.Weapons.SatchelChargeEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineMoveEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 public class ModEntities {
 
@@ -49,8 +50,15 @@ public class ModEntities {
     public static final RegistryObject<EntityType<PingEntity>> PING_ENTITY =
             ENTITY_TYPES.register("ping", () -> EntityType.Builder.<PingEntity>of(PingEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "ping").toString()));
 
+    public static final RegistryObject<EntityType<ZiplineMoveEntity>> ZIPLINE_MOVE_ENTITY =
+            ENTITY_TYPES.register("zipline_move", () -> EntityType.Builder.<ZiplineMoveEntity>of(ZiplineMoveEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline_move").toString()));
+
     public static final RegistryObject<EntityType<ZiplineEntity>> ZIPLINE_ENTITY =
             ENTITY_TYPES.register("zipline", () -> EntityType.Builder.<ZiplineEntity>of(ZiplineEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline").toString()));
+
+    public static final RegistryObject<EntityType<ZiplineStringAnchor>> STRING_ANCHOR_ENTITY =
+            ENTITY_TYPES.register("zipline_anchor", () -> EntityType.Builder.<ZiplineStringAnchor>of(ZiplineStringAnchor::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline_anchor").toString()));
+
 
 
 

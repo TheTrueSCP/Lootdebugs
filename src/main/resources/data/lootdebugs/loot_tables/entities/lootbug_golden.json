@@ -3,8 +3,8 @@
   "pools": [
     {
       "rolls": {
-        "min": 4,
-        "max": 8
+        "min": 6,
+        "max": 10
       },
       "entries": [
         {
@@ -53,12 +53,12 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 60,
+          "weight": 70,
           "name": "minecraft:raw_gold"
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
+          "weight": 10,
           "name": "lootdebugs:nitra"
         }
       ]

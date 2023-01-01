@@ -13,10 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.the_goldbeards.lootdebugs.Entities.Projectiles.GrapplingHookHookEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.GrapplingHookHookEntity;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 public class GrapplingHookItem extends Item
 {
@@ -50,7 +50,7 @@ public class GrapplingHookItem extends Item
             pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
 
-                HelpfullStuff.ItemNBTHelper.putString(pStack,"grapplinghook_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+                UsefullStuff.ItemNBTHelper.putString(pStack,"grapplinghook_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
 
 
             });
@@ -59,9 +59,9 @@ public class GrapplingHookItem extends Item
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!HelpfullStuff.ItemNBTHelper.getString(pStack, "grapplinghook_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "grapplinghook_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
             }
 
         }
@@ -74,7 +74,7 @@ public class GrapplingHookItem extends Item
     {
         if(pStack.hasTag())
         {
-            if(pLevel.getEntity((int) HelpfullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) != null)
+            if(pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) != null)
             {
                 if(pLivingEntity instanceof Player player)
                 {
@@ -84,7 +84,7 @@ public class GrapplingHookItem extends Item
                     }
                 }
 
-                pLevel.getEntity((int) HelpfullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")).kill();
+                pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")).kill();
 
             }
         }
@@ -98,7 +98,7 @@ public class GrapplingHookItem extends Item
 
         if (pStack.hasTag()) {
             assert pStack.getTag() != null;
-            if (pLevel.getEntity((int) HelpfullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) instanceof GrapplingHookHookEntity GH)
+            if (pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) instanceof GrapplingHookHookEntity GH)
             {
 
                 if (GH.position().distanceTo(pEntity.position()) > (100 * 2)) //Block Range * 2 cause 1 vec is a half block
@@ -149,14 +149,13 @@ public class GrapplingHookItem extends Item
 
 
 
-        HelpfullStuff.ItemNBTHelper.putFloat(pingItemStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id", grapplingHookHookEntity.getId());//Create fuel with defaut values
+        UsefullStuff.ItemNBTHelper.putFloat(pingItemStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id", grapplingHookHookEntity.getId());//Create fuel with defaut values
 
         pEntity.startUsingItem(pUsedHand);
 
 
         return InteractionResultHolder.consume(pEntity.getItemInHand(pUsedHand));
     }
-
 
 
 

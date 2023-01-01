@@ -17,48 +17,44 @@ public class OreBlocks extends Block
         super(p_49795_);
     }
 
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return !pLevel.getBlockState(pPos).isAir();
-    }
-
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
-    }
-
-
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return this.isAnNeighborBlock(pPos,pLevel);
     }
 
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
         return pState.getFluidState().isEmpty();
     }
 
-    public boolean isAnNeighborBlock(BlockPos pos, LevelReader level)
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return isNeighborBlock(pPos, pLevel);
+    }
+
+    public boolean isNeighborBlock(BlockPos pos, LevelReader level)
     {
-         if (!level.getBlockState(pos.above(1)).isAir())
+        if (level.getBlockState(pos.above(1)).isCollisionShapeFullBlock(level, pos.above(1)))
         {
             return true;
         }
 
-        else if (!level.getBlockState(pos.below(1)).isAir())
+        else if (level.getBlockState(pos.below(1)).isCollisionShapeFullBlock(level, pos.below(1)))
         {
             return true;
         }
 
-        else if (!level.getBlockState(pos.north(1)).isAir())
+        else if (level.getBlockState(pos.north(1)).isCollisionShapeFullBlock(level, pos.north(1)))
         {
             return true;
         }
-        else if (!level.getBlockState(pos.east(1)).isAir())
+        else if (level.getBlockState(pos.east(1)).isCollisionShapeFullBlock(level, pos.east(1)))
         {
             return true;
         }
-        else if (!level.getBlockState(pos.south(1)).isAir())
+        else if (level.getBlockState(pos.south(1)).isCollisionShapeFullBlock(level, pos.south(1)))
         {
-             return true;
+            return true;
         }
-        else if(!level.getBlockState(pos.west(1)).isAir())
+        else if(level.getBlockState(pos.west(1)).isCollisionShapeFullBlock(level, pos.west(1)))
         {
             return true;
         }

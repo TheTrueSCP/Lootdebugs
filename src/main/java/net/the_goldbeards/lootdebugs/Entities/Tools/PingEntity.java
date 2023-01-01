@@ -27,25 +27,32 @@ import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
 
 public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
 
-    public static final EntityDataAccessor<String> dwarfClassSynced = SynchedEntityData.defineId(PingEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DWARF_CLASS = SynchedEntityData.defineId(PingEntity.class, EntityDataSerializers.STRING);
 
+    private boolean lock = false;
     private ItemStack pingItem;
-    public IClassData.Classes dwarfClass = IClassData.Classes.LeafLover;
 
     public PingEntity(EntityType<? extends PingEntity> p_36721_, Level p_36722_) {
         super(p_36721_, p_36722_);
     }
 
 
-    public PingEntity( LivingEntity p_36718_, Level p_36719_, ItemStack pingItem) {
-        super(ModEntities.PING_ENTITY.get(), p_36718_, p_36719_);
+    public PingEntity( LivingEntity pShooter, Level p_36719_, ItemStack pingItem) {
+        super(ModEntities.PING_ENTITY.get(), pShooter, p_36719_);
         this.pingItem = pingItem;
+
+        if(pShooter instanceof Player player)
+        {
+            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+                setDwarfClass(classCap.getDwarfClass());
+
+            });
+        }
     }
 
     @Override
     public void tick() {
-
-        this.entityData.set(dwarfClassSynced, dwarfClass.name());
 
         if(this.getOwner() == null)
         {
@@ -56,16 +63,10 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
             this.kill();
         }
 
-        if(this.getOwner() instanceof Player player)
+        if(this.inGround && !lock)
         {
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-                    {
-                        this.dwarfClass = classCap.getDwarfClass();
-
-                    }
-            );
+            this.lock = true;
         }
-
 
         super.tick();
     }
@@ -73,12 +74,34 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(dwarfClassSynced, IClassData.Classes.LeafLover.name());
+        this.entityData.define(DWARF_CLASS, IClassData.Classes.LeafLover.name());
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound)
+    {
+        pCompound.putString("dwarfClass", getDwarfClass().name());
+
+        super.addAdditionalSaveData(pCompound);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound)
+    {
+        if (pCompound.contains("dwarfClass", 8))
+        {
+            this.setDwarfClass(IClassData.Classes.valueOf(pCompound.getString("dwarfClass")));
+        }
+        super.readAdditionalSaveData(pCompound);
     }
 
     public IClassData.Classes getDwarfClass()
     {
-        return dwarfClass;
+        return IClassData.Classes.valueOf(this.entityData.get(DWARF_CLASS));
+    }
+
+    public void setDwarfClass(IClassData.Classes dwarfClass) {
+        this.entityData.set(DWARF_CLASS, dwarfClass.name());
     }
 
     @Override
@@ -204,5 +227,11 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
             this.getOwner().playSound(playSpecificBlockHitSound(this.level.getBlockState(blockHitResult.getBlockPos()).getBlock()), 1.0F, 1);
         }
         this.inGround = true;
+    }
+
+    @Override
+    protected boolean shouldFall() {
+
+        return !lock && super.shouldFall();
     }
 }

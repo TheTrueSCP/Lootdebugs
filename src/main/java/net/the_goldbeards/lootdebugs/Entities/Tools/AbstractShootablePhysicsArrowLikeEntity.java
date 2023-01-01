@@ -143,7 +143,9 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         }
 
         if (this.inGround && !flag) {
-            if (!this.level.isClientSide) {
+            if (this.lastState != blockstate && this.shouldFall()) {
+                this.startFalling();
+            } else if (!this.level.isClientSide) {
                 this.tickDespawn();
             }
 
@@ -229,7 +231,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         }
     }
 
-    private boolean shouldFall() {
+    protected boolean shouldFall() {
         return this.inGround && this.level.noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
     }
 
@@ -396,6 +398,13 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         this.setFlag(2, pNoClip);
     }
 
+    private void startFalling() {
+        this.inGround = false;
+        Vec3 vec3 = this.getDeltaMovement();
+        this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
+        this.life = 0;
+    }
+
     /**
      * Whether the arrow can noClip
      */
@@ -416,5 +425,4 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     public boolean shouldResetLife() {
         return false;
     }
-
 }

@@ -16,9 +16,9 @@ import java.util.List;
 
 public class GoToWantedItemGoal extends Goal
 {
-    private int itemDistance;
-    private TagKey<Item> items;
-    private PathfinderMob mob;
+    private final int itemDistance;
+    private final TagKey<Item> items;
+    private final PathfinderMob mob;
 
     public GoToWantedItemGoal(PathfinderMob pMob, TagKey<Item> pItems, int pItemDistance)
     {
@@ -32,12 +32,7 @@ public class GoToWantedItemGoal extends Goal
     @Override
     public boolean canUse()
     {
-        if(!getNearWantedItems(mob, itemDistance, items).isEmpty())
-        {
-            return true;
-        }
-
-        return false;
+        return !getNearWantedItems(mob, itemDistance, items).isEmpty();
     }
 
     @Override

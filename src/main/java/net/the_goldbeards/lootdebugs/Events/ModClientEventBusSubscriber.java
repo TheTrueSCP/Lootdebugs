@@ -1,14 +1,12 @@
 package net.the_goldbeards.lootdebugs.Events;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -31,7 +29,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.GuiUtils;
 import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.client.gui.OverlayRegistry;
@@ -41,14 +38,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableScreen;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelPress.FuelRefineryScreen;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubScreen;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugGoldenRender;
 import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugOldRender;
 import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.*;
-import net.the_goldbeards.lootdebugs.client.Render.Weapons.SatchelChargeRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineMoveRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
 import net.the_goldbeards.lootdebugs.client.model.Armor.DrillerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.EngineerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.GunnerMK1ArmorModel;
@@ -56,10 +55,9 @@ import net.the_goldbeards.lootdebugs.client.model.Armor.ScoutMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugOldModel;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.*;
-import net.the_goldbeards.lootdebugs.client.model.Weapons.SatchelChargeModel;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.*;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
@@ -70,15 +68,15 @@ public class ModClientEventBusSubscriber
 {
     public static final KeyMapping ROCK_AND_STONE = new KeyMapping("lootdebugs.key.rock_and_stone", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "keyGroup.lootdebugs");
     public static final KeyMapping THROW_FLARE = new KeyMapping("lootdebugs.key.throw_flare", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "keyGroup.lootdebugs");
+    public static final KeyMapping CHANGE_DIRECTION = new KeyMapping("lootdebugs.key.zipline.change_direction", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, "keyGroup.lootdebugs");
+
 
     public static final ResourceLocation drunknessOverlay = new ResourceLocation("lootdebugs", "textures/gui/drunkness_overlay.png");
     public static Player getPlayer()
     {
         return Minecraft.getInstance().player;
     }
-
-    int widthMid = Minecraft.getInstance().screen.width / 2;
-    int heightMid = Minecraft.getInstance().screen.height / 2;
+    
 
     //Register
     @SubscribeEvent
@@ -97,7 +95,9 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.GRAPPLING_HOOK_HOOK.get(), GrapplingHookHookRender::new);
         event.registerEntityRenderer(ModEntities.PING_ENTITY.get(), PingRender::new);
         event.registerEntityRenderer(ModEntities.SHIELD_ENTITY.get(), ShieldRender::new);
+        event.registerEntityRenderer(ModEntities.ZIPLINE_MOVE_ENTITY.get(), ZiplineMoveRender::new);
         event.registerEntityRenderer(ModEntities.ZIPLINE_ENTITY.get(), ZiplineRender::new);
+        event.registerEntityRenderer(ModEntities.STRING_ANCHOR_ENTITY.get(), ZiplineStringRender::new);
 
         //Weapons
         event.registerEntityRenderer(ModEntities.SATCHEL_CHARGE.get(), SatchelChargeRender::new);
@@ -135,6 +135,8 @@ public class ModClientEventBusSubscriber
         event.registerLayerDefinition(EngineerMK1ArmorModel.LAYER_LOCATION, EngineerMK1ArmorModel::createBodyLayer);
 
         event.registerLayerDefinition(GunnerMK1ArmorModel.LAYER_LOCATION, GunnerMK1ArmorModel::createBodyLayer);
+
+        event.registerLayerDefinition(ShieldEmitterModel.LAYER_LOCATION, ShieldEmitterModel::createBodyLayer);
     }
 
 
@@ -152,6 +154,7 @@ public class ModClientEventBusSubscriber
     {
         ClientRegistry.registerKeyBinding(ROCK_AND_STONE);
         ClientRegistry.registerKeyBinding(THROW_FLARE);
+        ClientRegistry.registerKeyBinding(CHANGE_DIRECTION);
 
     }
 
@@ -165,7 +168,10 @@ public class ModClientEventBusSubscriber
                 if (minecraft.gameMode == null) return;
                 if (minecraft.level == null) return;
                 TextureManager tm = minecraft.getTextureManager();
-                gui.setupOverlayRenderState(true, false, drunknessOverlay);
+                int i = minecraft.screen.width;
+                int j = minecraft.screen.height;
+                NativeImage nativeimage = new NativeImage(i, j, false);
+            //    gui.setupOverlayRenderState(true, false, drunknessOverlay-);
                 GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, screenWidth, screenHeight, 0);
             }
         });
@@ -271,10 +277,10 @@ public class ModClientEventBusSubscriber
                 {
                     if(pEntity.getItemInHand(pEntity.getUsedItemHand()) == pStack)
                     {
-                        boolean flag = HelpfullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.drills_rot");
+                        boolean flag = UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.drills_rot");
                         if(flag)
                         {
-                            return HelpfullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.drills_rot");
+                            return UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.drills_rot");
                         }
                     }
 

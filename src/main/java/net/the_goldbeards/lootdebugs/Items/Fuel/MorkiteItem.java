@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 public class MorkiteItem extends Item {
 
-    public static int burnTime = 600;
+    public static int burnTime = 2300;
 
     public MorkiteItem(Properties properties) {
         super(properties);

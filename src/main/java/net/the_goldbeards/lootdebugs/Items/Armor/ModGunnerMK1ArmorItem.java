@@ -24,7 +24,7 @@ import net.minecraftforge.client.IItemRenderProperties;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.client.model.Armor.GunnerMK1ArmorModel;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 import java.util.Collections;
 import java.util.Map;
@@ -89,15 +89,15 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
 
                 if(entity instanceof Player player)
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
                 }
                 return false;
             }
@@ -110,11 +110,11 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -183,16 +183,16 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-                HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
 
                 if(entity instanceof Player player)
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
                 }
                 return false;
             }
@@ -205,11 +205,11 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -278,15 +278,15 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
 
                 if(entity instanceof Player player)
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
                 }
                 return false;
             }
@@ -299,11 +299,11 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -372,15 +372,15 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
 
                 if(entity instanceof Player player)
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
                 }
                 return false;
             }
@@ -393,11 +393,11 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
 
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
-                 HelpfullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
+                 UsefullStuff.ItemNBTHelper.putString(stack,"gunner_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
 
             });
 
-            if(!HelpfullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+            if(!UsefullStuff.ItemNBTHelper.getString(stack, "gunner_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);

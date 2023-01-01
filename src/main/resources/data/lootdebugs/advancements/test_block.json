@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.pickup.test_block.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": true

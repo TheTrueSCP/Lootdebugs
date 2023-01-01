@@ -14,16 +14,23 @@
   "player.class.gunner" : "Gunner",
   "player.class.thetruescp": "TheTrueSCP" ,
   "player.class.monsieurhannes": "Monsieur Hannes",
+  "player.class.flare.wrong_class": "Wrong class, you must be a Dwarf",
 
-  "tool.wrong_class" : "Wrong Class, you must be ",
-  "tool.wrong_class_after" : " to use this tool",
+  "tool.wrong_class" : "Wrong Class, you must be",
+  "tool.wrong_class_after" : "to use this tool",
   "tool.no_fuel": "No Fuel in Inventory",
   "tool.on_block_drill_mode": "On block drill mode",
+  "tool.not_on_ground": "You must be on ground to use this item",
+  "tool.satchel_charge.ready": "Satchel Charge ready",
+  "tool.satchel_charge.link_invalid": "No connection to Satchel Charge",
+  "tool.satchel_charge.detonated": "DETONATED",
 
+  "tooltip.lootdebugs.fuel_canister.refuel": "You can refuel this at the fuel refinery",
+  "tooltip.lootdebugs.more_information": "Press SHIFT to see more information",
 
   "block.lootdebugs.pub": "Lloyd",
   "block.lootdebugs.equipment_table": "Equipment Table",
-  "block.lootdebugs.fuel_press": "Fuel Press",
+  "block.lootdebugs.fuel_refinery": "Fuel Refinery",
   "block.lootdebugs.class_changer": "Class Changer",
 
   "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
@@ -33,6 +40,7 @@
 
   "lootdebugs.key.rock_and_stone": "Salute",
   "lootdebugs.key.throw_flare": "Throw Flare",
+  "lootdebugs.key.zipline.change_direction": "Change zipline direction",
 
   "item.lootdebugs.jet": "Jet",
   "item.lootdebugs.drill_head": "Drill Head",
@@ -40,6 +48,8 @@
   "item.lootdebugs.power_cell": "Power Cell",
   "item.lootdebugs.mixer_barrel": "Mixer Barrel",
   "item.lootdebugs.flare_igniter": "Flare Igniter",
+  "item.lootdebugs.zipline": "Zipline",
+
 
   "item.lootdebugs.company_standard_pickaxe": "Company Standard Pickaxe",
   "item.lootdebugs.drills": "Reinforced Mining Drills",
@@ -47,8 +57,12 @@
   "item.lootdebugs.flare_gun":"Flare Gun",
   "item.lootdebugs.grappling_hook":"Grappling Hook",
   "item.lootdebugs.laser_pointer": "Laser Pointer",
+  "item.lootdebugs.satchel_charge_detonator": "Satchel Charge Detonator",
   "block.lootdebugs.satchel_charge": "Satchel Charge",
   "block.lootdebugs.shield_emitter_block": "Shield",
+  "block.lootdebugs.zipline_block.link_invalid": "Linked block invalid",
+  "entity.zipline_move.change_direction.1": "Press",
+  "entity.zipline_move.change_direction.2": "to change direction",
 
   "item.lootdebugs.nitra_on_a_stick":"Nitra on a Stick",
 
@@ -61,6 +75,9 @@
   "block.lootdebugs.plascrete_foam": "Plascrete Foam MKI",
   "block.lootdebugs.plascrete_foam_mk2": "Plascrete Foam MKII",
   "item.lootdebugs.ommoran_hearthstone_locator":"Ommoran Hearthstone Locator",
+  "item.lootdebugs.shoot_zipline":"Shootable Zipline",
+  "block.lootdebugs.zipline_block": "Zipline",
+
 
 
   "item.lootdebugs.mk1_company_standard_driller_helmet": "MK1 Driller Suit Helmet",
@@ -144,6 +161,7 @@
   "block.lootdebugs.glyphid_slammer": "Glyphid Slammer",
   "block.lootdebugs.seasoned_moonrider":"Seasoned Moonrider",
   "block.lootdebugs.smartstout":"Smartstout",
+  "block.lootdebugs.lootbug_gold": "Lootbug Gold",
 
 
   "block.lootdebugs.ommoran_hearthstone": "Ommoran Hearthstone",
@@ -199,15 +217,14 @@
   "effect.lootdebugs.explosive_diarrhoea" : "Explosive Diarrhoea",
   "effect.lootdebugs.drunkness" : "Drunkness",
   "effect.lootdebugs.slow_death" : "Blackout in",
+  "effect.lootdebugs.freeze" : "Freeze",
+  "effect.lootdebugs.lootbug_touch" : "Lootbug's Touch",
 
   "death.attack.blackoutstout": "Thats the go(o)d stuff",
-  "death.attack.toodrunkin": "%1$s has defenetly NOT enough",
+  "death.attack.toodrunkin": "%1$s has definitely NOT enough yet",
 
   "advancements.lootbug.kill.title": "You Monster!",
   "advancements.lootbug.kill.description":"So you know how some sins are unforgivable?",
-
-  "advancements.jet.create.title":"WHOOOOOOOOSSSHHH",
-  "advancements.jet.create.description": "Create a Jet",
 
   "advancements.brew.drink.title":"Rock and Stone, Brother",
   "advancements.brew.drink.description": "Brew a Drink",
@@ -230,35 +247,11 @@
   "advancements.pickup.test_block.title": "TEEEEESSSTTT, work that thing? TEEEEEST, HELLLLOO?,TEEEEESST",
   "advancements.pickup.test_block.description": "Gratulations, you found the first block that i have ever implemented in this mod",
 
-  "advancements.pickup.nitra.title": "NIIITTTRAAAAAAAA",
-  "advancements.pickup.nitra.description":"yay, you found some nitra *Lootbug like that*",
-
-  "advancements.pickup.cropper.title": "Cropper, the good stuff",
-  "advancements.pickup.cropper.description": "Cropper, valuable mineral",
-
-  "advancements.pickup.bismor.title": "Bismor, just bismor",
-  "advancements.pickup.bismor.description": "Bismor, a yellow mineral",
-
-  "advancements.pickup.dystrum.title": "DYSTRUM, YEAH!",
-  "advancements.pickup.dystrum.description": "Dystrum, mainparts for the pickaxe",
-
   "advancements.pickup.ommoran_hearthstone_locator.title": "Ommoran Hearthstone Locator",
   "advancements.pickup.ommoran_hearthstone_locator.description": "Go ahead, find that shiny stone",
 
   "advancements.pickup.equipment_table.title": "Equipment Table",
   "advancements.pickup.equipment_table.description": "The mod is based on this",
-
-  "advancements.pickup.mixer_barrel.title": "Mixer Barrel",
-  "advancements.pickup.mixer_barrel.description": "The main part of the Platform Gun",
-
-  "advancements.pickup.flare_igniter.title": "Flare Igniter",
-  "advancements.pickup.flare_igniter.description": "The main part of the Flare Gun",
-
-  "advancements.pickup.drill_head.title": "Drill Head",
-  "advancements.pickup.drill_head.description": "The main part of the Drills",
-
-  "advancements.pickup.coil.title": "Coil",
-  "advancements.pickup.coil.description": "The main part of the Grappling Hook",
 
   "advancements.pickup.power_cell.title": "Power Cell",
   "advancements.pickup.power_cell.description": "The Hearth of Lloyd (jk. its Blackout Stout)",
@@ -275,17 +268,8 @@
   "advancements.pickup.grappling_hook.title": "Grappling Hook",
   "advancements.pickup.grappling_hook.description": "Fly me to the moon!",
 
-  "advancements.pickup.laser_pointer.title": "Marker",
-  "advancements.pickup.laser_pointer.description": "Marker Up!",
-
-  "advancements.pickup.satchel_charge.title": "Satchel Charge",
-  "advancements.pickup.satchel_charge.description": "Why is that thing re- *BOOM*",
-
-  "advancements.pickup.shield.title": "Shield",
-  "advancements.pickup.shield.description": "I love that Gunnershield",
-
   "advancements.pickup.fuel_refinery.title": "Fuel Refinery",
-  "advancements.pickup.fuel_refinery.description": "Brrrrrrrrrr, morkite to fuel in 20 Seconds",
+  "advancements.pickup.fuel_refinery.description": "Machine goes Brrrrrrrrrr, morkite into fuel in 10 Seconds",
 
   "advancements.pickup.fuel.title": "Fuel",
   "advancements.pickup.fuel.description": "The Fuel for the Drills",
@@ -295,33 +279,6 @@
 
   "advancements.pickup.nitra_on_a_stick.title": "Nitra on a stick",
   "advancements.pickup.nitra_on_a_stick.description": "Lets ride the Lootbug, my beloved",
-
-  "advancements.pickup.oil_shale.title": "Oil Shale",
-  "advancements.pickup.oil_shale.description": "Oil Shale, high energy potential...",
-
-  "advancements.pickup.zipline.title": "Zipline",
-  "advancements.pickup.zipline.description": "Zippedi Zip",
-
-  "advancements.pickup.barley_bulb.title": "Barley Bulb",
-  "advancements.pickup.barley_bulb.description": "Beer Ingredient",
-
-  "advancements.pickup.malt_star.title": "Malt Star",
-  "advancements.pickup.malt_star.description": "Beer Ingredient",
-
-  "advancements.pickup.starch_nut.title": "Starch Nut",
-  "advancements.pickup.starch_nut.description": "Beer Ingredient",
-
-  "advancements.pickup.yeast_cone.title": "Yeast Cone",
-  "advancements.pickup.yeast_cone.description": "Beer Ingredient",
-
-  "advancements.pickup.apoca_bloom.title": "Apoca Bloom",
-  "advancements.pickup.apoca_bloom.description": "Hey, its Flowey :)",
-
-  "advancements.pickup.boolo_cap.title": "Boolo Cap",
-  "advancements.pickup.boolo_cap.description": "Dont put it on your head...",
-
-  "advancements.pickup.red_sugar.title": "Red Sugar",
-  "advancements.pickup.red_sugar.description": "Wait you ate all the Red Sugar? We need that!",
 
   "advancements.pickup.driller_mk1_suit.title": "Driller Mk1",
   "advancements.pickup.driller_mk1_suit.description": "You, Driller, go Drilling!",

@@ -29,6 +29,8 @@ public class ModIngredientsGeneration
             baseDec.add(ModPlacedFeatures.INGREDIENTS);
             baseDec.add( ModPlacedFeatures.RED_SUGAR);
             baseDec.add( ModPlacedFeatures.MINERALS);
+            baseDec.add( ModPlacedFeatures.LIQUID_MORKITE_SPRING);
+            baseDec.add( ModPlacedFeatures.LIQUID_MORKITE_LAKE);
         }
     }
 }

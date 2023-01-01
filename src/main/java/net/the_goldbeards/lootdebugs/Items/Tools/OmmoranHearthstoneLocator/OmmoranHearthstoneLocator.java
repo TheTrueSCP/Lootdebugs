@@ -8,8 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
 import net.the_goldbeards.lootdebugs.util.ModConfiguredStructureTags;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 public class OmmoranHearthstoneLocator extends Item
 {
@@ -21,9 +21,9 @@ public class OmmoranHearthstoneLocator extends Item
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected)
     {
-        if (pLevel instanceof ServerLevel SL && pIsSelected)
+        if (pLevel instanceof ServerLevel SL)
         {
-            if(!HelpfullStuff.ItemNBTHelper.getBoolean(pStack, "lootdebugs.isLocatorLocked"))
+            if(!UsefullStuff.ItemNBTHelper.getBoolean(pStack, "lootdebugs.isLocatorLocked"))
             {
                 BlockPos findBlockPos = SL.findNearestMapFeature(ModConfiguredStructureTags.OMMORAN_HEARTHSTONE, pEntity.blockPosition(), 100, false);
                 if (findBlockPos != null) {
@@ -36,8 +36,8 @@ public class OmmoranHearthstoneLocator extends Item
                                     BlockPos locatePos = new BlockPos(findBlockPos.getX() + (x), findBlockPos.getY() + (y), findBlockPos.getZ() + (z));
                                     if (pLevel.getBlockState(locatePos).is(ModBlocks.OMMORAN_HEARTHSTONE.get()))
                                     {
-                                        HelpfullStuff.ItemNBTHelper.put(pStack, "OmmoranPos", NbtUtils.writeBlockPos(locatePos));
-                                        HelpfullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", true);
+                                        UsefullStuff.ItemNBTHelper.put(pStack, "OmmoranPos", NbtUtils.writeBlockPos(locatePos));
+                                        UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", true);
                                         break;
 
                                     }
@@ -47,8 +47,8 @@ public class OmmoranHearthstoneLocator extends Item
                     }
                     else
                     {
-                        HelpfullStuff.ItemNBTHelper.put(pStack, "OmmoranPos", NbtUtils.writeBlockPos(findBlockPos));
-                        HelpfullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", true);
+                        UsefullStuff.ItemNBTHelper.put(pStack, "OmmoranPos", NbtUtils.writeBlockPos(findBlockPos));
+                        UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", true);
                     }
                 }
             }

@@ -28,9 +28,10 @@ import net.the_goldbeards.lootdebugs.Items.Tools.GrapplingHook.GrapplingHookItem
 import net.the_goldbeards.lootdebugs.Items.Tools.OmmoranHearthstoneLocator.OmmoranHearthstoneLocator;
 import net.the_goldbeards.lootdebugs.Items.Tools.PingTool.PingItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.PlatformGun.PlatformGunItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeDetonatorItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Shield.ShieldItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Zipline.ZiplineItem;
-import net.the_goldbeards.lootdebugs.Items.Weapons.SatchelCharge.SatchelChargeItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
 import net.the_goldbeards.lootdebugs.Sound.ModSounds;
@@ -78,6 +79,10 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> EMPTY_FUEL_CANISTER = ITEMS.register("empty_fuel_canister",
             () -> new EmptyFuelCanister(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
+    public static final RegistryObject<Item> SHOOT_ZIPLINE = ITEMS.register("shoot_zipline",
+            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+
     //Buckets
     public static final RegistryObject<Item> LIQUID_MORKITE_BUCKET = ITEMS.register("liquid_morkite_bucket",
             () -> new BucketItem(ModFluids.LIQUID_MORKITE,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -111,11 +116,14 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> SATCHEL_CHARGE = ITEMS.register("satchel_charge",
             () -> new SatchelChargeItem(ModBlocks.SATCHEL_CHARGE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
+    public static final RegistryObject<Item> SATCHEL_CHARGE_DETONATOR = ITEMS.register("satchel_charge_detonator",
+            () -> new SatchelChargeDetonatorItem(new Item.Properties()));
+
     public static final RegistryObject<Item> SHIELD = ITEMS.register("shield",
             () -> new ShieldItem(ModBlocks.SHIELD_EMITTER_BLOCK.get() ,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> ZIPLINE = ITEMS.register("zipline",
-            () -> new ZiplineItem(ModBlocks.ZIPLINE_BLOCK.get() ,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new ZiplineItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
 
 

@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
-"lootdebugs:plascrete_foam"
+    "lootdebugs:plascrete_foam",
+    "lootdebugs:plascrete_foam_mk2",
+    "lootdebugs:zipline_block"
+
 
   ]
 }

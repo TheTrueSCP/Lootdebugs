@@ -24,7 +24,8 @@
 
     "lootdebugs:equipment_table",
     "lootdebugs:fuel_refinery",
-    "lootdebugs:pub"
+    "lootdebugs:pub",
+    "lootdebugs:class_changer"
 
   ]
 }

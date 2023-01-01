@@ -10,13 +10,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.the_goldbeards.lootdebugs.Entities.Tools.FoamEntity;
-import net.the_goldbeards.lootdebugs.client.model.Projectiles.FoamModel;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
+import net.the_goldbeards.lootdebugs.client.model.Projectiles.FoamModel;
 
 @OnlyIn(Dist.CLIENT)
 public class FoamRender extends EntityRenderer<FoamEntity>
 {
-    protected final ResourceLocation TEXTURE = new ResourceLocation(LootDebugsMain.MOD_ID,"textures/entity/projectiles/flare.png");
+    protected final ResourceLocation TEXTURE = new ResourceLocation(LootDebugsMain.MOD_ID,"textures/entity/projectiles/flare_yellow.png");
     private final FoamModel<FoamEntity> model;
 
     public FoamRender(EntityRendererProvider.Context context) {

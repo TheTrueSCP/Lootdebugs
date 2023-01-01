@@ -10,6 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.the_goldbeards.lootdebugs.Server.ChangeClass.ChangeClassPacket;
 import net.the_goldbeards.lootdebugs.Server.ChangeClass.PlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Server.ChangeDirection.ChangeDirectionPacket;
 import net.the_goldbeards.lootdebugs.Server.Flare.FlareCountSyncPacket;
 import net.the_goldbeards.lootdebugs.Server.Flare.ThrowFlarePacket;
 import net.the_goldbeards.lootdebugs.Server.RockAndStone.RockAndStonePacket;
@@ -53,6 +54,8 @@ public class PacketHandler {
         CHANNEL.registerMessage(disc++, RockAndStonePacket.class,(packet, buf) -> {},buffer -> new RockAndStonePacket(),RockAndStonePacket::handle);
         CHANNEL.registerMessage(disc++, RockAndStoneSyncPacket.class, RockAndStoneSyncPacket::encode, RockAndStoneSyncPacket::new,RockAndStoneSyncPacket::handle);
 
+        //Change Zipline Direction
+        CHANNEL.registerMessage(disc++, ChangeDirectionPacket.class,(packet, buf) -> {},buffer -> new ChangeDirectionPacket(), ChangeDirectionPacket::handle);
 
         //RockAndStone
       //  CHANNEL.registerMessage(disc++, OpenSlotPacket.class, (msg, buf) -> {}, buf -> new OpenSlotPacket(), OpenSlotPacket::handle);

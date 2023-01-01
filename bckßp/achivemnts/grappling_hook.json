@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:coil",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:grappling_hook"
+    },
+    "title": {
+      "translate": "advancements.pickup.grappling_hook.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.grappling_hook.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "grappling_hook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:grappling_hook"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "grappling_hook"
+    ]
+  ]
+}

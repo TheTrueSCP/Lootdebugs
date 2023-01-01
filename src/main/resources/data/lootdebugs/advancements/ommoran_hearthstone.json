@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.pickup.ommoran_hearthstone.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": true

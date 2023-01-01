@@ -1,7 +1,6 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,21 +21,18 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Goals.GoToWantedItemGoal;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Inventory.Inventory;
 import net.the_goldbeards.lootdebugs.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.ModTags;
@@ -72,7 +68,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 40));
+        this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 100));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, TEMPTATION_ITEMS, false));
         //   this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -123,11 +119,6 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
             if(!this.isPetting && this.shakeAnim == 0 && this.shakeAnimO == 0) {
                 this.heal(3);
                 playerIn.getItemInHand(hand).shrink(1);
-
-                double d0 = this.random.nextGaussian() * 0.02D;
-                double d1 = this.random.nextGaussian() * 0.02D;
-                double d2 = this.random.nextGaussian() * 0.02D;
-                this.level.addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
 
                 petting();
             }
@@ -241,28 +232,33 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
     public void travel(Vec3 pTravelVector) {
 
-        if(!this.verticalCollision)
+        if(!this.canBeControlledByRider())
         {
-            this.setClimbing(this.horizontalCollision);
+            if (!this.verticalCollision) {
+                this.setClimbing(this.horizontalCollision);
+            } else {
+                this.setClimbing(false);
+            }
         }
         else
         {
-            this.setClimbing(false);
+            this.setClimbing(this.horizontalCollision);
         }
         this.travel(this, this.steering, pTravelVector);
     }
 
     @Override
-    protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
-        super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
+    public void killed(ServerLevel pLevel, LivingEntity pKilledEntity) {
+        super.killed(pLevel, pKilledEntity);
 
         for(ItemStack itemStack : this.inventory.getAll())
         {
-            ItemEntity entity = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
+            ItemEntity entity = new ItemEntity(level, pKilledEntity.getX(), pKilledEntity.getY(), pKilledEntity.getZ(), itemStack);
             this.level.addFreshEntity(entity);
         }
         this.inventory.deleteAll();
     }
+
 
     @Override
     protected void pickUpItem(ItemEntity pItemEntity) {

@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:create_jet",
+  "parent": "lootdebugs:lootdebugs",
   "display": {
     "icon": {
       "item": "lootdebugs:power_cell"

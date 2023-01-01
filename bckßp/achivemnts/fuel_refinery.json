@@ -1,0 +1,39 @@
+{
+  "parent": "lootdebugs:equipment_table",
+  "display": {
+    "icon": {
+      "item": "lootdebugs:fuel_refinery"
+    },
+    "title": {
+      "translate": "advancements.pickup.fuel_refinery.title"
+    },
+    "description": {
+      "translate": "advancements.pickup.fuel_refinery.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "fuel_refinery": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lootdebugs:fuel_refinery"
+            ]
+
+
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fuel_refinery"
+    ]
+  ]
+}

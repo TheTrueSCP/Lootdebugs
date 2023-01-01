@@ -1,26 +1,37 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "=W=",
-    "MSM",
-    " = "
-  ],
-  "key": {
-    "=": {
+  "type": "lootdebugs:equipment_crafting",
+  "ingredients":
+  [
+    {
       "item": "minecraft:iron_ingot"
     },
-    "W": {
+    {
       "item": "lootdebugs:morkite"
     },
-    "M": {
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
       "item": "lootdebugs:bismor_ingot"
     },
-
-    "S": {
+    {
       "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "lootdebugs:bismor_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
     }
-  },
-  "result": {
+  ],
+  "output": {
     "item": "lootdebugs:jet"
   }
+
 }

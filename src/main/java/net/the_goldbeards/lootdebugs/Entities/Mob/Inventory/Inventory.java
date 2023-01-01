@@ -56,7 +56,6 @@ public class Inventory
     {
         if(itemStack == null)
         {
-            System.out.println("null");
             return false;
         }
 
@@ -68,7 +67,6 @@ public class Inventory
                 return true;
             }
         }
-        System.out.println("cant pick up");
         return false;
     }
 }

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "lootdebugs:logo"
+    },
+    "title": {
+      "translate": "advancements.welcome.to.lootdebugs.title"
+    },
+    "description": {
+      "translate": "advancements.welcome.to.lootdebugs.description"
+    },
+    "background": "lootdebugs:textures/block/morkite_block.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "stepping_on": {
+            "dimension": "minecraft:overworld"
+          }
+        }
+      }
+    }
+  }
+}

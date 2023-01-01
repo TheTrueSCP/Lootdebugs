@@ -17,7 +17,7 @@ import net.the_goldbeards.lootdebugs.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 import java.util.function.Predicate;
 
@@ -60,7 +60,7 @@ public class FlareGunItem extends Item {
             pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
 
-                HelpfullStuff.ItemNBTHelper.putString(pStack,"flare_gun_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+                UsefullStuff.ItemNBTHelper.putString(pStack,"flare_gun_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
 
 
             });
@@ -69,9 +69,9 @@ public class FlareGunItem extends Item {
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!HelpfullStuff.ItemNBTHelper.getString(pStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + HelpfullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
             }
 
         }
@@ -82,7 +82,7 @@ public class FlareGunItem extends Item {
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
 
-            if (!HelpfullStuff.ItemNBTHelper.getString(pUsedStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) {
+            if (!UsefullStuff.ItemNBTHelper.getString(pUsedStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) {
                 return InteractionResultHolder.pass(pUsedStack);
             }
 

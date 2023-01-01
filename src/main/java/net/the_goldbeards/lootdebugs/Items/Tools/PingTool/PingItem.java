@@ -14,7 +14,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Entities.Tools.PingEntity;
 import net.the_goldbeards.lootdebugs.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.util.HelpfullStuff;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 public class PingItem extends Item {
 
@@ -40,12 +40,12 @@ public class PingItem extends Item {
         if(pingItemStack.hasTag())
         {
 
-                if(pLevel.getEntity((int) HelpfullStuff.ItemNBTHelper.getFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id")) instanceof PingEntity PE)
+                if(pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id")) instanceof PingEntity PE)
                 {
                     PE.kill();
                 }
 
-            else if(pLevel.getEntity((int) HelpfullStuff.ItemNBTHelper.getFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id")) instanceof LivingEntity LE)
+            else if(pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id")) instanceof LivingEntity LE)
             {
 
                 LE.removeEffect(MobEffects.GLOWING);
@@ -58,7 +58,7 @@ public class PingItem extends Item {
         pingEntity.setOwner(pPlayer);
         pLevel.addFreshEntity(pingEntity);
         pingEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 10F, 0.0F);
-        HelpfullStuff.ItemNBTHelper.putFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id", (int) pingEntity.getId());//save ping id in itemstack
+        UsefullStuff.ItemNBTHelper.putFloat(pingItemStack,"lootdebugs.pingitem.pingentity.id", (int) pingEntity.getId());//save ping id in itemstack
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
 

@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.the_goldbeards.lootdebugs.Entities.Projectiles.GrapplingHookHookEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.GrapplingHookHookEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 public class GrapplingHookHookModel<T extends GrapplingHookHookEntity> extends HierarchicalModel<T> {

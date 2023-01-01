@@ -19,9 +19,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.the_goldbeards.lootdebugs.Entities.Projectiles.GrapplingHookHookEntity;
-import net.the_goldbeards.lootdebugs.client.model.Projectiles.GrapplingHookHookModel;
+import net.the_goldbeards.lootdebugs.Entities.Tools.GrapplingHookHookEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
+import net.the_goldbeards.lootdebugs.client.model.Projectiles.GrapplingHookHookModel;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 
 @OnlyIn(Dist.CLIENT)

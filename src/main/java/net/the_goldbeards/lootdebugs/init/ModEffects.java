@@ -25,8 +25,8 @@ public class ModEffects
     public static RegistryObject<MobEffect> SLOW_DEATH = EFFECTS.register("slow_death",
             ()-> new SlowDeathEffect(MobEffectCategory.HARMFUL,11345123));
 
-    public static RegistryObject<MobEffect> GOLD_TOUCH = EFFECTS.register("gold_touch",
-            ()-> new GoldTouchEffect(MobEffectCategory.NEUTRAL,11345123));
+    public static RegistryObject<MobEffect> LOOTBUG_TOUCH = EFFECTS.register("lootbug_touch",
+            ()-> new LootbugTouchEffect(MobEffectCategory.NEUTRAL,11345123));
 
      public static RegistryObject<MobEffect> FREEZE = EFFECTS.register("freeze",
             ()-> new FreezeEffect(MobEffectCategory.HARMFUL,11345123).addAttributeModifier(Attributes.MOVEMENT_SPEED, "7107DE5E-7CE8-4030-940E-514C1F160890", (double)-1.00F, AttributeModifier.Operation.MULTIPLY_TOTAL));

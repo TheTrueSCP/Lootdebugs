@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,17 +21,17 @@ import net.the_goldbeards.lootdebugs.Block.GenBlocks.plants.*;
 import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
 import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
 import net.the_goldbeards.lootdebugs.Block.TestBlock;
-import net.the_goldbeards.lootdebugs.Block.Tools.Zipline.ZiplineBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelPress.FuelRefineryBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.FlareGun.LightBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKII;
 import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldEmitterBlock;
-import net.the_goldbeards.lootdebugs.Block.Weapons.SatchelCharge.SatchelChargeBlock;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
 import net.the_goldbeards.lootdebugs.Sound.ModSoundTypes;
@@ -40,26 +41,18 @@ import java.util.function.Supplier;
 public class ModBlocks {
 
 
-
     public static final DeferredRegister<Block> BLOCKS
             = DeferredRegister.create(ForgeRegistries.BLOCKS, LootDebugsMain.MOD_ID);
 
     private static <T extends Block> RegistryObject<T> registryBlock(String name, Supplier<T> block, boolean registerItem) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
 
-
-
-
         if(registerItem)
         {
             registerBlockItem(name, toReturn);
         }
 
-
-
-
         return toReturn;
-
     }
 
     private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
@@ -72,6 +65,11 @@ public class ModBlocks {
 
         BLOCKS.register(eventBus);
     }
+
+    //Materials
+    public static final Material STONE = (new Material.Builder(MaterialColor.STONE)).build();
+
+
 
     //Block Behaviors
 
@@ -103,8 +101,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SATCHEL_CHARGE = registryBlock("satchel_charge",
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
-    public static final RegistryObject<Block> ZIPLINE_BLOCK = registryBlock("zipline_bock",
-            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
+    public static final RegistryObject<Block> ZIPLINE_BLOCK = registryBlock("zipline_block",
+            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never)),false);
 
 
 
@@ -168,7 +166,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> RED_SUGAR = registryBlock("red_sugar",
-            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.AMETHYST).strength(0.5f).lightLevel((state) -> 8)),true);
+            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(0.5f).lightLevel((state) -> 8)),true);
 
     public static final RegistryObject<Block> OIL_SHALE = registryBlock("oil_shale",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST).strength(4f).requiresCorrectToolForDrops().lightLevel((state) -> 8)),false);

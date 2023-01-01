@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:equipment_table",
+  "parent": "lootdebugs:lootdebugs",
   "display": {
     "icon": {
       "item": "lootdebugs:fuel_refinery"
@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.pickup.fuel_refinery.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false

@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:coil",
+  "parent": "lootdebugs:equipment_table",
   "display": {
     "icon": {
       "item": "lootdebugs:grappling_hook"

@@ -6,6 +6,7 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -33,17 +34,11 @@ public class EquipmentTableRecipeCategory implements IRecipeCategory<EquipmentTa
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.EQUIPMENT_TABLE.get()));
     }
 
-
     @Override
-    public ResourceLocation getUid() {
-        return UID;
+    public RecipeType<EquipmentTableRecipe> getRecipeType()
+    {
+        return new RecipeType<>(UID, EquipmentTableRecipe.class);
     }
-
-    @Override
-    public Class<? extends EquipmentTableRecipe> getRecipeClass() {
-        return EquipmentTableRecipe.class;
-    }
-
 
     @Override
     public Component getTitle() {
@@ -78,5 +73,15 @@ public class EquipmentTableRecipeCategory implements IRecipeCategory<EquipmentTa
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 124, 35).addItemStack(recipe.getResultItem());
 
+    }
+
+    @Override
+    public ResourceLocation getUid() {
+        return getRecipeType().getUid();
+    }
+
+    @Override
+    public Class<? extends EquipmentTableRecipe> getRecipeClass() {
+        return getRecipeType().getRecipeClass();
     }
 }

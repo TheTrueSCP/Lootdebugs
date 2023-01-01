@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyTicker.HearthstoneDefender.HearhstoneDefenderTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.HearthstoneDefender.HearhstoneDefenderTile;
 import org.jetbrains.annotations.Nullable;
 
 public class HearthstoneDefenderBlock extends BaseEntityBlock
