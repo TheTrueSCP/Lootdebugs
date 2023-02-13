@@ -71,6 +71,12 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     }
 
     @Override
+    protected void tickDespawn()
+    {
+
+    }
+
+    @Override
     public InteractionResult interact(Player pPlayer, InteractionHand pHand)
     {
         Level pLevel = pPlayer.getLevel();
@@ -87,11 +93,8 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
                     pPlayer.startRiding(ziplineMoveEntity);
                 } else
                 {
-                    pPlayer.displayClientMessage(new TranslatableComponent("block.zipline_block.link_invalid"), true);
+                    pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.zipline_block.link_invalid"), true);
                 }
-            } else
-            {
-                pPlayer.displayClientMessage(new TranslatableComponent("tool.not_on_ground"), true);
             }
         }
 

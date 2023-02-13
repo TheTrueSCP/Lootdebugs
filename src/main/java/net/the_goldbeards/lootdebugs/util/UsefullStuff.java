@@ -375,7 +375,9 @@ public class UsefullStuff
             }
         }
 
-        //Only use it if you have already saved the class into the itemstack!
+        /**
+         * Only use it if you have already saved the class into the itemstack!
+         */
         public static boolean canItemBeUsed(ItemStack pStack, IClassData.Classes dwarfClassToUse)
         {
             if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
@@ -468,26 +470,26 @@ public class UsefullStuff
             {
 
                 case Driller -> {
-                    return new TranslatableComponent("player.class.driller");
+                    return new TranslatableComponent("class.lootdebugs.player.driller");
                 }
 
                 case Engineer -> {
-                    return new TranslatableComponent("player.class.engineer");
+                    return new TranslatableComponent("class.lootdebugs.player.engineer");
                 }
                 case Scout -> {
-                    return new TranslatableComponent("player.class.scout");
+                    return new TranslatableComponent("class.lootdebugs.player.scout");
                 }
                 case Gunner -> {
-                    return new TranslatableComponent("player.class.gunner");
+                    return new TranslatableComponent("class.lootdebugs.player.gunner");
                 }
                 case TheTrueSCP -> {
-                    return new TranslatableComponent("player.class.thetruescp");
+                    return new TranslatableComponent("class.lootdebugs.player.thetruescp");
                 }
                 case MonsieurHannes -> {
-                    return new TranslatableComponent("player.class.monsieurhannes");
+                    return new TranslatableComponent("class.lootdebugs.player.monsieurhannes");
                 }
                 default -> {
-                    return new TranslatableComponent("player.class.leaf_lover");
+                    return new TranslatableComponent("class.lootdebugs.player.leaf_lover");
                 }
             }
         }

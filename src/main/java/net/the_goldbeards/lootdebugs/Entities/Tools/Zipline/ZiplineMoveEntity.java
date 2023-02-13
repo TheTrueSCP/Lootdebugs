@@ -30,6 +30,8 @@ public class ZiplineMoveEntity extends Entity
     private BlockPos targetPos;
     private BlockPos startPos;
 
+    private int preventDrop;
+
     private boolean rided = false;
 
     public ZiplineMoveEntity(EntityType<? extends ZiplineMoveEntity> p_36957_, Level p_36958_) {
@@ -51,6 +53,8 @@ public class ZiplineMoveEntity extends Entity
 
     public void tick() {
         super.tick();
+
+        preventDrop++;
         Vec3 vec3 = this.getDeltaMovement();
         double d0 = this.getX() + vec3.x;
         double d1 = this.getY() + vec3.y;
@@ -114,7 +118,7 @@ public class ZiplineMoveEntity extends Entity
                 {
                     endKey = "z";
                 }
-                player.displayClientMessage(new TextComponent(new TranslatableComponent("entity.zipline_move.change_direction.1").getString() + " " + endKey + " " + new TranslatableComponent("entity.zipline_move.change_direction.2").getString()), true);
+                player.displayClientMessage(new TextComponent(new TranslatableComponent("message.lootdebugs.zipline_move.change_direction.1").getString() + " " + endKey + " " + new TranslatableComponent("message.lootdebugs.zipline_move.change_direction.2").getString()), true);
             }
         }
     }
@@ -234,7 +238,10 @@ public class ZiplineMoveEntity extends Entity
     {
         if(pState.getBlock() != Blocks.AIR && pState.getBlock() != ModBlocks.ZIPLINE_BLOCK.get())
         {
-            this.discard();
+            if(this.preventDrop >= 25)
+            {
+                this.discard();
+            }
         }
         super.onInsideBlock(pState);
     }

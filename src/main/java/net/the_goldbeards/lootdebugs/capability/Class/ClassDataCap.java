@@ -11,7 +11,6 @@ public class ClassDataCap
 {
 
     public static final Capability<IClassData> CLASS_DATA = CapabilityManager.get(new CapabilityToken<>(){});
-    public static final ResourceLocation KEY = new ResourceLocation(LootDebugsMain.MOD_ID, "class_data");
 
     public static void register(RegisterCapabilitiesEvent event)
     {

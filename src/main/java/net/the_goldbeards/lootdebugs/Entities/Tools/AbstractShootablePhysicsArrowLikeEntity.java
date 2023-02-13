@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -239,9 +240,18 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
 
     }
 
+    @Override
+    protected void onHitEntity(EntityHitResult pResult)
+    {
+        pResult.getEntity().hurt(DamageSource.GENERIC, 2);
+        this.kill();
+    }
+
     /**
      * Called when the arrow hits an entity
      */
+
+
 
     protected void onHitBlock(BlockHitResult p_36755_) {
         this.lastState = this.level.getBlockState(p_36755_.getBlockPos());

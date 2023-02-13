@@ -22,8 +22,6 @@ import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteItem;
 import net.the_goldbeards.lootdebugs.Items.Fuel.OilShaleBlockItem;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModArmorMaterials;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModTiers;
-import net.the_goldbeards.lootdebugs.Items.Plants.ApocaBloomItem;
-import net.the_goldbeards.lootdebugs.Items.Plants.BooleoCapItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.CompanyStandardPickaxe.CompanyPickAxeItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Drills.DrillsItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.FlareGun.FlareGunItem;
@@ -306,11 +304,11 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
 
     public static final RegistryObject<Item> BOOLO_CAP = ITEMS.register("boolo_cap",
-            () -> new BooleoCapItem(ModBlocks.BOOLO_CAP.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new BlockItem(ModBlocks.BOOLO_CAP.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
 
     public static final RegistryObject<Item> APOCA_BLOOM = ITEMS.register("apoca_bloom",
-            () -> new ApocaBloomItem(ModBlocks.APOCA_BLOOM.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new BlockItem(ModBlocks.APOCA_BLOOM.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB).stacksTo(64)));
 
     public static final RegistryObject<Item> BARLEY_BULB = ITEMS.register("barley_bulb",
             () -> new BlockItem(ModBlocks.BARLEY_PLANT.get(),new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));

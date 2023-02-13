@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.LogicButton;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.BasicButton;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.Pub.PubBrewBeerPacket;
@@ -29,7 +29,7 @@ public class PubScreen extends AbstractContainerScreen<PubContainer> {
     protected void init() {
 
         super.init();
-        this.addRenderableWidget(new LogicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.sendToServer(new PubBrewBeerPacket(pubTile.getBlockPos()));
 

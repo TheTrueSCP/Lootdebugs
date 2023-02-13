@@ -14,7 +14,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.LogicButton;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.BasicButton;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefineryConverting;
@@ -47,14 +47,14 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryCont
 
         super.init();
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 88, this.height / 2 - 26, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 86, this.height / 2 - 26, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
 
             PacketHandler.sendToServer(new FuelRefineryConverting(fuelRefineryTile.getBlockPos()));
 
         }));
 
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 88, this.height / 2 - 62, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 86, this.height / 2 - 62, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
 
             PacketHandler.sendToServer(new FuelRefineryRefuelCanister(fuelRefineryTile.getBlockPos()));
 
@@ -143,7 +143,7 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryCont
 
             long amount = fluidStack.getAmount();
             long milliBuckets = (amount * 1000) / 1000;
-                MutableComponent amountString = new TranslatableComponent("tooltip.liquid.amount.with.capacity", nf.format(milliBuckets), nf.format(capacity));
+                MutableComponent amountString = new TranslatableComponent("tooltip.lootdebugs.liquid.amount.with.capacity", nf.format(milliBuckets), nf.format(capacity));
                 tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
         return tooltip;
     }

@@ -82,9 +82,11 @@ public class ZiplineBlock extends BaseEntityBlock
         return new ZiplineTile(pPos, pState);
     }
 
+    /**
+     * place blocks, the string-anchor entity and links everything together
+     */
     public static void placeBlock(Level pLevel, BlockPos pos, @NotNull ZiplineEntity linkedEntity)
     {
-        //place blocks, the string anchor entity and links everything together
         if(pos != null)
         {
             BlockPos posUpper = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
@@ -120,7 +122,7 @@ public class ZiplineBlock extends BaseEntityBlock
             {
                 if(ziplineTile.getThisAnchor() != null)
                 {
-                    ziplineTile.getLinkedEntity().discard();
+                    ziplineTile.getLinkedEntity().discard();//remove string aswell
                     ziplineTile.getThisAnchor().discard();
                 }
             }
@@ -240,6 +242,8 @@ public class ZiplineBlock extends BaseEntityBlock
         return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP) : blockstate.is(this);
     }
 
+
+
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
@@ -266,7 +270,7 @@ public class ZiplineBlock extends BaseEntityBlock
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(FACING);
-        pBuilder.add(HALF);
+        pBuilder.add(FACING, HALF);
+
     }
 }

@@ -14,13 +14,7 @@ public class ModTags
     {
         public static final TagKey<Block> NOT_MINEABLE_WITH_DRILLS = createTag("not_mineable_with_drills");
 
-        public static final TagKey<Block> LOOTBUG_CAN_SPAWN_ON = createTag("lootbug_can_spawn_on");
-
         public static final TagKey<Block> NEED_COMPANY_STANDARD_TOOL = createTag("need_company_standard_tool");
-
-        public static final TagKey<Block> MC_ORES = createTag("mc_ores");
-
-        public static final TagKey<Block> BEER_CAN_PLACE_ON = createTag("beer_can_place_on");
 
         public static final TagKey<Block> PLATFORMGUN_REPLACEABLE_BLOCKS = createTag("platformgun_replaceable_blocks");
 
@@ -50,11 +44,10 @@ public class ModTags
 
         public static final TagKey<Item> LOOTBUG_CONSUMABLE_ITEMS = createTag("lootbug/consumable_item_items");
 
-        public static final TagKey<Item> FUELPRESS_WOOD = createTag("fuelpress/wood");
 
-        public static final TagKey<Item> LIQUID_FUEL = createTag("fuelrefinery/ld_liquid_fuel");
+        public static final TagKey<Item> LIQUID_FUEL = createTag("fuelrefinery/liquid_fuel");
 
-        public static final TagKey<Item> SOLID_FUEL = createTag("fuelrefinery/ld_solid_fuel");
+        public static final TagKey<Item> SOLID_FUEL = createTag("fuelrefinery/solid_fuel");
 
 
         private static TagKey<Item> createTag(String name)

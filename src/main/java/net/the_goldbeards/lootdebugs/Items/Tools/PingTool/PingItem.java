@@ -12,10 +12,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.PingEntity;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
-public class PingItem extends Item {
+public class PingItem extends BasicAllClassItem {
 
 
     public PingItem(Properties pProperties) {
@@ -28,7 +29,7 @@ public class PingItem extends Item {
 
         ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
 
-        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, pPlayer, IClassData.Classes.LeafLover))
+        if(canUseItem(pStack))
         {
 
             if (!pLevel.isClientSide())
@@ -57,20 +58,6 @@ public class PingItem extends Item {
             }
         }
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
-    }
-
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected)
-    {
-        if(pEntity instanceof Player player && pIsSelected)
-        {
-            if(UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tools.you_leaf_lover").getString()), true);
-            }
-        }
-
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override

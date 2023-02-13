@@ -8,7 +8,6 @@ import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 public interface ModConfiguredStructureTags
 {
-
         TagKey<ConfiguredStructureFeature<?, ?>> OMMORAN_HEARTHSTONE = create("ommoran_hearthstone");
 
         private static TagKey<ConfiguredStructureFeature<?, ?>> create(String p_207644_) {

@@ -13,7 +13,6 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubContainer;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
-import net.the_goldbeards.lootdebugs.capability.BeardSlot.BeardSlotContainer;
 
 public class ModMenuTypes
 {

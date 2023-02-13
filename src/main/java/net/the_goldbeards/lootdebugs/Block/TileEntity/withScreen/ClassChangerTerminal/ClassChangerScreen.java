@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.LogicButton;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.BasicButton;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.ChangeClassPacket;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
@@ -42,22 +42,22 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
         super.init();
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 40, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 40, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Driller));//Driller
         }));
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 60, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 60, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Engineer));
         }));
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 80, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 80, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Gunner));
         }));
 
-        this.addRenderableWidget(new LogicButton(this.leftPos + 100, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 100, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Scout));
         }));
@@ -67,7 +67,7 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
         if(player.getUUID().toString().equals("3398160a-6def-43d2-b280-6ce5c84b8839") ||player.getUUID().toString().equals("3398160a6def43d2b2806ce5c84b8839"))//TheTrueSCP
         {
 
-            this.addRenderableWidget(new LogicButton(this.leftPos + 40, this.height / 2 - 60, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+            this.addRenderableWidget(new BasicButton(this.leftPos + 40, this.height / 2 - 60, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.TheTrueSCP));//TheTrueSCP
 
@@ -77,7 +77,7 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
         if(player.getUUID().toString().equals("91da03dc-5ba2-43cb-a3f3-8f0f4dfa2b3f") ||player.getUUID().toString().equals("91da03dc5ba243cba3f38f0f4dfa2b3f"))//MonsieurHannes
         {
-            this.addRenderableWidget(new LogicButton(this.leftPos + 100, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+            this.addRenderableWidget(new BasicButton(this.leftPos + 100, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
                 PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.MonsieurHannes));
 

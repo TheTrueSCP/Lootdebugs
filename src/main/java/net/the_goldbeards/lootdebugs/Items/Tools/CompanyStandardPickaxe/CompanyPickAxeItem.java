@@ -107,7 +107,7 @@ public class CompanyPickAxeItem extends PickaxeItem  {
         {
             if(UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tools.you_leaf_lover").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.no_dwarf").getString()), true);
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);

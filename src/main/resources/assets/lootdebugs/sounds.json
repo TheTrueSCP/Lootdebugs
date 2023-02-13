@@ -1,6 +1,6 @@
 {
   "pub.pub_interaction": {
-    "subtitle": "lloyd.lloyd_reaction",
+    "subtitle": "lloyd.subtitle.lloyd_reaction",
     "sounds": [
       "lootdebugs:tile_entities/pub/pub_interaction"
     ]
@@ -115,7 +115,7 @@
   },
 
   "beer.smartstout": {
-    "subtitle": "beer.smartstout",
+    "subtitle": "beer.subtitle.smartstout",
     "sounds": [
       "lootdebugs:beer/smartstout/line1",
       "lootdebugs:beer/smartstout/line2",
@@ -138,7 +138,7 @@
 
 
   "ore.general.mining": {
-    "subtitle": "ore.general.mining",
+    "subtitle": "ore.subtitle.general.mining",
     "sounds": [
       "lootdebugs:ores/morkite/morkite_mining_1",
       "lootdebugs:ores/morkite/morkite_mining_2",

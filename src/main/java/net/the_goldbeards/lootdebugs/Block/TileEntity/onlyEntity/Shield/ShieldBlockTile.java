@@ -18,7 +18,6 @@ public class ShieldBlockTile extends BlockEntity {
     {
         BlockPos pPos = this.getBlockPos();
         Level pLevel = this.getLevel();
-        BlockState pState = pLevel.getBlockState(pPos);
 
         time++;
 

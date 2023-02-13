@@ -24,7 +24,8 @@ public class SatchelChargeTile extends BlockEntity {
 
         if(LootdebugsServerConfig.SATCHEL_CHARGE_BLINK.get())
         {
-            if (count >= 2) {
+            if (count >= 2)
+            {
                 switchActivated(this.getBlockState());
                 count = 0;
             }

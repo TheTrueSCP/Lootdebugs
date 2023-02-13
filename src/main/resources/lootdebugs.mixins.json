@@ -5,12 +5,10 @@
   "refmap": "lootdebugs.refmap.json",
   "plugin": "net.the_goldbeards.lootdebugs.mixin.LootdebugsMixinConfig",
   "mixins": [
-    "coremods.PrimaryLevelDataMixin"
   ],
   "client": [
     "accessors.client.PlayerControllerAccess",
-    "accessors.client.WorldRendererAccess",
-    "coremods.client.WorldSelectionListMixin"
+    "accessors.client.WorldRendererAccess"
   ],
   "injectors": {
     "defaultRequire": 1

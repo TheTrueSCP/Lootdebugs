@@ -74,9 +74,9 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientEventBusSubscriber
 {
-    public static final KeyMapping ROCK_AND_STONE = new KeyMapping("lootdebugs.key.rock_and_stone", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "keyGroup.lootdebugs");
-    public static final KeyMapping THROW_FLARE = new KeyMapping("lootdebugs.key.throw_flare", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "keyGroup.lootdebugs");
-    public static final KeyMapping CHANGE_DIRECTION = new KeyMapping("lootdebugs.key.zipline.change_direction", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, "keyGroup.lootdebugs");
+    public static final KeyMapping ROCK_AND_STONE = new KeyMapping("key.lootdebugs.rock_and_stone", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_V, "keyGroup.lootdebugs");
+    public static final KeyMapping THROW_FLARE = new KeyMapping("key.lootdebugs.throw_flare", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, "keyGroup.lootdebugs");
+    public static final KeyMapping CHANGE_DIRECTION = new KeyMapping("key.lootdebugs.zipline.change_direction", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, "keyGroup.lootdebugs");
 
 
     private static final ResourceLocation NAUSEA_LOCATION = new ResourceLocation("textures/misc/nausea.png");

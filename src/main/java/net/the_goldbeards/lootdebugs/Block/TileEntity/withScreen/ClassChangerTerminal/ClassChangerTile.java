@@ -17,11 +17,8 @@ import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ClassChangerTile extends BlockEntity implements MenuProvider {
-
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-
+public class ClassChangerTile extends BlockEntity implements MenuProvider
+{
     public ClassChangerTile(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModTileEntities.CLASS_CHANGER_ENTITY.get(), pWorldPosition, pBlockState);
     }
@@ -36,23 +33,4 @@ public class ClassChangerTile extends BlockEntity implements MenuProvider {
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new ClassChangerContainer(pContainerId, this);
     }
-
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
-
-    @NotNull
-    @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap);
-    }
-
-
-
 }

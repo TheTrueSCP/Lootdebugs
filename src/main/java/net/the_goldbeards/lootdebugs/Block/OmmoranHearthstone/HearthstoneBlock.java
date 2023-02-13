@@ -27,7 +27,7 @@ public class HearthstoneBlock extends Block implements SimpleWaterloggedBlock {
 
     public HearthstoneBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }
 
     private static final VoxelShape SHAPE = Shapes.or(Block.box(5, 0, 5, 11, 16, 11),

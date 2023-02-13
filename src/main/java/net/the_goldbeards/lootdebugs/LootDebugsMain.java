@@ -19,7 +19,6 @@ import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.capability.BeardSlot.BeardSlotCap;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
@@ -85,7 +84,6 @@ public class LootDebugsMain
         FlareDataCap.register(event);
         ClassDataCap.register(event);
         SaluteDataCap.register(event);
-        BeardSlotCap.register(event);
     }
 
     private void setup(final FMLCommonSetupEvent event)

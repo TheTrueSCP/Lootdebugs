@@ -38,10 +38,18 @@ public class RedSugarItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
 
-        pLivingEntity.heal(HealAmount);
-        pLivingEntity.addEffect(new MobEffectInstance(MobEffects.SATURATION,1,-1));
+        if(!pLevel.isClientSide())
+        {
+            pLivingEntity.heal(HealAmount);
+            pLivingEntity.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, -1));
 
-        pStack.shrink(1);
+            if (pLivingEntity instanceof Player player)
+            {
+                if (!player.isCreative()) {
+                    pStack.shrink(1);
+                }
+            }
+        }
         return pStack;
     }
 }

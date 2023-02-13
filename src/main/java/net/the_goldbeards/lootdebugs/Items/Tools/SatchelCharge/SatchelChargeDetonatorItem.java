@@ -13,10 +13,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
-public class SatchelChargeDetonatorItem extends Item
+public class SatchelChargeDetonatorItem extends BasicAllClassItem
 {
     public SatchelChargeDetonatorItem(Properties pProperties) {
         super(pProperties);
@@ -31,27 +32,17 @@ public class SatchelChargeDetonatorItem extends Item
 
         if (pEntity instanceof Player player && pIsSelected)
         {
-            if (UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse))
+            if (canUseItem(pStack))
             {
                 if(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile)
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.GREEN + new TranslatableComponent("tool.satchel_charge.ready").getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.GREEN + new TranslatableComponent("message.lootdebugs.tool.satchel_charge.ready").getString()), true);
                 }
                 else
                 {
                     player.getInventory().removeItem(pStack);
                 }
             }
-            else
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-
-                if(!(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile))
-                {
-                    player.getInventory().removeItem(pStack);
-                }
-            }
-
         }
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -68,7 +59,7 @@ public class SatchelChargeDetonatorItem extends Item
 
             if (pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile satchelChargeTile) {
                 satchelChargeTile.detonate(pPlayer);
-                pPlayer.displayClientMessage(new TextComponent(ChatFormatting.DARK_RED + new TranslatableComponent("tool.satchel_charge.detonated").getString()), true);
+                pPlayer.displayClientMessage(new TextComponent(ChatFormatting.DARK_RED + new TranslatableComponent("message.lootdebugs.tool.satchel_charge.detonated").getString()), true);
 
             }
 

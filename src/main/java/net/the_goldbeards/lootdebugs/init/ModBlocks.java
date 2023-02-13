@@ -6,6 +6,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -14,9 +15,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.the_goldbeards.lootdebugs.Block.Drinks.*;
-import net.the_goldbeards.lootdebugs.Block.GenBlocks.Ores.BismorBlock;
-import net.the_goldbeards.lootdebugs.Block.GenBlocks.Ores.CropperBlock;
+import net.the_goldbeards.lootdebugs.Block.Beers.*;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.plants.*;
 import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
 import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
@@ -27,11 +26,11 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTer
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubBlock;
-import net.the_goldbeards.lootdebugs.Block.Tools.FlareGun.LightBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKII;
-import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldBlock;
-import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldEmitterBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlock;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSoundTypes;
@@ -151,7 +150,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> BISMOR_ORE = registryBlock("bismor_ore",
-            () -> new BismorBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> BISMOR_BLOCK = registryBlock("bismor_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -159,7 +158,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> CROPPER_ORE = registryBlock("cropper_ore",
-            () -> new CropperBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> CROPPER_BLOCK = registryBlock("cropper_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);

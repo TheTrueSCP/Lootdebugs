@@ -2,6 +2,7 @@ package net.the_goldbeards.lootdebugs.Items.Tools.Zipline;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -14,6 +15,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
@@ -54,7 +59,7 @@ public class ZiplineItem extends BasicToolItem
 
         ItemStack zipline = getAmmo(pPlayer);
 
-        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(2)) && linkPos != null)
+        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(2)) && linkPos != null && canPlaceBlock(pLevel, linkPos))
         {
             if (!zipline.isEmpty() || pPlayer.isCreative())
             {
@@ -85,10 +90,18 @@ public class ZiplineItem extends BasicToolItem
         }
         else
         {
-            pPlayer.displayClientMessage(new TranslatableComponent("tool.not_on_ground"), true);
+            pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.not_on_ground"), true);
         }
 
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+    }
+
+    public static boolean canPlaceBlock(Level pLevel, BlockPos ziplineBlock)
+    {
+
+        BlockPos blockpos = ziplineBlock.below();
+        BlockState blockstate = pLevel.getBlockState(blockpos);
+        return blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP);
     }
 
     public ItemStack getAmmo(Player player) {

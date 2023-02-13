@@ -27,14 +27,14 @@ public class ShieldEmitterBlockTile extends BlockEntity {
 
         if(time >= 180)
         {
-
+            //Remove shield
             for (int x = -4; x < 4; x++) {
                 for (int y = -4; y < 4; y++) {
                     for (int z = -4; z < 4; z++) {
                         BlockPos testpos = new BlockPos(pPos.getX() + (x),pPos.getY() + (y), pPos.getZ() + (z));
-                        if (pLevel.getBlockState(testpos).is(ModBlocks.SHIELD_BLOCK.get())) {
+                        if (pLevel.getBlockState(testpos).is(ModBlocks.SHIELD_BLOCK.get()))
+                        {
                             pLevel.setBlock(testpos, Blocks.AIR.defaultBlockState(), 3);
-
                         }
                     }
                 }
@@ -42,6 +42,7 @@ public class ShieldEmitterBlockTile extends BlockEntity {
         }
         else
         {
+            //add shield/recreate
             time++;
             placeShieldBlocks(pLevel, pPos);
         }

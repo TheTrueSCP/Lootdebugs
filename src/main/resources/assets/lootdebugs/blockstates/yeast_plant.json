@@ -1,13 +1,13 @@
 {
   "variants": {
 
-    "facing=north,age=0": {"model": "lootdebugs:block/yeast_plant_0"},
-    "facing=south,age=0": {"model": "lootdebugs:block/yeast_plant_0"},
-    "facing=west,age=0": {"model": "lootdebugs:block/yeast_plant_0", "y":  90},
-    "facing=east,age=0": {"model": "lootdebugs:block/yeast_plant_0", "y":  90},
-    "facing=north,age=1": {"model": "lootdebugs:block/yeast_plant_1"},
-    "facing=south,age=1": {"model": "lootdebugs:block/yeast_plant_1"},
-    "facing=west,age=1": {"model": "lootdebugs:block/yeast_plant_1", "y":  90},
-    "facing=east,age=1": {"model": "lootdebugs:block/yeast_plant_1", "y":  90}
+    "facing=north,age=0": {"model": "lootdebugs:block/yeast_plant/yeast_plant_0"},
+    "facing=south,age=0": {"model": "lootdebugs:block/yeast_plant/yeast_plant_0"},
+    "facing=west,age=0": {"model": "lootdebugs:block/yeast_plant/yeast_plant_0", "y":  90},
+    "facing=east,age=0": {"model": "lootdebugs:block/yeast_plant/yeast_plant_0", "y":  90},
+    "facing=north,age=1": {"model": "lootdebugs:block/yeast_plant/yeast_plant_1"},
+    "facing=south,age=1": {"model": "lootdebugs:block/yeast_plant/yeast_plant_1"},
+    "facing=west,age=1": {"model": "lootdebugs:block/yeast_plant/yeast_plant_1", "y":  90},
+    "facing=east,age=1": {"model": "lootdebugs:block/yeast_plant/yeast_plant_1", "y":  90}
   }
 }

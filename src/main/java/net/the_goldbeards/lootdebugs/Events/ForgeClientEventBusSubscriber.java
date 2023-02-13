@@ -91,7 +91,7 @@ public class ForgeClientEventBusSubscriber
 
             player.getCapability(FlareDataCap.FLARE_DATA).ifPresent(flareCap ->
             {
-                event.getLeft().add(new TranslatableComponent("player.flares").getString() +": " + flareCap.getStoredFlares() + "/" + 4);
+                event.getLeft().add(new TranslatableComponent("gui.lootdebugs.player.flares").getString() +": " + flareCap.getStoredFlares() + "/" + 4);
             });
 
             player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap -> {
@@ -100,14 +100,7 @@ public class ForgeClientEventBusSubscriber
                 event.getLeft().add(UsefullStuff.DwarfClasses.getClassColor(dwarfClass) + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClass).getString());
 
             });
-
-
-
         }
-
-
-
-
     }
 
 
@@ -208,27 +201,4 @@ public class ForgeClientEventBusSubscriber
             }
         }
     }
-
-  /*  public static void test(AnvilUpdateEvent event)
-    {
-        if(event.getLeft().is(ModItems.FUEL.get()))
-        {
-            ItemStack left = event.getLeft();
-            ItemStack right = event.getRight();
-
-            if(UsefullStuff.ItemNBTHelper.hasKey(left, "fuelAmount") && UsefullStuff.ItemNBTHelper.hasKey(right, "fuelAmount"))
-            {
-                ItemStack fuelNew = new ItemStack(ModItems.FUEL.get(), 1);
-
-                float newFuel = UsefullStuff.ItemNBTHelper.getFloat(left, "fuelAmount") + UsefullStuff.ItemNBTHelper.getFloat(right, "fuelAmount");
-                if(newFuel > FuelItem.maxFuel)
-                {
-                    newFuel = FuelItem.maxFuel;
-                }
-                UsefullStuff.ItemNBTHelper.putFloat(fuelNew, "fuelAmount", newFuel);
-                event.setOutput(fuelNew);
-                event.setCanceled(true);
-            }
-        }
-    }*/
 }

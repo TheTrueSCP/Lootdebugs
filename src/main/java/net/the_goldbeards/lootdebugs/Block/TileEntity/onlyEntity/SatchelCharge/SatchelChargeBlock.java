@@ -104,7 +104,7 @@ public class SatchelChargeBlock extends BaseEntityBlock {
             Block.box(9.75, 7.5, 15.75, 10.75, 8.5, 16.75),
             Block.box(4.5, 11.5, 14, 11.5, 15.5, 14),
             Block.box(4.5, 0.5, 14, 11.5, 4.5, 14)
-            );
+    );
 
 
     public static final VoxelShape WALL_EAST = Shapes.or(
@@ -124,26 +124,26 @@ public class SatchelChargeBlock extends BaseEntityBlock {
             Block.box(3.75, 7.5, 5.25, 4.75, 8.5, 6.25),
             Block.box(2, 11.5, 4.5, 2, 15.5, 11.5),
             Block.box(2, 0.5, 4.5, 2, 4.5, 11.5)
-            );
+    );
 
     public static final VoxelShape WALL_WEST = Shapes.or(
-        Block.box(11.5, 6.15, 6.625, 12.5, 9.85, 9.375),
-        Block.box(15.5, 6.15, 6.625, 16.5, 9.85, 9.375),
-        Block.box(11.75, 4.5, 3.75, 16.25, 6.25, 12.25),
-        Block.box(11.75, 9.75, 3.75, 16.25, 11.5, 12.25),
-        Block.box(12, 3.5, 3.9499999999999993, 16, 12.5, 7.949999999999999),
-        Block.box(12, 3.5, 8.05, 16, 12.5, 12.05),
-        Block.box(11.75, 7, 4.699999999999999, 12.75, 9, 6.699999999999999),
-        Block.box(11.75, 7, 9.3, 12.75, 9, 11.3),
-        Block.box(15.25, 7, 4.699999999999999, 16.25, 9, 6.699999999999999),
-        Block.box(15.25, 7, 9.3, 16.25, 9, 11.3),
-        Block.box(11.25, 7.5, 9.75, 12.25, 8.5, 10.75),
-        Block.box(11.25, 7.5, 5.25, 12.25, 8.5, 6.25),
-        Block.box(15.75, 7.5, 9.75, 16.75, 8.5, 10.75),
-        Block.box(15.75, 7.5, 5.25, 16.75, 8.5, 6.25),
-        Block.box(14, 11.5, 4.5, 14, 15.5, 11.5),
-        Block.box(14, 0.5, 4.5, 14, 4.5, 11.5)
-        );
+            Block.box(11.5, 6.15, 6.625, 12.5, 9.85, 9.375),
+            Block.box(15.5, 6.15, 6.625, 16.5, 9.85, 9.375),
+            Block.box(11.75, 4.5, 3.75, 16.25, 6.25, 12.25),
+            Block.box(11.75, 9.75, 3.75, 16.25, 11.5, 12.25),
+            Block.box(12, 3.5, 3.9499999999999993, 16, 12.5, 7.949999999999999),
+            Block.box(12, 3.5, 8.05, 16, 12.5, 12.05),
+            Block.box(11.75, 7, 4.699999999999999, 12.75, 9, 6.699999999999999),
+            Block.box(11.75, 7, 9.3, 12.75, 9, 11.3),
+            Block.box(15.25, 7, 4.699999999999999, 16.25, 9, 6.699999999999999),
+            Block.box(15.25, 7, 9.3, 16.25, 9, 11.3),
+            Block.box(11.25, 7.5, 9.75, 12.25, 8.5, 10.75),
+            Block.box(11.25, 7.5, 5.25, 12.25, 8.5, 6.25),
+            Block.box(15.75, 7.5, 9.75, 16.75, 8.5, 10.75),
+            Block.box(15.75, 7.5, 5.25, 16.75, 8.5, 6.25),
+            Block.box(14, 11.5, 4.5, 14, 15.5, 11.5),
+            Block.box(14, 0.5, 4.5, 14, 4.5, 11.5)
+    );
 
 
     public static final VoxelShape CEILING_X = Shapes.or(
@@ -262,8 +262,8 @@ public class SatchelChargeBlock extends BaseEntityBlock {
         return new SatchelChargeTile(pPos, pState);
     }
 
-  
-    
+
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

@@ -47,22 +47,21 @@ public class FoamEntity extends ThrowableProjectile {
     @Override
     protected void onHitBlock(BlockHitResult hitResult) {
 
-        
-        if(this.getOwner() == null)
+        if(!level.isClientSide())
         {
+            if (this.getOwner() == null) {
+                this.kill();
+
+            }
+            switch (hitResult.getDirection()) {
+                case UP -> PlaceBlock(hitResult.getBlockPos().above(), true);
+                case DOWN -> PlaceBlock(hitResult.getBlockPos().below(), true);
+                default -> PlaceBlock(hitResult.getBlockPos(), true);
+            }
+
+
             this.kill();
-            
         }
-        switch (hitResult.getDirection())
-        {
-            case UP -> PlaceBlock(hitResult.getBlockPos().above(), true);
-            case DOWN -> PlaceBlock(hitResult.getBlockPos().below(), true);
-            default -> PlaceBlock(hitResult.getBlockPos(), true);
-        }
-
-
-
-        this.kill();
     }
 
     private void PlaceBlock(BlockPos HitPos, boolean mkII)

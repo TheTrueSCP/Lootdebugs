@@ -47,7 +47,7 @@ public class RockAndStonePacket
                 }
                 else
                 {
-                    player.displayClientMessage(new TranslatableComponent("misc.action.salute.must_be_dwarf"), true);
+                    player.displayClientMessage(new TranslatableComponent("message.action.salute.must_be_dwarf"), true);
                 }
             }
 

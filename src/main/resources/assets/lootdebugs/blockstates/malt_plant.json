@@ -1,16 +1,16 @@
 {
   "variants": {
 
-    "facing=north,age=0": { "model": "lootdebugs:block/malt_plant_0" , "y":  270},
-    "facing=north,age=1": { "model": "lootdebugs:block/malt_plant_1" , "y":  270},
+    "facing=north,age=0": { "model": "lootdebugs:block/malt_plant/malt_plant_0" , "y":  270},
+    "facing=north,age=1": { "model": "lootdebugs:block/malt_plant/malt_plant_1" , "y":  270},
 
-    "facing=south,age=0": { "model": "lootdebugs:block/malt_plant_0", "y":  90},
-    "facing=south,age=1": { "model": "lootdebugs:block/malt_plant_1", "y":  90},
+    "facing=south,age=0": { "model": "lootdebugs:block/malt_plant/malt_plant_0", "y":  90},
+    "facing=south,age=1": { "model": "lootdebugs:block/malt_plant/malt_plant_1", "y":  90},
 
-    "facing=west,age=0": { "model": "lootdebugs:block/malt_plant_0", "y":  180},
-    "facing=west,age=1": { "model": "lootdebugs:block/malt_plant_1", "y": 180},
+    "facing=west,age=0": { "model": "lootdebugs:block/malt_plant/malt_plant_0", "y":  180},
+    "facing=west,age=1": { "model": "lootdebugs:block/malt_plant/malt_plant_1", "y": 180},
 
-    "facing=east,age=0": { "model": "lootdebugs:block/malt_plant_0", "y":  0},
-    "facing=east,age=1": { "model": "lootdebugs:block/malt_plant_1", "y":  0}
+    "facing=east,age=0": { "model": "lootdebugs:block/malt_plant/malt_plant_0", "y":  0},
+    "facing=east,age=1": { "model": "lootdebugs:block/malt_plant/malt_plant_1", "y":  0}
   }
 }

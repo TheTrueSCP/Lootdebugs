@@ -54,6 +54,15 @@ public class DrillsItem extends FuelDiggingItem
 
 			boolean onBlockMode = stack.getOrCreateTag().getBoolean("onBlockMode");
 			stack.getOrCreateTag().putBoolean("onBlockMode", !onBlockMode);
+			if(onBlockMode)
+			{
+				pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_off"), true);
+			}
+			else
+			{
+				pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_on"), true);
+
+			}
 
 		return super.use(pLevel, pPlayer, pUsedHand);
 	}
@@ -70,7 +79,7 @@ public class DrillsItem extends FuelDiggingItem
 			{
 				if(!haveFuel(pStack))
 				{
-					player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.no_fuel").getString()), true);
+					player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.no_fuel").getString()), true);
 				}
 			}
 		}

@@ -1,54 +1,13 @@
 {
   "itemGroup.lootbuggroup": "Lootdebugs",
-  "block.lootdebugs.test_block": "Test Block",
-  "block.lootdebugs.glyphid_shit": "Glyphid shit",
-  "item.lootdebugs.dafuck": "Dafuck?",
-
-  "entity.lootdebugs.lootbug_golden": "Lootbug golden",
-  "entity.lootdebugs.lootbug": "Lootbug",
 
   "keyGroup.lootdebugs": "Lootdebugs",
-  "lootdebugs.key.rock_and_stone": "Salute",
-  "lootdebugs.key.throw_flare": "Throw Flare",
-  "lootdebugs.key.zipline.change_direction": "Change zipline direction",
+  "key.lootdebugs.rock_and_stone": "Salute",
+  "key.lootdebugs.throw_flare": "Throw Flare",
+  "key.lootdebugs.zipline.change_direction": "Change zipline direction",
 
-  "player.flares": "Flares",
-
-  "player.class.leaf_lover": "Leaf Lover",
-  "player.class.driller" : "Driller",
-  "player.class.scout" : "Scout",
-  "player.class.engineer" : "Engineer",
-  "player.class.gunner" : "Gunner",
-  "player.class.thetruescp": "TheTrueSCP" ,
-  "player.class.monsieurhannes": "Monsieur Hannes",
-  "player.class.flare.wrong_class": "Wrong class, you must be a Dwarf",
-
-
-  "tool.wrong_class" : "Wrong Class, you must be",
-  "tool.wrong_class_after" : "to use this tool",
-  "tool.no_fuel": "No Fuel in Inventory",
-  "tool.on_block_drill_mode": "On block drill mode",
-  "tool.not_on_ground": "You must be on ground to use this item",
-  "tool.satchel_charge.ready": "Satchel Charge ready",
-  "tool.satchel_charge.detonated": "DETONATED",
-  "tool.you_leaf_lover": "You must be a dwarf to use this item, you Leaf Lover",
-
-  "block.zipline_block.link_invalid": "Linked pos invalid",
-  "entity.zipline_move.change_direction.1": "Press",
-  "entity.zipline_move.change_direction.2": "to change direction",
-
-  "tooltip.lootdebugs.fuel_canister.refuel": "You can refuel this at the fuel refinery",
-  "tooltip.lootdebugs.fuel_canister.amount": "Fuel:",
-  "tooltip.lootdebugs.more_information": "Press SHIFT to see more information",
-  "tooltip.lootdebugs.drills.on_block_drill_mode": "Use the item (right-click) to change the drill-mode",
-  "tooltip.liquid.amount.with.capacity": "%s / %s mB",
-
-
-  "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
-  "jei.lootdebugs.pub_brewing": "Beer Brewing",
-  "jei.lootdebugs.fuel_refining": "Fuel Refining",
-
-
+  "block.lootdebugs.test_block": "Test Block",
+  "block.lootdebugs.glyphid_shit": "Glyphid shit",
   "block.lootdebugs.plascrete_foam": "Plascrete Foam MKI",
   "block.lootdebugs.plascrete_foam_mk2": "Plascrete Foam MKII",
   "block.lootdebugs.oil_shale": "Oil Shale",
@@ -82,6 +41,36 @@
   "block.lootdebugs.seasoned_moonrider":"Seasoned Moonrider",
   "block.lootdebugs.smartstout":"Smartstout",
   "block.lootdebugs.lootbug_gold": "Lootbug Gold",
+
+  "block.lootdebugs.ommoran_hearthstone": "Ommoran Hearthstone",
+  "block.lootdebugs.ommoran_layer_1_outerst": "Ommoran Crust",
+  "block.lootdebugs.ommoran_layer_2": "Ommoran Shell",
+  "block.lootdebugs.ommoran_layer_3": "Ommoran Crystal",
+  "block.lootdebugs.ommoran_layer_4_innerst": "Ommoran Bedding",
+
+  "block.lootdebugs.morkite_ore": "Morkite Ore",
+  "block.lootdebugs.deepslate_morkite_ore": "Deepslate Morkite Ore",
+  "block.lootdebugs.morkite_block": "Morkite Block",
+
+  "block.lootdebugs.nitra_ore": "Nitra Ore",
+  "block.lootdebugs.deepslate_nitra_ore": "Deepslate Nitra Ore",
+  "block.lootdebugs.nitra_block": "Nitra Block",
+
+  "block.lootdebugs.cropper_ore": "Croppa Ore",
+  "block.lootdebugs.cropper_block": "Croppa Block",
+
+  "block.lootdebugs.dystrum_ore": "Dystrum Ore",
+  "block.lootdebugs.deepslate_dystrum_ore": "Deepslate Dystrum Ore",
+  "block.lootdebugs.raw_dystrum_block": "Raw Dystrum Block",
+  "block.lootdebugs.dystrum_block": "Dystrum Block",
+
+  "block.lootdebugs.bismor_ore": "Bismor Ore",
+  "block.lootdebugs.raw_bismor_block": "Raw Bismor Block",
+  "block.lootdebugs.bismor_block": "Bismor Block",
+
+  "block.lootdebugs.red_sugar":"Red Sugar",
+
+
 
   "item.lootdebugs.jet": "Jet",
   "item.lootdebugs.drill_head": "Drill Head",
@@ -146,44 +135,66 @@
   "item.lootdebugs.lootbug_spawn_egg": "Lootbug Spawn Egg",
   "item.lootdebugs.lootbug_golden_spawn_egg": "Golden Lootbug Spawn Egg",
 
-
-  "block.lootdebugs.ommoran_hearthstone": "Ommoran Hearthstone",
-  "block.lootdebugs.ommoran_layer_1_outerst": "Ommoran Crust",
-  "block.lootdebugs.ommoran_layer_2": "Ommoran Shell",
-  "block.lootdebugs.ommoran_layer_3": "Ommoran Crystal",
-  "block.lootdebugs.ommoran_layer_4_innerst": "Ommoran Bedding",
   "item.lootdebugs.ommoran_hearthstone": "Ommoran Hearthstone",
 
-  "block.lootdebugs.morkite_ore": "Morkite Ore",
-  "block.lootdebugs.deepslate_morkite_ore": "Deepslate Morkite Ore",
-  "block.lootdebugs.morkite_block": "Morkite Block",
   "item.lootdebugs.morkite": "Morkite",
 
-  "block.lootdebugs.nitra_ore": "Nitra Ore",
-  "block.lootdebugs.deepslate_nitra_ore": "Deepslate Nitra Ore",
-  "block.lootdebugs.nitra_block": "Nitra Block",
   "item.lootdebugs.nitra": "Nitra",
 
-  "block.lootdebugs.cropper_ore": "Croppa Ore",
-  "block.lootdebugs.cropper_block": "Croppa Block",
   "item.lootdebugs.raw_cropper": "Raw Croppa",
   "item.lootdebugs.cropper_ingot": "Croppa Ingot",
 
-  "block.lootdebugs.dystrum_ore": "Dystrum Ore",
-  "block.lootdebugs.deepslate_dystrum_ore": "Deepslate Dystrum Ore",
-  "block.lootdebugs.raw_dystrum_block": "Raw Dystrum Block",
-  "block.lootdebugs.dystrum_block": "Dystrum Block",
   "item.lootdebugs.raw_dystrum": "Raw Dystrum",
   "item.lootdebugs.dystrum_ingot": "Dystrum Ingot",
 
-  "block.lootdebugs.bismor_ore": "Bismor Ore",
-  "block.lootdebugs.raw_bismor_block": "Raw Bismor Block",
-  "block.lootdebugs.bismor_block": "Bismor Block",
   "item.lootdebugs.raw_bismor": "Raw Bismor",
   "item.lootdebugs.bismor_ingot": "Bismor Ingot",
 
-  "block.lootdebugs.red_sugar":"Red Sugar",
   "item.lootdebugs.red_sugar_item":"Chunk of Red Sugar",
+
+
+  "entity.lootdebugs.lootbug_golden": "Lootbug golden",
+  "entity.lootdebugs.lootbug": "Lootbug",
+
+
+  "gui.lootdebugs.player.flares": "Flares",
+
+  "class.lootdebugs.player.leaf_lover": "Leaf Lover",
+  "class.lootdebugs.player.driller" : "Driller",
+  "class.lootdebugs.player.scout" : "Scout",
+  "class.lootdebugs.player.engineer" : "Engineer",
+  "class.lootdebugs.player.gunner" : "Gunner",
+  "class.lootdebugs.player.thetruescp": "TheTrueSCP" ,
+  "class.lootdebugs.player.monsieurhannes": "Monsieur Hannes",
+  "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your'e just a leaf_lover",
+
+  "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
+
+  "message.lootdebugs.tool.wrong_class_0" : "Wrong Class, you must be",
+  "message.lootdebugs.tool.wrong_class_1" : "to use this tool",
+  "message.lootdebugs.tool.no_fuel": "No Fuel in Inventory",
+  "message.lootdebugs.tool.on_block_drill_mode_off": "On block drill mode off",
+  "message.lootdebugs.tool.on_block_drill_mode_on": "On block drill mode on",
+  "message.lootdebugs.tool.not_on_ground": "You must be on solid ground to use this item",
+  "message.lootdebugs.tool.satchel_charge.ready": "Satchel Charge ready",
+  "message.lootdebugs.tool.satchel_charge.detonated": "DETONATED",
+
+  "message.lootdebugs.zipline_block.link_invalid": "Linked pos invalid",
+  "message.lootdebugs.zipline_move.change_direction.1": "Press",
+  "message.lootdebugs.zipline_move.change_direction.2": "to change direction",
+
+  "tooltip.lootdebugs.fuel_canister.refuel": "You can refuel this at the fuel refinery",
+  "tooltip.lootdebugs.fuel_canister.amount": "Fuel:",
+  "tooltip.lootdebugs.more_information": "Press SHIFT to see more information",
+  "tooltip.lootdebugs.drills.on_block_drill_mode": "Use the item (right-click) to change the drill-mode",
+  "tooltip.lootdebugs.liquid.amount.with.capacity": "%s / %s mB",
+
+
+  "jei.lootdebugs.equipment_table_crafting": "Equipment Table Crafting",
+  "jei.lootdebugs.pub_brewing": "Beer Brewing",
+  "jei.lootdebugs.fuel_refining": "Fuel Refining",
+
+
 
 
   "lootbug.subtitle.lootbug_idle": "Lootbug idle",
@@ -199,11 +210,11 @@
   "rockandstone.subtitle.mining_shanty": "Playing mining shanty",
 
   "rockandstone.subtitle.salute": "Player Salute",
-  "ore.general.mining": "Mining Minerals",
+  "ore.subtitle.general.mining": "Mining Minerals",
 
   "vegetation.subtitle.general.pick": "Plant picked",
 
-  "lloyd.lloyd_reaction":"Lloyd Reaction",
+  "lloyd.subtitle.lloyd_reaction":"Lloyd Reaction",
 
   "tools.subtitle.shoot": "Tool Shoot",
   "tools.subtitle.foam.harden": "Platform Gun Shoot",
@@ -231,9 +242,8 @@
   "tools.subtitle.ping.ommoran_hearthstone": "OMMORAN!",
 
   "beer.subtitle.drink": "Drinks Beer",
-  "beer.smartstout": "Smartass",
+  "beer.subtitle.smartstout": "Smartass",
 
-  "misc.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
   "misc.lootbug.attack.pacifist_mode.enabled": "Lootbug Pacifist mode is enabled on this server",
 
 

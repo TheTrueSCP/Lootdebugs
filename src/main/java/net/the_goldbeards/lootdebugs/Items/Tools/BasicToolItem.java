@@ -26,7 +26,7 @@ public abstract class BasicToolItem extends Item
         {
             if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, getDwarfClassToUse()))
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(getDwarfClassToUse()).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(getDwarfClassToUse()).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
             }
         }
 

@@ -1,28 +1,28 @@
 {
   "variants":
   {
-    "facing=north,last_interacted_class=0": { "model": "lootdebugs:block/class_changer" , "y":  0},
-    "facing=north,last_interacted_class=1": { "model": "lootdebugs:block/class_changer_driller" , "y":  0},
-    "facing=north,last_interacted_class=2": { "model": "lootdebugs:block/class_changer_engineer" , "y":  0},
-    "facing=north,last_interacted_class=3": { "model": "lootdebugs:block/class_changer_gunner" , "y":  0},
-    "facing=north,last_interacted_class=4": { "model": "lootdebugs:block/class_changer_scout" , "y":  0},
+    "facing=north,last_interacted_class=0": { "model": "lootdebugs:block/class_changer/class_changer" , "y":  0},
+    "facing=north,last_interacted_class=1": { "model": "lootdebugs:block/class_changer/class_changer_driller" , "y":  0},
+    "facing=north,last_interacted_class=2": { "model": "lootdebugs:block/class_changer/class_changer_engineer" , "y":  0},
+    "facing=north,last_interacted_class=3": { "model": "lootdebugs:block/class_changer/class_changer_gunner" , "y":  0},
+    "facing=north,last_interacted_class=4": { "model": "lootdebugs:block/class_changer/class_changer_scout" , "y":  0},
 
-    "facing=south,last_interacted_class=0": { "model": "lootdebugs:block/class_changer", "y":  180},
-    "facing=south,last_interacted_class=1": { "model": "lootdebugs:block/class_changer_driller", "y":  180},
-    "facing=south,last_interacted_class=2": { "model": "lootdebugs:block/class_changer_engineer", "y":  180},
-    "facing=south,last_interacted_class=3": { "model": "lootdebugs:block/class_changer_gunner", "y":  180},
-    "facing=south,last_interacted_class=4": { "model": "lootdebugs:block/class_changer_scout", "y":  180},
+    "facing=south,last_interacted_class=0": { "model": "lootdebugs:block/class_changer/class_changer", "y":  180},
+    "facing=south,last_interacted_class=1": { "model": "lootdebugs:block/class_changer/class_changer_driller", "y":  180},
+    "facing=south,last_interacted_class=2": { "model": "lootdebugs:block/class_changer/class_changer_engineer", "y":  180},
+    "facing=south,last_interacted_class=3": { "model": "lootdebugs:block/class_changer/class_changer_gunner", "y":  180},
+    "facing=south,last_interacted_class=4": { "model": "lootdebugs:block/class_changer/class_changer_scout", "y":  180},
 
-    "facing=west,last_interacted_class=0": { "model": "lootdebugs:block/class_changer", "y":  270},
-    "facing=west,last_interacted_class=1": { "model": "lootdebugs:block/class_changer_driller", "y":  270},
-    "facing=west,last_interacted_class=2": { "model": "lootdebugs:block/class_changer_engineer", "y":  270},
-    "facing=west,last_interacted_class=3": { "model": "lootdebugs:block/class_changer_gunner", "y":  270},
-    "facing=west,last_interacted_class=4": { "model": "lootdebugs:block/class_changer_scout", "y":  270},
+    "facing=west,last_interacted_class=0": { "model": "lootdebugs:block/class_changer/class_changer", "y":  270},
+    "facing=west,last_interacted_class=1": { "model": "lootdebugs:block/class_changer/class_changer_driller", "y":  270},
+    "facing=west,last_interacted_class=2": { "model": "lootdebugs:block/class_changer/class_changer_engineer", "y":  270},
+    "facing=west,last_interacted_class=3": { "model": "lootdebugs:block/class_changer/class_changer_gunner", "y":  270},
+    "facing=west,last_interacted_class=4": { "model": "lootdebugs:block/class_changer/class_changer_scout", "y":  270},
 
-    "facing=east,last_interacted_class=0": { "model": "lootdebugs:block/class_changer", "y":  90},
-    "facing=east,last_interacted_class=1": { "model": "lootdebugs:block/class_changer_driller", "y":  90},
-    "facing=east,last_interacted_class=2": { "model": "lootdebugs:block/class_changer_engineer", "y":  90},
-    "facing=east,last_interacted_class=3": { "model": "lootdebugs:block/class_changer_gunner", "y":  90},
-    "facing=east,last_interacted_class=4": { "model": "lootdebugs:block/class_changer_scout", "y":  90}
+    "facing=east,last_interacted_class=0": { "model": "lootdebugs:block/class_changer/class_changer", "y":  90},
+    "facing=east,last_interacted_class=1": { "model": "lootdebugs:block/class_changer/class_changer_driller", "y":  90},
+    "facing=east,last_interacted_class=2": { "model": "lootdebugs:block/class_changer/class_changer_engineer", "y":  90},
+    "facing=east,last_interacted_class=3": { "model": "lootdebugs:block/class_changer/class_changer_gunner", "y":  90},
+    "facing=east,last_interacted_class=4": { "model": "lootdebugs:block/class_changer/class_changer_scout", "y":  90}
   }
 }

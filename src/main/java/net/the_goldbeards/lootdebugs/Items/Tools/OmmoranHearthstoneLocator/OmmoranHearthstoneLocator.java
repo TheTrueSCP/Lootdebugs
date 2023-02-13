@@ -11,12 +11,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.util.ModConfiguredStructureTags;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
-public class OmmoranHearthstoneLocator extends Item
+public class OmmoranHearthstoneLocator extends BasicAllClassItem
 {
 
     public OmmoranHearthstoneLocator(Properties pProperties) {
@@ -26,17 +27,9 @@ public class OmmoranHearthstoneLocator extends Item
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected)
     {
-        if(pEntity instanceof Player player && pIsSelected)
+        if(pEntity instanceof Player && pIsSelected)
         {
-
-            if(UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tools.you_leaf_lover").getString()), true);
-                super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
-                return;
-            }
-
-            if (pLevel instanceof ServerLevel SL)
+            if (pLevel instanceof ServerLevel SL && BasicAllClassItem.canUseItem(pStack))
             {
                 if (!UsefullStuff.ItemNBTHelper.getBoolean(pStack, "lootdebugs.isLocatorLocked")) {
                     BlockPos findBlockPos = SL.findNearestMapFeature(ModConfiguredStructureTags.OMMORAN_HEARTHSTONE, pEntity.blockPosition(), 100, false);
