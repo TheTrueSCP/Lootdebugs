@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.the_goldbeards.lootdebugs.Entities.Tools.FlareEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.FlareEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.FlareModel;
 

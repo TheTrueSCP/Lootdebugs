@@ -13,9 +13,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.the_goldbeards.lootdebugs.Entities.Tools.ShootFlareEntity;
-import net.the_goldbeards.lootdebugs.client.model.Projectiles.ShootFlareModel;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
+import net.the_goldbeards.lootdebugs.client.model.Projectiles.ShootFlareModel;
 
 @OnlyIn(Dist.CLIENT)
 public class ShootFlareRender extends EntityRenderer<ShootFlareEntity>

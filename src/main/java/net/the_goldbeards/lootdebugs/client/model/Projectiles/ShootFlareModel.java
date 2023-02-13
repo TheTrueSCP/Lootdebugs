@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.the_goldbeards.lootdebugs.Entities.Tools.ShootFlareEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 public class ShootFlareModel<T extends ShootFlareEntity> extends HierarchicalModel<T> {

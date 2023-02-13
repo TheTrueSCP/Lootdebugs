@@ -1,24 +1,27 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery;
 
+import net.minecraft.commands.arguments.coordinates.Coordinates;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.FuelRefinery.ModFuelRefineryResultSlot;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.FuelRefinery.ModLiquidFuelSlot;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.FuelRefinery.ModSolidFuelSlot;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
 public class FuelRefineryContainer extends AbstractContainerMenu /*implements WorldlyContainer*/ {
 
-    public final FuelRefineryTile blockEntity;
+    public final FuelRefineryTile fuelRefineryTile;
     private final ContainerData data;
+    private final Level level;
+    private FluidStack fluidStack;
 
     //Transfer Stack in Slot Values
     private static final int HOTBAR_SLOT_COUNT = 9;
@@ -33,48 +36,50 @@ public class FuelRefineryContainer extends AbstractContainerMenu /*implements Wo
     private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
 
     public FuelRefineryContainer(int windowId, Inventory inv, FriendlyByteBuf extraData) {
-        this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(5));
+        this(windowId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
     public FuelRefineryContainer(int windowId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.FUEL_PRESS_CONTAINER.get(), windowId);
-        checkContainerSize(inv, 5);
-        blockEntity = ((FuelRefineryTile) entity);
+        super(ModMenuTypes.FUEL_REFINERY_CONTAINER.get(), windowId);
+        checkContainerSize(inv, TE_INVENTORY_SLOT_COUNT);
+        fuelRefineryTile = ((FuelRefineryTile) entity);
+        this.fluidStack = fuelRefineryTile.getFluidStack();
         this.data = data;
+        this.level = inv.player.level;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler ->
+        this.fuelRefineryTile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler ->
         {
-            this.addSlot(new ModFuelRefineryResultSlot(handler, 0, 124, 35));
-            this.addSlot(new ModLiquidFuelSlot(handler, 1, 30, 17));
-            this.addSlot(new ModLiquidFuelSlot(handler, 2, 48, 17));
-            this.addSlot(new ModSolidFuelSlot(handler, 3, 66, 17));
-            this.addSlot(new ModSolidFuelSlot(handler, 4, 86, 17));
+            this.addSlot(new ModFuelRefineryResultSlot(handler, 0, 132, 56));
+            this.addSlot(new ModLiquidFuelSlot(handler, 1, 21, 52));
+            this.addSlot(new ModLiquidFuelSlot(handler, 2, 46, 52));
+            this.addSlot(new ModSolidFuelSlot(handler, 3, 21, 16));
+            this.addSlot(new ModSolidFuelSlot(handler, 4, 46, 16));
         });
 
         addDataSlots(data);
     }
 
     public int getScaledProgress() {//Mixing Progress
-        int progress = this.data.get(2);
-        int maxProgress = this.data.get(3);  // Max Progress
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1);  // Max Progress
         int progressArrowSize = 79; // This is the width in pixels of your arrow
 
         return maxProgress  != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
 
+
+
     public int getScaledFluidLevel()
     {
-        int fuelAmount = this.data.get(0);
-        int maxFuelAmount = this.data.get(1);  // Max Progress
-        int progressArrowSize = 63; // This is the width in pixels of your arrow
+        int fuelAmount = this.data.get(2);
+        int maxFuelAmount = this.data.get(3);  // Max Progress
+        int progressArrowSize = 40; // This is the width in pixels of your arrow
 
         return maxFuelAmount != 0 && fuelAmount != 0 ? (fuelAmount * progressArrowSize / maxFuelAmount) : 0;
     }
-
-
 
 
     public boolean isCompressing()
@@ -118,26 +123,36 @@ public class FuelRefineryContainer extends AbstractContainerMenu /*implements Wo
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        //  return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-        //       pPlayer, ModBlocks.PUB.get());
-
-        return true;
+        return stillValid(ContainerLevelAccess.create(level, fuelRefineryTile.getBlockPos()),
+                pPlayer, ModBlocks.FUEL_REFINERY.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
     }
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
 
+    public void setFluid(FluidStack fluidStack) {
+        this.fluidStack = fluidStack;
+    }
 
+    public FuelRefineryTile getFuelRefineryTile()
+    {
+        return this.fuelRefineryTile;
+    }
+
+    public FluidStack getFluidStack()
+    {
+        return fluidStack;
+    }
 }
 

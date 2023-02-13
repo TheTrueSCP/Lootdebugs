@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.Button.LogicButton;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
-import net.the_goldbeards.lootdebugs.Server.PacketHandler;
-import net.the_goldbeards.lootdebugs.Server.TileEntity.Pub.BrewBeerPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
+import net.the_goldbeards.lootdebugs.Network.TileEntity.Pub.PubBrewBeerPacket;
 
 public class PubScreen extends AbstractContainerScreen<PubContainer> {
 
@@ -31,7 +31,7 @@ public class PubScreen extends AbstractContainerScreen<PubContainer> {
         super.init();
         this.addRenderableWidget(new LogicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
-            PacketHandler.sendToServer(new BrewBeerPacket(pubTile.getBlockPos()));
+            PacketHandler.sendToServer(new PubBrewBeerPacket(pubTile.getBlockPos()));
 
 
         }));

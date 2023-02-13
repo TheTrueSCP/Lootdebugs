@@ -24,9 +24,10 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/lootbugs" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="lootdebugs_logo.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks in particular to Ozensiz for providing some models" #optional
+credits="Thanks for playing our mod" #optional
 # A text field displayed in the mod UI
 authors='''
+
 The Goldbeards:
 
         Tim Macht (Programmer) aka TheTrueSCP
@@ -35,11 +36,10 @@ The Goldbeards:
 # The description text for the mod (multi line!) (#mandatory)
 description='''
      >>Disclaimer<<
-     !!!THIS IS AN EXPERIMENTAL BUILD AND FOR TEST PURPOSES ONLY, DO NOT USE THIS BUILD ON YOUR SAVES!!!
+     !!!THIS IS A EXPERIMENTAL BUILD AND FOR TEST PURPOSES ONLY, BACKUP YOUR SAVES BEFOR LOADING!!!
      !!!USING AT YOUR OWN RISK!!!
      This mod is still in development and not Complete yet!
-     This is still the beta phase of this mod, so there might still be some bugs, if you encounter any, please report the bug in the "Issues" tab or
-     contact The True SCP#5608 on Discord.
+     This is still the beta phase of this mod, so there might still be some bugs, if you encounter any, please report the bug in the "Issues" tab.
      Feedback of any kind can also be given in the comments or per Discord and is greatly appreciated.
      >>Disclaimer<<
 
@@ -47,14 +47,10 @@ description='''
      >>FAQ<<
 
      Can I include Lootdebugs in my Modpack?
-
      Of course, you playing the mod is nothing we wanna prevent
 
-
-
      Can Lootdebugs run on a Server?
-     
-      You bet your dwarven ass it can.
+     You bet your dwarven ass it can.
 
      >>FAQ<<
 
@@ -66,9 +62,9 @@ description='''
      Hello Lads,
      In this mod, we imported ores/minerals like Morkite or Nitra from the awesome game "Deep Rock Galactic" into Minecraft.
 
-     The highlight of this mod is that you can brew beers in a brewery (Lloyd) which have special effects just like in DRG. The recipes are the same as in drg exept a few Drinks. These Recipes are displayed in the Images-Tab Also, Lootbugs will now spawn within the world.
+     The highlight of this mod-update are the Tools which works mostly like in DRG. Additional to that there are many, maaany bugfixes and the beautiful cave generation from mincraft itself!
 
-     The ores (Nitra, Morkite, Red sugar), hops for brewing also generate in the world, just like Ommoran Heartstones and Pubs(These was a Structure generation test but i've forget to disable the generation in the 1.18 build :D).
+     The ores (Nitra, Morkite, Red sugar), hops for brewing also generate in the world, just like Ommoran Heartstones.
 
      Lastly, we have our four supported Languages:
      LOLCAT

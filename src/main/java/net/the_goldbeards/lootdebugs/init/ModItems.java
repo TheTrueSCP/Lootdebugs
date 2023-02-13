@@ -16,7 +16,10 @@ import net.the_goldbeards.lootdebugs.Items.Armor.ModGunnerMK1ArmorItem;
 import net.the_goldbeards.lootdebugs.Items.Armor.ModScoutMK1ArmorItem;
 import net.the_goldbeards.lootdebugs.Items.Drinks.*;
 import net.the_goldbeards.lootdebugs.Items.Food.RedSugarItem;
-import net.the_goldbeards.lootdebugs.Items.Fuel.*;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteBlockItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.OilShaleBlockItem;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModArmorMaterials;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModTiers;
 import net.the_goldbeards.lootdebugs.Items.Plants.ApocaBloomItem;
@@ -34,7 +37,9 @@ import net.the_goldbeards.lootdebugs.Items.Tools.Shield.ShieldItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Zipline.ZiplineItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
+
+import static net.minecraft.world.item.Items.BUCKET;
 
 public class ModItems
 {
@@ -51,14 +56,8 @@ public class ModItems
 public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
         () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> RICKROLL = ITEMS.register("rickroll",
-            () -> new RecordItem(1, ModSounds.RICKROLL, new Item.Properties()));
-
-    public static final RegistryObject<Item> DAFUCK = ITEMS.register("dafuck",
-            () -> new Item(new Item.Properties()));
-
     public static final RegistryObject<Item> MINING_SHANTY = ITEMS.register("mining_shanty",
-            () -> new RecordItem(3, ModSounds.MINING_SHANTY, new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new RecordItem(15, ModSounds.MINING_SHANTY, new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> JET = ITEMS.register("jet",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -73,20 +72,15 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> SHOOT_FLARE = ITEMS.register("shoot_flare",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> FUEL = ITEMS.register("fuel",
-            () -> new FuelItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
-
-    public static final RegistryObject<Item> EMPTY_FUEL_CANISTER = ITEMS.register("empty_fuel_canister",
-            () -> new EmptyFuelCanister(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
-
     public static final RegistryObject<Item> SHOOT_ZIPLINE = ITEMS.register("shoot_zipline",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
+    public static final RegistryObject<Item> FUEL = ITEMS.register("fuel",
+            () -> new FuelItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Buckets
     public static final RegistryObject<Item> LIQUID_MORKITE_BUCKET = ITEMS.register("liquid_morkite_bucket",
-            () -> new BucketItem(ModFluids.LIQUID_MORKITE,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
-
+            () -> new BucketItem(ModFluids.LIQUID_MORKITE, new Item.Properties().craftRemainder(BUCKET).stacksTo(1).tab(ModGroup.LOOTDEBUGS_TAB)));
 
 
     //Nothing
@@ -96,7 +90,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
     //Tools
     public static final RegistryObject<Item> COMPANY_STANDARD_PICKAXE = ITEMS.register("company_standard_pickaxe",
-            () -> new CompanyPickAxeItem(ModTiers.COMPANY_STANDARD,3,4,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new CompanyPickAxeItem(ModTiers.COMPANY_STANDARD,3,4, new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> DRILLS = ITEMS.register("drills",
             () -> new DrillsItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -124,7 +118,6 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
     public static final RegistryObject<Item> ZIPLINE = ITEMS.register("zipline",
             () -> new ZiplineItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
-
 
 
     //Toolparts

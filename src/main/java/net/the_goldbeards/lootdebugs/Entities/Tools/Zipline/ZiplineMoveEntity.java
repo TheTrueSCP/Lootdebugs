@@ -1,7 +1,6 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools.Zipline;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.TextComponent;
@@ -13,8 +12,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.Mod;
 import net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 
 import static net.minecraft.world.phys.Vec3.ZERO;
@@ -35,15 +40,8 @@ public class ZiplineMoveEntity extends Entity
         this(ModEntities.ZIPLINE_MOVE_ENTITY.get(), p_36960_);
         this.setPos(startPos.getX(), startPos.getY(), startPos.getZ());
 
-        Vec3 moveVec = new Vec3((startPos.getX() - targetPos.getX()) * -1, (startPos.getY() - targetPos.getY()) * -1, (startPos.getZ() - targetPos.getZ()) * -1);
-
-
-        BlockPos offsetPos = getEntityOffsetRegardingMoveVector(startPos, moveVec);
-
-        this.setPos(offsetPos.getX(), offsetPos.getY(), offsetPos.getZ());
-
-        this.startPos = startPos;
-        this.targetPos = targetPos;
+        this.startPos = startPos.below(1);
+        this.targetPos = targetPos.below(1);
     }
 
     protected void defineSynchedData()
@@ -58,6 +56,8 @@ public class ZiplineMoveEntity extends Entity
         double d1 = this.getY() + vec3.y;
         double d2 = this.getZ() + vec3.z;
         double d3 = vec3.horizontalDistance();
+
+        tryCheckInsideBlocks();
 
         this.setXRot(lerpRotation(this.xRotO, (float) (Mth.atan2(vec3.y, d3) * (double) (180F / (float) Math.PI))));
         this.setYRot(lerpRotation(this.yRotO, (float) (Mth.atan2(vec3.x, vec3.z) * (double) (180F / (float) Math.PI))));
@@ -75,25 +75,6 @@ public class ZiplineMoveEntity extends Entity
 
             }
 
-            if(this.getFirstPassenger() != null)
-            {
-                if(this.getFirstPassenger() instanceof Player player)
-                {
-                    String key = ModClientEventBusSubscriber.CHANGE_DIRECTION.getKey().toString().substring(ModClientEventBusSubscriber.CHANGE_DIRECTION.getKey().toString().length() - 1);
-
-                    if(key.equals("y"))
-                    {
-                        key = "z";
-                    }
-
-                    if(key.equals("z"))
-                    {
-                        key = "y";
-                    }
-                    player.displayClientMessage(new TextComponent(new TranslatableComponent("entity.zipline_move.change_direction.1").getString() + " " + key + " " + new TranslatableComponent("entity.zipline_move.change_direction.2").getString()), true);
-                }
-            }
-
             if(targetPos != null)
             {
                 vec3 = new Vec3((this.blockPosition().getX() - targetPos.getX()) * -1, (this.blockPosition().getY() - targetPos.getY()) * -1, (this.blockPosition().getZ() - targetPos.getZ()) * -1);
@@ -108,8 +89,34 @@ public class ZiplineMoveEntity extends Entity
         else
         {
             this.setPosRaw(d0, d1, d2);
+
+            displayChangeDirectionKey();
         }
 
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void displayChangeDirectionKey()
+    {
+        if(this.getFirstPassenger() != null)
+        {
+            if(this.getFirstPassenger() instanceof Player player)
+            {
+                String key = ModClientEventBusSubscriber.CHANGE_DIRECTION.getKey().toString();
+                String endKey = key.substring(key.length() - 1);
+
+                if(endKey.equals("z"))
+                {
+                    endKey = "y";
+                }
+
+                else if(endKey.equals("y"))
+                {
+                    endKey = "z";
+                }
+                player.displayClientMessage(new TextComponent(new TranslatableComponent("entity.zipline_move.change_direction.1").getString() + " " + endKey + " " + new TranslatableComponent("entity.zipline_move.change_direction.2").getString()), true);
+            }
+        }
     }
 
 
@@ -129,7 +136,7 @@ public class ZiplineMoveEntity extends Entity
 
         if (pCompound.contains("StartPos"))
         {
-            this.targetPos = NbtUtils.readBlockPos(pCompound.getCompound("StartPos"));
+            this.startPos = NbtUtils.readBlockPos(pCompound.getCompound("StartPos"));
         }
     }
 
@@ -140,15 +147,15 @@ public class ZiplineMoveEntity extends Entity
 
         if(input.y() < 1)
         {
-            return normalizeTo(input, 0.5f);
+            return normalizeTo(input, 0.35f);
         }
         else  if(input.y() > 0)
         {
-            return normalizeTo(input, 0.2f);
+            return normalizeTo(input, 0.1f);
         }
         else
         {
-            return normalizeTo(input, 0.3f);
+            return normalizeTo(input, 0.2f);
         }
     }
 
@@ -168,39 +175,12 @@ public class ZiplineMoveEntity extends Entity
         startPos = targetTemp;
     }
 
-    //sets the offset regarding the move vec
-    private BlockPos getEntityOffsetRegardingMoveVector(BlockPos pos, Vec3 addVec)
-    {
-        if(getLongestSide(addVec) == Direction.Axis.X)
-        {
-            return new BlockPos(pos.getX() + 2, pos.getY(), pos.getZ());
-        }
-        else if(getLongestSide(addVec) == Direction.Axis.Z)
-        {
-            return new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 2);
-        }
-
-        return pos;
-    }
-
-    private Direction.Axis getLongestSide(Vec3 vec3)
-    {
-        if(vec3.x < vec3.z)
-        {
-            return Direction.Axis.Z;
-        }
-        else
-        {
-            return Direction.Axis.X;
-        }
-    }
-
     //Entity Stuff
 
     @Override
     public double getPassengersRidingOffset() {
 
-        return super.getPassengersRidingOffset() - 1.5;
+        return super.getPassengersRidingOffset() - 1;
     }
 
     public void lerpMotion(double pX, double pY, double pZ) {
@@ -247,5 +227,15 @@ public class ZiplineMoveEntity extends Entity
         }
 
         return Mth.lerp(0.2F, p_37274_, p_37275_);
+    }
+
+    @Override
+    protected void onInsideBlock(BlockState pState)
+    {
+        if(pState.getBlock() != Blocks.AIR && pState.getBlock() != ModBlocks.ZIPLINE_BLOCK.get())
+        {
+            this.discard();
+        }
+        super.onInsideBlock(pState);
     }
 }

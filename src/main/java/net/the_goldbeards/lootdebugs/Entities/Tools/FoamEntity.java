@@ -142,12 +142,12 @@ public class FoamEntity extends ThrowableProjectile {
         placeBlock(pPos, level, mkII);
     }
 
-    private static void placeBlock(BlockPos pPos, Level pLevel, boolean mkII)
+    private void placeBlock(BlockPos pPos, Level pLevel, boolean mkII)
     {
         if (pLevel.isEmptyBlock(pPos)|| pLevel.getBlockState(pPos).is(ModTags.Blocks.PLATFORMGUN_REPLACEABLE_BLOCKS))
         {
 
-            if(pLevel.getEntities(null, new AABB(pPos)).isEmpty() || pLevel.getEntities(null, new AABB(pPos)).contains(FoamEntity.class))
+            if(pLevel.getEntities(this, new AABB(pPos)).isEmpty() || pLevel.getEntities(this, new AABB(pPos)).contains(this))
             {
                 if (mkII)
                 {

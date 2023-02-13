@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.the_goldbeards.lootdebugs.Entities.Tools.ShieldEntity;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
@@ -36,28 +35,14 @@ public class ShieldItem extends BlockItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if(pEntity instanceof Player pPlayer)
-        {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack,"shield_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-
-        }
-
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected)
+    {
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "shield_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
             }
-
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
@@ -67,7 +52,7 @@ public class ShieldItem extends BlockItem {
 
         ItemStack pUsedStack = pContext.getItemInHand();
 
-        if(!pUsedStack.getTag().getString("shield_dwarfclass").equals(dwarfClassToUse.name()))
+        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pContext.getPlayer(), dwarfClassToUse))
         {
             return InteractionResult.FAIL;
         }
@@ -145,7 +130,7 @@ public class ShieldItem extends BlockItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
 
-        if(!itemInHand.getTag().getString("shield_dwarfclass").equals(dwarfClassToUse.name()))
+        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(itemInHand, pPlayer, dwarfClassToUse))
         {
             return InteractionResultHolder.pass(itemInHand);
         }

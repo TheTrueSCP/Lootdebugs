@@ -3,12 +3,16 @@ package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.*;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModResultSlot;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModSlot;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
 public class EquipmentTableContainer extends AbstractContainerMenu {
 
@@ -91,7 +95,8 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return true;
+        return stillValid(ContainerLevelAccess.create(pPlayer.getLevel(), blockEntity.getBlockPos()),
+                pPlayer, ModBlocks.EQUIPMENT_TABLE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

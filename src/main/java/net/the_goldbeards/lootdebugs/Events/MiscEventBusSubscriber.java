@@ -17,10 +17,10 @@ import net.minecraftforge.network.PacketDistributor;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
-import net.the_goldbeards.lootdebugs.Server.ChangeClass.PlayerClassSyncPacket;
-import net.the_goldbeards.lootdebugs.Server.Flare.FlareCountSyncPacket;
-import net.the_goldbeards.lootdebugs.Server.PacketHandler;
-import net.the_goldbeards.lootdebugs.Server.RockAndStone.RockAndStoneSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.PlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.Flare.FlareCountSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.RockAndStone.RockAndStoneSyncPacket;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
@@ -28,7 +28,6 @@ import net.the_goldbeards.lootdebugs.capability.Flare.IFlareData;
 import net.the_goldbeards.lootdebugs.capability.Salute.ISaluteData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
-import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
 import net.the_goldbeards.lootdebugs.world.LootModifierer.OmmoranLocatorFromVillageChest;
 
 import javax.annotation.Nonnull;
@@ -110,7 +109,7 @@ public class MiscEventBusSubscriber
             if (event.side.isServer() && event.phase.equals(TickEvent.Phase.START))
                 event.player.getCapability(FlareDataCap.FLARE_DATA).ifPresent(flareCap -> {
                     int storedFlares = flareCap.getStoredFlares();
-                    int maxFlares = LootdebugsConfig.MAX_FLARE_AMOUNT.get();
+                    int maxFlares = 4;
 
                     if (event.player.isCreative() || (event.player.isSpectator() && flareCap.getStoredFlares() != maxFlares)) {
                         flareCap.setStoredFlares(maxFlares);
@@ -121,7 +120,7 @@ public class MiscEventBusSubscriber
                     }
 
 
-                    if (flareCap.getReplenishTickCounter() >= LootdebugsConfig.FLARE_GENERATION_TIME.get() && storedFlares < maxFlares) {
+                    if (flareCap.getReplenishTickCounter() >= 240 && storedFlares < maxFlares) {
                         int totalFlares = storedFlares + 1;
 
                         flareCap.setStoredFlares(totalFlares);
@@ -129,7 +128,7 @@ public class MiscEventBusSubscriber
                         flareCap.setReplenishTickCounter(0);
                     }
 
-                    if (flareCap.getStoredFlares() == LootdebugsConfig.MAX_FLARE_AMOUNT.get()) {
+                    if (flareCap.getStoredFlares() == maxFlares) {
                         flareCap.setReplenishTickCounter(0);
                     }
 

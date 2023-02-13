@@ -38,17 +38,17 @@ public class JEILootdebugsPlugin implements IModPlugin {
 
 
         List<EquipmentTableRecipe> recipes = rm.getAllRecipesFor(EquipmentTableRecipe.Type.INSTANCE);
-        registration.addRecipes(new RecipeType<>(EquipmentTableRecipeCategory.UID,EquipmentTableRecipe.class), recipes);
+        registration.addRecipes(new RecipeType<>(EquipmentTableRecipeCategory.UID, EquipmentTableRecipe.class), recipes);
 
         List<PubRecipe> recipes1 = rm.getAllRecipesFor(PubRecipe.Type.INSTANCE);
-        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID,PubRecipe.class), recipes1);
+        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID, PubRecipe.class), recipes1);
 
     }
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         //registration.addRecipeTransferHandler(EquipmentTableContainer.class, new RecipeType<>(EquipmentTableRecipeCategory.UID,EquipmentTableRecipe.class), 1, 9, 10, 36);
-      //  registration.addRecipeTransferHandler(PubContainer.class, new RecipeType<>(PubRecipeCategory.UID,PubRecipe.class), 0, 6, 7, 36);
+        // registration.addRecipeTransferHandler(new PubRecipeTransferHandler(),  new RecipeType<>(PubRecipeCategory.UID, PubRecipe.class));
 
     }
 }

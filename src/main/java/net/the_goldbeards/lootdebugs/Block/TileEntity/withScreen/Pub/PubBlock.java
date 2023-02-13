@@ -28,9 +28,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
-import net.the_goldbeards.lootdebugs.Server.PacketHandler;
-import net.the_goldbeards.lootdebugs.Server.TileEntity.Pub.BrewBeerPacket;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
+import net.the_goldbeards.lootdebugs.Network.TileEntity.Pub.PubBrewBeerPacket;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class PubBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
@@ -253,17 +254,19 @@ public class PubBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof PubTile pubTile)
             {
-                pubTile.setRemoved();
                 ((PubTile) blockEntity).drops();
+                pLevel.removeBlockEntity(pPos);
+                pLevel.removeBlock(pPos, false);
             }
         }
     }
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        pLevel.playSound(pPlayer,pPos, ModSounds.LLOYD_INTERACTION.get(), SoundSource.BLOCKS,1,1);
 
-        if (!pLevel.isClientSide()) {
+        if (!pLevel.isClientSide())
+        {
+            pLevel.playSound(null, pPos, ModSounds.LLOYD_INTERACTION.get(), SoundSource.BLOCKS,1,1);
 
             BlockEntity entity = pLevel.getBlockEntity(pPos);
 
@@ -290,14 +293,8 @@ public class PubBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
        {
-           if (pLevel.isClientSide()) {
-               return null;
-           }
-           return (lvl, pos, blockState, t) -> {
-               if (t instanceof PubTile BE) {
-                   BE.tick(pLevel, pos, blockState, BE);
-               }
-           };
+           return createTickerHelper(pBlockEntityType, ModTileEntities.PUB_BLOCK_ENTITY.get(),
+                   PubTile::tick);
        }
     }
 
@@ -305,7 +302,7 @@ public class PubBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
                     if (!pLevel.isClientSide) {
 
                         if (pLevel.hasNeighborSignal(pPos)) {
-                            PacketHandler.sendToServer(new BrewBeerPacket(pPos));
+                            PacketHandler.sendToServer(new PubBrewBeerPacket(pPos));
             }
 
         }

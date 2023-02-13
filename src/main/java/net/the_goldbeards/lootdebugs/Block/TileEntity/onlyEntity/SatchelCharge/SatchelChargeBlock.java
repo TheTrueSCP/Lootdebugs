@@ -298,18 +298,6 @@ public class SatchelChargeBlock extends BaseEntityBlock {
     }
 
 
-    //Redstone
-
-    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
-        if (!pLevel.isClientSide) {
-           if(pLevel.hasNeighborSignal(pPos))
-           {
-               pLevel.setBlock(pPos, pState.setValue(ACTIVATED, true), 2);
-           }
-
-        }
-    }
-
     public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRand) {
         if (pState.getValue(ACTIVATED) && !pLevel.hasNeighborSignal(pPos)) {
             pLevel.setBlock(pPos, pState.cycle(ACTIVATED), 2);

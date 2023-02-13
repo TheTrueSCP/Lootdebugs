@@ -16,12 +16,7 @@ public class FreezeEffect extends MobEffect
         super.applyEffectTick(pLivingEntity, pAmplifier);
         pLivingEntity.setTicksFrozen(20);
 
-        Vec3 deltaMovement = pLivingEntity.getDeltaMovement();
-
-        if(deltaMovement.y > 0)
-        {
-            pLivingEntity.setDeltaMovement(deltaMovement.x, -9000, deltaMovement.y);
-        }
+        pLivingEntity.setDeltaMovement(Vec3.ZERO);
     }
 
 

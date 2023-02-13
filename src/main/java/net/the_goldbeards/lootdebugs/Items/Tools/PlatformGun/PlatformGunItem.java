@@ -13,8 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.FoamEntity;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
@@ -22,10 +22,9 @@ import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import java.util.function.Predicate;
 
 
-public class PlatformGunItem extends Item {
+public class PlatformGunItem extends BasicToolItem
+{
 
-
-    public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Engineer;
 
     public static final Predicate<ItemStack> FOAM = (p_43017_) -> {
         return p_43017_.is(ModItems.FOAM.get());
@@ -41,50 +40,24 @@ public class PlatformGunItem extends Item {
         super(properties);
     }
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.NONE;
-    }
 
     @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if(pEntity instanceof Player pPlayer)
-        {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack,"platform_gun_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-
-        }
-
-        if(pEntity instanceof Player player && pIsSelected)
-        {
-            if(UsefullStuff.ItemNBTHelper.getString(pStack,"platform_gun_dwarfclass") != dwarfClassToUse.name()) //TheTrueSCP
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-            }
-
-        }
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    public IClassData.Classes getDwarfClassToUse() {
+        return IClassData.Classes.Engineer;
     }
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
 
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
-        if(pUsedStack.getTag().getString("platform_gun_dwarfclass") != dwarfClassToUse.name())
+        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse()))
         {
             return InteractionResultHolder.pass(pUsedStack);
         }
 
         ItemStack foam = getAmmo(pPlayer);
 
-        pPlayer.getCooldowns().addCooldown(this, 20);
+        pPlayer.getCooldowns().addCooldown(this, 15);
         if (!foam.isEmpty()  || pPlayer.isCreative()) {
 
             FoamEntity foamEntity = new FoamEntity(pPlayer, pLevel);
@@ -99,7 +72,6 @@ public class PlatformGunItem extends Item {
             if (foam.isEmpty()) {
                 pPlayer.getInventory().removeItem(foam);
             }
-            pUsedStack.releaseUsing(pLevel,pPlayer , 0);
 
         }
         else
@@ -108,8 +80,8 @@ public class PlatformGunItem extends Item {
             pPlayer.playSound(SoundEvents.DISPENSER_FAIL, 1, 1);
         }
 
-
-        return InteractionResultHolder.consume(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
+        pUsedStack.releaseUsing(pLevel,pPlayer , 0);
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
     }
 
     public ItemStack getAmmo(Player player) {

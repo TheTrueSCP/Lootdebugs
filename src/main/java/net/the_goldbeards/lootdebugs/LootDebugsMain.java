@@ -1,9 +1,10 @@
 package net.the_goldbeards.lootdebugs;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -16,8 +17,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
-import net.the_goldbeards.lootdebugs.Server.PacketHandler;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.BeardSlot.BeardSlotCap;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
@@ -25,7 +26,8 @@ import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
-import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
+import net.the_goldbeards.lootdebugs.util.BetterBrewingRecipe;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +36,6 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber
 public class LootDebugsMain
 {
-    ResourceLocation rl = new ResourceLocation("minecraft", "textures/gui/recipe_book.png");
     public static final String MOD_ID = "lootdebugs";
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
@@ -59,7 +60,9 @@ public class LootDebugsMain
 
 
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LootdebugsConfig.SPEC, "lootdebugs_config.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, LootdebugsServerConfig.SPEC, "lootdebugs_config-server.toml");
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, LootdebugsClientConfig.SPEC, "lootdebugs_config-client.toml");
+       // ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, LootdebugsCommonConfig.SPEC, "lootdebugs_config-common.toml");
 
 
         PacketHandler.register();
@@ -91,11 +94,11 @@ public class LootDebugsMain
         SpawnPlacements.register(ModEntities.LOOTBUG_GOLDEN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LootbugGoldenEntity::checkLootbugGoldenSpawnRules);
         SpawnPlacements.register(ModEntities.LOOTBUG_OLD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LootbugOldEntity::checkLootbugOldSpawnRules);
 
-       /* event.enqueueWork(() -> {
+        event.enqueueWork(() -> {
 
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.WATER,
                     ModItems.GLYPHID_SLAMMER.get(), ModPotions.DRUNKNESS_POTION.get()));
-        });*/
+        });
     }
 
 

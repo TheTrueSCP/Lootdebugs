@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -30,17 +32,15 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.ForgeHooks;
 import net.the_goldbeards.lootdebugs.Items.Tools.FuelDiggingItem;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class DrillsItem extends FuelDiggingItem
 {
-
-
-	public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Driller;
 	public DrillsItem(Properties pProperties) {
 		super(pProperties);
 	}
@@ -58,68 +58,38 @@ public class DrillsItem extends FuelDiggingItem
 		return super.use(pLevel, pPlayer, pUsedHand);
 	}
 
-
-
-
 	@Override
-	public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-		//Dwarfclass
-
-		if(pEntity instanceof Player pPlayer)
-		{
-			pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-			{
-
-				UsefullStuff.ItemNBTHelper.putString(pStack,"drills_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-			});
-
-		}
-
+	public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected)
+	{
 		//Have Fuel in Inv
 		if(pEntity instanceof Player player)
 		{
-			UsefullStuff.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveFuelFromItem(pStack, player));
+			UsefullStuff.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveUseableFuel(pStack, player));
 
-		}
-
-		if(pEntity instanceof Player player && pIsSelected)
-		{
-			if(!UsefullStuff.ItemNBTHelper.getString(pStack, "drills_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
+			if(pIsSelected)
 			{
-				player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-
+				if(!haveFuel(pStack))
+				{
+					player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.no_fuel").getString()), true);
+				}
 			}
-
-			if(!haveFuelFromItem(pStack, player))
-			{
-				player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.no_fuel").getString()), true);
-			}
-
 		}
-
-
-
 
 		super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
 	}
 
 	@Override
-	public boolean onBlockStartBreak(ItemStack stack, BlockPos ipos, Player player) {//check if the tool can Break extra blocks
+	public IClassData.Classes getDwarfClassToUse()
+	{
+		return IClassData.Classes.Driller;
+	}
 
+	@Override
+	public boolean onBlockStartBreak(ItemStack stack, BlockPos ipos, Player player) {//check if the tool can Break extra blocks
 
 		Level world = player.level;
 		// early exit for client
 		if(world.isClientSide||!(player instanceof ServerPlayer))
-		{
-			return false;
-		}
-
-
-
-		// if sneaking or toggled, don't multi-mine
-		if(player.isShiftKeyDown())
 		{
 			return false;
 		}
@@ -129,7 +99,13 @@ public class DrillsItem extends FuelDiggingItem
 
 		//Cancel if player have no fuel in inventory or is not the right dwarfclass
 
-		if (!canToolBeUsed(stack) || !haveFuel(stack)) {
+		if (!canToolBeUsed(stack, player))
+		{
+			return false;
+		}
+
+		if(!haveFuel(stack) && !player.getAbilities().instabuild)
+		{
 			return false;
 		}
 
@@ -164,11 +140,12 @@ public class DrillsItem extends FuelDiggingItem
 			if(!state.isAir() && state.getDestroyProgress(player, world, pos) != 0)
 			{
 
-				if (stack.getItem() instanceof DrillsItem && haveFuelFromItem(stack, player) && canToolBeUsed(stack)) {
-					UsefullStuff.ItemHelpers.rotateDrills(world, stack);//Play Anim
+				if (stack.getItem() instanceof DrillsItem && haveFuel(stack) && canToolBeUsed(stack, player)) {
+					UsefullStuff.ItemNBTHelper.rotateDrills(world, stack);//Play Anim
 				}
 
 				int xpDropEvent = ForgeHooks.onBlockBreakEvent(world, ((ServerPlayer)player).gameMode.getGameModeForPlayer(), (ServerPlayer)player, pos);
+				if(xpDropEvent < 0)
 				if(xpDropEvent < 0)
 					continue;
 
@@ -203,9 +180,17 @@ public class DrillsItem extends FuelDiggingItem
 
 	}
 
+	public boolean canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
+	{
+		return UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse());
+	}
+
+	/**
+	 * only use when you alreay saved the playerclass into the stack == if you called canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
+	 */
 	public boolean canToolBeUsed(ItemStack pUsedStack)
 	{
-		return UsefullStuff.ItemNBTHelper.getString(pUsedStack, "drills_dwarfclass").equals(dwarfClassToUse.name());//you can only use the tool if you are the right dwarf
+		return UsefullStuff.DwarfClasses.canItemBeUsed(pUsedStack, getDwarfClassToUse());
 	}
 
 	@Override
@@ -218,7 +203,9 @@ public class DrillsItem extends FuelDiggingItem
 				if(living instanceof Player)
 				{
 					if(((Player)living).getAbilities().instabuild)
+					{
 						return true;
+					}
 					((DrillsItem)stack.getItem()).afterBlockbreak(stack, (Player)living, pos, world);
 				}
 				if(living instanceof Player player)
@@ -324,11 +311,14 @@ public class DrillsItem extends FuelDiggingItem
 
 
 	//Do not use this, use haveFuel Instead
-	private boolean haveFuelFromItem(ItemStack pStack, Player pPlayer)
+	private boolean haveUseableFuel(ItemStack pStack, Player pPlayer)
 	{
 		if(pStack.getItem() instanceof DrillsItem)
 		{
-			return !getInventoryFuel(pPlayer, FUEL).isEmpty();
+			if(!getUsableInventoryFuel(pPlayer, FUEL).isEmpty())
+			{
+				return true;
+			}
 		}
 		return false;
 	}
@@ -360,7 +350,20 @@ public class DrillsItem extends FuelDiggingItem
 	}
 
 	@Override
+	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+
+		pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.drills.on_block_drill_mode"));
+
+		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+	}
+
+	@Override
 	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
 		return false;
+	}
+
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return 1;
 	}
 }

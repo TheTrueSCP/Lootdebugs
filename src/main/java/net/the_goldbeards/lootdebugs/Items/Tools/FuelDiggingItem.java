@@ -11,7 +11,7 @@ import net.the_goldbeards.lootdebugs.init.ModItems;
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
-public abstract class FuelDiggingItem extends FuelConsumItem {
+public abstract class FuelDiggingItem extends FuelConsumeItem {
 
     public static final Predicate<ItemStack> FUEL = (p_43017_) -> {
         return p_43017_.is(ModItems.FUEL.get());

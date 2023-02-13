@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lootdebugs:mining_shanty",
-    "lootdebugs:rickroll"
+    "lootdebugs:mining_shanty"
   ]
 }

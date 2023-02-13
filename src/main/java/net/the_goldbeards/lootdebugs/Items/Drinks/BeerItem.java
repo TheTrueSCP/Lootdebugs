@@ -71,7 +71,7 @@ public abstract class BeerItem extends BlockItem
     {
         if(!livingEntity.hasEffect(ModEffects.DRUNKNESS.get()))
         {
-            return -1;//Safty: IF the player hasnt the effect, return -1
+            return -1;//Safety: IF the player hasnt the effect, return -1
         }
         return livingEntity.getEffect(ModEffects.DRUNKNESS.get()).getAmplifier();//instead, return the Amp
     }
@@ -84,7 +84,6 @@ public abstract class BeerItem extends BlockItem
     {
         //Overrideable void to add effects
     }
-
 
     //Default Beer Stuff
     @Override

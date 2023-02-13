@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 public class EquipmentTableBlock extends BaseEntityBlock  {
@@ -562,6 +562,8 @@ public class EquipmentTableBlock extends BaseEntityBlock  {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof EquipmentTableTile) {
                 ((EquipmentTableTile) blockEntity).drops();
+                pLevel.removeBlockEntity(pPos);
+                pLevel.removeBlock(pPos, false);
             }
         }
         super.onRemove(pState,pLevel,pPos,pNewState,pIsMoving);

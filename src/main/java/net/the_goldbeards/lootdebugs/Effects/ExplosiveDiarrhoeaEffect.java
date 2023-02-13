@@ -1,12 +1,12 @@
 package net.the_goldbeards.lootdebugs.Effects;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -30,11 +30,11 @@ public class ExplosiveDiarrhoeaEffect extends MobEffect {
         if(randValue == 11)
         {
 
-                level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
-                level.playSound((Player) pLivingEntity, entityPos.x(), entityPos.y(), entityPos.z(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1,1);
+            Minecraft.getInstance().level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
+            level.playSound(null, entityPos.x(), entityPos.y(), entityPos.z(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1,1);
 
-                Vec3 randMove = new Vec3(rand.nextInt(2),rand.nextInt(3),rand.nextInt(2));//Set Random numbers for move
-                pLivingEntity.setDeltaMovement(randMove);
+            Vec3 randMove = new Vec3(rand.nextInt(2),rand.nextInt(1,3),rand.nextInt(2));//Set Random numbers for move
+            pLivingEntity.setDeltaMovement(randMove);
 
 
         }

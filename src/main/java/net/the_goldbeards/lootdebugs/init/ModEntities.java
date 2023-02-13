@@ -10,7 +10,10 @@ import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.FlareEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.*;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.BulletEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineMoveEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
@@ -59,7 +62,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<ZiplineStringAnchor>> STRING_ANCHOR_ENTITY =
             ENTITY_TYPES.register("zipline_anchor", () -> EntityType.Builder.<ZiplineStringAnchor>of(ZiplineStringAnchor::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline_anchor").toString()));
 
-
+    public static final RegistryObject<EntityType<BulletEntity>> BULLET_ENTITY =
+            ENTITY_TYPES.register("bullet", () -> EntityType.Builder.<BulletEntity>of(BulletEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "bullet").toString()));
 
 
 

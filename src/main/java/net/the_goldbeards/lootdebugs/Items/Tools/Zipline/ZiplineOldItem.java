@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 @Deprecated(forRemoval = true, since = "2.1")
@@ -78,9 +77,9 @@ public class ZiplineOldItem extends Item
 
         if(!UsefullStuff.ItemNBTHelper.getBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond"))
         {
-            ZiplineEntity ziplineEntityFirst = new ZiplineEntity(pPlayer, pLevel, null, false, ziplineItemStack);
-            ziplineEntityFirst.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
-            pLevel.addFreshEntity(ziplineEntityFirst);
+          //  ZiplineEntity ziplineEntityFirst = new ZiplineEntity(pPlayer, pLevel, null, false, ziplineItemStack);
+          //  ziplineEntityFirst.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
+         //   pLevel.addFreshEntity(ziplineEntityFirst);
             UsefullStuff.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", true);
         }
         else
@@ -92,9 +91,9 @@ public class ZiplineOldItem extends Item
                 BlockPos linkedBlockPos = new BlockPos(UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.x"), UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.y"), UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.z"));//create blockpos
 
                 if(pPlayer.blockPosition().closerThan(linkedBlockPos, 31D)) {
-                    ZiplineEntity ziplineEntitySecond = new ZiplineEntity(pPlayer, pLevel, linkedBlockPos, true, ziplineItemStack);//enable linking with secondPlace and give linking coords.
-                    ziplineEntitySecond.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
-                    pLevel.addFreshEntity(ziplineEntitySecond);
+                //    ZiplineEntity ziplineEntitySecond = new ZiplineEntity(pPlayer, pLevel, linkedBlockPos, true, ziplineItemStack);//enable linking with secondPlace and give linking coords.
+                //    ziplineEntitySecond.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
+                //    pLevel.addFreshEntity(ziplineEntitySecond);
                     UsefullStuff.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", false);
                 }
             }

@@ -31,7 +31,7 @@ public class BeardSlotContainer extends AbstractContainerMenu {
 
 
     public BeardSlotContainer(int windowId, Player player) {
-        super(ModMenuTypes.CLASS_CHANGE_CONTAINER.get(), windowId);
+        super(ModMenuTypes.CLASS_CHANGER_CONTAINER.get(), windowId);
 
 
 

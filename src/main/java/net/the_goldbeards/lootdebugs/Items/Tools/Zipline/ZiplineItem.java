@@ -15,17 +15,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 import java.util.function.Predicate;
 
-public class ZiplineItem extends Item
+public class ZiplineItem extends BasicToolItem
 {
-    public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Gunner;
 
     public ZiplineItem(Properties pProperties)
     {
@@ -37,40 +36,8 @@ public class ZiplineItem extends Item
     };
 
     @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return 1;
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.NONE;
-    }
-
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if(pEntity instanceof Player pPlayer)
-        {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack,"flare_gun_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-
-        }
-
-        if(pEntity instanceof Player player && pIsSelected)
-        {
-            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-            }
-
-        }
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    public IClassData.Classes getDwarfClassToUse() {
+        return IClassData.Classes.Gunner;
     }
 
 
@@ -81,19 +48,20 @@ public class ZiplineItem extends Item
 
         ItemStack pUsedStack = pPlayer.getItemInHand(pUsedHand);
 
-        if (!UsefullStuff.ItemNBTHelper.getString(pUsedStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) {
+        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse())) {
             return InteractionResultHolder.pass(pUsedStack);
         }
 
         ItemStack zipline = getAmmo(pPlayer);
 
-        if(pPlayer.isOnGround())
+        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(2)) && linkPos != null)
         {
             if (!zipline.isEmpty() || pPlayer.isCreative())
             {
                 pPlayer.getCooldowns().addCooldown(this, 28);
 
-                ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos.above(1));
+                //Shoots zipline entity with blocklink to current player pos
+                ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos);
                 ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 5.0F, 0.0F);
                 pLevel.addFreshEntity(ziplineEntity);
 
@@ -104,7 +72,8 @@ public class ZiplineItem extends Item
 
                 }
 
-                if (zipline.isEmpty()) {
+                if (zipline.isEmpty())
+                {
                     pPlayer.getInventory().removeItem(zipline);
                 }
             }

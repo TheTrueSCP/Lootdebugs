@@ -1,17 +1,21 @@
 package net.the_goldbeards.lootdebugs.Events;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -29,25 +33,28 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.gui.GuiUtils;
 import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeScreen;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubScreen;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
-import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugGoldenRender;
-import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugOldRender;
-import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugRender;
+import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugGoldenRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugOldRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.*;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.BulletRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineMoveRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
+import net.the_goldbeards.lootdebugs.client.Render.TileEntities.ClassChangerRenderer;
 import net.the_goldbeards.lootdebugs.client.model.Armor.DrillerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.EngineerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.GunnerMK1ArmorModel;
@@ -56,6 +63,7 @@ import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugOldModel;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.*;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
+import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import org.lwjgl.glfw.GLFW;
@@ -71,12 +79,14 @@ public class ModClientEventBusSubscriber
     public static final KeyMapping CHANGE_DIRECTION = new KeyMapping("lootdebugs.key.zipline.change_direction", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, "keyGroup.lootdebugs");
 
 
+    private static final ResourceLocation NAUSEA_LOCATION = new ResourceLocation("textures/misc/nausea.png");
+
     public static final ResourceLocation drunknessOverlay = new ResourceLocation("lootdebugs", "textures/gui/drunkness_overlay.png");
     public static Player getPlayer()
     {
         return Minecraft.getInstance().player;
     }
-    
+
 
     //Register
     @SubscribeEvent
@@ -98,9 +108,15 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.ZIPLINE_MOVE_ENTITY.get(), ZiplineMoveRender::new);
         event.registerEntityRenderer(ModEntities.ZIPLINE_ENTITY.get(), ZiplineRender::new);
         event.registerEntityRenderer(ModEntities.STRING_ANCHOR_ENTITY.get(), ZiplineStringRender::new);
+        event.registerEntityRenderer(ModEntities.BULLET_ENTITY.get(), BulletRender::new);
+
 
         //Weapons
         event.registerEntityRenderer(ModEntities.SATCHEL_CHARGE.get(), SatchelChargeRender::new);
+
+        //TileEntities
+
+        event.registerBlockEntityRenderer(ModTileEntities.CLASS_CHANGER_ENTITY.get(), ClassChangerRenderer::new);
 
     }
 
@@ -145,8 +161,8 @@ public class ModClientEventBusSubscriber
     {
         MenuScreens.register(ModMenuTypes.PUB_CONTAINER.get(), PubScreen::new);
         MenuScreens.register(ModMenuTypes.EQUIPMENT_TERMINAL_CONTAINER.get(), EquipmentTableScreen::new);
-        MenuScreens.register(ModMenuTypes.FUEL_PRESS_CONTAINER.get(), FuelRefineryScreen::new);
-        MenuScreens.register(ModMenuTypes.CLASS_CHANGE_CONTAINER.get(), ClassChangeScreen::new);
+        MenuScreens.register(ModMenuTypes.FUEL_REFINERY_CONTAINER.get(), FuelRefineryScreen::new);
+        MenuScreens.register(ModMenuTypes.CLASS_CHANGER_CONTAINER.get(), ClassChangerScreen::new);
     }
 
     @SubscribeEvent
@@ -161,21 +177,57 @@ public class ModClientEventBusSubscriber
     @SubscribeEvent
     public static void renderDrunknessOverlay(FMLClientSetupEvent event)
     {
+
         IIngameOverlay MyHudOverlay = OverlayRegistry.registerOverlayTop("drunkness", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
-            if(Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()))
+
+            if (Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) && false )
             {
-                Minecraft minecraft = Minecraft.getInstance();
-                if (minecraft.gameMode == null) return;
+            float pScalar = (1.0F - Minecraft.getInstance().options.screenEffectScale);
+            Minecraft minecraft = Minecraft.getInstance();
+            int i = minecraft.getWindow().getGuiScaledWidth();
+            int j = minecraft.getWindow().getGuiScaledHeight();
+            double d0 = Mth.lerp((double)pScalar, 2.0D, 1.0D);
+            float f = 0.2F * pScalar;
+            float f1 = 0.4F * pScalar;
+            float f2 = 0.2F * pScalar;
+            double d1 = (double)i * d0;
+            double d2 = (double)j * d0;
+            double d3 = ((double)i - d1) / 2.0D;
+            double d4 = ((double)j - d2) / 2.0D;
+            RenderSystem.disableDepthTest();
+            RenderSystem.depthMask(false);
+            RenderSystem.enableBlend();
+            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
+            RenderSystem.setShaderColor(f, f1, f2, 1.0F);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderTexture(0, NAUSEA_LOCATION);
+            Tesselator tesselator = Tesselator.getInstance();
+            BufferBuilder bufferbuilder = tesselator.getBuilder();
+            bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+            bufferbuilder.vertex(d3, d4 + d2, -90.0D).uv(0.0F, 1.0F).endVertex();
+            bufferbuilder.vertex(d3 + d1, d4 + d2, -90.0D).uv(1.0F, 1.0F).endVertex();
+            bufferbuilder.vertex(d3 + d1, d4, -90.0D).uv(1.0F, 0.0F).endVertex();
+            bufferbuilder.vertex(d3, d4, -90.0D).uv(0.0F, 0.0F).endVertex();
+            tesselator.end();
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.disableBlend();
+            RenderSystem.depthMask(true);
+            RenderSystem.enableDepthTest();
+
+               /* if (minecraft.gameMode == null) return;
                 if (minecraft.level == null) return;
                 TextureManager tm = minecraft.getTextureManager();
                 int i = minecraft.screen.width;
                 int j = minecraft.screen.height;
                 NativeImage nativeimage = new NativeImage(i, j, false);
             //    gui.setupOverlayRenderState(true, false, drunknessOverlay-);
-                GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, screenWidth, screenHeight, 0);
+                GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, screenWidth, screenHeight, 0);*/
+
             }
         });
     }
+
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -203,7 +255,7 @@ public class ModClientEventBusSubscriber
 
                     BlockPos blockpos = this.getOmmoranPosition(pStack.getOrCreateTag());
                     long i = pClientLevel.getGameTime();
-                    if (blockpos != null && !(entity.position().distanceToSqr((double)blockpos.getX() + 0.5D, entity.position().y(), (double)blockpos.getZ() + 0.5D) < (double)1.0E-5F))
+                    if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double)blockpos.getX() + 0.5D, entity.position().y(), (double)blockpos.getZ() + 0.5D) < (double)1.0E-5F))
                     {
                         boolean flag = pEntity instanceof Player && ((Player)pEntity).isLocalPlayer();
                         double d1 = 0.0D;
@@ -294,24 +346,16 @@ public class ModClientEventBusSubscriber
         });
 
         ItemProperties.register(ModItems.FUEL.get(), new ResourceLocation(LootDebugsMain.MOD_ID,"fuel_level"), (pStack, pLevel, pEntity, p_174633_) -> {
-            if(pEntity == null) {
-                return 0.0F;
-            }
-            else
-            {
-                if(pStack.isDamaged() && pStack.isDamageableItem())
+                if(pEntity == null)
                 {
-                    float val = ((float)pStack.getMaxDamage() - (float)pStack.getDamageValue()) / (float)pStack.getMaxDamage();
-                    return val;
-
+                    return 0.0F;
+                }
+                else
+                {
+                    return UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount") / FuelItem.maxFuel;
 
                 }
-                return 0.0f;
-            }
-
-
         });
-
 
 
     }
@@ -337,7 +381,6 @@ public class ModClientEventBusSubscriber
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.MALT_PLANT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.YEAST_PLANT.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.STARCH_PLANT.get(), RenderType.cutout());
-
 
 
         ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_MORKITE.get(), RenderType.translucent());

@@ -1,7 +1,9 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
+import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 public class SatchelChargeDetonatorItem extends Item
@@ -19,39 +22,58 @@ public class SatchelChargeDetonatorItem extends Item
         super(pProperties);
     }
 
+    public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Driller;
+
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
         BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
 
-
-        if(pEntity instanceof Player player)
+        if (pEntity instanceof Player player && pIsSelected)
         {
-            if(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile satchelChargeTile)
+            if (UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse))
             {
-                player.displayClientMessage(new TranslatableComponent("tool.satchel_charge.ready"), true);
+                if(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile)
+                {
+                    player.displayClientMessage(new TextComponent(ChatFormatting.GREEN + new TranslatableComponent("tool.satchel_charge.ready").getString()), true);
+                }
+                else
+                {
+                    player.getInventory().removeItem(pStack);
+                }
             }
             else
             {
-                player.displayClientMessage(new TranslatableComponent("tool.satchel_charge.link_invalid"), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
+
+                if(!(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile))
+                {
+                    player.getInventory().removeItem(pStack);
+                }
             }
+
         }
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand)
+    {
         ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
 
-        BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
+        if (UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, pPlayer, dwarfClassToUse)) {
 
-        if (pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile satchelChargeTile) {
-            satchelChargeTile.detonate(pPlayer);
-            pPlayer.displayClientMessage(new TranslatableComponent("tool.satchel_charge.detonated"), true);
+            BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
 
+            if (pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile satchelChargeTile) {
+                satchelChargeTile.detonate(pPlayer);
+                pPlayer.displayClientMessage(new TextComponent(ChatFormatting.DARK_RED + new TranslatableComponent("tool.satchel_charge.detonated").getString()), true);
+
+            }
+
+            pPlayer.getInventory().removeItem(pStack);
         }
-        pPlayer.getInventory().removeItem(pStack);
 
         return super.use(pLevel, pPlayer, pUsedHand);
     }

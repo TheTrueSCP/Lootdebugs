@@ -1,8 +1,12 @@
 package net.the_goldbeards.lootdebugs.world.feature;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
@@ -38,7 +42,7 @@ public class ModPlacedFeatures
             ModConfiguredFeatures.INGREDIENTS, CountPlacement.of(16) ,HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(110)));
 
     public static final Holder<PlacedFeature> RED_SUGAR = PlacementUtils.register("red_sugar_placed",
-            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(20), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
+            ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(17), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
 
     public static final Holder<PlacedFeature> MINERALS = PlacementUtils.register("minerals_placed",
             ModConfiguredFeatures.MINERALS, CountPlacement.of(4), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(90)));
@@ -47,7 +51,7 @@ public class ModPlacedFeatures
         ModConfiguredFeatures.LIQUID_MORKITE_SPRING, CountPlacement.of(2), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));
 
     public static final Holder<PlacedFeature> LIQUID_MORKITE_LAKE = PlacementUtils.register("liquid_morkite_lake_placed",
-            ModConfiguredFeatures.LIQUID_MORKITE_LAKE, RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(), HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.absolute(0))));
+            ModConfiguredFeatures.LIQUID_MORKITE_LAKE, RarityFilter.onAverageOnceEvery(70), InSquarePlacement.spread(), HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(-60), VerticalAnchor.absolute(-20))), EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 32), SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5), BiomeFilter.biome());
 
 
 }

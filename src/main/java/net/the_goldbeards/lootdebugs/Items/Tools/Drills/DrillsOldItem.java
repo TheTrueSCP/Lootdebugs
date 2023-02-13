@@ -17,7 +17,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.ModTags;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 //Old Drills, use the DrillsItem instead
-@Deprecated(forRemoval = true)
+@Deprecated(forRemoval = true, since = "1.5")
 public class DrillsOldItem extends Item
 {
 
@@ -126,7 +126,7 @@ if(!level.isClientSide) {
                         }
                     }
 
-                    if (!player.isCrouching() && (!fuel.isEmpty() || player.isCreative()) && !UsefullStuff.isBlockTag(block,ModTags.Blocks.NOT_MINEABLE_WITH_DRILLS))
+                    if (!player.isCrouching() && (!fuel.isEmpty() || player.isCreative()) && !UsefullStuff.BlockHelpers.isBlockTag(block,ModTags.Blocks.NOT_MINEABLE_WITH_DRILLS))
                     //If the block is not Mineable and the fuel is in the inventory or the player is in creative mode
                     {
 

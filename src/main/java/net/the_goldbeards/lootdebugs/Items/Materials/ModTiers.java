@@ -8,7 +8,7 @@ import net.the_goldbeards.lootdebugs.util.ModTags;
 public class ModTiers
 {
     //Company Standard Tier for Company Standard pickaxe
-    public static final ForgeTier COMPANY_STANDARD = new ForgeTier(4, 2031, 9.0F, 5.0F, 0, ModTags.Blocks.NEED_COMPANY_STANDARD_TOOL,
+    public static final ForgeTier COMPANY_STANDARD = new ForgeTier(4, 2031, 14.0F, 5.0F, 0, ModTags.Blocks.NEED_COMPANY_STANDARD_TOOL,
             ()-> Ingredient.of(ModItems.DYSTRUM_INGOT.get()));
 
 

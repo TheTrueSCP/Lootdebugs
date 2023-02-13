@@ -5,8 +5,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.world.gen.ModEntityGeneration;
-import net.the_goldbeards.lootdebugs.world.gen.ModIngredientsGeneration;
+import net.the_goldbeards.lootdebugs.world.gen.ModMiscGeneration;
 import net.the_goldbeards.lootdebugs.world.gen.ModOreGeneration;
+import net.the_goldbeards.lootdebugs.world.gen.ModResourcesGeneration;
 
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID)
 public class ModWorldEvents
@@ -16,8 +17,8 @@ public class ModWorldEvents
     {
         ModOreGeneration.generateOres(event);
         ModEntityGeneration.onEntitySpawn(event);
-        ModIngredientsGeneration.generateIngredients(event);
-
+        ModResourcesGeneration.generateResources(event);
+        ModMiscGeneration.generateMisc(event);
     }
 
 

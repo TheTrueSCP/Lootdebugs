@@ -5,8 +5,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 
-import java.util.Objects;
-
 public class ModStarchNutSlot extends SlotItemHandler
 {
     public ModStarchNutSlot(IItemHandler itemHandler, int index, int x, int y) {

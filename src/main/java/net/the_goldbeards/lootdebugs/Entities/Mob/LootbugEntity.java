@@ -1,7 +1,10 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob;
 
+import com.mojang.serialization.Codec;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -9,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -22,27 +26,30 @@ import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Goals.GoToWantedItemGoal;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Inventory.Inventory;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import net.the_goldbeards.lootdebugs.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
+import java.util.function.IntFunction;
+import java.util.stream.Collectors;
 
-public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideable
-{
-
+public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideable {
 
 
     private static final EntityDataAccessor<Boolean> DATA_SADDLE_ID = SynchedEntityData.defineId(LootbugEntity.class, EntityDataSerializers.BOOLEAN);
@@ -81,8 +88,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
 
     //Atributes
-    public static AttributeSupplier.Builder createAttributes()
-    {
+    public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.00f)
                 .add(Attributes.MOVEMENT_SPEED, 0.15)
@@ -98,7 +104,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte)0);
+        this.entityData.define(DATA_FLAGS_ID, (byte) 0);
         this.entityData.define(DATA_SADDLE_ID, false);
         this.entityData.define(DATA_BOOST_TIME, 0);
 
@@ -111,12 +117,10 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     }
 
     @Override
-    public InteractionResult mobInteract(Player playerIn, InteractionHand hand)
-    {
-        if(playerIn.getItemInHand(hand).is(ModItems.RED_SUGAR.get()))
-        {
+    public InteractionResult mobInteract(Player playerIn, InteractionHand hand) {
+        if (playerIn.getItemInHand(hand).is(ModItems.RED_SUGAR.get())) {
 
-            if(!this.isPetting && this.shakeAnim == 0 && this.shakeAnimO == 0) {
+            if (!this.isPetting && this.shakeAnim == 0 && this.shakeAnimO == 0) {
                 this.heal(3);
                 playerIn.getItemInHand(hand).shrink(1);
 
@@ -124,55 +128,57 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
             }
 
             return InteractionResult.SUCCESS;
-        }
-        else if(playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS))
-        {
+        } else if (playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS)) {
             inventory.add(new ItemStack(playerIn.getItemInHand(hand).getItem(), 1));
             playerIn.getItemInHand(hand).shrink(1);
             petting();
             return InteractionResult.SUCCESS;
-        }
-        else if (!playerIn.getItemInHand(hand).isEmpty() && !playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_BREEDING_ITEMS) && !this.isVehicle() && !playerIn.isSecondaryUseActive())
-        {//if you press Shift and have nothing in your hand, you'll start riding the lootbug
+        } else if (!playerIn.getItemInHand(hand).isEmpty() && !playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_BREEDING_ITEMS) && !this.isVehicle() && !playerIn.isSecondaryUseActive()) {//if you press Shift and have nothing in your hand, you'll start riding the lootbug
 
-            if(!this.level.isClientSide())
-            {
+            if (!this.level.isClientSide()) {
                 playerIn.startRiding(this);
 
             }
             return InteractionResult.sidedSuccess(this.level.isClientSide);
-        }
-        else
-        {
+        } else {
             InteractionResult interactionresult = super.mobInteract(playerIn, hand);//Feeding
 
             if (!interactionresult.consumesAction()) {
                 ItemStack itemstack = playerIn.getItemInHand(hand);
 
-               petting();
+                petting();
 
                 return InteractionResult.SUCCESS;
-            }
-            else
-            {
+            } else {
                 return interactionresult;
             }
         }
 
     }
 
-    public void petting()
-    {
-        if(!this.isPetting && this.shakeAnim == 0 && this.shakeAnimO == 0)
-        {
-            this.isPetting = true;
-            level.playLocalSound(this.getX(),this.getY(),this.getZ(),getReactionSound(), SoundSource.NEUTRAL,1,1, true);//petting
-            int rand = this.level.getRandom().nextInt(60,80);
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (!(pSource.getEntity() instanceof Player)) {
+            return super.hurt(pSource, pAmount);
+        }
 
-            if(rand == 69)
-            {
-                BlockPos DropPos = new BlockPos(this.getX() + 2,this.getY()+ 3,this.getZ() + 2);
-                ItemEntity Loot = new ItemEntity(level,DropPos.getX(),DropPos.getY(),DropPos.getZ(), getPettingDrop());
+        if (LootdebugsServerConfig.LOOTBUG_PACIFIST_MODE.get()) {
+            ((Player) pSource.getEntity()).displayClientMessage(new TranslatableComponent("misc.lootbug.attack.pacifist_mode.enabled"), true);
+        }
+
+        return !LootdebugsServerConfig.LOOTBUG_PACIFIST_MODE.get() && super.hurt(pSource, pAmount);
+
+    }
+
+    public void petting() {
+        if (!this.isPetting && this.shakeAnim == 0 && this.shakeAnimO == 0) {
+            this.isPetting = true;
+            level.playLocalSound(this.getX(), this.getY(), this.getZ(), getReactionSound(), SoundSource.NEUTRAL, 1, 1, true);//petting
+            int rand = this.level.getRandom().nextInt(60, 80);
+
+            if (rand == 69) {
+                BlockPos DropPos = new BlockPos(this.getX() + 2, this.getY() + 3, this.getZ() + 2);
+                ItemEntity Loot = new ItemEntity(level, DropPos.getX(), DropPos.getY(), DropPos.getZ(), getPettingDrop());
 
                 level.addFreshEntity(Loot);
                 //AdLoot
@@ -186,7 +192,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
     @Override
     protected PathNavigation createNavigation(Level pLevel) {
-        return new WallClimberNavigation(this,pLevel);
+        return new WallClimberNavigation(this, pLevel);
     }
 
     @Override
@@ -201,9 +207,9 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     public void setClimbing(boolean pClimbing) {
         byte b0 = this.entityData.get(DATA_FLAGS_ID);
         if (pClimbing) {
-            b0 = (byte)(b0 | 1);
+            b0 = (byte) (b0 | 1);
         } else {
-            b0 = (byte)(b0 & -2);
+            b0 = (byte) (b0 & -2);
         }
 
         this.entityData.set(DATA_FLAGS_ID, b0);
@@ -232,16 +238,13 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
     public void travel(Vec3 pTravelVector) {
 
-        if(!this.canBeControlledByRider())
-        {
+        if (!this.canBeControlledByRider()) {
             if (!this.verticalCollision) {
                 this.setClimbing(this.horizontalCollision);
             } else {
                 this.setClimbing(false);
             }
-        }
-        else
-        {
+        } else {
             this.setClimbing(this.horizontalCollision);
         }
         this.travel(this, this.steering, pTravelVector);
@@ -251,8 +254,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     public void killed(ServerLevel pLevel, LivingEntity pKilledEntity) {
         super.killed(pLevel, pKilledEntity);
 
-        for(ItemStack itemStack : this.inventory.getAll())
-        {
+        for (ItemStack itemStack : this.inventory.getAll()) {
             ItemEntity entity = new ItemEntity(level, pKilledEntity.getX(), pKilledEntity.getY(), pKilledEntity.getZ(), itemStack);
             this.level.addFreshEntity(entity);
         }
@@ -263,10 +265,8 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     @Override
     protected void pickUpItem(ItemEntity pItemEntity) {
         super.pickUpItem(pItemEntity);
-        if (pItemEntity.getItem().is(ModTags.Items.LOOTBUG_BREEDING_ITEMS))
-        {
-            if(this.inventory.add(pItemEntity.getItem()))
-            {
+        if (pItemEntity.getItem().is(ModTags.Items.LOOTBUG_BREEDING_ITEMS)) {
+            if (this.inventory.add(pItemEntity.getItem())) {
                 pItemEntity.discard();
             }
         }
@@ -278,11 +278,9 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     }
 
 
-
     @Override
-    public boolean wantsToPickUp(ItemStack pStack)
-    {
-return true;
+    public boolean wantsToPickUp(ItemStack pStack) {
+        return true;
     }
     // Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
     //use this to react to sunlight and start to burn.
@@ -291,7 +289,7 @@ return true;
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide  && !this.isPetting  && this.onGround) {
+        if (!this.level.isClientSide && !this.isPetting && this.onGround) {
             this.shakeAnim = 0.0F;
             this.shakeAnimO = 0.0F;
 
@@ -302,8 +300,7 @@ return true;
     @Override
     public void tick() {
         super.tick();
-        if(!this.level.isClientSide())
-        {
+        if (!this.level.isClientSide()) {
             this.setClimbing(this.horizontalCollision);
         }
         if (this.isAlive()) {
@@ -346,6 +343,7 @@ return true;
     }
 
 //Pet Animation
+
     /**
      * Handler for {World#setEntityState}
      */
@@ -368,8 +366,7 @@ return true;
         this.shakeAnimO = 0.0F;
     }
 
-    public float getTailRotation(float pPartialTicks, float pOffset)
-    {
+    public float getTailRotation(float pPartialTicks, float pOffset) {
         float f = (Mth.lerp(pPartialTicks, this.shakeAnimO, this.shakeAnim) + pOffset) / 2.0F;
         if (f < 0.0F) {
             f = 0.0F;
@@ -378,14 +375,13 @@ return true;
         }
 
 
-        return Mth.sin(f * (float)Math.PI) * Mth.sin(f * (float)Math.PI * 11.0F) * 0.15F * (float)Math.PI;
+        return Mth.sin(f * (float) Math.PI) * Mth.sin(f * (float) Math.PI * 11.0F) * 0.15F * (float) Math.PI;
     }
 
     //Sounds
     @javax.annotation.Nullable
     @Override
-    protected SoundEvent getAmbientSound()
-    {
+    protected SoundEvent getAmbientSound() {
         return ModSounds.LOOTBUG_IDLE.get();
     }
 
@@ -407,41 +403,30 @@ return true;
 
     //Interaction
 
-    public ItemStack getPettingDrop()
-    {
-       int rand = level.random.nextInt(0, 100);
+    public ItemStack getPettingDrop() {
+        int rand = level.random.nextInt(0, 100);
 
-       if(rand <= 5)
-       {
-           return new ItemStack(Items.FLINT, 1);
-       }
-       else if(rand <= 10)
-       {
-           return new ItemStack(ModItems.RAW_BISMOR.get(), 1);
-       }
-       else if(rand <= 15)
-       {
-           return new ItemStack(ModItems.RAW_CROPPER.get(), 1);
-       }
-       else if(rand <= 20)
-       {
-           return new ItemStack(ModItems.RAW_DYSTRUM.get(), 1);
-       }
-       else if(rand <= 40)
-       {
-           return new ItemStack(Items.RAW_GOLD, 1);
-       }
-       else if(rand <= 100)
-       {
-           return new ItemStack(ModItems.NITRA.get(), 1);
-       }
+        if (rand <= 5) {
+            return new ItemStack(Items.FLINT, 1);
+        } else if (rand <= 10) {
+            return new ItemStack(ModItems.RAW_BISMOR.get(), 1);
+        } else if (rand <= 15) {
+            return new ItemStack(ModItems.RAW_CROPPER.get(), 1);
+        } else if (rand <= 20) {
+            return new ItemStack(ModItems.RAW_DYSTRUM.get(), 1);
+        } else if (rand <= 40) {
+            return new ItemStack(Items.RAW_GOLD, 1);
+        } else if (rand <= 100) {
+            return new ItemStack(ModItems.NITRA.get(), 1);
+        }
         return new ItemStack(ModItems.NITRA.get(), 1);
     }
 
     //What Happend, when the Lootbug is stroke by an Lightning Bolt?
     @Override
     public void thunderHit(ServerLevel worldIn, LightningBolt bolt) {
-        if (worldIn.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, ModEntities.LOOTBUG_GOLDEN.get(), (timer) -> {})) {
+        if (worldIn.getDifficulty() != Difficulty.PEACEFUL && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, ModEntities.LOOTBUG_GOLDEN.get(), (timer) -> {
+        })) {
             LootbugEntity lootbug = ModEntities.LOOTBUG_GOLDEN.get().create(worldIn);
             lootbug.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
             lootbug.setNoAi(this.isNoAi());
@@ -474,12 +459,12 @@ return true;
 
     @Override
     public boolean boost() {
-    return false;
+        return false;
     }
 
     @Override
     public float getSteeringSpeed() {
-        return (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
     }
 
     @Override
@@ -496,7 +481,7 @@ return true;
 
     @Override
     public Vec3 getLeashOffset() {
-        return new Vec3(0.0D, (double)(0.6F * this.getEyeHeight()), (double)(this.getBbWidth() * 0.4F));
+        return new Vec3(0.0D, (double) (0.6F * this.getEyeHeight()), (double) (this.getBbWidth() * 0.4F));
     }
 
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
@@ -504,14 +489,11 @@ return true;
     }
 
     @Override
-    public boolean checkSpawnRules(LevelAccessor pLevel, MobSpawnType pSpawnReason)
-    {
-
+    public boolean checkSpawnRules(LevelAccessor pLevel, MobSpawnType pSpawnReason) {
         return true;
     }
 
-    public static <T extends Mob> boolean checkLootbugSpawnRules(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, Random random)
-    {
+    public static <T extends Mob> boolean checkLootbugSpawnRules(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, Random random) {
         return blockPos.getY() <= 20;
     }
 }

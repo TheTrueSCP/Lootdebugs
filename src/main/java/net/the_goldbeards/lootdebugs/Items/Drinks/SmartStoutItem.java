@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 
 public class SmartStoutItem extends BeerItem
@@ -25,12 +25,12 @@ public class SmartStoutItem extends BeerItem
 
         if (!worldIn.isClientSide) {
 
-            entityLiving.playSound(ModSounds.SMARTSTOUT.get(),3,1);
+            entityLiving.playSound(ModSounds.BEER_SMARTSTOUT.get(),3,1);
         }
         if(worldIn.isClientSide)
         {
 
-            entityLiving.playSound(ModSounds.SMARTSTOUT.get(),3,1);
+            entityLiving.playSound(ModSounds.BEER_SMARTSTOUT.get(),3,1);
         }
         if (entityLiving instanceof ServerPlayer) {
             ServerPlayer serverplayerentity = (ServerPlayer) entityLiving;

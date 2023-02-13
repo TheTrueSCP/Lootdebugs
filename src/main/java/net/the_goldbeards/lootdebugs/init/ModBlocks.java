@@ -23,7 +23,7 @@ import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
 import net.the_goldbeards.lootdebugs.Block.TestBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubBlock;
@@ -34,7 +34,7 @@ import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.Shield.ShieldEmitterBlock;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
-import net.the_goldbeards.lootdebugs.Sound.ModSoundTypes;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSoundTypes;
 
 import java.util.function.Supplier;
 
@@ -102,7 +102,7 @@ public class ModBlocks {
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
     public static final RegistryObject<Block> ZIPLINE_BLOCK = registryBlock("zipline_block",
-            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never)),false);
+            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f)),false);
 
 
 
@@ -117,33 +117,33 @@ public class ModBlocks {
 // Ores
 
     public static final RegistryObject<Block> MORKITE_ORE =registryBlock("morkite_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.9f).sound(ModSoundTypes.MORKITE)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.9f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_MORKITE_ORE =registryBlock("deepslate_morkite_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f).sound(ModSoundTypes.MORKITE)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> MORKITE_BLOCK =registryBlock("morkite_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.0f).sound(ModSoundTypes.MORKITE)),false);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.0f)),false);
 
 
     public static final RegistryObject<Block> NITRA_ORE = registryBlock("nitra_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_NITRA_ORE =registryBlock("deepslate_nitra_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> NITRA_BLOCK = registryBlock("nitra_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
 
 
     public static final RegistryObject<Block> RAW_DYSTRUM_BLOCK = registryBlock("raw_dystrum_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DYSTRUM_ORE = registryBlock("dystrum_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_DYSTRUM_ORE = registryBlock("deepslate_dystrum_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DYSTRUM_BLOCK = registryBlock("dystrum_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -151,7 +151,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> BISMOR_ORE = registryBlock("bismor_ore",
-            () -> new BismorBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new BismorBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> BISMOR_BLOCK = registryBlock("bismor_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -159,14 +159,14 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> CROPPER_ORE = registryBlock("cropper_ore",
-            () -> new CropperBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
+            () -> new CropperBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> CROPPER_BLOCK = registryBlock("cropper_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
 
 
     public static final RegistryObject<Block> RED_SUGAR = registryBlock("red_sugar",
-            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(0.5f).lightLevel((state) -> 8)),true);
+            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(0.5f).lightLevel((state) -> 8).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> OIL_SHALE = registryBlock("oil_shale",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST).strength(4f).requiresCorrectToolForDrops().lightLevel((state) -> 8)),false);
@@ -204,7 +204,7 @@ public class ModBlocks {
             () -> new FuelRefineryBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
 
     public static final RegistryObject<Block> CLASS_CHANGER = registryBlock("class_changer",
-            () -> new ClassChangeBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+            () -> new ClassChangerBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 15)),true);
 
     ////BLocksWithoutItemRegistry
 
@@ -255,22 +255,22 @@ public class ModBlocks {
     //DrinkReceips
 
     public static final RegistryObject<Block> BARLEY_PLANT =registryBlock("barley_plant",
-            () -> new BarleyPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new BarleyPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
     public static final RegistryObject<Block> BOOLO_CAP =registryBlock("boolo_cap",
-            () -> new BooloCapBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new BooloCapBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
     public static final RegistryObject<Block> YEAST_PLANT =registryBlock("yeast_plant",
-            () -> new YeastPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new YeastPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
     public static final RegistryObject<Block> APOCA_BLOOM =registryBlock("apoca_bloom",
-            () -> new ApocaBloomBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new ApocaBloomBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
     public static final RegistryObject<Block> MALT_PLANT =registryBlock("malt_plant",
-            () -> new MaltPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new MaltPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
     public static final RegistryObject<Block> STARCH_PLANT =registryBlock("starch_plant",
-            () -> new StarchPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+            () -> new StarchPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
 
 
 }

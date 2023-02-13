@@ -27,6 +27,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.fluids.FluidStack;
+import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.PlayerControllerAccess;
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.WorldRendererAccess;
@@ -34,165 +35,11 @@ import net.the_goldbeards.lootdebugs.mixin.accessors.client.WorldRendererAccess;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
+
 public class UsefullStuff
 {
-    public static class ItemHelpers
+    public static class ItemNBTHelper
     {
-        public static void rotateDrills(Level level, ItemStack pStack) {
-            if (!level.isClientSide) {
-                if (pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
-                    float i = pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot");
-                    i += 0.25f;
-                    pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", i);
-
-                    if (pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot") >= 1f) {
-                        pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0);
-                    }
-                } else if (!pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
-                    pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0.0f);
-                }
-            }
-        }
-    }
-
-
-    public static boolean isBlockTag(Block block, TagKey<Block> tagKey)
-    {
-        return block.defaultBlockState().is(tagKey);
-        //return Registry.BLOCK.getHolderOrThrow(Registry.BLOCK.getResourceKey(block).get()).is(tagKey);
-    }
-
-    public static void drawAdditionalBlockbreak(DrawSelectionEvent.HighlightBlock ev, Player player, Collection<BlockPos> blocks) {
-        Vec3 renderView = ev.getCamera().getPosition();
-        for (BlockPos pos : blocks) {
-
-            ((WorldRendererAccess) ev.getLevelRenderer()).callRenderHitOutline(
-                    ev.getPoseStack(),
-                    ev.getMultiBufferSource().getBuffer(RenderType.lines()),
-                    player,
-                    renderView.x, renderView.y, renderView.z,
-                    pos,
-                    ClientUtils.mc().level.getBlockState(pos)
-
-
-            );
-        }
-
-        PoseStack transform = ev.getPoseStack();
-        transform.pushPose();
-        transform.translate(-renderView.x, -renderView.y, -renderView.z);
-        MultiPlayerGameMode controllerMP = ClientUtils.mc().gameMode;
-        if (controllerMP.isDestroying())
-
-
-            drawBlockDamageTexture(transform, ev.getMultiBufferSource(), player.level, blocks);
-        transform.popPose();
-    }
-
-
-    public static void drawBlockDamageTexture(PoseStack matrix, MultiBufferSource buffers, Level world, Collection<BlockPos> blocks) {
-        MultiPlayerGameMode controller = Minecraft.getInstance().gameMode;
-        int progress = (int) (((PlayerControllerAccess) controller).getDestroyProgress() * 10f) - 1; // 0-10
-        if (progress < 0 || progress >= ModelBakery.DESTROY_TYPES.size())
-            return;
-        BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
-        for (BlockPos blockpos : blocks) {
-            matrix.pushPose();
-            matrix.translate(blockpos.getX(), blockpos.getY(), blockpos.getZ());
-            VertexConsumer worldRendererIn = buffers.getBuffer(ModelBakery.DESTROY_TYPES.get(progress));
-            worldRendererIn = new SheetedDecalTextureGenerator(worldRendererIn, matrix.last().pose(), matrix.last().normal());
-            Block block = world.getBlockState(blockpos).getBlock();
-            boolean hasBreak = block instanceof ChestBlock || block instanceof EnderChestBlock
-                    || block instanceof SignBlock || block instanceof SkullBlock;
-
-            if (!hasBreak) {
-                BlockState iblockstate = world.getBlockState(blockpos);
-                if (iblockstate.getMaterial() != Material.AIR) {
-                    blockrendererdispatcher.renderBreakingTexture(iblockstate, blockpos, world, matrix, worldRendererIn);
-                }
-            }
-            matrix.popPose();
-        }
-    }
-
-    public static class ClientUtils {
-        public static Minecraft mc() {
-            return Minecraft.getInstance();
-        }
-    }
-
-    public static class ClassTranslator {
-
-        public static boolean isRightDwarfClass(int dwarfClass, int dwarfclasstest) {
-            return dwarfclasstest == dwarfClass;
-        }
-
-        public static TranslatableComponent getClassTranslate(IClassData.Classes pClass) {
-            switch (pClass)
-            {
-
-                case Driller -> {
-                    return new TranslatableComponent("player.class.driller");
-                }
-
-                case Engineer -> {
-                    return new TranslatableComponent("player.class.engineer");
-                }
-                case Scout -> {
-                    return new TranslatableComponent("player.class.scout");
-                }
-                case Gunner -> {
-                    return new TranslatableComponent("player.class.gunner");
-                }
-                case TheTrueSCP -> {
-                    return new TranslatableComponent("player.class.thetruescp");
-                }
-                case MonsieurHannes -> {
-                    return new TranslatableComponent("player.class.monsieurhannes");
-                }
-                default -> {
-                    return new TranslatableComponent("player.class.leaf_lover");
-                }
-            }
-        }
-
-        public static ChatFormatting getClassColor(IClassData.Classes pClass) {
-            switch (pClass) {
-
-                case Driller ->
-                        {
-                            return ChatFormatting.YELLOW;
-                        }
-
-                case Engineer ->
-                        {
-                            return ChatFormatting.DARK_RED;
-                        }
-                case Scout ->
-                        {
-                            return ChatFormatting.BLUE;
-                        }
-                case Gunner ->
-                        {
-                            return ChatFormatting.GREEN;
-                        }
-                case TheTrueSCP ->
-                        {
-                            return ChatFormatting.AQUA;
-                        }
-                case MonsieurHannes ->
-                        {
-                            return ChatFormatting.GOLD;
-                        }
-                default -> {
-                    return ChatFormatting.DARK_GRAY;
-                }
-            }
-        }
-    }
-
-
-    public static class ItemNBTHelper {
 
         public static boolean hasTag(ItemStack stack) {
             return stack.hasTag();
@@ -209,7 +56,6 @@ public class UsefullStuff
         public static void remove(ItemStack stack, String key) {
             stack.getOrCreateTag().remove(key);
         }
-
 
         public static void put(ItemStack stack, String key, Tag val) {
             stack.getOrCreateTag().put(key, val);
@@ -261,6 +107,10 @@ public class UsefullStuff
 
         public static float getFloat(ItemStack stack, String key) {
             return hasTag(stack) ? stack.getOrCreateTag().getFloat(key) : 0;
+        }
+
+        public static float getFloat(ItemStack stack, String key, float pDefault) {
+            return hasKey(stack, key) ? stack.getOrCreateTag().getFloat(key) : pDefault;
         }
 
         public static void putBoolean(ItemStack stack, String key, boolean val) {
@@ -354,6 +204,327 @@ public class UsefullStuff
                     }
             return target;
         }
+
+        public static void rotateDrills(Level level, ItemStack pStack) {
+            if (!level.isClientSide)
+            {
+                if (pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
+                    float i = pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot");
+                    i += 0.25f;
+                    pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", i);
+
+                    if (pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot") >= 1f) {
+                        pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0);
+                    }
+                } else if (!pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
+                    pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0.0f);
+                }
+            }
+        }
+
+        public static void rotateDrills(ItemStack pStack)
+        {
+            if (pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
+                float i = pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot");
+                i += 0.25f;
+                pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", i);
+
+                if (pStack.getOrCreateTag().getFloat("lootdebugs.drills_rot") >= 1f) {
+                    pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0);
+                }
+            } else if (!pStack.getOrCreateTag().contains("lootdebugs.drills_rot")) {
+                pStack.getOrCreateTag().putFloat("lootdebugs.drills_rot", 0.0f);
+            }
+        }
+    }
+
+
+    public static class BlockHelpers
+    {
+        public static void drawAdditionalBlockbreak(DrawSelectionEvent.HighlightBlock ev, Player player, Collection<BlockPos> blocks) {
+            Vec3 renderView = ev.getCamera().getPosition();
+            for (BlockPos pos : blocks) {
+
+                ((WorldRendererAccess) ev.getLevelRenderer()).callRenderHitOutline(
+                        ev.getPoseStack(),
+                        ev.getMultiBufferSource().getBuffer(RenderType.lines()),
+                        player,
+                        renderView.x, renderView.y, renderView.z,
+                        pos,
+                        ClientUtils.mc().level.getBlockState(pos)
+
+
+                );
+            }
+
+            PoseStack transform = ev.getPoseStack();
+            transform.pushPose();
+            transform.translate(-renderView.x, -renderView.y, -renderView.z);
+            MultiPlayerGameMode controllerMP = ClientUtils.mc().gameMode;
+            if (controllerMP.isDestroying())
+
+
+                drawBlockDamageTexture(transform, ev.getMultiBufferSource(), player.level, blocks);
+            transform.popPose();
+        }
+
+        public static void drawBlockDamageTexture(PoseStack matrix, MultiBufferSource buffers, Level world, Collection<BlockPos> blocks) {
+            MultiPlayerGameMode controller = Minecraft.getInstance().gameMode;
+            int progress = (int) (((PlayerControllerAccess) controller).getDestroyProgress() * 10f) - 1; // 0-10
+            if (progress < 0 || progress >= ModelBakery.DESTROY_TYPES.size())
+                return;
+            BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
+            for (BlockPos blockpos : blocks) {
+                matrix.pushPose();
+                matrix.translate(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                VertexConsumer worldRendererIn = buffers.getBuffer(ModelBakery.DESTROY_TYPES.get(progress));
+                worldRendererIn = new SheetedDecalTextureGenerator(worldRendererIn, matrix.last().pose(), matrix.last().normal());
+                Block block = world.getBlockState(blockpos).getBlock();
+                boolean hasBreak = block instanceof ChestBlock || block instanceof EnderChestBlock
+                        || block instanceof SignBlock || block instanceof SkullBlock;
+
+                if (!hasBreak) {
+                    BlockState iblockstate = world.getBlockState(blockpos);
+                    if (iblockstate.getMaterial() != Material.AIR) {
+                        blockrendererdispatcher.renderBreakingTexture(iblockstate, blockpos, world, matrix, worldRendererIn);
+                    }
+                }
+                matrix.popPose();
+            }
+        }
+
+        public static boolean isBlockTag(Block block, TagKey<Block> tagKey)
+        {
+            return block.defaultBlockState().is(tagKey);
+        }
+    }
+
+    public static class DwarfClasses
+    {
+        public static boolean isPlayerClass(Player pPlayer, IClassData.Classes dwarfClassToUse)
+        {
+            var playerClassWrapper = new Object(){String pClass;};
+
+            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+                playerClassWrapper.pClass = classCap.getDwarfClass().name();
+            });
+
+            String playerClass =playerClassWrapper.pClass;
+
+            if(playerClass.equals(dwarfClassToUse.name()))
+            {
+                return true;
+            }
+            else if(playerClass.equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
+            {
+                return true;
+            }
+            else if(playerClass.equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static IClassData.Classes getPlayerClass(Player player)
+        {
+            var playerClassWrapper = new Object(){String pClass;};
+
+            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+                playerClassWrapper.pClass = classCap.getDwarfClass().name();
+            });
+
+
+            if(playerClassWrapper.pClass != null)
+            {
+                return IClassData.Classes.valueOf(playerClassWrapper.pClass);
+            }
+            return IClassData.Classes.LeafLover;
+        }
+
+        public static boolean canPlayerUseItem(ItemStack pStack, Player pPlayer, IClassData.Classes dwarfClassToUse)
+        {
+            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+
+                UsefullStuff.ItemNBTHelper.putString(pStack, "satchelcharge_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+
+
+            });
+
+            if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
+            {
+                return true;
+            }
+            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
+            {
+                return true;
+            }
+            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Only use it if you have already saved the class into the itemstack!
+        public static boolean canItemBeUsed(ItemStack pStack, IClassData.Classes dwarfClassToUse)
+        {
+            if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
+            {
+                return true;
+            }
+            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
+            {
+                return true;
+            }
+            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static float getSalutePitch(Player pPlayer)
+        {
+            var playerClassWrapper = new Object(){String pClass;};
+
+            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+                playerClassWrapper.pClass = classCap.getDwarfClass().name();
+            });
+
+            IClassData.Classes playerClass = IClassData.Classes.valueOf(playerClassWrapper.pClass);
+
+            switch (playerClass)
+            {
+                case Driller, TheTrueSCP ->
+                        {
+                            return 0.80f;
+                        }
+                case Scout, MonsieurHannes ->
+                        {
+                            return 1.10f;
+                        }
+                case Engineer ->
+                        {
+                            return 1;
+                        }
+                case Gunner ->
+                        {
+                            return 0.90f;
+                        }
+                default ->
+                        {
+                            return 1;
+                        }
+            }
+
+        }
+
+        public static float getSalutePitch(IClassData.Classes playerClass)
+        {
+
+            switch (playerClass)
+            {
+                case Driller, TheTrueSCP ->
+                        {
+                            return 0.80f;
+                        }
+                case Scout, MonsieurHannes ->
+                        {
+                            return 1.10f;
+                        }
+                case Engineer ->
+                        {
+                            return 1;
+                        }
+                case Gunner ->
+                        {
+                            return 0.90f;
+                        }
+                default ->
+                        {
+                            return 1;
+                        }
+            }
+
+        }
+
+        //UI Stuff
+        public static TranslatableComponent getClassTranslate(IClassData.Classes pClass) {
+            switch (pClass)
+            {
+
+                case Driller -> {
+                    return new TranslatableComponent("player.class.driller");
+                }
+
+                case Engineer -> {
+                    return new TranslatableComponent("player.class.engineer");
+                }
+                case Scout -> {
+                    return new TranslatableComponent("player.class.scout");
+                }
+                case Gunner -> {
+                    return new TranslatableComponent("player.class.gunner");
+                }
+                case TheTrueSCP -> {
+                    return new TranslatableComponent("player.class.thetruescp");
+                }
+                case MonsieurHannes -> {
+                    return new TranslatableComponent("player.class.monsieurhannes");
+                }
+                default -> {
+                    return new TranslatableComponent("player.class.leaf_lover");
+                }
+            }
+        }
+
+        public static ChatFormatting getClassColor(IClassData.Classes pClass) {
+            switch (pClass) {
+
+                case Driller ->
+                        {
+                            return ChatFormatting.YELLOW;
+                        }
+
+                case Engineer ->
+                        {
+                            return ChatFormatting.DARK_RED;
+                        }
+                case Scout ->
+                        {
+                            return ChatFormatting.BLUE;
+                        }
+                case Gunner ->
+                        {
+                            return ChatFormatting.GREEN;
+                        }
+                case TheTrueSCP ->
+                        {
+                            return ChatFormatting.AQUA;
+                        }
+                case MonsieurHannes ->
+                        {
+                            return ChatFormatting.GOLD;
+                        }
+                default -> {
+                    return ChatFormatting.DARK_GRAY;
+                }
+            }
+        }
     }
 
     public static class Math
@@ -376,4 +547,25 @@ public class UsefullStuff
         }
 
     }
+
+    public static class ClientUtils {
+        public static Minecraft mc() {
+            return Minecraft.getInstance();
+        }
+    }
+
+    public class MouseUtil {
+        public static boolean isMouseOver(double mouseX, double mouseY, int x, int y) {
+            return isMouseOver(mouseX, mouseY, x, y, 16);
+        }
+
+        public static boolean isMouseOver(double mouseX, double mouseY, int x, int y, int size) {
+            return isMouseOver(mouseX, mouseY, x, y, size, size);
+        }
+
+        public static boolean isMouseOver(double mouseX, double mouseY, int x, int y, int sizeX, int sizeY) {
+            return (mouseX >= x && mouseX <= x + sizeX) && (mouseY >= y && mouseY <= y + sizeY);
+        }
+    }
+
 }

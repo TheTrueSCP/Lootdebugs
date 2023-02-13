@@ -1,6 +1,6 @@
 Lootdebugs Changelog
 
-Rekord:85 (Tech and Tools Update)
+Record:85 (Tech and Tools Update)
 
 
 
@@ -23,7 +23,7 @@ Rekord:85 (Tech and Tools Update)
 
 -added Lootbug Sounds
 -Escape reflex removed
--deaktivated Lootbug animations
+-deactivated Lootbug animations
 
 
 1.16.5-v1.4 Alpha 9.10.2021
@@ -44,18 +44,18 @@ Rekord:85 (Tech and Tools Update)
 
 1.16.5-v1.6 Alpha 16.10.2021
 
--Lootbug running animations complete
+-Lootbug running animations added
 -Lootbug AI improved
 -Added Ommoran Hearthstone Model
--Ommoran Hearthstone Waterlogable
--Lootbugs can be fed with Ommoran Hearthstone
+-Ommoran Hearthstone Waterlogability added
+-Lootbugs can now be fed with Ommoran Hearthstone
 -Added golden lootbug (if you parry a golden lootbug with a standard or another golden lootbug, you still get a normal one)
 -Nitra Added
--added Nitra geneartion
+-added Nitra generation
 
 
 1.16.5-v1.7 Alpha 16.10.2021
--Pub class added
+-Lloyd class added
 -added mug
 -added Ommoran Hearthstone layers
 -added Ommoran Crust
@@ -69,12 +69,12 @@ Rekord:85 (Tech and Tools Update)
 -added Boolo Cap, Yeast Cone, Barley Bulb and Apoca Bloom
 -added Boolo Cap, Yeast Cone, Barley Bulb and Apoca Bloom textures
 -added Pub GUI Texture
--Changed developer name to "the goldbeards" and mod name to "Lootdebugs" [!!!!!WARNING!!!!! WITH THIS VERSION ALL BLOCKS FROM PREVIOUS VERSIONS WILL BE REMOVED/ERASED FORM EARLIER VERSIONS]
+-Changed developer name to "the goldbeards" and mod name to "Lootdebugs" [!!!!!WARNING!!!!! WITH THIS VERSION ALL MOD-THINGS FROM PREVIOUS VERSIONS WILL BE REMOVED/ERASED]
 -added Lootbug Gen
 
 1.16.5-v1.9 Alpha-Bugfix 19.10.21
--added Block-loottables
--Code made more efficient
+-added Block-loot-tables
+-made code more efficient
 -Items Embellished
 -Pub textur added
 -hitboxes fixed
@@ -83,7 +83,7 @@ Rekord:85 (Tech and Tools Update)
 
 -Mug, Oily Oaf, Pub(Lloyd) and Skull Crusher are now rotateable
 -Ommoran Hearthstone now glows
--Naming error corrected (OMMORAN_HEARTHSTONE removed)
+-Naming error corrected (OMMORAN_HEARTHSTONE will be removed from previous versions)
 -Morkite added
 -Morkite Hardness
 -Better Ommoran Hearthstone added
@@ -466,6 +466,62 @@ Rekord:85 (Tech and Tools Update)
 -added fuel tooltip
 -fixed ommoran hearthstone locator select bug
 -fixed ingredients gen... again
-
-
+-improved liquid morkite lake gen
+-optimized dwarf class reading system
+-added misc tools can only be used by dwarfs (not leaf lovers)
+-fixed zipline server crash
+-fixed zipline string entity not removed after block removing
+-fixed flare gun disperses after shoot
+-fixed grappling hook hook not kill bug
+-tweaked fuel refill item
+-removed fuel canister
+-improved fuel canister fuel system
+-updated fuel canister recipe
+-fixed drills not accept fuel
+-fuel refinery, class changer must now be on sold block
+-fixed platform gun shoot prevented some block placing
+-added fuel refinery refuel mechanics (refill refinery, refill fuel)
+-fixed fuel refinery crash
+-set liquid morkite stack size to 1
+-fixed blockentity data still exists after block destroy
+-fixed zipline offset
+-added tooltip to drills
+-fixed zipline movement
+-fixed finally zipline string rendering
+-fixed tool use animation
+-added salute requires to be a dwarf message
+-fixed ommoran hearthstone structure model
+-fixed ommoran hearthstone generation
+-player now see his own class activated on the class changer
+-changed lootbugs can now only be hurt when pacifist mode is false
+-improved config
+-added config to disable satchel charge blink anim (blink COULD produce lag when too many satchel charges are placed)
+-fixed lootbug pacifist mode
+-fixed explosive diarrhoea crash
+-improved freeze effect
+-removed dafuck item (it does not match with lootdebugs)
+-rearranged class changer buttons
+-removed player inventory from class changer
+-fixed lootbug gold blockdrop
+-fixed class changer leave ghost block behind after removed block under it
+-fixed MASSIVE Development Engine core crash
+-satchelcharge detonator now delete itself when no connection to satchel charge
+-fixed class null crash
+-removed rickroll disc because, why?
+-fixed ping offset
+-added new ping sounds
+-sorted translation file
+-added ping effect sound
+-updated plascrete foam, flare sound
+-added new block sounds
+-fixed block sounds
+-removed dafuck recipe
+-fixed creeper drop music disc tag
+-added drunkness movement
+-rewrote fuel refinery fluid code
+-added fuel refinery gui
+-rewrote fuel refinery fuel calculating
+-rewrote packet message system (upgraded to newer system)
+-changed zipline end hook
+-fixed zipline bugs
 

@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
 {
     private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(AbstractShootablePhysicsArrowLikeEntity.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(AbstractShootablePhysicsArrowLikeEntity.class, EntityDataSerializers.BYTE);
     @Nullable
     BlockState lastState;
     public boolean inGround;
@@ -75,12 +74,9 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
 
     protected void defineSynchedData() {
         this.entityData.define(ID_FLAGS, (byte)0);
-        this.entityData.define(PIERCE_LEVEL, (byte)0);
     }
 
-    /**
-     * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-     */
+
     public void shoot(double pX, double pY, double pZ, float pVelocity, float pInaccuracy) {
         super.shoot(pX, pY, pZ, pVelocity, pInaccuracy);
         this.life = 0;
@@ -102,9 +98,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         this.life = 0;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
+
     public void tick()
     {
         super.tick();
@@ -179,7 +173,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
                     this.hasImpulse = true;
                 }
 
-                if (entityhitresult == null || this.getPierceLevel() <= 0) {
+                if (entityhitresult == null) {
                     break;
                 }
 
@@ -190,11 +184,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
             double d5 = vec3.x;
             double d6 = vec3.y;
             double d1 = vec3.z;
-            if (this.isCritArrow()) {
-                for(int i = 0; i < 4; ++i) {
-                    this.level.addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
-                }
-            }
 
             double d7 = this.getX() + d5;
             double d2 = this.getY() + d6;
@@ -239,7 +228,14 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         ++this.life;
         if (this.life >= 1200) {
             this.discard();
+            this.onDespawn();
         }
+
+    }
+
+
+    public void onDespawn()
+    {
 
     }
 
@@ -256,8 +252,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
         this.inGround = true;
         this.shakeTime = 7;
-        this.setCritArrow(false);
-        this.setPierceLevel((byte)0);
         this.setSoundEvent(SoundEvents.ARROW_HIT);
     }
 
@@ -287,8 +281,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         pCompound.putByte("shake", (byte)this.shakeTime);
         pCompound.putBoolean("inGround", this.inGround);
         pCompound.putByte("pickup", (byte)this.pickup.ordinal());
-        pCompound.putBoolean("crit", this.isCritArrow());
-        pCompound.putByte("PierceLevel", this.getPierceLevel());
         pCompound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
     }
 
@@ -306,8 +298,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         this.inGround = pCompound.getBoolean("inGround");
 
         this.pickup = AbstractArrow.Pickup.byOrdinal(pCompound.getByte("pickup"));
-        this.setCritArrow(pCompound.getBoolean("crit"));
-        this.setPierceLevel(pCompound.getByte("PierceLevel"));
         if (pCompound.contains("SoundEvent", 8)) {
             this.soundEvent = Registry.SOUND_EVENT.getOptional(new ResourceLocation(pCompound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
         }
@@ -341,7 +331,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
      * Returns true if it's possible to attack this entity with an item.
      */
     public boolean isAttackable() {
-        return false;
+        return true;
     }
 
     protected float getEyeHeight(Pose pPose, EntityDimensions pSize) {
@@ -353,10 +343,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
      */
     public void setCritArrow(boolean pCritical) {
         this.setFlag(1, pCritical);
-    }
-
-    public void setPierceLevel(byte pLevel) {
-        this.entityData.set(PIERCE_LEVEL, pLevel);
     }
 
     private void setFlag(int p_36738_, boolean p_36739_) {
@@ -372,19 +358,10 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     /**
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
-    public boolean isCritArrow() {
-        byte b0 = this.entityData.get(ID_FLAGS);
-        return (b0 & 1) != 0;
-    }
 
     /**
      * Whether the arrow was shot from a crossbow.
      */
-
-    public byte getPierceLevel() {
-        return this.entityData.get(PIERCE_LEVEL);
-    }
-
 
     protected float getWaterInertia() {
         return 0.6F;
@@ -393,10 +370,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     /**
      * Sets if this arrow can noClip
      */
-    public void setNoPhysics(boolean pNoClip) {
-        this.noPhysics = pNoClip;
-        this.setFlag(2, pNoClip);
-    }
 
     private void startFalling() {
         this.inGround = false;
@@ -416,13 +389,15 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         }
     }
 
-    /**
-     * Sets data about if this arrow entity was shot from a crossbow
-     */
-
-
-
-    public boolean shouldResetLife() {
-        return false;
+    @Override
+    public boolean isPickable() {
+        return true;
     }
+
+    @Override
+    public boolean mayInteract(Level pLevel, BlockPos pPos) {
+        return true;
+    }
+
+
 }

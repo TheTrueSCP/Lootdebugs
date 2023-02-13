@@ -10,6 +10,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -22,10 +23,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import org.jetbrains.annotations.Nullable;
 
-public class FuelRefineryBlock extends BaseEntityBlock  {
-
+public class FuelRefineryBlock extends BaseEntityBlock
+{
 
     public FuelRefineryBlock(Properties properties) {
         super(properties);
@@ -48,7 +50,7 @@ public class FuelRefineryBlock extends BaseEntityBlock  {
 
             BlockEntity entity = pLevel.getBlockEntity(pPos);
 
-            if(entity instanceof FuelRefineryTile) {
+            if(entity instanceof FuelRefineryTile fuelRefineryTile) {
 
                 NetworkHooks.openGui(((ServerPlayer)pPlayer), (FuelRefineryTile)entity, pPos);
 
@@ -62,24 +64,8 @@ public class FuelRefineryBlock extends BaseEntityBlock  {
 
     @Override
     public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
-        return true;
+        return false;
 
-    }
-
-    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
-        if (!pLevel.isClientSide) {
-            if(pLevel.hasNeighborSignal(pPos))
-            {
-                BlockEntity entity = pLevel.getBlockEntity(pPos);
-
-                if(entity instanceof FuelRefineryTile FPT) {
-
-                    FPT.setConvertingToTrue();
-
-                }
-            }
-
-        }
     }
 
     @Override
@@ -118,14 +104,22 @@ public class FuelRefineryBlock extends BaseEntityBlock  {
     //If the block is destroyed, al items inside drops
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
+        if (pState.getBlock() != pNewState.getBlock())
+        {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof FuelRefineryTile fuelRefineryTile)
             {
                 fuelRefineryTile.setRemoved();
                 ((FuelRefineryTile) blockEntity).drops();
+                pLevel.removeBlockEntity(pPos);
+                pLevel.removeBlock(pPos, false);
             }
         }
+    }
+
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return pLevel.getBlockState(pPos.below(1)).isFaceSturdy(pLevel, pPos, Direction.UP);
     }
 
     @Nullable
@@ -139,15 +133,13 @@ public class FuelRefineryBlock extends BaseEntityBlock  {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         {
-            if (pLevel.isClientSide()) {
-                return null;
-            }
-            return (lvl, pos, blockState, t) -> {
-                if (t instanceof FuelRefineryTile BE) {
-                    BE.tick(pLevel, pos, blockState, BE);
-                }
-            };
+            return createTickerHelper(pBlockEntityType, ModTileEntities.FUEL_PRESS_ENTITY.get(),
+                    FuelRefineryTile::tick);
         }
+    }
+
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> state) {

@@ -21,7 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.client.model.Armor.ScoutMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
@@ -32,11 +31,12 @@ import java.util.Map;
 public abstract class ModScoutMK1ArmorItem extends ArmorItem {
 
     public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Scout;
-    
+
     public ModScoutMK1ArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties) {
         super(pMaterial, pSlot, pProperties);
     }
-    public static class Helmet extends ModScoutMK1ArmorItem {
+    public static class Helmet extends ModScoutMK1ArmorItem
+    {
 
         public Helmet(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties) {
             super(pMaterial, pSlot, pProperties);
@@ -83,39 +83,23 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         }
 
         @Override
-        public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-
-
-
-            entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+        public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity)
+        {
+            if(entity instanceof Player player)
             {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
-
-                if(entity instanceof Player player)
-                {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse)) {
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                    return false;
                 }
-                return false;
             }
-
             return super.canEquip(stack, armorType, entity);
         }
 
         @Override
-        public void onArmorTick(ItemStack stack, Level level, Player player) {
+        public void onArmorTick(ItemStack stack, Level level, Player player)
+        {
 
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -132,7 +116,8 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         }
     }
 
-    public static class Chestplate extends ModScoutMK1ArmorItem {
+    public static class Chestplate extends ModScoutMK1ArmorItem
+    {
 
         public Chestplate(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties) {
             super(pMaterial, pSlot, pProperties);
@@ -180,36 +165,22 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         @Override
         public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 
-
-
-            entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            if(entity instanceof Player player)
             {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
-
-                if(entity instanceof Player player)
+                if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                    return false;
                 }
-                return false;
             }
 
             return super.canEquip(stack, armorType, entity);
         }
 
         @Override
-        public void onArmorTick(ItemStack stack, Level level, Player player) {
-
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+        public void onArmorTick(ItemStack stack, Level level, Player player)
+        {
+            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -226,7 +197,8 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         }
     }
 
-    public static class Leggings extends ModScoutMK1ArmorItem {
+    public static class Leggings extends ModScoutMK1ArmorItem
+    {
 
         public Leggings(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties) {
             super(pMaterial, pSlot, pProperties);
@@ -274,36 +246,21 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         @Override
         public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
 
-
-
-            entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            if(entity instanceof Player player)
             {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
-
-                if(entity instanceof Player player)
+                if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                    return false;
                 }
-                return false;
             }
-
             return super.canEquip(stack, armorType, entity);
         }
 
         @Override
-        public void onArmorTick(ItemStack stack, Level level, Player player) {
-
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name()))
+        public void onArmorTick(ItemStack stack, Level level, Player player)
+        {
+            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -320,7 +277,8 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         }
     }
 
-    public static class Boots extends ModScoutMK1ArmorItem {
+    public static class Boots extends ModScoutMK1ArmorItem
+    {
 
         public Boots(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties) {
             super(pMaterial, pSlot, pProperties);
@@ -366,45 +324,28 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
         }
 
         @Override
-        public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
-
-
-
-            entity.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+        public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity)
+        {
+            if(entity instanceof Player player)
             {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(!UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass").equals(dwarfClassToUse.name())) {
-
-                if(entity instanceof Player player)
+                if (!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString()), true);
+                    player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                    return false;
                 }
-                return false;
             }
-
             return super.canEquip(stack, armorType, entity);
         }
 
         @Override
-        public void onArmorTick(ItemStack stack, Level level, Player player) {
-
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-                UsefullStuff.ItemNBTHelper.putString(stack,"scout_mk1_armor_dwarfclass",classCap.getDwarfClass().name());
-
-            });
-
-            if(UsefullStuff.ItemNBTHelper.getString(stack, "scout_mk1_armor_dwarfclass") != dwarfClassToUse.name())
+        public void onArmorTick(ItemStack stack, Level level, Player player)
+        {
+            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
                 player.getInventory().add(stack);
             }
-
-
             super.onArmorTick(stack, level, player);
         }
 
@@ -413,6 +354,6 @@ public abstract class ModScoutMK1ArmorItem extends ArmorItem {
             return "lootdebugs:textures/armor/scout_mk1_boots.png";
         }
     }
-    
-    
+
+
 }

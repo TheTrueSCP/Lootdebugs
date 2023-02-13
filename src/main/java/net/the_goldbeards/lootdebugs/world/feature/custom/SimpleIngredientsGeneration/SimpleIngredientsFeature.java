@@ -15,12 +15,17 @@ public class SimpleIngredientsFeature extends Feature<SimpleIngredientsConfigura
         super(p_66808_);
     }
 
-    public boolean place(FeaturePlaceContext<SimpleIngredientsConfiguration> featurePlaceContext) {
+    public boolean place(FeaturePlaceContext<SimpleIngredientsConfiguration> featurePlaceContext)
+    {
         SimpleIngredientsConfiguration simpleIngredientsPlaceConfiguration = featurePlaceContext.config();
         WorldGenLevel worldgenlevel = featurePlaceContext.level();
         BlockPos blockpos = featurePlaceContext.origin();
         Random random = featurePlaceContext.random();
 
-        return simpleIngredientsPlaceConfiguration.feature().value().place(worldgenlevel, featurePlaceContext.chunkGenerator(), random, blockpos);
+        BlockPos.MutableBlockPos offsetBlockPos = new BlockPos.MutableBlockPos();
+
+        offsetBlockPos.setWithOffset(blockpos, random.nextInt(-6, 6), random.nextInt(-6, 6), random.nextInt(-6, 6));
+
+        return simpleIngredientsPlaceConfiguration.feature().value().place(worldgenlevel, featurePlaceContext.chunkGenerator(), random, offsetBlockPos);
     }
 }

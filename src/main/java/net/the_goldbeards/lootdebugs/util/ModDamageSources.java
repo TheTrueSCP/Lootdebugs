@@ -6,4 +6,5 @@ public class ModDamageSources
 {
     public static DamageSource BLACKOUTSTOUT = (new DamageSource("blackoutstout")).bypassArmor();
     public static DamageSource TOODRUNKIN = (new DamageSource("toodrunkin")).bypassArmor();
+    public static DamageSource BULLET = (new DamageSource("bullet"));
 }

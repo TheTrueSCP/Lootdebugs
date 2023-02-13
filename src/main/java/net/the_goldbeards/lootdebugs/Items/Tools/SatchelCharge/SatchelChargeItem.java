@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.the_goldbeards.lootdebugs.Entities.Tools.SatchelChargeEntity;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
@@ -49,7 +48,8 @@ public class SatchelChargeItem extends BlockItem {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
 
-        if (UsefullStuff.ItemNBTHelper.getString(stack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name())) {
+        if (UsefullStuff.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
+        {
 
             SatchelChargeEntity satchelCharge = new SatchelChargeEntity(pPlayer, pLevel);
             satchelCharge.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.2F, 0.0F);
@@ -66,23 +66,13 @@ public class SatchelChargeItem extends BlockItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if (pEntity instanceof Player pPlayer) {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected)
+    {
+        if (pEntity instanceof Player player && pIsSelected)
+        {
+            if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
             {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack, "satchelcharge_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-        }
-
-        if (pEntity instanceof Player player && pIsSelected) {
-            if (!UsefullStuff.ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
             }
         }
     }
@@ -94,7 +84,7 @@ public class SatchelChargeItem extends BlockItem {
         Player pPlayer = pContext.getPlayer();
         ItemStack stack = pContext.getItemInHand();
 
-        if (!UsefullStuff.ItemNBTHelper.getString(stack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
+        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
         {
             return InteractionResult.FAIL;
         }

@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,7 +17,7 @@ public class ISaluteData implements ICapabilitySerializable<CompoundTag>
 
     public ISaluteData()
     {
-        this.cooldown = LootdebugsConfig.DWARF_SALUTE_COOLDOWN.get();
+        this.cooldown = 60;
     }
 
 

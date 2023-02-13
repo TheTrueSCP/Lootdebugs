@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.the_goldbeards.lootdebugs.Entities.Tools.FlareEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.FlareEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 public class FlareModel<T extends FlareEntity> extends HierarchicalModel<T> {

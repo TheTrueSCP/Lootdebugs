@@ -4,7 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -85,7 +85,7 @@ public class PubTile extends BlockEntity implements MenuProvider, WorldlyContain
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("");
+        return new TranslatableComponent("block.lootdebugs.pub");
     }
 
     @Nullable
@@ -119,14 +119,14 @@ public class PubTile extends BlockEntity implements MenuProvider, WorldlyContain
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
-        tag.putInt("pub.progress", progress);
+        tag.putInt("progress", progress);
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        progress = nbt.getInt("pub.progress");
+        progress = nbt.getInt("progress");
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
     }
 
@@ -145,7 +145,7 @@ public class PubTile extends BlockEntity implements MenuProvider, WorldlyContain
                 isBrewing = true;//Set the Variable to true
             }
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, PubTile pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, PubTile pBlockEntity) {
         if (hasRecipe(pBlockEntity) && isMugAndWaterInSlot(pBlockEntity) && pBlockEntity.isBrewing) {//If the ingredients in the slots match with one recipe in the folder and you have pressed the button
 
                 pBlockEntity.progress++;//progess pro tick +1
@@ -341,6 +341,7 @@ public class PubTile extends BlockEntity implements MenuProvider, WorldlyContain
             return pPlayer.distanceToSqr((double)this.worldPosition.getX() + 0.5D, (double)this.worldPosition.getY() + 0.5D, (double)this.worldPosition.getZ() + 0.5D) <= 64.0D;
         }
     }
+
 
     @Override
     public void clearContent()

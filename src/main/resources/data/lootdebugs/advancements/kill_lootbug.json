@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:nitra_on_a_stick",
+  "parent": "lootdebugs:lootdebugs",
   "display": {
     "icon": {
       "item": "lootdebugs:lootbug_spawn_egg"

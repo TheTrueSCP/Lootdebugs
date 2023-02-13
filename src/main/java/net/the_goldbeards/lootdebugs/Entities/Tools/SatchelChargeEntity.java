@@ -46,7 +46,7 @@ public class SatchelChargeEntity extends ThrowableProjectile
 
         if(this.getOwner() != null)
         {
-            if (this.getOwner() instanceof Player player) {
+            if (this.getOwner() instanceof Player player && pos != null) {
                 ItemStack detonator = new ItemStack(ModItems.SATCHEL_CHARGE_DETONATOR.get(), 1);
                 UsefullStuff.ItemNBTHelper.put(detonator, "satchel_charge", NbtUtils.writeBlockPos(pos));
                 player.getInventory().add(detonator);

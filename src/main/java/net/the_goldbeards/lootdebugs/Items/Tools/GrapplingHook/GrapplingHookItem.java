@@ -14,11 +14,11 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Entities.Tools.GrapplingHookHookEntity;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
-public class GrapplingHookItem extends Item
+public class GrapplingHookItem extends BasicToolItem
 {
 
 
@@ -35,37 +35,8 @@ public class GrapplingHookItem extends Item
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.NONE;
-    }
-
-
-
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if(pEntity instanceof Player pPlayer)
-        {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack,"grapplinghook_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-
-        }
-
-        if(pEntity instanceof Player player && pIsSelected)
-        {
-            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "grapplinghook_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-            }
-
-        }
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
+    public IClassData.Classes getDwarfClassToUse() {
+        return IClassData.Classes.Scout;
     }
 
 
@@ -103,15 +74,15 @@ public class GrapplingHookItem extends Item
 
                 if (GH.position().distanceTo(pEntity.position()) > (100 * 2)) //Block Range * 2 cause 1 vec is a half block
                 {
-                        GH.kill();
+                    GH.kill();
                 }
 
                 else if (GH.inGround && GH.position().distanceTo(pEntity.position()) > 1)
                 {
-                        Vec3 vec3 = new Vec3((pEntity.getX() - GH.getX()) * -1, (pEntity.getY() - GH.getY()) * -1, (pEntity.getZ() - GH.getZ()) * -1);//calculate Movement from Entity to hook
-                        pEntity.setDeltaMovement(pEntity.getDeltaMovement().add(vec3).normalize());//Normalize Vec cause the vec would be to fast
-                        pEntity.fallDistance = 0;
-                        pEntity.resetFallDistance();
+                    Vec3 vec3 = new Vec3((pEntity.getX() - GH.getX()) * -1, (pEntity.getY() - GH.getY()) * -1, (pEntity.getZ() - GH.getZ()) * -1);//calculate Movement from Entity to hook
+                    pEntity.setDeltaMovement(pEntity.getDeltaMovement().add(vec3).normalize());//Normalize Vec cause the vec would be to fast
+                    pEntity.fallDistance = 0;
+                    pEntity.resetFallDistance();
                 }
                 else if(GH.position().distanceTo(pEntity.position()) < 1)
                 {
@@ -127,17 +98,14 @@ public class GrapplingHookItem extends Item
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pEntity, InteractionHand pUsedHand) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pEntity, InteractionHand pUsedHand)
+    {
         ItemStack pingItemStack = pEntity.getItemInHand(pUsedHand);
         ItemStack pUsedStack = pEntity.getItemInHand(pUsedHand);
 
-
-        //ClassStuff
-
-        if (!pUsedStack.getTag().getString("grapplinghook_dwarfclass").equals(dwarfClassToUse.name())) {
+        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pEntity, dwarfClassToUse)) {
             return InteractionResultHolder.pass(pUsedStack);
         }
-
 
 
         //Summon Hook and save his id
@@ -147,14 +115,19 @@ public class GrapplingHookItem extends Item
         grapplingHookHookEntity.setOwner(pEntity);
         pLevel.addFreshEntity(grapplingHookHookEntity);
 
+        if(pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pUsedStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) != null)
+        {
+            if (pLevel.getEntity((int) UsefullStuff.ItemNBTHelper.getFloat(pUsedStack, "lootdebugs.grapplinghook.grapplinghookhookentity.id")) instanceof GrapplingHookHookEntity GH) {
+                GH.discard();
+            }
+        }
 
-
-        UsefullStuff.ItemNBTHelper.putFloat(pingItemStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id", grapplingHookHookEntity.getId());//Create fuel with defaut values
+        UsefullStuff.ItemNBTHelper.putFloat(pingItemStack, "lootdebugs.grapplinghook.grapplinghookhookentity.id", grapplingHookHookEntity.getId());//Create fuel with defaut values
 
         pEntity.startUsingItem(pUsedHand);
 
 
-        return InteractionResultHolder.consume(pEntity.getItemInHand(pUsedHand));
+        return InteractionResultHolder.pass(pEntity.getItemInHand(pUsedHand));
     }
 
 

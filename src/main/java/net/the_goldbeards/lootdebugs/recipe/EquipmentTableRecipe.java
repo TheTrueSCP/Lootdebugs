@@ -103,6 +103,8 @@ public class EquipmentTableRecipe implements Recipe<SimpleContainer>
         public static final String ID = "equipment_crafting";
     }
 
+
+
     public static class Serializer implements RecipeSerializer<EquipmentTableRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID = new ResourceLocation(LootDebugsMain.MOD_ID,"equipment_crafting");

@@ -1,14 +1,15 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools;
 
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,14 +17,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Items.Tools.PingTool.PingItem;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
-import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+
+import java.util.Map;
 
 public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
 
@@ -88,7 +91,7 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound)
     {
-        if (pCompound.contains("dwarfClass", 8))
+        if (pCompound.contains("dwarfClass"))
         {
             this.setDwarfClass(IClassData.Classes.valueOf(pCompound.getString("dwarfClass")));
         }
@@ -104,29 +107,36 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
         this.entityData.set(DWARF_CLASS, dwarfClass.name());
     }
 
+
     @Override
-    protected void onHitEntity(EntityHitResult pResult) {
+    protected void onHitEntity(EntityHitResult pResult)
+    {
 
-        if(this.getOwner() != null)
+        if(!level.isClientSide())
         {
-            if (!pResult.getEntity().is(this.getOwner())) {
-                if (pResult.getEntity() instanceof LivingEntity LE) {
-                    LE.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 10));
+            if (this.getOwner() != null) {
+                if (!pResult.getEntity().is(this.getOwner()))
+                {
+                    if (pResult.getEntity() instanceof LivingEntity LE)
+                    {
+                        LE.setGlowingTag(true);
 
-                    this.getOwner().playSound(this.entityPingSound(LE), 1, 1);
+                        level.playSound(null,  pResult.getEntity().blockPosition(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 1,1);
+                        level.playSound(null, this.getOwner().blockPosition(),entityPingSound(LE), SoundSource.PLAYERS, 1, UsefullStuff.DwarfClasses.getSalutePitch(getDwarfClass()));
 
-                    if (pingItem != null) {
-                        if (pingItem.getItem() instanceof PingItem) {
+                        if (pingItem != null) {
+                            if (pingItem.getItem() instanceof PingItem) {
 
-                            CompoundTag tag = new CompoundTag();
-                            tag.putFloat("lootdebugs.pingitem.pingentity.id", pResult.getEntity().getId());
-                            pingItem.setTag(tag);
+                                CompoundTag tag = new CompoundTag();
+                                tag.putFloat("lootdebugs.pingitem.pingentity.id", pResult.getEntity().getId());
+                                pingItem.setTag(tag);
+                            }
+
+
                         }
-
-
                     }
-                }
 
+                }
             }
         }
 
@@ -136,97 +146,124 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
 
     }
 
-    private SoundEvent entityPingSound(LivingEntity le)
-    {
-        if(le.getType() == ModEntities.LOOTBUG.get())
-        {
-            if(LootdebugsConfig.LOOTBUG_PACIFIST_MODE.get())
-            {
-                return ModSounds.PING_LOOTBUG_PACIFIST.get();
-            }
-            else
-            {
-                return ModSounds.PING_LOOTBUG_NORMAL.get();
-            }
-        }
-        if(le.getType() == ModEntities.LOOTBUG.get())
-        {
-            if(LootdebugsConfig.LOOTBUG_PACIFIST_MODE.get())
-            {
-                return ModSounds.PING_LOOTBUG_PACIFIST.get();
-            }
-            else
-            {
-                return ModSounds.PING_LOOTBUG_NORMAL.get();
-            }
-        }
-        else
-        {
-            return ModSounds.PING_MARK.get();
-        }
-    }
-
-
-
-    private SoundEvent playSpecificBlockHitSound(Block block)
-    {
-
-      if(block == ModBlocks.MORKITE_BLOCK.get() || block == ModBlocks.MORKITE_ORE.get() || block == ModBlocks.DEEPSLATE_MORKITE_ORE.get())
-      {
-          return ModSounds.PING_MORKITE.get();
-      }
-      else if(block == Blocks.DIRT || block == Blocks.DIRT_PATH)
-      {
-          return ModSounds.PING_DIRT.get();
-      }
-      else if(block == ModBlocks.DYSTRUM_BLOCK.get() || block == ModBlocks.DYSTRUM_ORE.get())
-      {
-          return ModSounds.PING_DYSTRUM.get();
-      }
-      else if(block == ModBlocks.RED_SUGAR.get())
-      {
-          return ModSounds.PING_RED_SUGAR.get();
-      }
-      else if( block == Blocks.GOLD_ORE || block == Blocks.NETHER_GOLD_ORE || block == Blocks.DEEPSLATE_GOLD_ORE || block == Blocks.RAW_GOLD_BLOCK)
-      {
-          return ModSounds.PING_GOLD.get();
-      }
-      else if( block == Blocks.GOLD_BLOCK)
-      {
-          return ModSounds.PING_GOLD_WERE_RICH.get();
-      }
-      else if(block == ModBlocks.NITRA_ORE.get() || block == ModBlocks.NITRA_BLOCK.get())
-      {
-          return ModSounds.PING_NITRA.get();
-      }
-      else if(block == Blocks.MUSHROOM_STEM || block == Blocks.BROWN_MUSHROOM_BLOCK || block == Blocks.BROWN_MUSHROOM || block == Blocks.RED_MUSHROOM_BLOCK || block == Blocks.RED_MUSHROOM || block == Blocks.POTTED_BROWN_MUSHROOM ||block == Blocks.POTTED_RED_MUSHROOM)
-      {
-          return ModSounds.PING_MUSHROOM.get();
-      }
-      else if(block == Blocks.GRAVEL)
-      {
-          return ModSounds.PING_WORTHLESS.get();
-      }
-      else
-      {
-          return ModSounds.PING_SETMARK.get();
-      }
-    }
-
     @Override
-    protected void onHitBlock(BlockHitResult blockHitResult) {
+    protected void onHitBlock(BlockHitResult blockHitResult)
+    {
         this.setGlowingTag(true);
         this.lastState = this.level.getBlockState(blockHitResult.getBlockPos());
         super.onHitBlock(blockHitResult);
-        Vec3 vec3 = blockHitResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
-        this.setDeltaMovement(vec3);
-        Vec3 vec31 = vec3.normalize().scale((double)0.05F);
-        this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
-        if(this.getOwner() != null)
+        if(!level.isClientSide())
         {
-            this.getOwner().playSound(playSpecificBlockHitSound(this.level.getBlockState(blockHitResult.getBlockPos()).getBlock()), 1.0F, 1);
+            if (this.getOwner() != null) {
+                SoundEvent pingSound = getBlockPing().get(this.level.getBlockState(blockHitResult.getBlockPos()).getBlock());
+
+                if (pingSound == null)
+                {
+                    pingSound = ModSounds.PING_SETMARK.get();
+                }
+
+                this.level.playSound(null,getOwner().blockPosition(), pingSound, SoundSource.PLAYERS, 1.0F, UsefullStuff.DwarfClasses.getSalutePitch(getDwarfClass()));
+                this.level.playSound(null,  blockHitResult.getBlockPos(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 1,1);
+            }
         }
         this.inGround = true;
+    }
+
+    public static Map<Block, SoundEvent> getBlockPing()
+    {
+        Map<Block, SoundEvent> map = Maps.newLinkedHashMap();
+
+        //Dirt
+        map.put(Blocks.DIRT, ModSounds.PING_DIRT.get());
+        map.put(Blocks.GRASS_BLOCK, ModSounds.PING_DIRT.get());
+        map.put(Blocks.DIRT_PATH, ModSounds.PING_DIRT.get());
+
+        //Iron
+        map.put(Blocks.IRON_ORE, ModSounds.PING_IRON.get());
+        map.put(Blocks.DEEPSLATE_IRON_ORE, ModSounds.PING_IRON.get());
+        map.put(Blocks.RAW_IRON_BLOCK, ModSounds.PING_IRON.get());
+        map.put(Blocks.IRON_BLOCK, ModSounds.PING_IRON.get());
+
+        //Nitra
+        map.put(ModBlocks.NITRA_ORE.get(), ModSounds.PING_NITRA.get());
+        map.put(ModBlocks.DEEPSLATE_NITRA_ORE.get(), ModSounds.PING_NITRA.get());
+        map.put(ModBlocks.NITRA_BLOCK.get(), ModSounds.PING_NITRA.get());
+
+        //Gold
+        map.put(Blocks.GOLD_ORE, ModSounds.PING_GOLD.get());
+        map.put(Blocks.DEEPSLATE_GOLD_ORE, ModSounds.PING_GOLD.get());
+        map.put(Blocks.GOLD_BLOCK, ModSounds.PING_GOLD_WERE_RICH.get());
+        map.put(Blocks.RAW_GOLD_BLOCK, ModSounds.PING_GOLD_WERE_RICH.get());
+
+        //Morkite
+        map.put(ModBlocks.MORKITE_ORE.get(), ModSounds.PING_MORKITE.get());
+        map.put(ModBlocks.MORKITE_BLOCK.get(), ModSounds.PING_MORKITE.get());
+        map.put(ModBlocks.DEEPSLATE_MORKITE_ORE.get(), ModSounds.PING_MORKITE.get());
+        map.put(ModBlocks.MORKITE_ORE.get(), ModSounds.PING_MORKITE.get());
+        map.put(ModBlocks.MORKITE_BLOCK.get(), ModSounds.PING_MORKITE.get());
+
+
+        //Dystrum
+        map.put(ModBlocks.DYSTRUM_BLOCK.get(), ModSounds.PING_DYSTRUM.get());
+        map.put(ModBlocks.DYSTRUM_ORE.get(), ModSounds.PING_DYSTRUM.get());
+        map.put(ModBlocks.RAW_DYSTRUM_BLOCK.get(), ModSounds.PING_DYSTRUM.get());
+
+        map.put(ModBlocks.RED_SUGAR.get(), ModSounds.PING_RED_SUGAR.get());
+
+        //Worthless
+        map.put(Blocks.GRAVEL, ModSounds.PING_WORTHLESS.get());
+        map.put(Blocks.COBBLESTONE, ModSounds.PING_WORTHLESS.get());
+
+        //Mushroom
+        map.put(Blocks.MUSHROOM_STEM, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.BROWN_MUSHROOM_BLOCK, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.BROWN_MUSHROOM, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.RED_MUSHROOM_BLOCK, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.RED_MUSHROOM, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.POTTED_BROWN_MUSHROOM, ModSounds.PING_MUSHROOM.get());
+        map.put(Blocks.POTTED_RED_MUSHROOM, ModSounds.PING_MUSHROOM.get());
+
+        map.put(ModBlocks.OMMORAN_HEARTHSTONE.get(), ModSounds.MARK_OMMORAN_HEARTHSTONE.get());
+
+        return map;
+    }
+
+    private static SoundEvent entityPingSound(LivingEntity le)
+    {
+        SoundEvent pingSoundEvent = getEntityPing(LootdebugsServerConfig.LOOTBUG_PACIFIST_MODE.get()).get(le.getType());
+
+        if(pingSoundEvent == null && le instanceof Monster)
+        {
+            pingSoundEvent = ModSounds.PING_ENEMY.get();
+        }
+
+        if(pingSoundEvent == null)
+        {
+            pingSoundEvent = ModSounds.PING_STRANGE_SPOT.get();
+        }
+        return pingSoundEvent;
+    }
+
+    public static Map<EntityType<?>, SoundEvent> getEntityPing(boolean pacifist)
+    {
+        Map<EntityType<?>, SoundEvent> map = Maps.newLinkedHashMap();
+
+        //Lootbug
+        if(pacifist)
+        {
+            map.put(ModEntities.LOOTBUG.get(), ModSounds.PING_LOOTBUG_PACIFIST.get());
+            map.put(ModEntities.LOOTBUG_GOLDEN.get(), ModSounds.PING_LOOTBUG_PACIFIST.get());
+        }
+        else
+        {
+            map.put(ModEntities.LOOTBUG.get(), ModSounds.PING_LOOTBUG_NORMAL.get());
+            map.put(ModEntities.LOOTBUG_GOLDEN.get(), ModSounds.PING_LOOTBUG_NORMAL.get());
+        }
+
+        map.put(ModEntities.LOOTBUG_OLD.get(), ModSounds.PING_STRANGE_SPOT.get());
+
+        //Monster
+        return map;
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangeTerminal.ClassChangeContainer;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubContainer;
@@ -26,14 +26,12 @@ public class ModMenuTypes
     public static final RegistryObject<MenuType<EquipmentTableContainer>> EQUIPMENT_TERMINAL_CONTAINER =
             registerMenuType(EquipmentTableContainer::new, "equipment_terminal_container");
 
-    public static final RegistryObject<MenuType<FuelRefineryContainer>> FUEL_PRESS_CONTAINER =
+    public static final RegistryObject<MenuType<FuelRefineryContainer>> FUEL_REFINERY_CONTAINER =
             registerMenuType(FuelRefineryContainer::new, "fuel_press_container");
 
-    public static final RegistryObject<MenuType<ClassChangeContainer>> CLASS_CHANGE_CONTAINER =
-            registerMenuType(ClassChangeContainer::new, "class_change_container");
+    public static final RegistryObject<MenuType<ClassChangerContainer>> CLASS_CHANGER_CONTAINER =
+            registerMenuType(ClassChangerContainer::new, "class_changer_container");
 
-    public static final RegistryObject<MenuType<BeardSlotContainer>> BEARD_SLOT_CONTAINER =
-            registerMenuType(BeardSlotContainer::new, "beard_slot_container");
 
 
 

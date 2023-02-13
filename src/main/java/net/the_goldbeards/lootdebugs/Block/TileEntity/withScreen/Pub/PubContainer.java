@@ -3,20 +3,20 @@ package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.Pub.*;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
 public class PubContainer extends AbstractContainerMenu {
 
     public final PubTile blockEntity;
     private final ContainerData data;
+    private final Level level;
 
     //Transfer Stack in Slot Values
     private static final int HOTBAR_SLOT_COUNT = 9;
@@ -39,6 +39,7 @@ public class PubContainer extends AbstractContainerMenu {
         checkContainerSize(inv, 6);
         blockEntity = ((PubTile) entity);
         this.data = data;
+        this.level = inv.player.level;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -113,10 +114,9 @@ public class PubContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-      //  return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-         //       pPlayer, ModBlocks.PUB.get());
 
-        return true;
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
+                pPlayer, ModBlocks.PUB.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

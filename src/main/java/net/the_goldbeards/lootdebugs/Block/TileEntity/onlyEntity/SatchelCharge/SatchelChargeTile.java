@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import org.jetbrains.annotations.Nullable;
 
 import static net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock.ACTIVATED;
@@ -21,10 +22,16 @@ public class SatchelChargeTile extends BlockEntity {
     {
         count++;
 
-        if(count >= 5)
+        if(LootdebugsServerConfig.SATCHEL_CHARGE_BLINK.get())
         {
-            switchActivated(this.getBlockState());
-            count = 0;
+            if (count >= 2) {
+                switchActivated(this.getBlockState());
+                count = 0;
+            }
+        }
+        else
+        {
+            level.setBlock(this.getBlockPos(), this.getBlockState().setValue(ACTIVATED, true),3);
         }
     }
 

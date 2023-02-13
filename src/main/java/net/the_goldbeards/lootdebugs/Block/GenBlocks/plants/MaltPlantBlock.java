@@ -2,7 +2,6 @@ package net.the_goldbeards.lootdebugs.Block.GenBlocks.plants;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +24,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -150,7 +150,7 @@ public class MaltPlantBlock extends BushBlock implements BonemealableBlock
         } else if (i == 1) {
 
             popResource(world, pos, new ItemStack(ModItems.MALT_STAR.get(), 1 + world.random.nextInt(1)));
-            world.playSound((Player)null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+            world.playSound((Player)null, pos, ModSounds.VEGETATION_PICKED.get(), SoundSource.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
             world.setBlock(pos, state.setValue(AGE, Integer.valueOf(0)), 2);
             return InteractionResult.sidedSuccess(world.isClientSide);
         } else {

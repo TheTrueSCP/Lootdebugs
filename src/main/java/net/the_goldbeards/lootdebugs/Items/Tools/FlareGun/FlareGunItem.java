@@ -12,9 +12,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.Entities.Tools.ShootFlareEntity;
-import net.the_goldbeards.lootdebugs.Sound.ModSounds;
-import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
@@ -23,98 +23,62 @@ import java.util.function.Predicate;
 
 
 
-public class FlareGunItem extends Item {
+public class FlareGunItem extends BasicToolItem
+{
 
-    public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Scout;
 
     public FlareGunItem(Properties pProperties) {
         super(pProperties);
     }
+
+    @Override
+    public IClassData.Classes getDwarfClassToUse() {
+        return IClassData.Classes.Scout;
+    }
+
     public static final Predicate<ItemStack> FOAM = (p_43017_) -> {
         return p_43017_.is(ModItems.SHOOT_FLARE.get());
     };
 
-    @Override
-    public int getItemStackLimit(ItemStack stack) {
-        return 1;
-    }
-
-
-
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.NONE;
-    }
-
-    /**
-     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     */
-
-    @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        //Dwarfclass
-
-        if(pEntity instanceof Player pPlayer)
-        {
-            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
-            {
-
-                UsefullStuff.ItemNBTHelper.putString(pStack,"flare_gun_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
-
-
-            });
-
-        }
-
-        if(pEntity instanceof Player player && pIsSelected)
-        {
-            if(!UsefullStuff.ItemNBTHelper.getString(pStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) //TheTrueSCP
-            {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.ClassTranslator.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
-            }
-
-        }
-        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-    }
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
 
-            if (!UsefullStuff.ItemNBTHelper.getString(pUsedStack, "flare_gun_dwarfclass").equals(dwarfClassToUse.name())) {
-                return InteractionResultHolder.pass(pUsedStack);
+        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse())) //TheTrueSCP
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
+
+        ItemStack foam = getAmmo(pPlayer);
+
+
+        pPlayer.getCooldowns().addCooldown(this, 28);
+        if (!foam.isEmpty() || pPlayer.isCreative()) {
+
+
+            ShootFlareEntity shootFlareEntity = new ShootFlareEntity(pPlayer, pLevel);
+
+            shootFlareEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4.0F, 0.0F);
+            pPlayer.playSound(ModSounds.TOOL_FOAM_HARDEN.get(), 1, 1);
+            pLevel.addFreshEntity(shootFlareEntity);
+
+            if (!pPlayer.isCreative()) {
+                foam.shrink(1);
+
             }
 
-
-            ItemStack foam = getAmmo(pPlayer);
-
-
-            pPlayer.getCooldowns().addCooldown(this, 28);
-            if (!foam.isEmpty() || pPlayer.isCreative()) {
-
-
-                ShootFlareEntity shootFlareEntity = new ShootFlareEntity(pPlayer, pLevel);
-
-                shootFlareEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4.0F, 0.0F);
-                pPlayer.playSound(ModSounds.TOOL_FOAM_HARDEN.get(), 1, 1);
-                pLevel.addFreshEntity(shootFlareEntity);
-
-                if (!pPlayer.isCreative()) {
-                    foam.shrink(1);
-
-                }
-
-                if (foam.isEmpty()) {
-                    pPlayer.getInventory().removeItem(foam);
-                }
-            } else
-            {
+            if (foam.isEmpty()) {
                 pPlayer.getInventory().removeItem(foam);
-                pPlayer.playSound(SoundEvents.DISPENSER_FAIL, 1, 1);
             }
+        } else
+        {
+            pPlayer.getInventory().removeItem(foam);
+            pPlayer.playSound(SoundEvents.DISPENSER_FAIL, 1, 1);
+        }
 
-        return InteractionResultHolder.consume(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
     }
 
     public ItemStack getAmmo(Player player) {

@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import net.the_goldbeards.lootdebugs.util.LootdebugsConfig;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,7 +17,7 @@ public class IClassData implements ICapabilitySerializable<CompoundTag>
 
     public IClassData()
     {
-        this.cooldown = LootdebugsConfig.DWARF_CHANGE_COOLDOWN.get();
+        this.cooldown = LootdebugsServerConfig.DWARF_CHANGE_COOLDOWN.get();
     }
     private int cooldown;
     private Classes dwarfClass = Classes.LeafLover;

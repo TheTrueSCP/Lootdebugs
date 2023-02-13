@@ -83,7 +83,7 @@ public class OmmoranHearthstoneStructure extends StructureFeature<JigsawConfigur
         // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
          BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
 
-         BlockPos height = new BlockPos(blockpos.getX(), -25, blockpos.getZ());
+         BlockPos height = new BlockPos(blockpos.getX(), -40, blockpos.getZ());
 
          Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator =
                  JigsawPlacement.addPieces(

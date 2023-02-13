@@ -6,6 +6,8 @@
     "#minecraft:stone_ore_replaceables",
     "minecraft:dirt",
     "minecraft:grass_block",
-    "minecraft:sand"
+    "minecraft:sand",
+    "minecraft:dirt_path",
+    "minecraft:cobblestone"
   ]
 }
