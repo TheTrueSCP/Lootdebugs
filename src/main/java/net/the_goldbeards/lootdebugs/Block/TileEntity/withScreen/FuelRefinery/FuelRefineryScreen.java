@@ -37,7 +37,6 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryCont
 
     public FuelRefineryScreen(FuelRefineryContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-
         fuelRefineryTile = pMenu.fuelRefineryTile;
 
     }
@@ -47,14 +46,14 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryCont
 
         super.init();
 
-        this.addRenderableWidget(new BasicButton(this.leftPos + 86, this.height / 2 - 26, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 89, this.height / 2 - 21, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
 
             PacketHandler.sendToServer(new FuelRefineryConverting(fuelRefineryTile.getBlockPos()));
 
         }));
 
 
-        this.addRenderableWidget(new BasicButton(this.leftPos + 86, this.height / 2 - 62, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
+        this.addRenderableWidget(new BasicButton(this.leftPos + 89, this.height / 2 - 57, 20, 18, 0, 0, 19, START_REFINING_BUTTON,(p_98484_) -> {
 
             PacketHandler.sendToServer(new FuelRefineryRefuelCanister(fuelRefineryTile.getBlockPos()));
 

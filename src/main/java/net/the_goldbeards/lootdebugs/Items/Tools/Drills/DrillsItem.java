@@ -48,9 +48,14 @@ public class DrillsItem extends FuelDiggingItem
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
+		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+
+		if(!canToolBeUsed(stack, pPlayer) || !haveFuel(stack))
+		{
+			return InteractionResultHolder.pass(stack);
+		}
 
 		//Switch Between On Block Mode/Normal Mode
-		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
 			boolean onBlockMode = stack.getOrCreateTag().getBoolean("onBlockMode");
 			stack.getOrCreateTag().putBoolean("onBlockMode", !onBlockMode);

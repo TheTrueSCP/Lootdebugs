@@ -529,4 +529,15 @@ Record:85 (Tech and Tools Update)
 -rearranged json files
 -fixed zipline entity despawns
 -fixed reds sugar creative shrink bug
+-fixed zipline placement bug
+-fixed zipline save/load loes linked pos
+-fixed pickaxe translation bug
+-improved ommoran locator display
+-improved drills interaction
+-fixed satchel charge wrong class display
+-fixed satchel charge detonator delete mechanic
+-fixed drills reset model when unequip
+-fixed fuel refinery is removing bucket too
+-foam can now place around entity when hitted
+-fixed zipline read/save anchor
 

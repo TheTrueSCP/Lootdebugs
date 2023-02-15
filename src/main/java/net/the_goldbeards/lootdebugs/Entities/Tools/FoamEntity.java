@@ -27,7 +27,8 @@ public class FoamEntity extends ThrowableProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult)
     {
-
+        placeBlocks(pResult.getEntity().blockPosition(), true);
+        this.kill();
     }
 
     @Override
@@ -54,9 +55,9 @@ public class FoamEntity extends ThrowableProjectile {
 
             }
             switch (hitResult.getDirection()) {
-                case UP -> PlaceBlock(hitResult.getBlockPos().above(), true);
-                case DOWN -> PlaceBlock(hitResult.getBlockPos().below(), true);
-                default -> PlaceBlock(hitResult.getBlockPos(), true);
+                case UP -> placeBlocks(hitResult.getBlockPos().above(), true);
+                case DOWN -> placeBlocks(hitResult.getBlockPos().below(), true);
+                default -> placeBlocks(hitResult.getBlockPos(), true);
             }
 
 
@@ -64,7 +65,10 @@ public class FoamEntity extends ThrowableProjectile {
         }
     }
 
-    private void PlaceBlock(BlockPos HitPos, boolean mkII)
+
+
+
+    private void placeBlocks(BlockPos HitPos, boolean mkII)
     {
         BlockPos pPos = HitPos;
 
@@ -141,6 +145,7 @@ public class FoamEntity extends ThrowableProjectile {
         placeBlock(pPos, level, mkII);
     }
 
+    //only one block
     private void placeBlock(BlockPos pPos, Level pLevel, boolean mkII)
     {
         if (pLevel.isEmptyBlock(pPos)|| pLevel.getBlockState(pPos).is(ModTags.Blocks.PLATFORMGUN_REPLACEABLE_BLOCKS))

@@ -59,7 +59,7 @@ public class ZiplineItem extends BasicToolItem
 
         ItemStack zipline = getAmmo(pPlayer);
 
-        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(2)) && linkPos != null && canPlaceBlock(pLevel, linkPos))
+        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(1)) && linkPos != null && canPlaceBlock(pLevel, linkPos))
         {
             if (!zipline.isEmpty() || pPlayer.isCreative())
             {

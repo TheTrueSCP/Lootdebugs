@@ -41,7 +41,7 @@ public class ShieldItem extends BlockItem {
         {
             if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("tool.wrong_class_after").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);

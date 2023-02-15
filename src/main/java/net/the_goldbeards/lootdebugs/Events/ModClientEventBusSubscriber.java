@@ -242,53 +242,51 @@ public class ModClientEventBusSubscriber
 
                 Entity entity = (Entity)(pEntity != null ? pEntity : pStack.getEntityRepresentation());
 
-
-                if (entity == null)
+                if(entity instanceof Player player)
                 {
-                    return 0.0F;
-                }
-                else
-                {
-                    if (pClientLevel == null && entity.level instanceof ClientLevel) {
-                        pClientLevel = (ClientLevel)entity.level;
-                    }
 
-                    BlockPos blockpos = this.getOmmoranPosition(pStack.getOrCreateTag());
-                    long i = pClientLevel.getGameTime();
-                    if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double)blockpos.getX() + 0.5D, entity.position().y(), (double)blockpos.getZ() + 0.5D) < (double)1.0E-5F))
-                    {
-                        boolean flag = pEntity instanceof Player && ((Player)pEntity).isLocalPlayer();
-                        double d1 = 0.0D;
-                        if (flag) {
-                            d1 = (double)pEntity.getYRot();
-                        } else if (entity instanceof ItemFrame) {
-                            d1 = this.getFrameRotation((ItemFrame)entity);
-                        } else if (entity instanceof ItemEntity) {
-                            d1 = (double)(180.0F - ((ItemEntity)entity).getSpin(0.5F) / ((float)Math.PI * 2F) * 360.0F);
-                        } else if (pEntity != null) {
-                            d1 = (double)pEntity.yBodyRot;
+                    if (entity == null || !UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover)) {
+                        return 0.0F;
+                    } else {
+                        if (pClientLevel == null && entity.level instanceof ClientLevel) {
+                            pClientLevel = (ClientLevel) entity.level;
                         }
 
-                        d1 = Mth.positiveModulo(d1 / 360.0D, 1.0D);
-                        double d2 = this.getAngleTo(Vec3.atCenterOf(blockpos), entity) / (double)((float)Math.PI * 2F);
-                        double d3;
-                        if (flag) {
-                            if (this.wobble.shouldUpdate(i)) {
-                                this.wobble.update(i, 0.5D - (d1 - 0.25D));
+                        BlockPos blockpos = this.getOmmoranPosition(pStack.getOrCreateTag());
+                        long i = pClientLevel.getGameTime();
+                        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double) blockpos.getX() + 0.5D, entity.position().y(), (double) blockpos.getZ() + 0.5D) < (double) 1.0E-5F)) {
+                            boolean flag = pEntity instanceof Player && ((Player) pEntity).isLocalPlayer();
+                            double d1 = 0.0D;
+                            if (flag) {
+                                d1 = (double) pEntity.getYRot();
+                            } else if (entity instanceof ItemFrame) {
+                                d1 = this.getFrameRotation((ItemFrame) entity);
+                            } else if (entity instanceof ItemEntity) {
+                                d1 = (double) (180.0F - ((ItemEntity) entity).getSpin(0.5F) / ((float) Math.PI * 2F) * 360.0F);
+                            } else if (pEntity != null) {
+                                d1 = (double) pEntity.yBodyRot;
                             }
 
-                            d3 = d2 + this.wobble.rotation;
-                        } else {
-                            d3 = 0.5D - (d1 - 0.25D - d2);
-                        }
+                            d1 = Mth.positiveModulo(d1 / 360.0D, 1.0D);
+                            double d2 = this.getAngleTo(Vec3.atCenterOf(blockpos), entity) / (double) ((float) Math.PI * 2F);
+                            double d3;
+                            if (flag) {
+                                if (this.wobble.shouldUpdate(i)) {
+                                    this.wobble.update(i, 0.5D - (d1 - 0.25D));
+                                }
 
-                        return Mth.positiveModulo((float)d3, 1.0F);
-                    }
-                    else
-                    {
-                        return 0.2f;
+                                d3 = d2 + this.wobble.rotation;
+                            } else {
+                                d3 = 0.5D - (d1 - 0.25D - d2);
+                            }
+
+                            return Mth.positiveModulo((float) d3, 1.0F);
+                        } else {
+                            return 0.2f;
+                        }
                     }
                 }
+                return 0.0f;
             }
 
             private int hash(int p_174670_) {
@@ -327,14 +325,11 @@ public class ModClientEventBusSubscriber
                 }
                 else
                 {
-                    if(pEntity.getItemInHand(pEntity.getUsedItemHand()) == pStack)
-                    {
                         boolean flag = UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.drills_rot");
                         if(flag)
                         {
                             return UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.drills_rot");
                         }
-                    }
 
                     return 0.0f;
                 }

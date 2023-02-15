@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -49,28 +50,27 @@ public class ZiplineBlock extends BaseEntityBlock
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit)
     {
-        if(pState.getValue(HALF) == DoubleBlockHalf.UPPER)
+        if(pLevel instanceof ServerLevel serverLevel)
         {
-            if (!pLevel.isClientSide)
+            if (pState.getValue(HALF) == DoubleBlockHalf.UPPER)
             {
-                    if (getLinkedEntity(pLevel, pPos) != null)
+                    if (getLinkedEntity(serverLevel, pPos) != null)
                     {
-                            ZiplineMoveEntity ziplineMoveEntity = new ZiplineMoveEntity(pLevel, pPos, getLinkedEntity(pLevel, pPos).blockPosition());
-                            pLevel.addFreshEntity(ziplineMoveEntity);
-                            pPlayer.startRiding(ziplineMoveEntity);
-                            return InteractionResult.SUCCESS;
-                    }
-                    else
-                    {
-                        pPlayer.displayClientMessage(new TranslatableComponent("block.zipline_block.link_invalid"), true);
+                        ZiplineMoveEntity ziplineMoveEntity = new ZiplineMoveEntity(pLevel, pPos, getLinkedEntity(serverLevel, pPos).blockPosition());
+                        pLevel.addFreshEntity(ziplineMoveEntity);
+                        pPlayer.startRiding(ziplineMoveEntity);
+                        return InteractionResult.SUCCESS;
+                    } else {
+                        pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.zipline_block.link_invalid"), true);
                     }
             }
-        }
-        else if(pState.getValue(HALF) == DoubleBlockHalf.LOWER)
-        {
-            if(pLevel.getBlockState(pPos.above(1)).getValue(HALF) == DoubleBlockHalf.UPPER)
+
+            else if (pState.getValue(HALF) == DoubleBlockHalf.LOWER)
             {
-                pLevel.getBlockState(pPos.above(1)).use(pLevel, pPlayer, pHand, pHit);
+                if (pLevel.getBlockState(pPos.above(1)).getValue(HALF) == DoubleBlockHalf.UPPER)
+                {
+                    pLevel.getBlockState(pPos.above(1)).use(pLevel, pPlayer, pHand, pHit);
+                }
             }
         }
         return InteractionResult.PASS;
@@ -95,8 +95,8 @@ public class ZiplineBlock extends BaseEntityBlock
 
             if (pLevel.getBlockEntity(posUpper) instanceof ZiplineTile ziplineTile)
             {
-                ziplineTile.setLinkedEntity(linkedEntity);
-                ziplineTile.setThisAnchor(placeAnchor(pLevel, posUpper, linkedEntity));//Spawn anchor and save entity in block
+                ziplineTile.setLinkedEntityUUID(linkedEntity.getUUID());
+                ziplineTile.setThisAnchor(placeAnchor(pLevel, posUpper, linkedEntity).getUUID());//Spawn anchor and save entity in block
             }
         }
     }
@@ -114,31 +114,42 @@ public class ZiplineBlock extends BaseEntityBlock
      */
     public static void removeZipline(Level pLevel, BlockPos pPos, BlockState pState)
     {
-        DoubleBlockHalf doubleblockhalf = pState.getValue(HALF);
+        if(pLevel instanceof ServerLevel serverLevel)
+        {
+            DoubleBlockHalf doubleblockhalf = pState.getValue(HALF);
 
-        if (doubleblockhalf == DoubleBlockHalf.UPPER)
-        {
-            if(pLevel.getBlockEntity(pPos) instanceof ZiplineTile ziplineTile)
+            if (doubleblockhalf == DoubleBlockHalf.UPPER)
             {
-                if(ziplineTile.getThisAnchor() != null)
+                if (pLevel.getBlockEntity(pPos) instanceof ZiplineTile ziplineTile)
                 {
-                    ziplineTile.getLinkedEntity().discard();//remove string aswell
-                    ziplineTile.getThisAnchor().discard();
-                }
-            }
-        }
-        else if (doubleblockhalf == DoubleBlockHalf.LOWER)
-        {
-            BlockPos blockpos = pPos.above();
-            BlockState blockstate = pLevel.getBlockState(blockpos);
-            if (blockstate.is(pState.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER)
-            {
-                if(pLevel.getBlockEntity(blockpos) instanceof ZiplineTile ziplineTile)
-                {
-                    if(ziplineTile.getThisAnchor() != null)
+                    if (ziplineTile.getThisAnchor(serverLevel) != null)
                     {
-                        ziplineTile.getLinkedEntity().discard();
-                        ziplineTile.getThisAnchor().discard();
+                        ziplineTile.getThisAnchor(serverLevel).discard();
+                    }
+
+                    if (ziplineTile.getLinkedEntity(serverLevel) != null)
+                    {
+                        ziplineTile.getLinkedEntity(serverLevel).discard();//remove string aswell
+                    }
+                }
+            } else if (doubleblockhalf == DoubleBlockHalf.LOWER)
+            {
+                BlockPos blockpos = pPos.above();
+                BlockState blockstate = pLevel.getBlockState(blockpos);
+
+                if (blockstate.is(pState.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER)
+                {
+                    if (pLevel.getBlockEntity(blockpos) instanceof ZiplineTile ziplineTile)
+                    {
+                        if (ziplineTile.getThisAnchor(serverLevel) != null)
+                        {
+                            ziplineTile.getThisAnchor(serverLevel).discard();
+                        }
+
+                        if (ziplineTile.getLinkedEntity(serverLevel) != null)
+                        {
+                            ziplineTile.getLinkedEntity(serverLevel).discard();
+                        }
                     }
                 }
             }
@@ -148,11 +159,11 @@ public class ZiplineBlock extends BaseEntityBlock
 
 
     @Nullable
-    public static ZiplineEntity getLinkedEntity(Level pLevel, BlockPos pos)
+    public static ZiplineEntity getLinkedEntity(ServerLevel pLevel, BlockPos pos)
     {
         if(pLevel.getBlockEntity(pos) instanceof ZiplineTile ziplineTile)
         {
-            return ziplineTile.getLinkedEntity();
+            return ziplineTile.getLinkedEntity(pLevel);
         }
         return null;
     }

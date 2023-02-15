@@ -41,11 +41,14 @@ public class ModPlacedFeatures
     public static final Holder<PlacedFeature> INGREDIENTS = PlacementUtils.register("ingredients_placed",
             ModConfiguredFeatures.INGREDIENTS, CountPlacement.of(16) ,HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(110)));
 
+
     public static final Holder<PlacedFeature> RED_SUGAR = PlacementUtils.register("red_sugar_placed",
             ModConfiguredFeatures.RED_SUGAR, CountPlacement.of(17), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(100)));
 
+
     public static final Holder<PlacedFeature> MINERALS = PlacementUtils.register("minerals_placed",
             ModConfiguredFeatures.MINERALS, CountPlacement.of(4), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(90)));
+
 
     public static final Holder<PlacedFeature> LIQUID_MORKITE_SPRING = PlacementUtils.register("liquid_morkite_spring_placed",
         ModConfiguredFeatures.LIQUID_MORKITE_SPRING, CountPlacement.of(2), InSquarePlacement.spread(), HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(80)));

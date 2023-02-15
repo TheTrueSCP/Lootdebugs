@@ -1,6 +1,8 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools.Zipline;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -47,6 +49,12 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         this.setZiplineMountBase(ziplineMountBase);
     }
 
+    public ZiplineEntity(LivingEntity pShooter, Level pLevel, @NotNull BlockPos ziplineMountBase, BlockPos pos) {
+        super(ModEntities.ZIPLINE_ENTITY.get(), pShooter, pLevel);
+        this.setZiplineMountBase(ziplineMountBase);
+        this.setPos(pos.getX(), pos.getY(), pos.getZ());
+    }
+
     @Override
     protected void defineSynchedData() {
 
@@ -68,6 +76,31 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         {
             this.kill();
         }
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+
+        pCompound.put("link_base_pos", NbtUtils.writeBlockPos(getZiplineMountBase()));
+        pCompound.putBoolean("lock", this.lock);
+
+        super.addAdditionalSaveData(pCompound);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+
+        if(pCompound.contains("link_base_pos"))
+        {
+            setZiplineMountBase(NbtUtils.readBlockPos(pCompound.getCompound("link_base_pos")));
+        }
+
+        if(pCompound.contains("lock"))
+        {
+            this.lock = pCompound.getBoolean("lock");
+        }
+
+        super.readAdditionalSaveData(pCompound);
     }
 
     @Override

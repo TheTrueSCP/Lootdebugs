@@ -30,17 +30,22 @@ public class SatchelChargeDetonatorItem extends BasicAllClassItem
 
         BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
 
-        if (pEntity instanceof Player player && pIsSelected)
+
+        if (pEntity instanceof Player player)
         {
-            if (canUseItem(pStack))
+            if (!(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile))
             {
-                if(pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile)
+                player.getInventory().removeItem(pStack);
+            }
+
+            if(pIsSelected)
+            {
+                if (canUseItem(pStack))
                 {
-                    player.displayClientMessage(new TextComponent(ChatFormatting.GREEN + new TranslatableComponent("message.lootdebugs.tool.satchel_charge.ready").getString()), true);
-                }
-                else
-                {
-                    player.getInventory().removeItem(pStack);
+                    if (pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile)
+                    {
+                        player.displayClientMessage(new TextComponent(ChatFormatting.GREEN + new TranslatableComponent("message.lootdebugs.tool.satchel_charge.ready").getString()), true);
+                    }
                 }
             }
         }

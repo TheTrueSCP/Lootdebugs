@@ -166,13 +166,14 @@
   "class.lootdebugs.player.gunner" : "Gunner",
   "class.lootdebugs.player.thetruescp": "TheTrueSCP" ,
   "class.lootdebugs.player.monsieurhannes": "Monsieur Hannes",
-  "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your'e just a leaf_lover",
+  "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your'e just a leaf lover",
 
   "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
 
   "message.lootdebugs.tool.wrong_class_0" : "Wrong Class, you must be",
   "message.lootdebugs.tool.wrong_class_1" : "to use this tool",
   "message.lootdebugs.tool.no_fuel": "No Fuel in Inventory",
+  "message.lootdebugs.tool.ommoran_locator.searching": "Searching for Hearhstone...",
   "message.lootdebugs.tool.on_block_drill_mode_off": "On block drill mode off",
   "message.lootdebugs.tool.on_block_drill_mode_on": "On block drill mode on",
   "message.lootdebugs.tool.not_on_ground": "You must be on solid ground to use this item",

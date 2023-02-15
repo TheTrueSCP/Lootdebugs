@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -272,15 +273,32 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
             if(realFuelAmount == optimalFuelAmount)
             {
-                fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount(),false);
+                if(!fuelPressTile.addedBucketToSlot(i, fuelPressTile))
+                {
+                    fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount(), false);
+                }
                 fuelPressTile.fluid_tank.fill(optimalFuel, IFluidHandler.FluidAction.EXECUTE);
             }
             else if(realFuelAmount >= (optimalFuelAmount / 2))
             {
-                fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount() / 2,false);
+                if(!fuelPressTile.addedBucketToSlot(i, fuelPressTile))
+                {
+                    fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount() / 2, false);
+                }
                 fuelPressTile.fluid_tank.fill(new FluidStack(ModFluids.LIQUID_MORKITE.get(), optimalFuelAmount / 2), IFluidHandler.FluidAction.EXECUTE);
             }
         }
+    }
+
+    public boolean addedBucketToSlot(int i, FuelRefineryTile fuelRefineryTile)
+    {
+        if(fuelRefineryTile.itemHandler.getStackInSlot(i).is(ModItems.LIQUID_MORKITE_BUCKET.get()) || fuelRefineryTile.itemHandler.getStackInSlot(i).is(Items.LAVA_BUCKET))
+        {
+            fuelRefineryTile.itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET, 1));
+        return true;
+        }
+
+        return false;
     }
 
     public static int getFluidAmount(ItemStack pStack)

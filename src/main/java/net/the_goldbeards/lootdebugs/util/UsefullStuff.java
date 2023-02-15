@@ -352,20 +352,20 @@ public class UsefullStuff
             pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
             {
 
-                UsefullStuff.ItemNBTHelper.putString(pStack, "satchelcharge_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
+                UsefullStuff.ItemNBTHelper.putString(pStack, "stack_dwarfclass", classCap.getDwarfClass().name());//Write every tick the Playerclass into the item
 
 
             });
 
-            if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
+            if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 return true;
             }
-            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
             {
                 return true;
             }
-            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
             {
                 return true;
             }

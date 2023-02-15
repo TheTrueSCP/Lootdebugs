@@ -16,6 +16,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Block.Beers.*;
+import net.the_goldbeards.lootdebugs.Block.GenBlocks.OreBlocks;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.plants.*;
 import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
 import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
@@ -150,7 +151,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> BISMOR_ORE = registryBlock("bismor_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> BISMOR_BLOCK = registryBlock("bismor_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -158,7 +159,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> CROPPER_ORE = registryBlock("cropper_ore",
-            () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> CROPPER_BLOCK = registryBlock("cropper_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -254,22 +255,22 @@ public class ModBlocks {
     //DrinkReceips
 
     public static final RegistryObject<Block> BARLEY_PLANT =registryBlock("barley_plant",
-            () -> new BarleyPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new BarleyPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
     public static final RegistryObject<Block> BOOLO_CAP =registryBlock("boolo_cap",
-            () -> new BooloCapBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new BooloCapBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
     public static final RegistryObject<Block> YEAST_PLANT =registryBlock("yeast_plant",
-            () -> new YeastPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new YeastPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
     public static final RegistryObject<Block> APOCA_BLOOM =registryBlock("apoca_bloom",
-            () -> new ApocaBloomBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new ApocaBloomBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
     public static final RegistryObject<Block> MALT_PLANT =registryBlock("malt_plant",
-            () -> new MaltPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new MaltPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
     public static final RegistryObject<Block> STARCH_PLANT =registryBlock("starch_plant",
-            () -> new StarchPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().sound(ModSoundTypes.VEGETATION)),false);
+            () -> new StarchPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
 
 
 }
