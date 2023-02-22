@@ -87,7 +87,7 @@ public class ZiplineTile extends BlockEntity
     {
         if(!blockState.canSurvive(level, pos))
         {
-            ZiplineBlock.removeZipline(level, pos, blockState);
+            ZiplineBlock.removeZipline(level, pos);
         }
     }
 

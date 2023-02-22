@@ -1,6 +1,7 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools.Zipline;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -31,7 +32,10 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Entities.Tools.AbstractShootablePhysicsArrowLikeEntity;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
+import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import javax.annotation.Nullable;
 
@@ -39,29 +43,27 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
 {
     private static final EntityDataAccessor<BlockPos> LINKED_BASE_POS = SynchedEntityData.defineId(ZiplineEntity.class, EntityDataSerializers.BLOCK_POS);
     private boolean lock = false;
+    private Direction rotPlaceDirection;
 
     public ZiplineEntity(EntityType<? extends AbstractShootablePhysicsArrowLikeEntity> p_37466_, Level p_37467_) {
         super(p_37466_, p_37467_);
     }
 
-    public ZiplineEntity(LivingEntity pShooter, Level pLevel, @NotNull BlockPos ziplineMountBase) {
+    public ZiplineEntity(LivingEntity pShooter, Level pLevel, @NotNull BlockPos ziplineMountBase, Direction playerLookDirection) {
         super(ModEntities.ZIPLINE_ENTITY.get(), pShooter, pLevel);
         this.setZiplineMountBase(ziplineMountBase);
-    }
-
-    public ZiplineEntity(LivingEntity pShooter, Level pLevel, @NotNull BlockPos ziplineMountBase, BlockPos pos) {
-        super(ModEntities.ZIPLINE_ENTITY.get(), pShooter, pLevel);
-        this.setZiplineMountBase(ziplineMountBase);
-        this.setPos(pos.getX(), pos.getY(), pos.getZ());
+        this.setRotPlaceDirection(playerLookDirection);
     }
 
     @Override
-    protected void defineSynchedData() {
+    protected void defineSynchedData()
+    {
 
         this.entityData.define(LINKED_BASE_POS, BlockPos.ZERO);
 
         super.defineSynchedData();
     }
+
 
     @Override
     public void tick()
@@ -75,7 +77,25 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         if(this.isInWater())
         {
             this.kill();
+
+            if(this.isInWater())
+            {
+                ZiplineBlock.removeBlock(level, getZiplineMountBase());
+            }
+
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+
+        if(getZiplineMountBase() != null)
+        {
+            ZiplineBlock.removeBlock(level, getZiplineMountBase());
+        }
+        this.discard();
+
+        return super.hurt(pSource, pAmount);
     }
 
     @Override
@@ -83,6 +103,7 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
 
         pCompound.put("link_base_pos", NbtUtils.writeBlockPos(getZiplineMountBase()));
         pCompound.putBoolean("lock", this.lock);
+        pCompound.putInt("rot_place_direction", getRotPlaceDirection().get2DDataValue());
 
         super.addAdditionalSaveData(pCompound);
     }
@@ -93,6 +114,11 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         if(pCompound.contains("link_base_pos"))
         {
             setZiplineMountBase(NbtUtils.readBlockPos(pCompound.getCompound("link_base_pos")));
+        }
+
+        if(pCompound.contains("rot_place_direction"))
+        {
+            this.setRotPlaceDirection(Direction.from2DDataValue(pCompound.getInt("rot_place_direction")));
         }
 
         if(pCompound.contains("lock"))
@@ -140,9 +166,9 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         super.onHitBlock(blockHitResult);
 
         //When hit, lock pos and build block at origin
-        if(!this.level.isClientSide)
+        if(!this.level.isClientSide && getZiplineMountBase() != null && this.getRotPlaceDirection() != null)
         {
-            ZiplineBlock.placeBlock(this.level, getZiplineMountBase(), this);
+            ZiplineBlock.placeBlock(this.level, getZiplineMountBase(), this, getRotPlaceDirection());
             this.lock = true;
         }
     }
@@ -167,5 +193,15 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     public boolean getIsLocked()
     {
         return lock;
+    }
+
+    public Direction getRotPlaceDirection()
+    {
+        return rotPlaceDirection;
+    }
+
+    public void setRotPlaceDirection(Direction rotPlaceDirection)
+    {
+        this.rotPlaceDirection = rotPlaceDirection;
     }
 }

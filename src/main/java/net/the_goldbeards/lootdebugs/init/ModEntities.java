@@ -57,7 +57,7 @@ public class ModEntities {
             ENTITY_TYPES.register("zipline_move", () -> EntityType.Builder.<ZiplineMoveEntity>of(ZiplineMoveEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline_move").toString()));
 
     public static final RegistryObject<EntityType<ZiplineEntity>> ZIPLINE_ENTITY =
-            ENTITY_TYPES.register("zipline", () -> EntityType.Builder.<ZiplineEntity>of(ZiplineEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline").toString()));
+            ENTITY_TYPES.register("zipline", () -> EntityType.Builder.<ZiplineEntity>of(ZiplineEntity::new, MobCategory.MISC).sized(1.5f, 1.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline").toString()));
 
     public static final RegistryObject<EntityType<ZiplineStringAnchor>> STRING_ANCHOR_ENTITY =
             ENTITY_TYPES.register("zipline_anchor", () -> EntityType.Builder.<ZiplineStringAnchor>of(ZiplineStringAnchor::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "zipline_anchor").toString()));

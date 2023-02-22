@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
@@ -38,6 +39,35 @@ import java.util.regex.Pattern;
 
 public class UsefullStuff
 {
+    public static class DataTypeHelper
+    {
+        public static BlockPos addVecToBlockPos(BlockPos pos, Vec3 additionalVec, int normalizedNumber)
+        {
+            double x = pos.getX() + getNormalizedNumber(additionalVec.x, normalizedNumber);
+            double y = pos.getY() + getNormalizedNumber(additionalVec.y, normalizedNumber);
+            double z = pos.getZ() + getNormalizedNumber(additionalVec.z, normalizedNumber);
+
+
+
+            return new BlockPos(x, y, z);
+        }
+
+        public static int getNormalizedNumber(double number, int normalizedNumber)
+        {
+            if(number > 0)
+            {
+                return normalizedNumber;
+            }
+
+            if(number < 0)
+            {
+                return -normalizedNumber;
+            }
+
+            return 0;
+        }
+    }
+
     public static class ItemNBTHelper
     {
 

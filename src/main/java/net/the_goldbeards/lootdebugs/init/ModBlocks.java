@@ -6,11 +6,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -102,7 +104,7 @@ public class ModBlocks {
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
     public static final RegistryObject<Block> ZIPLINE_BLOCK = registryBlock("zipline_block",
-            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f)),false);
+            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f).noOcclusion().isViewBlocking(ModBlocks::never)),false);
 
 
 

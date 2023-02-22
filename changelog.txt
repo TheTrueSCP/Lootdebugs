@@ -540,4 +540,9 @@ Record:85 (Tech and Tools Update)
 -fixed fuel refinery is removing bucket too
 -foam can now place around entity when hitted
 -fixed zipline read/save anchor
-
+-added zipline model
+-added zipline rotation
+-adeed zipline item model
+-added zipline block model
+-fixed zipline string rendering
+-improved zipline values

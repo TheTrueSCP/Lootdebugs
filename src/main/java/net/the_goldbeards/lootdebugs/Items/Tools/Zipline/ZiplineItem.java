@@ -66,9 +66,11 @@ public class ZiplineItem extends BasicToolItem
                 pPlayer.getCooldowns().addCooldown(this, 28);
 
                 //Shoots zipline entity with blocklink to current player pos
-                ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos);
-                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 5.0F, 0.0F);
+                ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos, pPlayer.getDirection().getOpposite());
+                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2.0F, 0.0F);
                 pLevel.addFreshEntity(ziplineEntity);
+
+                ziplineEntity.setPos(ziplineEntity.getX(), ziplineEntity.getY() - 0.5f, ziplineEntity.getZ());
 
                 pLevel.playSound(pPlayer, pPlayer, ModSounds.TOOL_SHOOT.get(), SoundSource.PLAYERS, 5, 1);
 
@@ -100,8 +102,9 @@ public class ZiplineItem extends BasicToolItem
     {
 
         BlockPos blockpos = ziplineBlock.below();
-        BlockState blockstate = pLevel.getBlockState(blockpos);
-        return blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP);
+        BlockState blockstateBelow = pLevel.getBlockState(blockpos);
+        return !blockstateBelow.isAir();
+       // return blockstateBelow.isFaceSturdy(pLevel, blockpos, Direction.UP);
     }
 
     public ItemStack getAmmo(Player player) {

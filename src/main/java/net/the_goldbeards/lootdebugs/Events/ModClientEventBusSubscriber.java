@@ -135,6 +135,8 @@ public class ModClientEventBusSubscriber
 
         event.registerLayerDefinition(ShootFlareModel.LAYER_LOCATION, ShootFlareModel::createBodyLayer);
 
+        event.registerLayerDefinition(ZiplineModel.LAYER_LOCATION, ZiplineModel::createBodyLayer);
+
         event.registerLayerDefinition(FoamModel.LAYER_LOCATION, FoamModel::createBodyLayer);//grappling hook hook
 
         event.registerLayerDefinition(SatchelChargeModel.LAYER_LOCATION, SatchelChargeModel::createBodyLayer);

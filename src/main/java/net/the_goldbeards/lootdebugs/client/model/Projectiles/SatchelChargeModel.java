@@ -10,11 +10,12 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.the_goldbeards.lootdebugs.Entities.Tools.SatchelChargeEntity;
+import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 
 public class SatchelChargeModel<T extends SatchelChargeEntity> extends HierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "satchel_charge"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(LootDebugsMain.MOD_ID, "satchel_charge"), "main");
 	private final ModelPart Satchelcharge;
 
 	public SatchelChargeModel(ModelPart root) {

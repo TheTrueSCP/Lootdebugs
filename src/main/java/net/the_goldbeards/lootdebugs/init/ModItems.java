@@ -114,7 +114,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> SHIELD = ITEMS.register("shield",
             () -> new ShieldItem(ModBlocks.SHIELD_EMITTER_BLOCK.get() ,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> ZIPLINE = ITEMS.register("zipline",
+    public static final RegistryObject<Item> ZIPLINE_GUN = ITEMS.register("zipline_gun",
             () -> new ZiplineItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
 
