@@ -1,24 +1,15 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.Zipline;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
@@ -67,7 +58,7 @@ public class ZiplineItem extends BasicToolItem
 
                 //Shoots zipline entity with blocklink to current player pos
                 ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos, pPlayer.getDirection().getOpposite());
-                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 2.0F, 0.0F);
+                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
                 pLevel.addFreshEntity(ziplineEntity);
 
                 ziplineEntity.setPos(ziplineEntity.getX(), ziplineEntity.getY() - 0.5f, ziplineEntity.getZ());

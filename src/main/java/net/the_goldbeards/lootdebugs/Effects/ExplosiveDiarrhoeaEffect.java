@@ -30,7 +30,7 @@ public class ExplosiveDiarrhoeaEffect extends MobEffect {
         if(randValue == 11)
         {
 
-            Minecraft.getInstance().level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
+          // Minecraft.getInstance().level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
             level.playSound(null, entityPos.x(), entityPos.y(), entityPos.z(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1,1);
 
             Vec3 randMove = new Vec3(rand.nextInt(2),rand.nextInt(1,3),rand.nextInt(2));//Set Random numbers for move

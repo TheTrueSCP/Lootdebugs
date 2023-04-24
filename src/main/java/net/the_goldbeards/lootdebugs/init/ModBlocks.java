@@ -6,13 +6,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +21,7 @@ import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
 import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
 import net.the_goldbeards.lootdebugs.Block.TestBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
@@ -103,8 +100,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SATCHEL_CHARGE = registryBlock("satchel_charge",
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
-    public static final RegistryObject<Block> ZIPLINE_BLOCK = registryBlock("zipline_block",
-            () -> new ZiplineBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f).noOcclusion().isViewBlocking(ModBlocks::never)),false);
+    public static final RegistryObject<Block> ZIPLINE_POLE_BLOCK = registryBlock("zipline_pole_block",
+            () -> new ZiplinePoleBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f).noOcclusion().isViewBlocking(ModBlocks::never)),false);
 
 
 

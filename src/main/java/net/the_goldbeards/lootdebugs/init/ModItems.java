@@ -230,7 +230,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
 
     public static final RegistryObject<Item> NITRA_ON_A_STICK = ITEMS.register("nitra_on_a_stick",
-            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB).stacksTo(1)));
 
 
     //Spawn Eggs

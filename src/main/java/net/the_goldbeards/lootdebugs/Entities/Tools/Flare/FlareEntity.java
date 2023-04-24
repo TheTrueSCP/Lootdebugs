@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools.Flare;
 
+import net.minecraft.client.gui.screens.inventory.BeaconScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -40,6 +41,17 @@ public class FlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
                 setDwarfClass(classCap.getDwarfClass());
 
             });
+        }
+    }
+
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(this.isInLava())
+        {
+            this.discard();
         }
     }
 
@@ -132,11 +144,6 @@ public class FlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
         super.onHitBlock(hitResult);
         tryToSetFlareAroundBlock(level, hitResult.getBlockPos());
 
-    }
-
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return ModSounds.FLARE_IDLE.get();
     }
 
     @Override

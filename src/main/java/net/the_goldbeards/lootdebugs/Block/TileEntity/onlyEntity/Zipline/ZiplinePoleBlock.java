@@ -1,6 +1,5 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline;
 
-import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -33,7 +32,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryTile;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineMoveEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
@@ -42,7 +40,7 @@ import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ZiplineBlock extends BaseEntityBlock
+public class ZiplinePoleBlock extends BaseEntityBlock
 {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -237,14 +235,14 @@ public class ZiplineBlock extends BaseEntityBlock
             Block.box(7.999999999999993, 0.5, 6.5, 7.999999999999993, 3, 9.5)
     );
 
-    public ZiplineBlock(Properties p_49224_)
+    public ZiplinePoleBlock(Properties p_49224_)
     {
         super(p_49224_);
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit)
     {
-        if(pLevel instanceof ServerLevel serverLevel && pLevel.getBlockState(pPos).getBlock() == ModBlocks.ZIPLINE_BLOCK.get())
+        if(pLevel instanceof ServerLevel serverLevel && pLevel.getBlockState(pPos).getBlock() == ModBlocks.ZIPLINE_POLE_BLOCK.get())
         {
             if (pState.getValue(HALF) == DoubleBlockHalf.UPPER)
             {
@@ -288,7 +286,7 @@ public class ZiplineBlock extends BaseEntityBlock
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ZiplineTile(pPos, pState);
+        return new ZiplinePoleTile(pPos, pState);
     }
 
     @Override
@@ -330,15 +328,15 @@ public class ZiplineBlock extends BaseEntityBlock
             if (pos != null) {
                 BlockPos posUpper = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
 
-                pLevel.setBlock(pos, ModBlocks.ZIPLINE_BLOCK.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(FACING, direction), 2);//place both blocks
-                pLevel.setBlock(posUpper, ModBlocks.ZIPLINE_BLOCK.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(FACING, direction), 2);
+                pLevel.setBlock(pos, ModBlocks.ZIPLINE_POLE_BLOCK.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER).setValue(FACING, direction), 2);//place both blocks
+                pLevel.setBlock(posUpper, ModBlocks.ZIPLINE_POLE_BLOCK.get().defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(FACING, direction), 2);
 
-                if (pLevel.getBlockEntity(posUpper) instanceof ZiplineTile ziplineTile)
+                if (pLevel.getBlockEntity(posUpper) instanceof ZiplinePoleTile ziplinePoleTile)
                 {
                     ZiplineStringAnchor ziplineStringAnchor = placeAnchor(pLevel, posUpper, linkedEntity);//spawn zipline entity
 
-                    ziplineTile.setLinkedEntityUUID(linkedEntity.getUUID());//save zipline-entity in block
-                    ziplineTile.setThisAnchor(ziplineStringAnchor.getUUID());// save anchor-entity in block
+                    ziplinePoleTile.setLinkedEntityUUID(linkedEntity.getUUID());//save zipline-entity in block
+                    ziplinePoleTile.setThisAnchor(ziplineStringAnchor.getUUID());// save anchor-entity in block
                 }
             }
         }
@@ -346,9 +344,9 @@ public class ZiplineBlock extends BaseEntityBlock
 
     public static void removeBlock(Level level, BlockPos ziplineMountBase)
     {
-        if(level.getBlockState(ziplineMountBase).is(ModBlocks.ZIPLINE_BLOCK.get()))
+        if(level.getBlockState(ziplineMountBase).is(ModBlocks.ZIPLINE_POLE_BLOCK.get()))
         {
-            ZiplineBlock.removeZipline(level, ziplineMountBase);
+            ZiplinePoleBlock.removeZipline(level, ziplineMountBase);
 
             level.removeBlock(ziplineMountBase.above(1), false);
             level.removeBlockEntity(ziplineMountBase.above(1));
@@ -379,16 +377,16 @@ public class ZiplineBlock extends BaseEntityBlock
 
             if (doubleblockhalf == DoubleBlockHalf.UPPER)
             {
-                if (pLevel.getBlockEntity(pPos) instanceof ZiplineTile ziplineTile)
+                if (pLevel.getBlockEntity(pPos) instanceof ZiplinePoleTile ziplinePoleTile)
                 {
-                    if (ziplineTile.getThisAnchor(serverLevel) != null)
+                    if (ziplinePoleTile.getThisAnchor(serverLevel) != null)
                     {
-                        ziplineTile.getThisAnchor(serverLevel).discard();
+                        ziplinePoleTile.getThisAnchor(serverLevel).discard();
                     }
 
-                    if (ziplineTile.getLinkedEntity(serverLevel) != null)
+                    if (ziplinePoleTile.getLinkedEntity(serverLevel) != null)
                     {
-                        ziplineTile.getLinkedEntity(serverLevel).discard();//remove string aswell
+                        ziplinePoleTile.getLinkedEntity(serverLevel).discard();//remove string aswell
                     }
                 }
             }
@@ -399,16 +397,16 @@ public class ZiplineBlock extends BaseEntityBlock
 
                 if (blockstate.is(pState.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.UPPER)
                 {
-                    if (pLevel.getBlockEntity(blockpos) instanceof ZiplineTile ziplineTile)
+                    if (pLevel.getBlockEntity(blockpos) instanceof ZiplinePoleTile ziplinePoleTile)
                     {
-                        if (ziplineTile.getThisAnchor(serverLevel) != null)
+                        if (ziplinePoleTile.getThisAnchor(serverLevel) != null)
                         {
-                            ziplineTile.getThisAnchor(serverLevel).discard();
+                            ziplinePoleTile.getThisAnchor(serverLevel).discard();
                         }
 
-                        if (ziplineTile.getLinkedEntity(serverLevel) != null)
+                        if (ziplinePoleTile.getLinkedEntity(serverLevel) != null)
                         {
-                            ziplineTile.getLinkedEntity(serverLevel).discard();
+                            ziplinePoleTile.getLinkedEntity(serverLevel).discard();
                         }
                     }
                 }
@@ -421,9 +419,9 @@ public class ZiplineBlock extends BaseEntityBlock
     @Nullable
     public static ZiplineEntity getLinkedEntity(ServerLevel pLevel, BlockPos pos)
     {
-        if(pLevel.getBlockEntity(pos) instanceof ZiplineTile ziplineTile)
+        if(pLevel.getBlockEntity(pos) instanceof ZiplinePoleTile ziplinePoleTile)
         {
-            return ziplineTile.getLinkedEntity(pLevel);
+            return ziplinePoleTile.getLinkedEntity(pLevel);
         }
         return null;
     }
@@ -432,8 +430,8 @@ public class ZiplineBlock extends BaseEntityBlock
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         {
-            return createTickerHelper(pBlockEntityType, ModTileEntities.ZIPLINE_ENTITY.get(),
-                    ZiplineTile::tick);
+            return createTickerHelper(pBlockEntityType, ModTileEntities.ZIPLINE_POLE_ENTITY.get(),
+                    ZiplinePoleTile::tick);
         }
     }
 

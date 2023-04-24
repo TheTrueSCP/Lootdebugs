@@ -9,7 +9,7 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.Ligh
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlockTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlockTile;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryTile;
@@ -55,9 +55,9 @@ public class ModTileEntities
             BLOCK_ENTITYS.register("class_changer_entity", () ->
                     BlockEntityType.Builder.of(ClassChangerTile::new, ModBlocks.CLASS_CHANGER.get()).build(null));
 
-    public static final RegistryObject<BlockEntityType<ZiplineTile>> ZIPLINE_ENTITY =
-            BLOCK_ENTITYS.register("zipline_entity", () ->
-                    BlockEntityType.Builder.of(ZiplineTile::new, ModBlocks.ZIPLINE_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ZiplinePoleTile>> ZIPLINE_POLE_ENTITY =
+            BLOCK_ENTITYS.register("zipline_pole_entity", () ->
+                    BlockEntityType.Builder.of(ZiplinePoleTile::new, ModBlocks.ZIPLINE_POLE_BLOCK.get()).build(null));
 
     // public static final RegistryObject<BlockEntityType<HearhstoneDefenderTile>> HEARTHSTONE_DEFENDER_ENTITY =
     //        BLOCK_ENTITYS.register("hearthstone_defender_entity", () ->

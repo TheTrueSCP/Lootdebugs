@@ -11,33 +11,16 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.ThrowableProjectile;
-import net.minecraft.world.entity.vehicle.Minecart;
-import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplineTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleTile;
 import net.the_goldbeards.lootdebugs.Entities.Tools.AbstractShootablePhysicsArrowLikeEntity;
-import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
-import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.mixin.MixinEnvironment;
-
-import javax.annotation.Nullable;
 
 public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
 {
@@ -74,26 +57,29 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
             this.lock = true;
         }
 
-        if(this.isInWater())
+        if(this.isInWater() || this.isInLava())
         {
             this.kill();
 
-            if(this.isInWater())
+            if(this.getZiplineMountBase() != null)
             {
-                ZiplineBlock.removeBlock(level, getZiplineMountBase());
+                ZiplinePoleBlock.removeBlock(level, getZiplineMountBase());
             }
 
         }
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
+    public boolean hurt(DamageSource pSource, float pAmount)
+    {
 
-        if(getZiplineMountBase() != null)
+        if(pSource.getEntity() instanceof Player)
         {
-            ZiplineBlock.removeBlock(level, getZiplineMountBase());
+            if (getZiplineMountBase() != null) {
+                ZiplinePoleBlock.removeBlock(level, getZiplineMountBase());
+            }
+            this.discard();
         }
-        this.discard();
 
         return super.hurt(pSource, pAmount);
     }
@@ -144,7 +130,7 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         if(!pLevel.isClientSide()) {
             if (getZiplineMountBase() != null)
             {
-                if (pLevel.getBlockEntity(getZiplineMountBase().above(1)) instanceof ZiplineTile && this.lock)
+                if (pLevel.getBlockEntity(getZiplineMountBase().above(1)) instanceof ZiplinePoleTile && this.lock)
                 {
                     //Move player
                     ZiplineMoveEntity ziplineMoveEntity = new ZiplineMoveEntity(pLevel, pPos, getZiplineMountBase().above(1));
@@ -168,7 +154,7 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         //When hit, lock pos and build block at origin
         if(!this.level.isClientSide && getZiplineMountBase() != null && this.getRotPlaceDirection() != null)
         {
-            ZiplineBlock.placeBlock(this.level, getZiplineMountBase(), this, getRotPlaceDirection());
+            ZiplinePoleBlock.placeBlock(this.level, getZiplineMountBase(), this, getRotPlaceDirection());
             this.lock = true;
         }
     }

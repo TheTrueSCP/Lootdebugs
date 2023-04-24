@@ -230,7 +230,7 @@ public class SatchelChargeBlock extends BaseEntityBlock {
         {
             pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(), 2);
             float f = 4.0F;
-            pLevel.explode(null, pPos.getX(), pPos.getY(), pPos.getZ(), 5.0F, Explosion.BlockInteraction.BREAK);
+            pLevel.explode(null, pPos.getX(), pPos.getY(), pPos.getZ(), 10.0F, Explosion.BlockInteraction.BREAK);
             pLevel.gameEvent(pEntity, GameEvent.PRIME_FUSE, pPos);
         }
     }

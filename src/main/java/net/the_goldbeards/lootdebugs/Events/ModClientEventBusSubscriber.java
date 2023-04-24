@@ -247,14 +247,16 @@ public class ModClientEventBusSubscriber
                 if(entity instanceof Player player)
                 {
 
-                    if (entity == null || !UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover)) {
+                    if (entity == null || UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover)) {
                         return 0.0F;
-                    } else {
+                    } else
+                    {
                         if (pClientLevel == null && entity.level instanceof ClientLevel) {
                             pClientLevel = (ClientLevel) entity.level;
                         }
 
                         BlockPos blockpos = this.getOmmoranPosition(pStack.getOrCreateTag());
+
                         long i = pClientLevel.getGameTime();
                         if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double) blockpos.getX() + 0.5D, entity.position().y(), (double) blockpos.getZ() + 0.5D) < (double) 1.0E-5F)) {
                             boolean flag = pEntity instanceof Player && ((Player) pEntity).isLocalPlayer();
@@ -380,6 +382,7 @@ public class ModClientEventBusSubscriber
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.STARCH_PLANT.get(), RenderType.cutout());
 
 
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.FUEL.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_MORKITE.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_LQUID_MORKITE.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModFluids.LIQUID_MORKITE_BLOCK.get(), RenderType.translucent());

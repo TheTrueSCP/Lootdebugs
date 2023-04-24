@@ -16,7 +16,7 @@ public class LeafLoverSpecialItem extends BeerItem {
     @Override
     public void addEffects(LivingEntity entityLiving)
     {
-        entityLiving.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+        entityLiving.removeAllEffects();
         entityLiving.addEffect(new MobEffectInstance(MobEffects.SATURATION,4, 0));
 
         super.addEffects(entityLiving);

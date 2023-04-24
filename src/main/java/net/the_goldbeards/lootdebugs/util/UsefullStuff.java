@@ -410,15 +410,15 @@ public class UsefullStuff
          */
         public static boolean canItemBeUsed(ItemStack pStack, IClassData.Classes dwarfClassToUse)
         {
-            if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals(dwarfClassToUse.name()))
+            if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals(dwarfClassToUse.name()))
             {
                 return true;
             }
-            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("TheTrueSCP") && dwarfClassToUse == IClassData.Classes.Driller)
             {
                 return true;
             }
-            else if(ItemNBTHelper.getString(pStack, "satchelcharge_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
             {
                 return true;
             }

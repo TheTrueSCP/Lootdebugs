@@ -103,7 +103,7 @@ public class DrillsItem extends FuelDiggingItem
 
 		Level world = player.level;
 		// early exit for client
-		if(world.isClientSide||!(player instanceof ServerPlayer))
+		if(world.isClientSide|| !(player instanceof ServerPlayer))
 		{
 			return false;
 		}
@@ -200,7 +200,7 @@ public class DrillsItem extends FuelDiggingItem
 	}
 
 	/**
-	 * only use when you alreay saved the playerclass into the stack == if you called canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
+	 * only use when you already saved the playerclass into the stack == if you called canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
 	 */
 	public boolean canToolBeUsed(ItemStack pUsedStack)
 	{

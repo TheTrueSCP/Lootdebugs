@@ -33,6 +33,16 @@ public class SatchelChargeEntity extends ThrowableProjectile
 
 
     @Override
+    public void tick() {
+        super.tick();
+
+        if (this.isInLava())
+        {
+            this.discard();
+        }
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult hitResult) {
         super.onHitBlock(hitResult);
         Vec3 vec3 = hitResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());

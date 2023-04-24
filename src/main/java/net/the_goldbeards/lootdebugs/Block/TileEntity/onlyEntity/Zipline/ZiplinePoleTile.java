@@ -2,28 +2,18 @@ package net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BeehiveBlock;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.ForgeConfig;
-import net.minecraftforge.common.world.ForgeChunkManager;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
-import javax.swing.text.html.parser.Entity;
-import java.util.List;
 import java.util.UUID;
 
-public class ZiplineTile extends BlockEntity
+public class ZiplinePoleTile extends BlockEntity
 {
     private UUID linkedEntityUUID;
     private UUID thisAnchorUUID;
@@ -32,9 +22,9 @@ public class ZiplineTile extends BlockEntity
         this.thisAnchorUUID = thisAnchorUUID;
     }
 
-    public ZiplineTile(BlockPos pWorldPosition, BlockState pBlockState)
+    public ZiplinePoleTile(BlockPos pWorldPosition, BlockState pBlockState)
     {
-        super(ModTileEntities.ZIPLINE_ENTITY.get(), pWorldPosition, pBlockState);
+        super(ModTileEntities.ZIPLINE_POLE_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     public void setLinkedEntityUUID(UUID linkedEntityUUID)
@@ -83,11 +73,11 @@ public class ZiplineTile extends BlockEntity
 
 
 
-    public static void tick(Level level, BlockPos pos, BlockState blockState, ZiplineTile e)
+    public static void tick(Level level, BlockPos pos, BlockState blockState, ZiplinePoleTile e)
     {
         if(!blockState.canSurvive(level, pos))
         {
-            ZiplineBlock.removeZipline(level, pos);
+            ZiplinePoleBlock.removeZipline(level, pos);
         }
     }
 

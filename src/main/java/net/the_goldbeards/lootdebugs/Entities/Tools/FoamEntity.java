@@ -39,7 +39,7 @@ public class FoamEntity extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
-        if(this.isInWater())
+        if(this.isInWater() || this.isInLava())
         {
             this.kill();
         }

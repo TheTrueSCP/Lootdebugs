@@ -30,4 +30,13 @@ public class GrapplingHookHookEntity extends AbstractShootablePhysicsArrowLikeEn
         return entity instanceof Player ? (Player)entity : null;
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(this.isInLava())
+        {
+            this.kill();
+        }
+    }
 }
