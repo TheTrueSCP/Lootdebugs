@@ -32,7 +32,7 @@ public class ZiplineMoveEntity extends Entity
     private BlockPos targetPos;
     private BlockPos startPos;
 
-    private int preventDrop;
+    private int preventKill;
 
     private boolean rided = false;
 
@@ -60,7 +60,7 @@ public class ZiplineMoveEntity extends Entity
     public void tick() {
         super.tick();
 
-        preventDrop++;
+        preventKill++;
         Vec3 vec3 = this.getDeltaMovement();
         double d0 = this.getX() + vec3.x;
         double d1 = this.getY() + vec3.y;
@@ -136,7 +136,7 @@ public class ZiplineMoveEntity extends Entity
         pCompound.put("TargetPos", NbtUtils.writeBlockPos(this.targetPos));
         pCompound.put("StartPos", NbtUtils.writeBlockPos(this.startPos));
         pCompound.putBoolean("rided", this.rided);
-        pCompound.putInt("preventDrop", this.preventDrop);
+        pCompound.putInt("preventKill", this.preventKill);
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound)
@@ -150,9 +150,9 @@ public class ZiplineMoveEntity extends Entity
         {
             this.rided = pCompound.getBoolean("rided");
         }
-        if (pCompound.contains("preventDrop"))
+        if (pCompound.contains("preventKill"))
         {
-            this.preventDrop = pCompound.getInt("preventDrop");
+            this.preventKill = pCompound.getInt("preventDrop");
         }
 
 
@@ -257,13 +257,14 @@ public class ZiplineMoveEntity extends Entity
     {
         if(!level.isClientSide())
         {
-            if (pState.getBlock() != Blocks.AIR && pState.getBlock() != ModBlocks.ZIPLINE_BLOCK.get()) {
-                if (this.preventDrop >= 25)
+            if (pState.getBlock() != Blocks.AIR && pState.getBlock() != ModBlocks.ZIPLINE_POLE_BLOCK.get()) {
+                if (this.preventKill >= 25)
                 {
                     this.discard();
                 }
             }
         }
+
         super.onInsideBlock(pState);
     }
 }

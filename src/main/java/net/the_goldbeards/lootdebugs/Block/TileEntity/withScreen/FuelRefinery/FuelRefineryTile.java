@@ -152,7 +152,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
         @Override
         public boolean isFluidValid(FluidStack stack) {
-            return stack.getFluid() == ModFluids.LIQUID_MORKITE.get();
+            return stack.getFluid() == ModFluids.FUEL.get();
         }
     };
 
@@ -265,7 +265,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
         for(int i = 1; i <= fuelPressTile.itemHandler.getSlots() -1; i++)
         {
             int optimalFuelAmount = getFluidAmount(fuelPressTile.itemHandler.getStackInSlot(i));
-            FluidStack optimalFuel = new FluidStack(ModFluids.LIQUID_MORKITE.get(), optimalFuelAmount);
+            FluidStack optimalFuel = new FluidStack(ModFluids.FUEL.get(), optimalFuelAmount);
 
             int realFuelAmount = fuelPressTile.fluid_tank.fill(optimalFuel, IFluidHandler.FluidAction.SIMULATE);
 
@@ -285,7 +285,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
                 {
                     fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount() / 2, false);
                 }
-                fuelPressTile.fluid_tank.fill(new FluidStack(ModFluids.LIQUID_MORKITE.get(), optimalFuelAmount / 2), IFluidHandler.FluidAction.EXECUTE);
+                fuelPressTile.fluid_tank.fill(new FluidStack(ModFluids.FUEL.get(), optimalFuelAmount / 2), IFluidHandler.FluidAction.EXECUTE);
             }
         }
     }

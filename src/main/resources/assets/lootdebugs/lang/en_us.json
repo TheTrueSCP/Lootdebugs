@@ -170,6 +170,7 @@
 
   "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
 
+  "message.lootdebugs.tool.locator.not_found": "Ommoran not found, use item to research",
   "message.lootdebugs.tool.wrong_class_0" : "Wrong Class, you must be",
   "message.lootdebugs.tool.wrong_class_1" : "to use this tool",
   "message.lootdebugs.tool.no_fuel": "No Fuel in Inventory",
@@ -261,6 +262,7 @@
 
 
   "fluid.lootdebugs.liquid_morkite": "Liquid Morkite",
+  "fluid.lootdebugs.fuel": "Fuel",
 
   "advancements.lootbug.kill.title": "You Monster!",
   "advancements.lootbug.kill.description":"So you know how some sins are unforgivable?",

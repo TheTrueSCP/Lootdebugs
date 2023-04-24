@@ -154,6 +154,9 @@ public class ForgeClientEventBusSubscriber
     //GoldLootbugEffect
 
     //Block
+    //ToDo:only on client
+    //ToDo:minerel sound mono
+    //Todo:ziline not rendering
     @SubscribeEvent
     public static void playerLootbugGoldEffect(PlayerInteractEvent.RightClickBlock event)
     {

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FuelItem extends Item
 {
-    public static final float maxFuel = 1000;
+    public static final float maxFuel = 500;
 
     public FuelItem(Properties pProperties)
     {

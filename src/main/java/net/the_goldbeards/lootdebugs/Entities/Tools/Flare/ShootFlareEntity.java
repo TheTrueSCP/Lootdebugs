@@ -30,7 +30,6 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
     }
 
 
-
     @Override
     public boolean isPickable() {
         return false;
@@ -79,6 +78,10 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
            this.level.setBlock(hitPos, Blocks.AIR.defaultBlockState(),2);
         }
 
+        if(this.isInLava())
+        {
+            this.discard();
+        }
 
         super.tick();
     }

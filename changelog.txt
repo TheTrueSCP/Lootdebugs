@@ -546,3 +546,14 @@ Record:85 (Tech and Tools Update)
 -added zipline block model
 -fixed zipline string rendering
 -improved zipline values
+-fixed ommoran hearthstone locator
+-changed zipline block to zipline pole block
+-changed zipline shoot velocity
+-fixed zipline remove only by player
+-fixed shootable entitys lava handeling
+-fixed drills not working
+-stacked nitra on a stick to 1
+-removed flare sound
+-fixed explosive dihaorra crash
+-fixed leaf lover special not removing all effects
+-fixed satchel charge is too weak

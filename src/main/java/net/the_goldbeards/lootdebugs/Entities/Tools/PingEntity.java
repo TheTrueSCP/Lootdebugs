@@ -54,6 +54,12 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
         }
     }
 
+
+    @Override
+    public boolean fireImmune() {
+        return true;
+    }
+
     @Override
     public void tick() {
 
@@ -141,8 +147,6 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
         }
 
         this.kill();
-
-        super.onHitEntity(pResult);
 
     }
 

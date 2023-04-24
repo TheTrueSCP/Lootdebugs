@@ -6,6 +6,8 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,9 +29,6 @@ public class OmmoranHearthstoneLocator extends BasicAllClassItem
         super(pProperties);
     }
 
-    /**
-     *ToDo: ommoran cant find location
-     */
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected)
     {
@@ -46,7 +45,30 @@ public class OmmoranHearthstoneLocator extends BasicAllClassItem
 
                 UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", true);
             }
+            else
+            {
+                if(NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "OmmoranPos")) == null)
+                {
+                    if(pEntity instanceof Player player)
+                    {
+                        player.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.locator.not_found"), true);
+                    }
+                }
+            }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand)
+    {
+        ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
+
+        if(NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "OmmoranPos")) == null)
+        {
+            UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.isLocatorLocked", false);
+        }
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
 
     @Nullable
@@ -73,6 +95,7 @@ public class OmmoranHearthstoneLocator extends BasicAllClassItem
                         }
                     }
                 }
+                return findBlockPos;
             }
             else//if the searchpos is already the ommoran
             {

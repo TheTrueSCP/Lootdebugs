@@ -26,11 +26,19 @@ public class ModFluids
     public static DeferredRegister<Fluid> FLUIDS =
             DeferredRegister.create(ForgeRegistries.FLUIDS, LootDebugsMain.MOD_ID);
 
+
     public static final RegistryObject<FlowingFluid> FLOWING_LQUID_MORKITE = FLUIDS.register("flowing_liquid_morkite",
             () -> new ForgeFlowingFluid.Flowing(ModFluids.LIQUID_MORKITE_PROPERTIES));
 
     public static final RegistryObject<FlowingFluid> LIQUID_MORKITE = FLUIDS.register("liquid_morkite",
             () -> new ForgeFlowingFluid.Source(ModFluids.LIQUID_MORKITE_PROPERTIES));
+
+
+    public static final RegistryObject<FlowingFluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel",
+            () -> new ForgeFlowingFluid.Flowing(ModFluids.FUEL_PROPERTIES));
+
+    public static final RegistryObject<FlowingFluid> FUEL = FLUIDS.register("fuel",
+            () -> new ForgeFlowingFluid.Source(ModFluids.FUEL_PROPERTIES));
 
 
     //Fluids
@@ -42,7 +50,16 @@ public class ModFluids
         .color(0xbf009c95)).slopeFindDistance(2).levelDecreasePerBlock(2)
         .block(() -> ModFluids.LIQUID_MORKITE_BLOCK.get()).bucket(() -> ModItems.LIQUID_MORKITE_BUCKET.get());
 
+    public static final ForgeFlowingFluid.Properties FUEL_PROPERTIES = new ForgeFlowingFluid.Properties(
+            () -> FUEL.get(), () -> FLOWING_FUEL.get(), FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
+            .density(15).luminosity(2).viscosity(5).sound(SoundEvents.BUCKET_FILL).overlay(WATER_OVERLAY_RL)
+            .color(0xbf341c44)).slopeFindDistance(2).levelDecreasePerBlock(2)
+            .block(() -> ModFluids.LIQUID_FUEL_BLOCK.get());
 
+
+    public static final RegistryObject<LiquidBlock> LIQUID_FUEL_BLOCK = ModBlocks.BLOCKS.register("liquid_fuel_block",
+            () -> new LiquidBlock(() -> ModFluids.FUEL.get(), BlockBehaviour.Properties.of(Material.WATER)
+                    .noCollission().strength(100f).noDrops()));
 
     public static final RegistryObject<LiquidBlock> LIQUID_MORKITE_BLOCK = ModBlocks.BLOCKS.register("liquid_morkite_block",
             () -> new LiquidBlock(() -> ModFluids.LIQUID_MORKITE.get(), BlockBehaviour.Properties.of(Material.WATER)

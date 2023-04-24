@@ -26,6 +26,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleTile;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
@@ -77,25 +78,27 @@ public class ZiplineRender extends EntityRenderer<ZiplineEntity>
 
         if(pEntity.getZiplineMountBase() != null)
         {
-            Vec3 vec3 = new Vec3(0.5, 1.7, 0.5);
+            if(pEntity.level.getBlockEntity(pEntity.getZiplineMountBase()) instanceof ZiplinePoleTile) {
+                Vec3 vec3 = new Vec3(0.5, 1.7, 0.5);
 
-            double d4 = pEntity.getZiplineMountBase().getX() + vec3.x;
-            double d5 = pEntity.getZiplineMountBase().getY() + vec3.y;
-            double d6 = pEntity.getZiplineMountBase().getZ() + vec3.z;
+                double d4 = pEntity.getZiplineMountBase().getX() + vec3.x;
+                double d5 = pEntity.getZiplineMountBase().getY() + vec3.y;
+                double d6 = pEntity.getZiplineMountBase().getZ() + vec3.z;
 
-            double d9 = Mth.lerp((double) pPartialTicks, pEntity.xo, pEntity.getX());
-            double d10 = Mth.lerp((double) pPartialTicks, pEntity.yo, pEntity.getY());
-            double d8 = Mth.lerp((double) pPartialTicks, pEntity.zo, pEntity.getZ());
+                double d9 = Mth.lerp((double) pPartialTicks, pEntity.xo, pEntity.getX());
+                double d10 = Mth.lerp((double) pPartialTicks, pEntity.yo, pEntity.getY());
+                double d8 = Mth.lerp((double) pPartialTicks, pEntity.zo, pEntity.getZ());
 
-            float f4 = (float) (d4 - d9);
-            float f5 = (float) (d5 - d10);
-            float f6 = (float) (d6 - d8);
+                float f4 = (float) (d4 - d9);
+                float f5 = (float) (d5 - d10);
+                float f6 = (float) (d6 - d8);
 
-            VertexConsumer vertexconsumer1 = pBuffer.getBuffer(RenderType.lineStrip());
-            PoseStack.Pose posestack$pose1 = pMatrixStack.last();
+                VertexConsumer vertexconsumer1 = pBuffer.getBuffer(RenderType.lineStrip());
+                PoseStack.Pose posestack$pose1 = pMatrixStack.last();
 
-            for (int k = 0; k <= 1; ++k) {
-                stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1, fraction(k, 1), fraction(k + 1, 1));
+                for (int k = 0; k <= 1; ++k) {
+                    stringVertex(f4, f5, f6, vertexconsumer1, posestack$pose1, fraction(k, 1), fraction(k + 1, 1));
+                }
             }
         }
         pMatrixStack.popPose();
