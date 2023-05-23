@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryContainer;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubContainer;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydContainer;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 public class ModMenuTypes
@@ -19,8 +19,8 @@ public class ModMenuTypes
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.CONTAINERS, LootDebugsMain.MOD_ID);
 
-    public static final RegistryObject<MenuType<PubContainer>> PUB_CONTAINER =
-            registerMenuType(PubContainer::new, "pub_container");
+    public static final RegistryObject<MenuType<LloydContainer>> LLOYD_CONTAINER =
+            registerMenuType(LloydContainer::new, "lloyd_container");
 
     public static final RegistryObject<MenuType<EquipmentTableContainer>> EQUIPMENT_TERMINAL_CONTAINER =
             registerMenuType(EquipmentTableContainer::new, "equipment_terminal_container");

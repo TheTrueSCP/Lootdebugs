@@ -25,8 +25,9 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.OldLloydBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKII;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlock;
@@ -193,8 +194,12 @@ public class ModBlocks {
 
     //TileEnititys
 
+    public static final RegistryObject<Block> LLOYD = registryBlock("lloyd",
+            () -> new LloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+
     public static final RegistryObject<Block> PUB = registryBlock("pub",
-            () -> new PubBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+            () -> new OldLloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+
 
     public static final RegistryObject<Block> EQUIPMENT_TABLE = registryBlock("equipment_table",
             () -> new EquipmentTableBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);

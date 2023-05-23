@@ -12,7 +12,7 @@ public class ModFuelRefineryResultSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(ModItems.FUEL.get());
+        return stack.is(ModItems.FUEL_CANISTER.get());
     }
 
     @Override

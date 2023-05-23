@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "lootdebugs:cropper_ingot"
+        },
+        {
+            "item": "lootdebugs:dystrum_ingot"
+        },
+        {
+            "item": "lootdebugs:cropper_ingot"
+        },
+        {
+            "item": "lootdebugs:cropper_ingot"
+        },
+        {
+            "item": "lootdebugs:power_cell"
+        },
+        {
+            "item": "lootdebugs:cropper_ingot"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "lootdebugs:jet"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:lloyd"
+    }
+
+}

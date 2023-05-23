@@ -17,18 +17,18 @@ import net.minecraft.world.item.Items;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.recipe.PubRecipe;
+import net.the_goldbeards.lootdebugs.recipe.LloydRecipe;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PubRecipeCategory implements IRecipeCategory<PubRecipe> {
+public class PubRecipeCategory implements IRecipeCategory<LloydRecipe> {
 
     public final static ResourceLocation UID = new ResourceLocation(LootDebugsMain.MOD_ID, "pub_brewing");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/pub_gui.png");
+            new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/lloyd_gui.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -36,13 +36,13 @@ public class PubRecipeCategory implements IRecipeCategory<PubRecipe> {
 
     public PubRecipeCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 168);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.PUB.get()));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.LLOYD.get()));
     }
 
 
     @Override
-    public RecipeType<PubRecipe> getRecipeType() {
-        return new RecipeType<>(UID, PubRecipe.class);
+    public RecipeType<LloydRecipe> getRecipeType() {
+        return new RecipeType<>(UID, LloydRecipe.class);
     }
 
 
@@ -62,7 +62,7 @@ public class PubRecipeCategory implements IRecipeCategory<PubRecipe> {
     }
 
     @Override
-    public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull PubRecipe recipe, @Nonnull IFocusGroup focusGroup)
+    public void setRecipe(@Nonnull IRecipeLayoutBuilder builder, @Nonnull LloydRecipe recipe, @Nonnull IFocusGroup focusGroup)
     {
         List<ItemStack> outputs = new ArrayList<ItemStack>(2);
 
@@ -90,7 +90,7 @@ public class PubRecipeCategory implements IRecipeCategory<PubRecipe> {
     }
 
     @Override
-    public Class<? extends PubRecipe> getRecipeClass() {
+    public Class<? extends LloydRecipe> getRecipeClass() {
         return getRecipeType().getRecipeClass();
     }
 }

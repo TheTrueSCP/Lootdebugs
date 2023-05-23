@@ -27,7 +27,7 @@ public class PlatformGunItem extends BasicToolItem
 
 
     public static final Predicate<ItemStack> FOAM = (p_43017_) -> {
-        return p_43017_.is(ModItems.FOAM.get());
+        return p_43017_.is(ModItems.PLATFORM_GUN_AMMO.get());
     };
 
 

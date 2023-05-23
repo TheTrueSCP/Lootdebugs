@@ -28,7 +28,7 @@ public class ZiplineItem extends BasicToolItem
     }
 
     public static final Predicate<ItemStack> ZIPLINE = (p_43017_) -> {
-        return p_43017_.is(ModItems.SHOOT_ZIPLINE.get());
+        return p_43017_.is(ModItems.ZIPLINE_AMMO.get());
     };
 
     @Override

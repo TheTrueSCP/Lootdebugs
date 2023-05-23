@@ -557,3 +557,11 @@ Record:85 (Tech and Tools Update)
 -fixed explosive dihaorra crash
 -fixed leaf lover special not removing all effects
 -fixed satchel charge is too weak
+-renamed fuel to fuel_canister
+-renamed shoot flare to flare gun ammo
+-renamed shoot zipline to zipline ammo
+-renamed foam to platform gun ammo
+-renamed pub to lloyd
+-added pub removing block
+-fixed fuel refinery conversion algorithm
+-fixed drunkness movement

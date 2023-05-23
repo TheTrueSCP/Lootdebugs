@@ -46,7 +46,7 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
             if (pResult.getEntity() != this.getOwner()) {
                 pResult.getEntity().hurt(DamageSource.GENERIC, 2);
                 Vec3 pPos = this.position();
-                ItemEntity SatchelCharge = new ItemEntity(level,pPos.x(),pPos.y(),pPos.z(),new ItemStack(ModItems.SHOOT_FLARE.get(),1));
+                ItemEntity SatchelCharge = new ItemEntity(level,pPos.x(),pPos.y(),pPos.z(),new ItemStack(ModItems.FLARE_GUN_AMMO.get(),1));
                 level.addFreshEntity(SatchelCharge);
                 this.kill();
             }

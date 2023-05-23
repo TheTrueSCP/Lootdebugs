@@ -9,9 +9,10 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.recipe.EquipmentTableRecipe;
-import net.the_goldbeards.lootdebugs.recipe.PubRecipe;
+import net.the_goldbeards.lootdebugs.recipe.LloydRecipe;
 
 import java.util.List;
 import java.util.Objects;
@@ -40,8 +41,8 @@ public class JEILootdebugsPlugin implements IModPlugin {
         List<EquipmentTableRecipe> recipes = rm.getAllRecipesFor(EquipmentTableRecipe.Type.INSTANCE);
         registration.addRecipes(new RecipeType<>(EquipmentTableRecipeCategory.UID, EquipmentTableRecipe.class), recipes);
 
-        List<PubRecipe> recipes1 = rm.getAllRecipesFor(PubRecipe.Type.INSTANCE);
-        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID, PubRecipe.class), recipes1);
+        List<LloydRecipe> recipes1 = rm.getAllRecipesFor(LloydRecipe.Type.INSTANCE);
+        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID, LloydRecipe.class), recipes1);
 
     }
 

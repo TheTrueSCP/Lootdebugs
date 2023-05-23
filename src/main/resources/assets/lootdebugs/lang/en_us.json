@@ -12,7 +12,7 @@
   "block.lootdebugs.plascrete_foam_mk2": "Plascrete Foam MKII",
   "block.lootdebugs.oil_shale": "Oil Shale",
 
-  "block.lootdebugs.pub": "Lloyd",
+  "block.lootdebugs.lloyd": "Lloyd",
   "block.lootdebugs.equipment_table": "Equipment Table",
   "block.lootdebugs.fuel_refinery": "Fuel Refinery",
   "block.lootdebugs.class_changer": "Class Changer",
@@ -71,7 +71,6 @@
   "block.lootdebugs.red_sugar":"Red Sugar",
 
 
-
   "item.lootdebugs.jet": "Jet",
   "item.lootdebugs.drill_head": "Drill Head",
   "item.lootdebugs.coil": "Coil",
@@ -88,12 +87,12 @@
   "item.lootdebugs.grappling_hook":"Grappling Hook",
   "item.lootdebugs.laser_pointer": "Laser Pointer",
   "item.lootdebugs.satchel_charge_detonator": "Satchel Charge Detonator",
-  "item.lootdebugs.fuel": "Fuel Canister",
+  "item.lootdebugs.fuel_canister": "Fuel Canister",
   "item.lootdebugs.empty_fuel_canister": "Empty Fuel Canister",
-  "item.lootdebugs.foam":"Compressed Plascrete Foam",
-  "item.lootdebugs.shoot_flare":"Shootable Flares",
+  "item.lootdebugs.platform_gun_ammo":"Compressed Plascrete Foam",
+  "item.lootdebugs.flare_gun_ammo":"Flare",
   "item.lootdebugs.ommoran_hearthstone_locator":"Ommoran Hearthstone Locator",
-  "item.lootdebugs.shoot_zipline":"Shootable Zipline",
+  "item.lootdebugs.zipline_ammo":"Shootable Zipline",
   "item.lootdebugs.barley_bulb": "Barley Bulb",
   "item.lootdebugs.starch_nut": "Starch Nut",
   "item.lootdebugs.malt_star": "Malt Star",
@@ -169,6 +168,8 @@
   "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your'e just a leaf lover",
 
   "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
+
+  "message.lootdebugs.block.old.lloyd": "Old lloyd block, mine and replace it to fix it",
 
   "message.lootdebugs.tool.locator.not_found": "Ommoran not found, use item to research",
   "message.lootdebugs.tool.wrong_class_0" : "Wrong Class, you must be",
