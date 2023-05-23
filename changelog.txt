@@ -565,3 +565,8 @@ Record:85 (Tech and Tools Update)
 -added pub removing block
 -fixed fuel refinery conversion algorithm
 -fixed drunkness movement
+-fixed platform gun replacable blocks
+-added zipline remove cooldown/warning
+-improved zipline pole block place mechanic
+-added turret ammo
+-added turret code
