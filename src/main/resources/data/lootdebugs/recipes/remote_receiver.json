@@ -1,0 +1,35 @@
+{
+  "type": "lootdebugs:equipment_crafting",
+  "ingredients": [
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "lootdebugs:empty"
+    }
+  ],
+  "output": {
+    "item": "lootdebugs:remote_receiver"
+  }
+}

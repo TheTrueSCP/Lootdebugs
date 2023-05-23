@@ -67,6 +67,9 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> PLATFORM_GUN_AMMO = ITEMS.register("platform_gun_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
+    public static final RegistryObject<Item> TURRET_AMMO = ITEMS.register("turret_ammo",
+            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
     public static final RegistryObject<Item> FLARE_GUN_AMMO = ITEMS.register("flare_gun_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
@@ -133,6 +136,12 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> MIXER_BARREL = ITEMS.register("mixer_barrel",
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> REMOTE_RECEIVER = ITEMS.register("remote_receiver",
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> ZIPLINE_LAUNCHER = ITEMS.register("zipline_launcher",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
 

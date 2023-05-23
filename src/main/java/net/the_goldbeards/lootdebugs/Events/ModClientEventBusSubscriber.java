@@ -51,6 +51,7 @@ import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugOl
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.*;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.BulletRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.TurretRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineMoveRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
@@ -62,6 +63,7 @@ import net.the_goldbeards.lootdebugs.client.model.Armor.ScoutMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugOldModel;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.*;
+import net.the_goldbeards.lootdebugs.client.model.TurretModel;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
@@ -109,6 +111,7 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.ZIPLINE_ENTITY.get(), ZiplineRender::new);
         event.registerEntityRenderer(ModEntities.STRING_ANCHOR_ENTITY.get(), ZiplineStringRender::new);
         event.registerEntityRenderer(ModEntities.BULLET_ENTITY.get(), BulletRender::new);
+        event.registerEntityRenderer(ModEntities.TURRET_ENTITY.get(), TurretRender::new);
 
 
         //Weapons
@@ -155,6 +158,8 @@ public class ModClientEventBusSubscriber
         event.registerLayerDefinition(GunnerMK1ArmorModel.LAYER_LOCATION, GunnerMK1ArmorModel::createBodyLayer);
 
         event.registerLayerDefinition(ShieldEmitterModel.LAYER_LOCATION, ShieldEmitterModel::createBodyLayer);
+
+        event.registerLayerDefinition(TurretModel.LAYER_LOCATION, TurretModel::createBodyLayer);
     }
 
 

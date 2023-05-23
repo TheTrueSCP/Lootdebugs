@@ -80,9 +80,9 @@
     ]
   },
   "rickroll.rickroll": {
-    "subtitle": "rockandstone.subtitle.mining_shanty",
+    "subtitle": "rickroll.subtitle.rickroll",
     "sounds": [
-      "lootdebugs:rockandstone/mining_shanty"
+      "lootdebugs:rickroll/never_gonna_give_you_up"
     ]
   },
 

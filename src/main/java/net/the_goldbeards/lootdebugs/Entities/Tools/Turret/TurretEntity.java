@@ -1,30 +1,46 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools.Turret;
 
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.NameTagItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.the_goldbeards.lootdebugs.Entities.Tools.PingEntity;
+import net.the_goldbeards.lootdebugs.init.ModItems;
 
 import java.util.function.Predicate;
 
-public class TurretEntity extends Entity 
+import java.util.function.Predicate;
+
+public class TurretEntity extends Entity
 {
 
-    private int ammoAmount = 0;
-    private int shootDelay = 0;
+    private static final EntityDataAccessor<Integer> AMMO = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.INT);
+    private static int searchRadiusInBlocks = 10;
+    private static float shootCooldownTicks = 10;
 
-    private static int searchRadiusInBlocks = 5;
+    private float shootCooldown;
     private static final Predicate<LivingEntity> ENEMY_PREDECATE = (p_30636_) -> {
         return p_30636_ instanceof Monster;
     };
@@ -34,70 +50,70 @@ public class TurretEntity extends Entity
         super(pEntityType, pLevel);
     }
 
-
     protected void defineSynchedData()
     {
+        this.entityData.define(AMMO, 200);
+    }
 
+    @Override
+    public InteractionResult interact(Player pPlayer, InteractionHand pHand) {
+
+        if(pPlayer.getItemInHand(pHand).is(ModItems.TURRET_AMMO.get()))
+        {
+            addAmmo(1);
+            pPlayer.getItemInHand(pHand).shrink(1);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     public void tick() {
         super.tick();
-        Vec3 vec3 = this.getDeltaMovement();
-        double d0 = this.getX() + vec3.x;
-        double d1 = this.getY() + vec3.y;
-        double d2 = this.getZ() + vec3.z;
-        double d3 = vec3.horizontalDistance();
-
-        this.setXRot(lerpRotation(this.xRotO, (float) (Mth.atan2(vec3.y, d3) * (double) (180F / (float) Math.PI))));
-        this.setYRot(lerpRotation(this.yRotO, (float) (Mth.atan2(vec3.x, vec3.z) * (double) (180F / (float) Math.PI))));
-
         if (!this.level.isClientSide)
         {
-            if(/*targetPos != null*/true)
+
+            LivingEntity target = level.getNearestEntity(level.getEntitiesOfClass(Monster.class, getSearchBound(this.blockPosition())), ENEMY_TARGETING, null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
+
+            this.setCustomName(new TextComponent("" + getAmmo()));
+            this.setCustomNameVisible(true);
+
+            if (shootCooldown <= 0 && target != null && canShoot())
             {
-                Monster nearestEnemy = level.getNearestEntity(level.getEntitiesOfClass(Monster.class, getSearchBound(this.blockPosition())), ENEMY_TARGETING, null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
-                if(nearestEnemy != null)
-                {
+                shootCooldown = shootCooldownTicks;
 
-                    shootDelay++;
-                    if(shootDelay >= 5)
-                    {
-                        BulletEntity bulletEntity = new BulletEntity(level, nearestEnemy.blockPosition());
-                        //bulletEntity.shootFromRotation(this, this.r);
-                        level.addFreshEntity(bulletEntity);
-                        level.playSound(null, this.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.BLOCKS, 5, 1);
-                        shootDelay = 0;
-                    }
-                }
+                BulletEntity bulletEntity = new BulletEntity(level);
+                bulletEntity.setPos(this.position().x, this.position().y + 1f, this.position().z);
 
+                Vec3 shootVec = new Vec3((bulletEntity.getX() - target.getX()) * -1, (bulletEntity.getY() - target.getY()) * -1, (bulletEntity.getZ() - target.getZ()) * -1);//calculate Movement from Entity to hook
+
+                level.addFreshEntity(bulletEntity);
+
+                bulletEntity.setDeltaMovement(bulletEntity.getDeltaMovement().add(shootVec));//Normalize Vec cause the vec would be to fast
+
+                shrinkAmmo(1);
             }
-        }
-        else
-        {
-            this.setPosRaw(d0, d1, d2);
+
+            if(shootCooldown > 0)
+            {
+                shootCooldown--;
+            }
+
+            if(shootCooldown < 0)
+            {
+                shootCooldown = 0;
+            }
+            
         }
 
     }
-    
+
     private static AABB getSearchBound(BlockPos pos)
     {
         return new AABB(pos.getX() - searchRadiusInBlocks, pos.getY() - searchRadiusInBlocks, pos.getZ() - searchRadiusInBlocks, pos.getX() + searchRadiusInBlocks, pos.getY() + searchRadiusInBlocks, pos.getZ() + searchRadiusInBlocks);
     }
-    
+
     //Entity Stuff
-
-    
-    public void lerpMotion(double pX, double pY, double pZ) {
-        this.setDeltaMovement(pX, pY, pZ);
-        if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-            double d0 = Math.sqrt(pX * pX + pZ * pZ);
-            this.setYRot((float) (Mth.atan2(pX, pZ) * (double) (180F / (float) Math.PI)));
-            this.setXRot((float) (Mth.atan2(pY, d0) * (double) (180F / (float) Math.PI)));
-            this.yRotO = this.getYRot();
-            this.xRotO = this.getXRot();
-        }
-
-    }
 
     public boolean shouldRenderAtSqrDistance(double pDistance) {
         double d0 = this.getBoundingBox().getSize() * 4.0D;
@@ -110,13 +126,21 @@ public class TurretEntity extends Entity
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag pCompound) {
-        
+    protected void readAdditionalSaveData(CompoundTag pCompound)
+    {
+        pCompound.putInt("ammo", getAmmo());
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {
+    protected void addAdditionalSaveData(CompoundTag pCompound)
+    {
+        setAmmo(pCompound.getInt("ammo"));
+    }
 
+    public float getTurretRotation(float pPartialTicks, float pOffset)
+    {
+
+        return 0;
     }
 
     public float getBrightness() {
@@ -124,7 +148,17 @@ public class TurretEntity extends Entity
     }
 
     public boolean isAttackable() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean isPickable() {
+        return true;
+    }
+
+    @Override
+    public boolean mayInteract(Level pLevel, BlockPos pPos) {
+        return true;
     }
 
     public Packet<?> getAddEntityPacket() {
@@ -141,5 +175,35 @@ public class TurretEntity extends Entity
         }
 
         return Mth.lerp(0.2F, p_37274_, p_37275_);
+    }
+
+    public boolean canShoot()
+    {
+        return getAmmo() >= 1;
+    }
+
+    public void addAmmo(int amount)
+    {
+        this.entityData.set(AMMO, getAmmo() + amount);
+    }
+
+    public void shrinkAmmo(int amount)
+    {
+        if(getAmmo() - amount < 0)
+        {
+            this.entityData.set(AMMO, 0);
+            return;
+        }
+        this.entityData.set(AMMO, getAmmo() - amount);
+    }
+
+    public void setAmmo(int amount)
+    {
+        this.entityData.set(AMMO, amount);
+    }
+
+    public int getAmmo()
+    {
+        return this.entityData.get(AMMO);
     }
 }

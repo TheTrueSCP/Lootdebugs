@@ -39,7 +39,8 @@ public class IClassData implements ICapabilitySerializable<CompoundTag>
         Engineer(3, "engineer"),
         Gunner(4, "gunner"),
         TheTrueSCP(5, "the_true_scp"),
-        MonsieurHannes(6, "Monsieur_hannes");
+        MonsieurHannes(6, "monsieur_hannes"),
+        Carl(69, "carl");
 
         private static final Classes[] BY_ID = Arrays.stream(values()).sorted(Comparator.comparingInt(Classes::getId)).toArray((p_41067_) -> {
             return new Classes[p_41067_];

@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleTile;
 import net.the_goldbeards.lootdebugs.Entities.Tools.AbstractShootablePhysicsArrowLikeEntity;
@@ -28,8 +29,11 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     private boolean lock = false;
     private Direction rotPlaceDirection;
 
+    private float killCooldown;
+
     public ZiplineEntity(EntityType<? extends AbstractShootablePhysicsArrowLikeEntity> p_37466_, Level p_37467_) {
         super(p_37466_, p_37467_);
+        killCooldown = 0;
     }
 
     public ZiplineEntity(LivingEntity pShooter, Level pLevel, @NotNull BlockPos ziplineMountBase, Direction playerLookDirection) {
@@ -52,6 +56,17 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     public void tick()
     {
         super.tick();
+
+        if(killCooldown > 0)
+        {
+            killCooldown--;
+        }
+
+        if(killCooldown < 0)
+        {
+            killCooldown = 0;
+        }
+
         if(this.inGround && !lock)
         {
             this.lock = true;
@@ -73,12 +88,22 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     public boolean hurt(DamageSource pSource, float pAmount)
     {
 
-        if(pSource.getEntity() instanceof Player)
+        if(pSource.getEntity() instanceof Player player)
         {
-            if (getZiplineMountBase() != null) {
-                ZiplinePoleBlock.removeBlock(level, getZiplineMountBase());
+            if(killCooldown <= 0)
+            {
+                killCooldown = 60;
+
+                player.displayClientMessage(new TranslatableComponent("message.lootdebugs.zipline_entity.hit_again_discard"), true);
+
             }
-            this.discard();
+            else
+            {
+                if (getZiplineMountBase() != null) {
+                    ZiplinePoleBlock.removeBlock(level, getZiplineMountBase());
+                }
+                this.discard();
+            }
         }
 
         return super.hurt(pSource, pAmount);
@@ -118,7 +143,7 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     @Override
     protected void tickDespawn()
     {
-
+        this.life = 0;
     }
 
     @Override
@@ -144,6 +169,12 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
         }
 
         return super.interact(pPlayer, pHand);
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult pResult)
+    {
+
     }
 
     @Override

@@ -348,12 +348,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         return 0.13F;
     }
 
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
-    public void setCritArrow(boolean pCritical) {
-        this.setFlag(1, pCritical);
-    }
 
     private void setFlag(int p_36738_, boolean p_36739_) {
         byte b0 = this.entityData.get(ID_FLAGS);

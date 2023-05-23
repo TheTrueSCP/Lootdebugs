@@ -14,6 +14,7 @@ import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.FlareEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.*;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.BulletEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.TurretEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineMoveEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineStringAnchor;
@@ -65,6 +66,8 @@ public class ModEntities {
     public static final RegistryObject<EntityType<BulletEntity>> BULLET_ENTITY =
             ENTITY_TYPES.register("bullet", () -> EntityType.Builder.<BulletEntity>of(BulletEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "bullet").toString()));
 
+    public static final RegistryObject<EntityType<TurretEntity>> TURRET_ENTITY =
+            ENTITY_TYPES.register("turret", () -> EntityType.Builder.<TurretEntity>of(TurretEntity::new, MobCategory.MISC).sized(1.5f, 1.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "turret").toString()));
 
 
     //Weapons

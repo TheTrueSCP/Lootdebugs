@@ -340,7 +340,7 @@ public class UsefullStuff
                 playerClassWrapper.pClass = classCap.getDwarfClass().name();
             });
 
-            String playerClass =playerClassWrapper.pClass;
+            String playerClass = playerClassWrapper.pClass;
 
             if(playerClass.equals(dwarfClassToUse.name()))
             {
@@ -399,6 +399,10 @@ public class UsefullStuff
             {
                 return true;
             }
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("Carl"))
+            {
+                return true;
+            }
             else
             {
                 return false;
@@ -419,6 +423,10 @@ public class UsefullStuff
                 return true;
             }
             else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            {
+                return true;
+            }
+            else if(ItemNBTHelper.getString(pStack, "stack_dwarfclass").equals("Carl"))
             {
                 return true;
             }
@@ -518,6 +526,9 @@ public class UsefullStuff
                 case MonsieurHannes -> {
                     return new TranslatableComponent("class.lootdebugs.player.monsieurhannes");
                 }
+                case Carl -> {
+                    return new TranslatableComponent("class.lootdebugs.player.carl");
+                }
                 default -> {
                     return new TranslatableComponent("class.lootdebugs.player.leaf_lover");
                 }
@@ -552,6 +563,10 @@ public class UsefullStuff
                         {
                             return ChatFormatting.GOLD;
                         }
+                case Carl ->
+                {
+                    return ChatFormatting.LIGHT_PURPLE;
+                }
                 default -> {
                     return ChatFormatting.DARK_GRAY;
                 }

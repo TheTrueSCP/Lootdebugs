@@ -17,8 +17,10 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public class SatchelChargeBlock extends BaseEntityBlock {
@@ -221,17 +223,27 @@ public class SatchelChargeBlock extends BaseEntityBlock {
                 }
         }
     }
-    public static void explode(BlockPos pPos, Level pLevel) {
-        explode(pLevel, pPos, (LivingEntity)null);
+
+    @Override
+    public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return Shapes.empty();
     }
+
+
 
     public static void explode(Level pLevel, BlockPos pPos, @Nullable LivingEntity pEntity) {
         if (!pLevel.isClientSide)
         {
             pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(), 2);
-            float f = 4.0F;
-            pLevel.explode(null, pPos.getX(), pPos.getY(), pPos.getZ(), 10.0F, Explosion.BlockInteraction.BREAK);
-            pLevel.gameEvent(pEntity, GameEvent.PRIME_FUSE, pPos);
+            Explosion explosion = pLevel.explode(null, pPos.getX(), pPos.getY(), pPos.getZ(), 10.0F, Explosion.BlockInteraction.BREAK);
+
+            List<BlockPos> explodedBlocks = explosion.getToBlow();
+
+            for(int i = 0; i < explodedBlocks.size(); i++)
+            {
+                if(pLevel.getBlockState(explodedBlocks.get(i).below()).isCollisionShapeFullBlock(pLevel, explodedBlocks.get(i).below()))
+                pLevel.setBlock(explodedBlocks.get(i), ModBlocks.SATCHEL_CHARGE_ASH.get().defaultBlockState(), 3);
+            }
         }
     }
 
@@ -245,7 +257,7 @@ public class SatchelChargeBlock extends BaseEntityBlock {
         Level level = pLevel;
         BlockPos pos = pPos;
         pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(),3);
-        explode(pos, level);
+        explode(level, pPos, null);
 
 
     }

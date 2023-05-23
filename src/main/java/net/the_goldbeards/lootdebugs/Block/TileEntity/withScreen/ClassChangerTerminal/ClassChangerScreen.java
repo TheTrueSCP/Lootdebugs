@@ -83,6 +83,15 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
             }));
         }
+
+        if(player.isCreative())//MonsieurHannes
+        {
+            this.addRenderableWidget(new BasicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
+
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Carl));
+
+            }));
+        }
     }
 
     @Override
