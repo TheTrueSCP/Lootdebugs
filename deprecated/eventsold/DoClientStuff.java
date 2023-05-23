@@ -26,7 +26,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangeScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelPressScreen;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubScreen;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.PubScreen;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;

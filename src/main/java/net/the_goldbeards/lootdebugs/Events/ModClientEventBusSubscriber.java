@@ -42,8 +42,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableScreen;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryScreen;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubScreen;
-import net.the_goldbeards.lootdebugs.Items.Fuel.FuelItem;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydScreen;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugGoldenRender;
@@ -51,6 +51,7 @@ import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugOl
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.*;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.BulletRender;
+import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.TurretRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineMoveRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
@@ -62,6 +63,7 @@ import net.the_goldbeards.lootdebugs.client.model.Armor.ScoutMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugOldModel;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.*;
+import net.the_goldbeards.lootdebugs.client.model.TurretModel;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
@@ -109,6 +111,7 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.ZIPLINE_ENTITY.get(), ZiplineRender::new);
         event.registerEntityRenderer(ModEntities.STRING_ANCHOR_ENTITY.get(), ZiplineStringRender::new);
         event.registerEntityRenderer(ModEntities.BULLET_ENTITY.get(), BulletRender::new);
+        event.registerEntityRenderer(ModEntities.TURRET_ENTITY.get(), TurretRender::new);
 
 
         //Weapons
@@ -155,13 +158,15 @@ public class ModClientEventBusSubscriber
         event.registerLayerDefinition(GunnerMK1ArmorModel.LAYER_LOCATION, GunnerMK1ArmorModel::createBodyLayer);
 
         event.registerLayerDefinition(ShieldEmitterModel.LAYER_LOCATION, ShieldEmitterModel::createBodyLayer);
+
+        event.registerLayerDefinition(TurretModel.LAYER_LOCATION, TurretModel::createBodyLayer);
     }
 
 
     @SubscribeEvent
     public static void registerScreens(final FMLClientSetupEvent event)
     {
-        MenuScreens.register(ModMenuTypes.PUB_CONTAINER.get(), PubScreen::new);
+        MenuScreens.register(ModMenuTypes.LLOYD_CONTAINER.get(), LloydScreen::new);
         MenuScreens.register(ModMenuTypes.EQUIPMENT_TERMINAL_CONTAINER.get(), EquipmentTableScreen::new);
         MenuScreens.register(ModMenuTypes.FUEL_REFINERY_CONTAINER.get(), FuelRefineryScreen::new);
         MenuScreens.register(ModMenuTypes.CLASS_CHANGER_CONTAINER.get(), ClassChangerScreen::new);
@@ -182,7 +187,7 @@ public class ModClientEventBusSubscriber
 
         IIngameOverlay MyHudOverlay = OverlayRegistry.registerOverlayTop("drunkness", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
 
-            if (Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) && false )
+            if (Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()))
             {
             float pScalar = (1.0F - Minecraft.getInstance().options.screenEffectScale);
             Minecraft minecraft = Minecraft.getInstance();
@@ -344,14 +349,14 @@ public class ModClientEventBusSubscriber
 
         });
 
-        ItemProperties.register(ModItems.FUEL.get(), new ResourceLocation(LootDebugsMain.MOD_ID,"fuel_level"), (pStack, pLevel, pEntity, p_174633_) -> {
+        ItemProperties.register(ModItems.FUEL_CANISTER.get(), new ResourceLocation(LootDebugsMain.MOD_ID,"fuel_level"), (pStack, pLevel, pEntity, p_174633_) -> {
                 if(pEntity == null)
                 {
                     return 0.0F;
                 }
                 else
                 {
-                    return UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount") / FuelItem.maxFuel;
+                    return UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount") / FuelCanisterItem.maxFuel;
 
                 }
         });

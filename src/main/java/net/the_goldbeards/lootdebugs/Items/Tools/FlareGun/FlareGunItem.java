@@ -37,7 +37,7 @@ public class FlareGunItem extends BasicToolItem
     }
 
     public static final Predicate<ItemStack> FOAM = (p_43017_) -> {
-        return p_43017_.is(ModItems.SHOOT_FLARE.get());
+        return p_43017_.is(ModItems.FLARE_GUN_AMMO.get());
     };
 
 

@@ -22,6 +22,8 @@
     "minecraft:crimson_fungus",
     "minecraft:nether_sprouts",
     "minecraft:snow",
-    "minecraft:spore_blossom"
+    "minecraft:spore_blossom",
+    "lootdebugs:satchel_charge_ash"
+
   ]
 }

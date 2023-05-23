@@ -6,6 +6,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -25,12 +27,14 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.OldLloydBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKII;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlock;
+import net.the_goldbeards.lootdebugs.Block.Tools.SatchelCharge.SatchelChargeAshBlock;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSoundTypes;
@@ -101,7 +105,7 @@ public class ModBlocks {
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
     public static final RegistryObject<Block> ZIPLINE_POLE_BLOCK = registryBlock("zipline_pole_block",
-            () -> new ZiplinePoleBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f).noOcclusion().isViewBlocking(ModBlocks::never)),false);
+            () -> new ZiplinePoleBlock(BlockBehaviour.Properties.of(Material.STONE).isSuffocating(ModBlocks::never).strength(2f).noOcclusion().lightLevel((state) -> 15).isViewBlocking(ModBlocks::never)),false);
 
 
 
@@ -193,8 +197,12 @@ public class ModBlocks {
 
     //TileEnititys
 
+    public static final RegistryObject<Block> LLOYD = registryBlock("lloyd",
+            () -> new LloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+
     public static final RegistryObject<Block> PUB = registryBlock("pub",
-            () -> new PubBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+            () -> new OldLloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+
 
     public static final RegistryObject<Block> EQUIPMENT_TABLE = registryBlock("equipment_table",
             () -> new EquipmentTableBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
@@ -204,6 +212,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CLASS_CHANGER = registryBlock("class_changer",
             () -> new ClassChangerBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 15)),true);
+
 
     ////BLocksWithoutItemRegistry
 
@@ -270,6 +279,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> STARCH_PLANT =registryBlock("starch_plant",
             () -> new StarchPlantBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak()),false);
+
+
+    //isc
+
+    public static final RegistryObject<Block> SATCHEL_CHARGE_ASH =registryBlock("satchel_charge_ash",
+            () -> new SatchelChargeAshBlock(BlockBehaviour.Properties.of(Material.SNOW).instabreak().requiresCorrectToolForDrops().sound(SoundType.GRAVEL)),true);
 
 
 }

@@ -20,7 +20,7 @@ import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefiner
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefineryRefuelCanister;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncFluidPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncItemStackPacket;
-import net.the_goldbeards.lootdebugs.Network.TileEntity.Pub.PubBrewBeerPacket;
+import net.the_goldbeards.lootdebugs.Network.TileEntity.Lloyd.LloydBrewBeerPacket;
 
 public class PacketHandler
 {
@@ -79,7 +79,7 @@ public class PacketHandler
         net.messageBuilder(FuelRefinerySyncItemStackPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT).decoder(FuelRefinerySyncItemStackPacket::decode).encoder(FuelRefinerySyncItemStackPacket::encode).consumer(FuelRefinerySyncItemStackPacket::handle).add();
 
 
-        net.messageBuilder(PubBrewBeerPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(PubBrewBeerPacket::decode).encoder(PubBrewBeerPacket::encode).consumer(PubBrewBeerPacket::handle).add();
+        net.messageBuilder(LloydBrewBeerPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(LloydBrewBeerPacket::decode).encoder(LloydBrewBeerPacket::encode).consumer(LloydBrewBeerPacket::handle).add();
 
 
         return id;

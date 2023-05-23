@@ -16,7 +16,7 @@ import net.the_goldbeards.lootdebugs.Items.Armor.ModGunnerMK1ArmorItem;
 import net.the_goldbeards.lootdebugs.Items.Armor.ModScoutMK1ArmorItem;
 import net.the_goldbeards.lootdebugs.Items.Drinks.*;
 import net.the_goldbeards.lootdebugs.Items.Food.RedSugarItem;
-import net.the_goldbeards.lootdebugs.Items.Fuel.FuelItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
 import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteBlockItem;
 import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteItem;
 import net.the_goldbeards.lootdebugs.Items.Fuel.OilShaleBlockItem;
@@ -64,17 +64,20 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new OmmoranHearthstoneLocator( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Ammo
-    public static final RegistryObject<Item> FOAM = ITEMS.register("foam",
+    public static final RegistryObject<Item> PLATFORM_GUN_AMMO = ITEMS.register("platform_gun_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> SHOOT_FLARE = ITEMS.register("shoot_flare",
+    public static final RegistryObject<Item> TURRET_AMMO = ITEMS.register("turret_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> SHOOT_ZIPLINE = ITEMS.register("shoot_zipline",
+    public static final RegistryObject<Item> FLARE_GUN_AMMO = ITEMS.register("flare_gun_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> FUEL = ITEMS.register("fuel",
-            () -> new FuelItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+    public static final RegistryObject<Item> ZIPLINE_AMMO = ITEMS.register("zipline_ammo",
+            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> FUEL_CANISTER = ITEMS.register("fuel_canister",
+            () -> new FuelCanisterItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Buckets
     public static final RegistryObject<Item> LIQUID_MORKITE_BUCKET = ITEMS.register("liquid_morkite_bucket",
@@ -133,6 +136,12 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> MIXER_BARREL = ITEMS.register("mixer_barrel",
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> REMOTE_RECEIVER = ITEMS.register("remote_receiver",
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> ZIPLINE_LAUNCHER = ITEMS.register("zipline_launcher",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
 

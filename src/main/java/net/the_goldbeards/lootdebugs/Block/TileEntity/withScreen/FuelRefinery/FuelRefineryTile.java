@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery;
 
+import com.google.common.collect.Maps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -25,18 +27,20 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.the_goldbeards.lootdebugs.Items.Fuel.FuelItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncFluidPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncItemStackPacket;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.ModFluids;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.ModLists;
 import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.Optional;
 
 public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
@@ -97,44 +101,11 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
         public boolean isItemValid(int slot, @NotNull ItemStack stack)
         {
             return switch (slot) {
-                case 0 -> stack.is(ModItems.FUEL.get());
+                case 0 -> stack.is(ModItems.FUEL_CANISTER.get());
                 case 1, 2 -> stack.is(ModTags.Items.LIQUID_FUEL);
                 case 3, 4 -> stack.is(ModTags.Items.SOLID_FUEL);
                 default -> false;
             };
-        }
-
-        @NotNull
-        @Override
-        public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate)
-        {
-            if(((slot == 1 || slot == 2) && stack.is(ModTags.Items.LIQUID_FUEL)) || ((slot == 3|| slot == 4) && stack.is(ModTags.Items.SOLID_FUEL)))
-            {
-                return super.insertItem(slot, stack, simulate);
-            }
-            else if(slot == 0 && stack.is(ModItems.FUEL.get()))
-            {
-                if(UsefullStuff.ItemNBTHelper.getFloat(stack, "fuelAmount") < FuelItem.maxFuel)
-                {
-                    return super.insertItem(slot, stack, simulate);
-                }
-            }
-            return stack;
-        }
-
-        @NotNull
-        @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
-
-            if(simulate)
-            {
-                if(slot == 0 && this.getStackInSlot(slot).is(ModItems.FUEL.get()))
-                {
-                 //   return ItemStack.EMPTY;
-                }
-            }
-
-            return super.extractItem(slot, amount, simulate);
         }
     };
 
@@ -242,12 +213,13 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FuelRefineryTile fuelPressTile)
     {
-        if (areItemsInSlots(fuelPressTile) && fuelPressTile.isConverting)
+        if (fuelPressTile.isConverting)
         {
             //fuelPressTile.progress++;//progess each tick +1
 
             if (fuelPressTile.progress > fuelPressTile.maxProgress || true)
             {
+
                 handelFinishRefining(fuelPressTile);
                 fuelPressTile.resetProgress();
                 setChanged(pLevel, pPos, pState);
@@ -260,54 +232,51 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
         }
     }
 
-    private static void handelFinishRefining(FuelRefineryTile fuelPressTile)
+    private static void handelFinishRefining(FuelRefineryTile fuelRefineryTile)
     {
-        for(int i = 1; i <= fuelPressTile.itemHandler.getSlots() -1; i++)
+        int missingFuel = fuelRefineryTile.fluid_tank.getCapacity() - fuelRefineryTile.fluid_tank.getFluidAmount();
+
+        int finalFuel = 0;
+
+        for(int i = 1; i < fuelRefineryTile.itemHandler.getSlots(); i++)
         {
-            int optimalFuelAmount = getFluidAmount(fuelPressTile.itemHandler.getStackInSlot(i));
-            FluidStack optimalFuel = new FluidStack(ModFluids.FUEL.get(), optimalFuelAmount);
+           if(itemFluidAmount().get(fuelRefineryTile.itemHandler.getStackInSlot(i).getItem()) != null)
+           {
+               int fuelAmountSingle = itemFluidAmount().get(fuelRefineryTile.itemHandler.getStackInSlot(i).getItem());
 
-            int realFuelAmount = fuelPressTile.fluid_tank.fill(optimalFuel, IFluidHandler.FluidAction.SIMULATE);
+               int removeItemCount = 0;
+
+               for (int r = 1; r <= fuelRefineryTile.itemHandler.getStackInSlot(i).getCount(); r++)
+               {
+                   if (fuelAmountSingle + finalFuel <= missingFuel) {
+                       finalFuel += fuelAmountSingle;
+                       removeItemCount++;
+                   }
 
 
+               }
 
-            if(realFuelAmount == optimalFuelAmount)
-            {
-                if(!fuelPressTile.addedBucketToSlot(i, fuelPressTile))
-                {
-                    fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount(), false);
-                }
-                fuelPressTile.fluid_tank.fill(optimalFuel, IFluidHandler.FluidAction.EXECUTE);
-            }
-            else if(realFuelAmount >= (optimalFuelAmount / 2))
-            {
-                if(!fuelPressTile.addedBucketToSlot(i, fuelPressTile))
-                {
-                    fuelPressTile.itemHandler.extractItem(i, fuelPressTile.itemHandler.getStackInSlot(i).getCount() / 2, false);
-                }
-                fuelPressTile.fluid_tank.fill(new FluidStack(ModFluids.FUEL.get(), optimalFuelAmount / 2), IFluidHandler.FluidAction.EXECUTE);
-            }
+               System.out.println("removed bucket in slot: " + i);
+               fuelRefineryTile.itemHandler.extractItem(i, removeItemCount, false);
+
+               if((i == 1 || i == 2) && removeItemCount > 0)
+               {
+                   System.out.println("insert bucket in slot: " + i);
+                   fuelRefineryTile.itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET, 1));
+               }
+           }
         }
+
+        fuelRefineryTile.fluid_tank.fill(new FluidStack(ModFluids.FUEL.get(), finalFuel), IFluidHandler.FluidAction.EXECUTE);
     }
 
-    public boolean addedBucketToSlot(int i, FuelRefineryTile fuelRefineryTile)
-    {
-        if(fuelRefineryTile.itemHandler.getStackInSlot(i).is(ModItems.LIQUID_MORKITE_BUCKET.get()) || fuelRefineryTile.itemHandler.getStackInSlot(i).is(Items.LAVA_BUCKET))
-        {
-            fuelRefineryTile.itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET, 1));
-        return true;
-        }
+    public static Map<Item, Integer> itemFluidAmount() {
+        Map<Item, Integer> map = Maps.newLinkedHashMap();
 
-        return false;
-    }
+        map.put(Items.COAL, 10);
+        map.put(ModItems.LIQUID_MORKITE_BUCKET.get(), 1000);
 
-    public static int getFluidAmount(ItemStack pStack)
-    {
-        if(ModLists.TileEntities.FuelRefinery.fuelAmountItems().containsKey(pStack.getItem()))
-        {
-            return ModLists.TileEntities.FuelRefinery.fuelAmountItems().get(pStack.getItem()) * pStack.getCount();
-        }
-        return 0;
+        return map;
     }
 
     private void resetProgress()
@@ -321,37 +290,10 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
         isConverting = true;//Set the Variable to true
     }
 
-
-    private static boolean areItemsInSlots(FuelRefineryTile fuelRefineryTile)
-    {
-
-        if(!fuelRefineryTile.itemHandler.getStackInSlot(1).isEmpty() && fuelRefineryTile.itemHandler.getStackInSlot(1).is(ModTags.Items.LIQUID_FUEL))
-        {
-            return true;
-        }
-        else if(!fuelRefineryTile.itemHandler.getStackInSlot(2).isEmpty() && fuelRefineryTile.itemHandler.getStackInSlot(2).is(ModTags.Items.LIQUID_FUEL))
-        {
-            return true;
-        }
-        else if(!fuelRefineryTile.itemHandler.getStackInSlot(3).isEmpty() && fuelRefineryTile.itemHandler.getStackInSlot(3).is(ModTags.Items.SOLID_FUEL))
-        {
-            return true;
-        }
-        else if(!fuelRefineryTile.itemHandler.getStackInSlot(4).isEmpty() && fuelRefineryTile.itemHandler.getStackInSlot(4).is(ModTags.Items.SOLID_FUEL))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
     //Canister
     public static void fillCanister(FuelRefineryTile fuelRefineryTile)//Call via Button
     {
-            if(fuelRefineryTile.itemHandler.getStackInSlot(0).is(ModItems.FUEL.get()))
+            if(fuelRefineryTile.itemHandler.getStackInSlot(0).is(ModItems.FUEL_CANISTER.get()))
             {
                 ItemStack fuel = fuelRefineryTile.itemHandler.getStackInSlot(0);
 
@@ -359,7 +301,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
                 {
                     float fuelInItem = UsefullStuff.ItemNBTHelper.getFloat(fuel, "fuelAmount");
 
-                    int optimalRefuelAmount = (int) (FuelItem.maxFuel - fuelInItem);
+                    int optimalRefuelAmount = (int) (FuelCanisterItem.maxFuel - fuelInItem);
 
                     int givenRefuelAmount = fuelRefineryTile.fluid_tank.drain(optimalRefuelAmount, IFluidHandler.FluidAction.EXECUTE).getAmount();
 

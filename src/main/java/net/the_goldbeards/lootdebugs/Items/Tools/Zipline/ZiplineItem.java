@@ -8,13 +8,17 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.UsefullStuff;
 
 import java.util.function.Predicate;
@@ -28,7 +32,7 @@ public class ZiplineItem extends BasicToolItem
     }
 
     public static final Predicate<ItemStack> ZIPLINE = (p_43017_) -> {
-        return p_43017_.is(ModItems.SHOOT_ZIPLINE.get());
+        return p_43017_.is(ModItems.ZIPLINE_AMMO.get());
     };
 
     @Override
@@ -50,7 +54,8 @@ public class ZiplineItem extends BasicToolItem
 
         ItemStack zipline = getAmmo(pPlayer);
 
-        if(pPlayer.isOnGround() && pLevel.isEmptyBlock(pPlayer.blockPosition()) && pLevel.isEmptyBlock(pPlayer.blockPosition().above(1)) && linkPos != null && canPlaceBlock(pLevel, linkPos))
+
+        if(pPlayer.isOnGround() &&  isZiplinePlaceable(pLevel, pPlayer.blockPosition()) && linkPos != null && isSolidGround(pLevel, linkPos))
         {
             if (!zipline.isEmpty() || pPlayer.isCreative())
             {
@@ -89,7 +94,22 @@ public class ZiplineItem extends BasicToolItem
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
 
-    public static boolean canPlaceBlock(Level pLevel, BlockPos ziplineBlock)
+    public static boolean isZiplinePlaceable(Level pLevel, BlockPos ziplinePos)
+    {
+        if((pLevel.isEmptyBlock(ziplinePos) && pLevel.isEmptyBlock(ziplinePos.above(1))))
+        {
+            return true;
+        }
+
+        if((pLevel.getBlockState(ziplinePos).is(ModTags.Blocks.PLATFORMGUN_REPLACEABLE_BLOCKS)) && pLevel.getBlockState(ziplinePos.above(1)).is(ModTags.Blocks.PLATFORMGUN_REPLACEABLE_BLOCKS))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean isSolidGround(Level pLevel, BlockPos ziplineBlock)
     {
 
         BlockPos blockpos = ziplineBlock.below();

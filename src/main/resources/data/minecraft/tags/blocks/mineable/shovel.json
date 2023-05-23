@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "lootdebugs:glyphid_shit"
+    "lootdebugs:glyphid_shit",
+    "lootdebugs:satchel_charge_ash"
   ]
 }

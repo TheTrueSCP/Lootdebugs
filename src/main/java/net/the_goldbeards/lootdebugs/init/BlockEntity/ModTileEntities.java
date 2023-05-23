@@ -13,7 +13,7 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryTile;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Pub.PubTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydTile;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
@@ -23,9 +23,9 @@ public class ModTileEntities
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, LootDebugsMain.MOD_ID);
 
 
-    public static final RegistryObject<BlockEntityType<PubTile>> PUB_BLOCK_ENTITY =
-            BLOCK_ENTITYS.register("pub_block_entity", () ->
-                    BlockEntityType.Builder.of(PubTile::new, ModBlocks.PUB.get()).build(null));
+    public static final RegistryObject<BlockEntityType<LloydTile>> LLOYD_BLOCK_ENTITY =
+            BLOCK_ENTITYS.register("lloyd_block_entity", () ->
+                    BlockEntityType.Builder.of(LloydTile::new, ModBlocks.LLOYD.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<EquipmentTableTile>> EQUIPMENT_TERMINAL_BLOCK_ENTITY =
             BLOCK_ENTITYS.register("equipment_terminal_block_entity", () ->

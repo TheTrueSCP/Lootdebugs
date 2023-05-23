@@ -86,8 +86,11 @@ public class ZiplinePoleTile extends BlockEntity
     @Override
     public void load(CompoundTag pTag)
     {
-        this.setThisAnchorUUID(pTag.getUUID("stringHook"));
-        this.setLinkedEntityUUID(pTag.getUUID("linkedEntity"));
+        if(pTag != null)
+        {
+            this.setThisAnchorUUID(pTag.getUUID("stringHook"));
+            this.setLinkedEntityUUID(pTag.getUUID("linkedEntity"));
+        }
         super.load(pTag);
     }
 

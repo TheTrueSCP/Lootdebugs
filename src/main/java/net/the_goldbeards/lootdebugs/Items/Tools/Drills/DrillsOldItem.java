@@ -36,7 +36,7 @@ public class DrillsOldItem extends Item
     public static int rangeInBlocks = 150;
 
     public static final Predicate<ItemStack> FUEL = (p_43017_) -> {
-        return p_43017_.is(ModItems.FUEL.get());
+        return p_43017_.is(ModItems.FUEL_CANISTER.get());
     };
 
     public DrillsOldItem(Properties pProperties) {

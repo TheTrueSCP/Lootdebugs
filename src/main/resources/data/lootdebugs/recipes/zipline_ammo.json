@@ -1,0 +1,37 @@
+{
+    "type": "lootdebugs:equipment_crafting",
+    "ingredients":
+    [
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "lootdebugs:coil"
+        },
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "lootdebugs:empty"
+        },
+        {
+            "item": "minecraft:iron_ingot"
+        },
+        {
+            "item": "lootdebugs:empty"
+        }
+    ],
+    "output": {
+        "item": "lootdebugs:zipline_ammo"
+    }
+
+}

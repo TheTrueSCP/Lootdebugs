@@ -39,6 +39,7 @@ public class DrunknessEffect extends MobEffect
 
         if(pLivingEntity.isOnGround() && pLivingEntity.isAlive())
         {
+
             pLivingEntity.setDeltaMovement(calculateDrunknessDeltaMovement(pLivingEntity.getDeltaMovement(), pLivingEntity.getRandom(), amp + 1));
         }
 
@@ -82,20 +83,6 @@ public class DrunknessEffect extends MobEffect
     private static Vec3 calculateDrunknessDeltaMovement(Vec3 deltaMovement, Random random, float modifier)
     {
 
-        if(modifier <= 0)
-        {
-            modifier = 1;
-        }
-        if(deltaMovement.x() == 0)
-        {
-            deltaMovement.add(new Vec3(1 * modifier, 0,0));
-        }
-
-
-        if(deltaMovement.z() == 0)
-        {
-            deltaMovement.add(new Vec3(0, 0,1 * modifier));
-        }
 
         return deltaMovement
                 .add(new Vec3(random.nextFloat(-0.02f * modifier, 0.02f * modifier), 0, random.nextFloat(-0.02f * modifier, 0.02f * modifier)))
