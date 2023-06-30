@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 
-public class TestBlock extends Block {
+public class  TestBlock extends Block {
 
     public static final BooleanProperty ISPLAYING = BooleanProperty.create("isplaying");
 

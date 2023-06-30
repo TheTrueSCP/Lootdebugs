@@ -23,7 +23,7 @@ public class RedSugarItem extends Item {
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return  42;
+        return  1;
     }
 
     @Override

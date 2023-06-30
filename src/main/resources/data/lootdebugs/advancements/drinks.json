@@ -1,5 +1,5 @@
 {
-  "parent": "lootdebugs:create_pub",
+  "parent": "lootdebugs:create_lloyd",
   "display": {
     "icon": {
       "item": "lootdebugs:oily_oaf"

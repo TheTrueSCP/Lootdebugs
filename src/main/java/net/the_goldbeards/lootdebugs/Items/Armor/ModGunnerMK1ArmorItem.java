@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.client.model.Armor.GunnerMK1ArmorModel;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -87,9 +87,9 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         {
                 if(entity instanceof Player player)
                 {
-                    if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+                    if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -100,7 +100,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         @Override
         public void onArmorTick(ItemStack stack, Level level, Player player)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -168,9 +168,9 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         {
                 if(entity instanceof Player player)
                 {
-                    if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+                    if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -180,7 +180,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         @Override
         public void onArmorTick(ItemStack stack, Level level, Player player)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -246,9 +246,9 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         {
                 if(entity instanceof Player player)
                 {
-                    if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+                    if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -259,7 +259,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         @Override
         public void onArmorTick(ItemStack stack, Level level, Player player)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);
@@ -325,9 +325,9 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         {
                 if(entity instanceof Player player)
                 {
-                    if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+                    if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -337,7 +337,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
         @Override
         public void onArmorTick(ItemStack stack, Level level, Player player)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
             {
                 ItemStack stack1 = stack.copy();
                 player.getInventory().removeItem(stack1);

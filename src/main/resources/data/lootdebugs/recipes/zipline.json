@@ -1,0 +1,35 @@
+{
+  "type": "lootdebugs:equipment_crafting",
+  "ingredients": [
+    {
+      "item": "lootdebugs:bismor_ingot"
+    },
+    {
+      "item": "lootdebugs:bismor_ingot"
+    },
+    {
+      "item": "lootdebugs:cropper_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "lootdebugs:zipline_launcher"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "lootdebugs:empty"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "lootdebugs:zipline"
+  }
+}

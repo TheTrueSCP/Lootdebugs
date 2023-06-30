@@ -27,7 +27,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.the_goldbeards.lootdebugs.Entities.Tools.SatchelChargeEntity;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public class SatchelChargeItem extends BlockItem {
 
@@ -48,7 +48,7 @@ public class SatchelChargeItem extends BlockItem {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
 
-        if (UsefullStuff.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
+        if (ModUtils.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
         {
 
             SatchelChargeEntity satchelCharge = new SatchelChargeEntity(pPlayer, pLevel);
@@ -70,9 +70,9 @@ public class SatchelChargeItem extends BlockItem {
     {
         if (pEntity instanceof Player player && pIsSelected)
         {
-            if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
+            if (!ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
             }
         }
     }
@@ -84,7 +84,7 @@ public class SatchelChargeItem extends BlockItem {
         Player pPlayer = pContext.getPlayer();
         ItemStack stack = pContext.getItemInHand();
 
-        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
+        if (!ModUtils.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
         {
             return InteractionResult.FAIL;
         }
@@ -121,7 +121,7 @@ public class SatchelChargeItem extends BlockItem {
                     BlockState blockstate1 = level.getBlockState(blockpos);
 
                     ItemStack detonator = new ItemStack(ModItems.SATCHEL_CHARGE_DETONATOR.get(), 1);
-                    UsefullStuff.ItemNBTHelper.put(detonator, "satchel_charge", NbtUtils.writeBlockPos(pContext.getClickedPos()));
+                    ModUtils.ItemNBTHelper.put(detonator, "satchel_charge", NbtUtils.writeBlockPos(pContext.getClickedPos()));
                     player.getInventory().add(detonator);
 
                     if (blockstate1.is(blockstate.getBlock())) {

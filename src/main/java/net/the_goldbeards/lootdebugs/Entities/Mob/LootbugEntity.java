@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -75,7 +76,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 100));
+        //this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 100));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, TEMPTATION_ITEMS, false));
         //   this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -494,6 +495,6 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     }
 
     public static <T extends Mob> boolean checkLootbugSpawnRules(EntityType<T> tEntityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, Random random) {
-        return blockPos.getY() <= 20;
+        return blockPos.getY() <= 30;
     }
 }

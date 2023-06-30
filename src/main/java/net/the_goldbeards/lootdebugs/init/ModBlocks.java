@@ -6,7 +6,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Block.Beers.*;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.OreBlocks;
+import net.the_goldbeards.lootdebugs.Block.GenBlocks.RedSugarBlock;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.plants.*;
 import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
 import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
@@ -28,7 +28,6 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTer
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydBlock;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.OldLloydBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKII;
@@ -98,9 +97,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> PLASCRETE_FOAM_MKII = registryBlock("plascrete_foam_mk2",
             () -> new PlascreteFoamMKII(BlockBehaviour.Properties.of(Material.STONE).strength(0.15f).sound(ModSoundTypes.PLASCRETE_FOAM).noDrops()),true);
 
-    public static final RegistryObject<Block> LIGHT_BLOCK = registryBlock("light_block",
-            () -> new LightBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).instabreak().noCollission().noDrops()),false);
-
     public static final RegistryObject<Block> SATCHEL_CHARGE = registryBlock("satchel_charge",
            () -> new SatchelChargeBlock(BlockBehaviour.Properties.of(Material.STONE)),false);
 
@@ -120,20 +116,20 @@ public class ModBlocks {
 // Ores
 
     public static final RegistryObject<Block> MORKITE_ORE =registryBlock("morkite_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.9f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_MORKITE_ORE =registryBlock("deepslate_morkite_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> MORKITE_BLOCK =registryBlock("morkite_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.0f)),false);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.0f)),true);
 
 
     public static final RegistryObject<Block> NITRA_ORE = registryBlock("nitra_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_NITRA_ORE =registryBlock("deepslate_nitra_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.3f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> NITRA_BLOCK = registryBlock("nitra_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -143,10 +139,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DYSTRUM_ORE = registryBlock("dystrum_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DEEPSLATE_DYSTRUM_ORE = registryBlock("deepslate_dystrum_ore",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> DYSTRUM_BLOCK = registryBlock("dystrum_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -154,7 +150,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> BISMOR_ORE = registryBlock("bismor_ore",
-            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> BISMOR_BLOCK = registryBlock("bismor_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
@@ -162,14 +158,14 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> CROPPER_ORE = registryBlock("cropper_ore",
-            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new OreBlocks(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(0.5f).sound(ModSoundTypes.GENERIC_MINERAL)),true);
 
     public static final RegistryObject<Block> CROPPER_BLOCK = registryBlock("cropper_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(1.5f)),true);
 
 
     public static final RegistryObject<Block> RED_SUGAR = registryBlock("red_sugar",
-            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).strength(0.5f).lightLevel((state) -> 8).sound(ModSoundTypes.GENERIC_MINERAL)),true);
+            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).lightLevel((state) -> 8).sound(ModSoundTypes.GENERIC_MINERAL).instabreak()),true);
 
     public static final RegistryObject<Block> OIL_SHALE = registryBlock("oil_shale",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST).strength(4f).requiresCorrectToolForDrops().lightLevel((state) -> 8)),false);
@@ -201,14 +197,14 @@ public class ModBlocks {
             () -> new LloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
 
     public static final RegistryObject<Block> PUB = registryBlock("pub",
-            () -> new OldLloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+            () -> new OldLloydBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f)),false);
 
 
     public static final RegistryObject<Block> EQUIPMENT_TABLE = registryBlock("equipment_table",
             () -> new EquipmentTableBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
 
     public static final RegistryObject<Block> FUEL_REFINERY = registryBlock("fuel_refinery",
-            () -> new FuelRefineryBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),true);
+            () -> new FuelRefineryBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 8)),false);
 
     public static final RegistryObject<Block> CLASS_CHANGER = registryBlock("class_changer",
             () -> new ClassChangerBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).lightLevel((state) -> 15)),true);

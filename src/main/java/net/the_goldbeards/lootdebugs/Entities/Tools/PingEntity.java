@@ -24,7 +24,7 @@ import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.Map;
 
@@ -128,7 +128,7 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
                         LE.setGlowingTag(true);
 
                         level.playSound(null,  pResult.getEntity().blockPosition(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 1,1);
-                        level.playSound(null, this.getOwner().blockPosition(),entityPingSound(LE), SoundSource.PLAYERS, 1, UsefullStuff.DwarfClasses.getSalutePitch(getDwarfClass()));
+                        level.playSound(null, this.getOwner().blockPosition(),entityPingSound(LE), SoundSource.PLAYERS, 1, ModUtils.DwarfClasses.getSalutePitch(getDwarfClass()));
 
                         if (pingItem != null) {
                             if (pingItem.getItem() instanceof PingItem) {
@@ -166,7 +166,7 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
                     pingSound = ModSounds.PING_SETMARK.get();
                 }
 
-                this.level.playSound(null,getOwner().blockPosition(), pingSound, SoundSource.PLAYERS, 1.0F, UsefullStuff.DwarfClasses.getSalutePitch(getDwarfClass()));
+                this.level.playSound(null,getOwner().blockPosition(), pingSound, SoundSource.PLAYERS, 1.0F, ModUtils.DwarfClasses.getSalutePitch(getDwarfClass()));
                 this.level.playSound(null,  blockHitResult.getBlockPos(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 1,1);
             }
         }
@@ -274,5 +274,10 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
     protected boolean shouldFall() {
 
         return !lock && super.shouldFall();
+    }
+
+    @Override
+    public void onDespawn() {
+
     }
 }

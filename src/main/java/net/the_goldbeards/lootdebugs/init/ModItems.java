@@ -17,11 +17,9 @@ import net.the_goldbeards.lootdebugs.Items.Armor.ModScoutMK1ArmorItem;
 import net.the_goldbeards.lootdebugs.Items.Drinks.*;
 import net.the_goldbeards.lootdebugs.Items.Food.RedSugarItem;
 import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
-import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteBlockItem;
-import net.the_goldbeards.lootdebugs.Items.Fuel.MorkiteItem;
-import net.the_goldbeards.lootdebugs.Items.Fuel.OilShaleBlockItem;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModArmorMaterials;
 import net.the_goldbeards.lootdebugs.Items.Materials.ModTiers;
+import net.the_goldbeards.lootdebugs.Items.TileEntities.FuelRefineryItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.CompanyStandardPickaxe.CompanyPickAxeItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Drills.DrillsItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.FlareGun.FlareGunItem;
@@ -32,6 +30,8 @@ import net.the_goldbeards.lootdebugs.Items.Tools.PlatformGun.PlatformGunItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeDetonatorItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Shield.ShieldItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretAmmoItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Zipline.ZiplineItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.ModGroup;
@@ -68,7 +68,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> TURRET_AMMO = ITEMS.register("turret_ammo",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new TurretAmmoItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> FLARE_GUN_AMMO = ITEMS.register("flare_gun_ammo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -88,6 +88,11 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> EMPTY = ITEMS.register("empty",
             () -> new Item(new Item.Properties()));
 
+
+    //Tile Entities
+
+    public static final RegistryObject<Item> FUEL_REFINERY = ITEMS.register("fuel_refinery",
+            () -> new FuelRefineryItem(ModBlocks.FUEL_REFINERY.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Tools
     public static final RegistryObject<Item> COMPANY_STANDARD_PICKAXE = ITEMS.register("company_standard_pickaxe",
@@ -117,9 +122,15 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> SHIELD = ITEMS.register("shield",
             () -> new ShieldItem(ModBlocks.SHIELD_EMITTER_BLOCK.get() ,new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> ZIPLINE_GUN = ITEMS.register("zipline_gun",
+    public static final RegistryObject<Item> ZIPLINE_GUN = ITEMS.register("zipline",
             () -> new ZiplineItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
+
+    public static final RegistryObject<Item> TURRET = ITEMS.register("turret",
+            () -> new TurretItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> TURRET_WRENCH = ITEMS.register("turret_wrench",
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Toolparts
 
@@ -152,7 +163,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> MORKITE = ITEMS.register("morkite",
-            () -> new MorkiteItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> DYSTRUM_INGOT = ITEMS.register("dystrum_ingot",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -260,17 +271,14 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> TEST_BLOCK = ITEMS.register("test_block",
             () -> new BlockItem(ModBlocks.TEST_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Item> MORKITE_BLOCK = ITEMS.register("morkite_block",
-            () -> new MorkiteBlockItem( ModBlocks.MORKITE_BLOCK.get(),new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
-
 
     public static final RegistryObject<Item> OIL_SHALE = ITEMS.register("oil_shale",
-            () -> new OilShaleBlockItem(ModBlocks.OIL_SHALE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new BlockItem(ModBlocks.OIL_SHALE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Drinks and Ingredients
 
     public static final RegistryObject<Item> LOOTBUG_GOLD = ITEMS.register("lootbug_gold",
-            () -> new LootbugGoldItem(ModBlocks.LOOTBUG_GOLD.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new LootbugGoldItem(ModBlocks.LOOTBUG_GOLD.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> OILY_OAF= ITEMS.register("oily_oaf",
             () -> new OilyOafItem(ModBlocks.OILY_OAF.get(),new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));

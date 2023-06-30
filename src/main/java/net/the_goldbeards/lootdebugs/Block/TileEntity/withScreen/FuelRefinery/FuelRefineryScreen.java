@@ -19,7 +19,7 @@ import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefineryConverting;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefineryRefuelCanister;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -149,10 +149,10 @@ public class FuelRefineryScreen extends AbstractContainerScreen<FuelRefineryCont
 
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY) {
-        return UsefullStuff.MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, 12, 40);
+        return ModUtils.MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, 12, 40);
     }
 
     private boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
-        return UsefullStuff.MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
+        return ModUtils.MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

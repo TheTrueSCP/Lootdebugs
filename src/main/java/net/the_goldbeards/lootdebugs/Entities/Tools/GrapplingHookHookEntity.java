@@ -39,4 +39,9 @@ public class GrapplingHookHookEntity extends AbstractShootablePhysicsArrowLikeEn
             this.kill();
         }
     }
+
+    @Override
+    public void onDespawn() {
+
+    }
 }

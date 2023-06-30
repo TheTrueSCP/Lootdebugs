@@ -21,7 +21,7 @@ import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.ModTags;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -126,7 +126,7 @@ if(!level.isClientSide) {
                         }
                     }
 
-                    if (!player.isCrouching() && (!fuel.isEmpty() || player.isCreative()) && !UsefullStuff.BlockHelpers.isBlockTag(block,ModTags.Blocks.NOT_MINEABLE_WITH_DRILLS))
+                    if (!player.isCrouching() && (!fuel.isEmpty() || player.isCreative()) && !ModUtils.BlockHelpers.isBlockTag(block,ModTags.Blocks.NOT_MINEABLE_WITH_DRILLS))
                     //If the block is not Mineable and the fuel is in the inventory or the player is in creative mode
                     {
 

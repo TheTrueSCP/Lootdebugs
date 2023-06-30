@@ -31,10 +31,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.ForgeHooks;
-import net.the_goldbeards.lootdebugs.Items.Tools.FuelDiggingItem;
+import net.the_goldbeards.lootdebugs.Items.Fuel.FuelDiggingItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.ModTags;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -78,13 +78,17 @@ public class DrillsItem extends FuelDiggingItem
 		//Have Fuel in Inv
 		if(pEntity instanceof Player player)
 		{
-			UsefullStuff.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveUseableFuel(pStack, player));
+			ModUtils.ItemNBTHelper.putBoolean(pStack,"havefuelininventory", haveUseableFuel(pStack, player));
 
 			if(pIsSelected)
 			{
 				if(!haveFuel(pStack))
 				{
 					player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.no_fuel").getString()), true);
+				}
+				else
+				{
+					player.displayClientMessage(new TextComponent(new TranslatableComponent("message.lootdebugs.tool.temperature").getString() + " " +  ModUtils.ItemNBTHelper.getFloat(pStack, "temperature") + "/100"),true);
 				}
 			}
 		}
@@ -155,7 +159,7 @@ public class DrillsItem extends FuelDiggingItem
 			{
 
 				if (stack.getItem() instanceof DrillsItem && haveFuel(stack) && canToolBeUsed(stack, player)) {
-					UsefullStuff.ItemNBTHelper.rotateDrills(world, stack);//Play Anim
+					ModUtils.ItemNBTHelper.rotateDrills(world, stack);//Play Anim
 				}
 
 				int xpDropEvent = ForgeHooks.onBlockBreakEvent(world, ((ServerPlayer)player).gameMode.getGameModeForPlayer(), (ServerPlayer)player, pos);
@@ -196,7 +200,7 @@ public class DrillsItem extends FuelDiggingItem
 
 	public boolean canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
 	{
-		return UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse());
+		return ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse());
 	}
 
 	/**
@@ -204,7 +208,7 @@ public class DrillsItem extends FuelDiggingItem
 	 */
 	public boolean canToolBeUsed(ItemStack pUsedStack)
 	{
-		return UsefullStuff.DwarfClasses.canItemBeUsed(pUsedStack, getDwarfClassToUse());
+		return ModUtils.DwarfClasses.canItemBeUsed(pUsedStack, getDwarfClassToUse());
 	}
 
 	@Override
@@ -315,7 +319,7 @@ public class DrillsItem extends FuelDiggingItem
 
 	private boolean haveFuel(ItemStack pStack)
 	{
-		return UsefullStuff.ItemNBTHelper.getBoolean(pStack,"havefuelininventory");
+		return ModUtils.ItemNBTHelper.getBoolean(pStack,"havefuelininventory");
 	}
 
 	private boolean isNoBreakableBlock(BlockState block)
@@ -369,6 +373,23 @@ public class DrillsItem extends FuelDiggingItem
 		pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.drills.on_block_drill_mode"));
 
 		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+	}
+
+	public void riseTemperature(ItemStack pStack)
+	{
+		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
+		ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", oldTemp + 0.1f);
+	}
+
+	public void decreaseTemperature(ItemStack pStack)
+	{
+		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
+
+		if(oldTemp > 0)
+		{
+			ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", oldTemp + 0.5f);
+		}
+
 	}
 
 	@Override

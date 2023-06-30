@@ -28,7 +28,7 @@ public class TurretRender extends EntityRenderer<TurretEntity>
 {
     protected final ResourceLocation TEXTURE = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/entity/turret/turret.png");
 
-    private final TurretModel<TurretEntity> model;
+    private TurretModel<TurretEntity> model;
 
     public TurretRender(EntityRendererProvider.Context context)
     {
@@ -45,18 +45,19 @@ public class TurretRender extends EntityRenderer<TurretEntity>
         pMatrixStack.pushPose();
         pMatrixStack.translate(0.0D, (double)1.5F, 0.0D);
 
-        //pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 10.0F));
-      //  pMatrixStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot())));
+        pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.yRotO, pEntity.getYRot()) - 10.0F));
+        pMatrixStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(pPartialTicks, pEntity.xRotO, pEntity.getXRot())));
         pMatrixStack.mulPose(Vector3f.XP.rotationDegrees(180f));
+        this.model.prepareMobModel(pEntity, 0, 0, pPartialTicks);
         this.model.setupAnim(pEntity, pPartialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer vertexconsumer = pBuffer.getBuffer(this.model.renderType(getTextureLocation(pEntity)));
         this.model.renderToBuffer(pMatrixStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.model.prepareMobModel(pEntity, 0, 0, pPartialTicks);
-
         pMatrixStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
+
+
 
     @Override
     public ResourceLocation getTextureLocation(TurretEntity pEntity) {

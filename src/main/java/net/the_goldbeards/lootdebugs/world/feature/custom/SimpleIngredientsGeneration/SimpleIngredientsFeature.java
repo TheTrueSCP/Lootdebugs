@@ -3,6 +3,7 @@ package net.the_goldbeards.lootdebugs.world.feature.custom.SimpleIngredientsGene
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.CactusBlock;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 

@@ -12,7 +12,7 @@ import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.function.Supplier;
 
@@ -30,14 +30,14 @@ public class RockAndStonePacket
             Level world = context.getSender().level;
             if (!world.isClientSide)
             {
-                if(!UsefullStuff.DwarfClasses.isPlayerClass(player, IClassData.Classes.LeafLover))
+                if(ModUtils.DwarfClasses.isPlayerDwarf(player))
                 {
                     player.getCapability(SaluteDataCap.SALUTE_DATA).ifPresent(saluteCap ->
                     {
 
                         if (saluteCap.getDwarfSaluteCooldown() <= 0)
                         {
-                            level.playSound(null, player.blockPosition(), ModSounds.SALUTE.get(), SoundSource.PLAYERS, 3, UsefullStuff.DwarfClasses.getSalutePitch(player));
+                            level.playSound(null, player.blockPosition(), ModSounds.SALUTE.get(), SoundSource.PLAYERS, 3, ModUtils.DwarfClasses.getSalutePitch(player));
 
                             saluteCap.setDwarfSaluteCooldown(LootdebugsServerConfig.DWARF_SALUTE_COOLDOWN.get());
 

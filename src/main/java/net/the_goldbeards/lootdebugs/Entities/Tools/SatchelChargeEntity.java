@@ -12,12 +12,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
 
 public class SatchelChargeEntity extends ThrowableProjectile
@@ -58,7 +59,7 @@ public class SatchelChargeEntity extends ThrowableProjectile
         {
             if (this.getOwner() instanceof Player player && pos != null) {
                 ItemStack detonator = new ItemStack(ModItems.SATCHEL_CHARGE_DETONATOR.get(), 1);
-                UsefullStuff.ItemNBTHelper.put(detonator, "satchel_charge", NbtUtils.writeBlockPos(pos));
+                ModUtils.ItemNBTHelper.put(detonator, "satchel_charge", NbtUtils.writeBlockPos(pos));
                 player.getInventory().add(detonator);
             }
         }
@@ -67,6 +68,17 @@ public class SatchelChargeEntity extends ThrowableProjectile
 
 
 
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult pResult) {
+
+        if(!level.isClientSide)
+        {
+            BlockPos hitPos = pResult.getEntity().blockPosition();
+            level.addFreshEntity(new ItemEntity(level, hitPos.getX(), hitPos.getY(), hitPos.getZ(), new ItemStack(ModItems.SATCHEL_CHARGE.get(), 1)));
+        }
+        this.discard();
     }
 
     @Nullable

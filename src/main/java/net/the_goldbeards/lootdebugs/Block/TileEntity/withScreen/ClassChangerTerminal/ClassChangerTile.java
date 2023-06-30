@@ -31,6 +31,6 @@ public class ClassChangerTile extends BlockEntity implements MenuProvider
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new ClassChangerContainer(pContainerId, this);
+        return new ClassChangerContainer(pContainerId, pInventory, this);
     }
 }

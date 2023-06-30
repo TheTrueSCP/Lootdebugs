@@ -48,6 +48,7 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
                 Vec3 pPos = this.position();
                 ItemEntity SatchelCharge = new ItemEntity(level,pPos.x(),pPos.y(),pPos.z(),new ItemStack(ModItems.FLARE_GUN_AMMO.get(),1));
                 level.addFreshEntity(SatchelCharge);
+                removeLight();
                 this.kill();
             }
         }
@@ -69,6 +70,7 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
         {
             if(this.getOwner().position().distanceTo(this.position()) >= 40)
             {
+                removeLight();
                 this.kill();
             }
         }
@@ -80,10 +82,19 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
 
         if(this.isInLava())
         {
+            removeLight();
             this.discard();
         }
 
         super.tick();
+    }
+
+    public void removeLight()
+    {
+        if(hitPos != null)
+        {
+            this.level.setBlock(hitPos, Blocks.AIR.defaultBlockState(), 2);
+        }
     }
 
     @Override
@@ -167,6 +178,8 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
         }
     }
 
-
-
+    @Override
+    public void onDespawn() {
+        removeLight();
+    }
 }

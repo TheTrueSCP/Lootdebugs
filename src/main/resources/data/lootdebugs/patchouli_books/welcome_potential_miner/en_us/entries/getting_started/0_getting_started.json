@@ -1,0 +1,11 @@
+{
+  "name": "Welcome Potential Miner",
+  "icon": "minecraft:writable_book",
+  "category": "lootdebugs:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Hello potential miner and welcome to Deep Rock Galactic! Here you will learn how to be a dwarf. First you must prove yourself and go deep into the mines to find minerals. After that, build the Equipment Table."
+    }
+  ]
+}

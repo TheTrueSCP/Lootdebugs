@@ -1,23 +1,17 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.PlatformGun;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.FoamEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.function.Predicate;
 
@@ -50,7 +44,7 @@ public class PlatformGunItem extends BasicToolItem
 
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
-        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse()))
+        if(!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse()))
         {
             return InteractionResultHolder.pass(pUsedStack);
         }

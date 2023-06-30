@@ -570,3 +570,48 @@ Record:85 (Tech and Tools Update)
 -improved zipline pole block place mechanic
 -added turret ammo
 -added turret code
+-added turret wrench
+-added turret item
+-added turret place/remove mechanic
+-added turret turn mechanic
+-added class changer buttons
+-added class changer gui
+-changed turret refill mechanic
+-fixed turret ammo crafting recipe
+-fixed ommoran hearthstone locator loot modifiers
+-improved ommoran hearthstone locator mechanic
+-added pub conversion block
+-fixed throw flare no dwarf message
+-fixed flare replace bug
+-fixed lootbug gen
+-added flare count only shows when player is dwarf
+-fixed flare sound bug
+-adujusted plascrete foam recipe
+-fixed company standard pickaxe leaf lover message
+-red sugar is now insta drop
+-flare now removes its light block
+-fixed mining sound
+-changed cropper/bismor gen
+-tweaked plants grow speed
+-removed morkite and oil shale burn ability
+-adjusted fuel yield from refinery
+-adjusted fuel consume from drills
+-adjusted fuel canister size
+-changed ammo recipes including nitra
+-removed liquid morkite wells (liquid morkite now brings 1 fuel)
+-improved company standard pickaxe
+-added pick sounds
+-fixed lootbug gen finally
+-fixed karl rename bug
+-added leaf lover special punishment
+-fixed entities hit entity crash
+-changed equipment table voxel shape
+-changed lloyd voxelshape
+-changed fuel refinery voxelshape
+-changed malt plant voxelshape
+-changed yeast plant voxelshape
+-added lootbug gold voxelshape
+-fixed lootbug gold texture bug
+-fixed starch plant voxelshape
+-fixed flintlockes delight voxelshape
+-fixed oily oaf voxelshape

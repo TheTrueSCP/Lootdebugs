@@ -228,23 +228,19 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     protected void tickDespawn() {
         ++this.life;
         if (this.life >= 1200) {
-            this.discard();
             this.onDespawn();
+            this.discard();
         }
 
     }
 
 
-    public void onDespawn()
-    {
-
-    }
-
+    public abstract void onDespawn();
     @Override
     protected void onHitEntity(EntityHitResult pResult)
     {
+        this.discard();
         pResult.getEntity().hurt(DamageSource.GENERIC, 2);
-        this.kill();
     }
 
     /**

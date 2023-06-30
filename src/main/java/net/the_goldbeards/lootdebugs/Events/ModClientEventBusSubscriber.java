@@ -33,6 +33,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.gui.IIngameOverlay;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -67,7 +68,7 @@ import net.the_goldbeards.lootdebugs.client.model.TurretModel;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
@@ -181,60 +182,6 @@ public class ModClientEventBusSubscriber
 
     }
 
-    @SubscribeEvent
-    public static void renderDrunknessOverlay(FMLClientSetupEvent event)
-    {
-
-        IIngameOverlay MyHudOverlay = OverlayRegistry.registerOverlayTop("drunkness", (gui, mStack, partialTicks, screenWidth, screenHeight) -> {
-
-            if (Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()))
-            {
-            float pScalar = (1.0F - Minecraft.getInstance().options.screenEffectScale);
-            Minecraft minecraft = Minecraft.getInstance();
-            int i = minecraft.getWindow().getGuiScaledWidth();
-            int j = minecraft.getWindow().getGuiScaledHeight();
-            double d0 = Mth.lerp((double)pScalar, 2.0D, 1.0D);
-            float f = 0.2F * pScalar;
-            float f1 = 0.4F * pScalar;
-            float f2 = 0.2F * pScalar;
-            double d1 = (double)i * d0;
-            double d2 = (double)j * d0;
-            double d3 = ((double)i - d1) / 2.0D;
-            double d4 = ((double)j - d2) / 2.0D;
-            RenderSystem.disableDepthTest();
-            RenderSystem.depthMask(false);
-            RenderSystem.enableBlend();
-            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
-            RenderSystem.setShaderColor(f, f1, f2, 1.0F);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, NAUSEA_LOCATION);
-            Tesselator tesselator = Tesselator.getInstance();
-            BufferBuilder bufferbuilder = tesselator.getBuilder();
-            bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-            bufferbuilder.vertex(d3, d4 + d2, -90.0D).uv(0.0F, 1.0F).endVertex();
-            bufferbuilder.vertex(d3 + d1, d4 + d2, -90.0D).uv(1.0F, 1.0F).endVertex();
-            bufferbuilder.vertex(d3 + d1, d4, -90.0D).uv(1.0F, 0.0F).endVertex();
-            bufferbuilder.vertex(d3, d4, -90.0D).uv(0.0F, 0.0F).endVertex();
-            tesselator.end();
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.disableBlend();
-            RenderSystem.depthMask(true);
-            RenderSystem.enableDepthTest();
-
-               /* if (minecraft.gameMode == null) return;
-                if (minecraft.level == null) return;
-                TextureManager tm = minecraft.getTextureManager();
-                int i = minecraft.screen.width;
-                int j = minecraft.screen.height;
-                NativeImage nativeimage = new NativeImage(i, j, false);
-            //    gui.setupOverlayRenderState(true, false, drunknessOverlay-);
-                GuiUtils.drawTexturedModalRect(new PoseStack(), 0, 0, 0, 0, screenWidth, screenHeight, 0);*/
-
-            }
-        });
-    }
-
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
@@ -252,7 +199,7 @@ public class ModClientEventBusSubscriber
                 if(entity instanceof Player player)
                 {
 
-                    if (entity == null || UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover)) {
+                    if (entity == null || ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover)) {
                         return 0.0F;
                     } else
                     {
@@ -263,7 +210,7 @@ public class ModClientEventBusSubscriber
                         BlockPos blockpos = this.getOmmoranPosition(pStack.getOrCreateTag());
 
                         long i = pClientLevel.getGameTime();
-                        if (!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double) blockpos.getX() + 0.5D, entity.position().y(), (double) blockpos.getZ() + 0.5D) < (double) 1.0E-5F)) {
+                        if (!ModUtils.DwarfClasses.canPlayerUseItem(pStack, getPlayer(), IClassData.Classes.LeafLover) && blockpos != null && !(entity.position().distanceToSqr((double) blockpos.getX() + 0.5D, entity.position().y(), (double) blockpos.getZ() + 0.5D) < (double) 1.0E-5F)) {
                             boolean flag = pEntity instanceof Player && ((Player) pEntity).isLocalPlayer();
                             double d1 = 0.0D;
                             if (flag) {
@@ -334,10 +281,10 @@ public class ModClientEventBusSubscriber
                 }
                 else
                 {
-                        boolean flag = UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.drills_rot");
+                        boolean flag = ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.drills_rot");
                         if(flag)
                         {
-                            return UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.drills_rot");
+                            return ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.drills_rot");
                         }
 
                     return 0.0f;
@@ -356,7 +303,7 @@ public class ModClientEventBusSubscriber
                 }
                 else
                 {
-                    return UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount") / FuelCanisterItem.maxFuel;
+                    return ModUtils.ItemNBTHelper.getFloat(pStack, "fuelAmount") / FuelCanisterItem.maxFuel;
 
                 }
         });
@@ -376,8 +323,8 @@ public class ModClientEventBusSubscriber
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_3.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_4_INNERST.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.SATCHEL_CHARGE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.LIGHT_BLOCK.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EQUIPMENT_TABLE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.EQUIPMENT_TABLE.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.FUEL_REFINERY.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.APOCA_BLOOM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.BOOLO_CAP.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.GLYPHID_SHIT.get(), RenderType.cutout());

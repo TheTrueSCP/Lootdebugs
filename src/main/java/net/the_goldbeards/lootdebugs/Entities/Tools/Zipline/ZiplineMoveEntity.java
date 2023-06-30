@@ -12,17 +12,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.Mod;
 import net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import static net.minecraft.world.phys.Vec3.ZERO;
 
@@ -48,7 +46,7 @@ public class ZiplineMoveEntity extends Entity
         this.targetPos = targetPos.below(1);
 
         Vec3 vec3 = new Vec3((this.blockPosition().getX() - targetPos.getX()) * -1, (this.blockPosition().getY() - targetPos.getY()) * -1, (this.blockPosition().getZ() - targetPos.getZ()) * -1);
-        BlockPos newPos = UsefullStuff.DataTypeHelper.addVecToBlockPos(this.blockPosition(), vec3, 1);
+        BlockPos newPos = ModUtils.DataTypeHelper.addVecToBlockPos(this.blockPosition(), vec3, 1);
         this.setPos(newPos.getX(), newPos.getY(), newPos.getZ());
     }
 

@@ -22,7 +22,7 @@ apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '2.25'
+version = '2.27'
 group = 'net.the_goldbeards.lootdebugs' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lootdebugs'
 
@@ -151,13 +151,14 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+    maven { url 'https://maven.blamejared.com' }
     maven {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
 
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
+    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:   maven { url 'https://maven.blamejared.com' }
     // flatDir {
     //     dir 'libs'
     // }
@@ -167,7 +168,10 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.18.2-40.2.0'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.2.9'
+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-71.1")
 
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")

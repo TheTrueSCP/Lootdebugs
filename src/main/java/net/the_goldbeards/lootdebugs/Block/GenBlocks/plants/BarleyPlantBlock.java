@@ -84,7 +84,7 @@ public class BarleyPlantBlock extends BushBlock implements BonemealableBlock
 
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
         int i = pState.getValue(AGE);
-        if (i < 1 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState,pRandom.nextInt(5) == 0)) {
+        if (i < 1 && pRandom.nextInt(0, 10) == 5) {
             pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(1)), 2);
             net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
         }

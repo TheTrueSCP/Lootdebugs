@@ -13,7 +13,7 @@
       "item": "lootdebugs:dystrum_ingot"
     },
     "H": {
-      "item": "lootdebugs:bismor_ingot"
+      "item": "lootdebugs:nitra"
     },
     "O": {
       "item": "minecraft:iron_nugget"
@@ -21,6 +21,6 @@
   },
   "result": {
     "item": "lootdebugs:platform_gun_ammo",
-    "count": 6
+    "count": 8
   }
 }

@@ -9,9 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public abstract class BasicAllClassItem extends Item
 {
@@ -24,14 +23,14 @@ public abstract class BasicAllClassItem extends Item
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
+            if(ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
             {
                 player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.no_dwarf").getString()), true);
-                UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.tool.usable", false);
+                ModUtils.ItemNBTHelper.putBoolean(pStack, "lootdebugs.tool.usable", false);
             }
             else
             {
-                UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.tool.usable", true);
+                ModUtils.ItemNBTHelper.putBoolean(pStack, "lootdebugs.tool.usable", true);
             }
         }
 
@@ -41,9 +40,9 @@ public abstract class BasicAllClassItem extends Item
 
     public static boolean canUseItem(ItemStack pStack)
     {
-        if(UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.tool.usable"))
+        if(ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.tool.usable"))
         {
-            return UsefullStuff.ItemNBTHelper.getBoolean(pStack, "lootdebugs.tool.usable");
+            return ModUtils.ItemNBTHelper.getBoolean(pStack, "lootdebugs.tool.usable");
         }
         return false;
     }

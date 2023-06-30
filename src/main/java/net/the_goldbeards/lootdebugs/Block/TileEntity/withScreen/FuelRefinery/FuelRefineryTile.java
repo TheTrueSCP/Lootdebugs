@@ -32,15 +32,15 @@ import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncFluidPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncItemStackPacket;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
+import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModFluids;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.ModTags;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
@@ -256,12 +256,10 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
                }
 
-               System.out.println("removed bucket in slot: " + i);
                fuelRefineryTile.itemHandler.extractItem(i, removeItemCount, false);
 
                if((i == 1 || i == 2) && removeItemCount > 0)
                {
-                   System.out.println("insert bucket in slot: " + i);
                    fuelRefineryTile.itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET, 1));
                }
            }
@@ -271,12 +269,18 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
     }
 
     public static Map<Item, Integer> itemFluidAmount() {
-        Map<Item, Integer> map = Maps.newLinkedHashMap();
+        Map<Item, Integer> fuelAmountItems = Maps.newLinkedHashMap();
 
-        map.put(Items.COAL, 10);
-        map.put(ModItems.LIQUID_MORKITE_BUCKET.get(), 1000);
+        fuelAmountItems.put(ModItems.LIQUID_MORKITE_BUCKET.get(), (int) FuelCanisterItem.maxFuel);
 
-        return map;
+        fuelAmountItems.put(Items.COAL, 16);
+        fuelAmountItems.put(Items.COAL_BLOCK, 160);
+
+        fuelAmountItems.put(ModItems.MORKITE.get(), 24);
+        fuelAmountItems.put(ModBlocks.MORKITE_BLOCK.get().asItem(), 240);
+        fuelAmountItems.put(ModBlocks.OIL_SHALE.get().asItem(), 250);
+
+        return fuelAmountItems;
     }
 
     private void resetProgress()
@@ -297,15 +301,15 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
             {
                 ItemStack fuel = fuelRefineryTile.itemHandler.getStackInSlot(0);
 
-                if(UsefullStuff.ItemNBTHelper.hasKey(fuel, "fuelAmount"))
+                if(ModUtils.ItemNBTHelper.hasKey(fuel, "fuelAmount"))
                 {
-                    float fuelInItem = UsefullStuff.ItemNBTHelper.getFloat(fuel, "fuelAmount");
+                    float fuelInItem = ModUtils.ItemNBTHelper.getFloat(fuel, "fuelAmount");
 
                     int optimalRefuelAmount = (int) (FuelCanisterItem.maxFuel - fuelInItem);
 
                     int givenRefuelAmount = fuelRefineryTile.fluid_tank.drain(optimalRefuelAmount, IFluidHandler.FluidAction.EXECUTE).getAmount();
 
-                    UsefullStuff.ItemNBTHelper.putFloat(fuel, "fuelAmount", givenRefuelAmount + fuelInItem);
+                    ModUtils.ItemNBTHelper.putFloat(fuel, "fuelAmount", givenRefuelAmount + fuelInItem);
 
                 }
 

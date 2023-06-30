@@ -1,0 +1,11 @@
+{
+  "name": "The Equipment Table",
+  "icon": "lootdebugs:equipment_table",
+  "category": "lootdebugs:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Equipment Table is the most important thing for you. Only in this table you can create all the things you need to be a real dwarf. You see the table is shaped like a regular crafting table. All the crafting recipes are displayed in JustEnoughItems"
+    }
+  ]
+}

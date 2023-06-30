@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -7,6 +8,7 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
@@ -65,7 +67,17 @@ public class ShieldEntity extends ThrowableProjectile
 
 
     }
-    
+    @Override
+    protected void onHitEntity(EntityHitResult pResult) {
+
+        if(!level.isClientSide)
+        {
+            BlockPos hitPos = pResult.getEntity().blockPosition();
+            level.addFreshEntity(new ItemEntity(level, hitPos.getX(), hitPos.getY(), hitPos.getZ(), new ItemStack(ModItems.SHIELD.get(), 1)));
+        }
+        this.discard();
+    }
+
     @Override
     protected void defineSynchedData() {
         

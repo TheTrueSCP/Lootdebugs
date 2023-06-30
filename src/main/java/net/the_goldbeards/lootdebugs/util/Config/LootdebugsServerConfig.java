@@ -10,6 +10,7 @@ public class LootdebugsServerConfig
  public static final ForgeConfigSpec.ConfigValue<Boolean> SATCHEL_CHARGE_BLINK;
  public static final ForgeConfigSpec.ConfigValue<Boolean> LOOTBUG_PACIFIST_MODE;
  public static final ForgeConfigSpec.ConfigValue<Integer> FLARE_COOLDOWN;
+ public static final ForgeConfigSpec.ConfigValue<Integer> FLARE_REFILL_TIME;
  public static final ForgeConfigSpec.ConfigValue<Integer> DWARF_CHANGE_COOLDOWN;
  public static final ForgeConfigSpec.ConfigValue<Integer> DWARF_SALUTE_COOLDOWN;
 
@@ -24,6 +25,8 @@ public class LootdebugsServerConfig
      BUILDER.comment("\nCooldowns are calculated by multiply your seconds with 20, Example: 2 Seconds = 2*20 = 40, Dwarf Change Cooldown = 40");
 
      FLARE_COOLDOWN = BUILDER.define("Flare Throw Cooldown", 5);
+
+     FLARE_REFILL_TIME = BUILDER.define("Flare Refill Time", 200);
 
      DWARF_CHANGE_COOLDOWN = BUILDER.define("Dwarf Change Cooldown", 60);
 

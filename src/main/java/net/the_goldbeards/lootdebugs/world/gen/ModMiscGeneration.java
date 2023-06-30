@@ -26,7 +26,7 @@ public class ModMiscGeneration
         if(types.contains(BiomeDictionary.Type.OVERWORLD))
         {
             baseDec.add( ModPlacedFeatures.LIQUID_MORKITE_SPRING);
-            baseDec.add( ModPlacedFeatures.LIQUID_MORKITE_LAKE);
+          //  baseDec.add( ModPlacedFeatures.LIQUID_MORKITE_LAKE);
         }
     }
 }

@@ -1,16 +1,20 @@
 package net.the_goldbeards.lootdebugs.Events;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.eventbus.EventBus;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -27,7 +31,9 @@ import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
 import net.the_goldbeards.lootdebugs.capability.Flare.IFlareData;
 import net.the_goldbeards.lootdebugs.capability.Salute.ISaluteData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
+import net.the_goldbeards.lootdebugs.init.ModEffects;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
+import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import net.the_goldbeards.lootdebugs.world.LootModifierer.OmmoranLocatorFromVillageChest;
 
 import javax.annotation.Nonnull;
@@ -120,7 +126,7 @@ public class MiscEventBusSubscriber
                     }
 
 
-                    if (flareCap.getReplenishTickCounter() >= 240 && storedFlares < maxFlares) {
+                    if (flareCap.getReplenishTickCounter() >= LootdebugsServerConfig.FLARE_REFILL_TIME.get() && storedFlares < maxFlares) {
                         int totalFlares = storedFlares + 1;
 
                         flareCap.setStoredFlares(totalFlares);
@@ -200,5 +206,9 @@ public class MiscEventBusSubscriber
             event.put(ModEntities.LOOTBUG_GOLDEN.get(), LootbugGoldenEntity.createAttributes().build());
             event.put(ModEntities.LOOTBUG_OLD.get(), LootbugEntity.createAttributes().build());
         }
+    }
+    @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus =Mod.EventBusSubscriber.Bus.FORGE)
+    public class BothSidesForge
+    {
     }
 }

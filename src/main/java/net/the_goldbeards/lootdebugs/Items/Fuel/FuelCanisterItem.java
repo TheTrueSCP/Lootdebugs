@@ -7,17 +7,19 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class FuelCanisterItem extends Item
 {
-    public static final float maxFuel = 500;
+    public static final float maxFuel = 1000;
 
     public FuelCanisterItem(Properties pProperties)
     {
@@ -25,11 +27,21 @@ public class FuelCanisterItem extends Item
     }
 
     @Override
+    public ItemStack getContainerItem(ItemStack itemStack) {
+        return new ItemStack(ModItems.FUEL_CANISTER.get(), 1);
+    }
+
+    @Override
+    public boolean hasCraftingRemainingItem() {
+        return true;
+    }
+
+    @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
-        if(!UsefullStuff.ItemNBTHelper.hasKey(pStack, "fuelAmount"))
+        if(!ModUtils.ItemNBTHelper.hasKey(pStack, "fuelAmount"))
         {
-            UsefullStuff.ItemNBTHelper.putFloat(pStack, "fuelAmount", 0);
+            ModUtils.ItemNBTHelper.putFloat(pStack, "fuelAmount", 0);
         }
 
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -38,7 +50,7 @@ public class FuelCanisterItem extends Item
     @Override
     public int getBarWidth(ItemStack pStack)
     {
-        return Math.round(13 / maxFuel * UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount"));
+        return Math.round(13 / maxFuel * ModUtils.ItemNBTHelper.getFloat(pStack, "fuelAmount"));
     }
 
     @Override
@@ -63,15 +75,17 @@ public class FuelCanisterItem extends Item
 
     @Override
     public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
-        return 30000;
+        return (int) (ModUtils.ItemNBTHelper.getFloat(itemStack, "fuelAmount") * 100);
     }
+
+
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
-        if(UsefullStuff.ItemNBTHelper.hasKey(pStack, "fuelAmount"))
+        if(ModUtils.ItemNBTHelper.hasKey(pStack, "fuelAmount"))
         {
-        pTooltipComponents.add(new TextComponent(new TranslatableComponent("tooltip.lootdebugs.fuel_canister.amount").getString() + UsefullStuff.ItemNBTHelper.getFloat(pStack, "fuelAmount") + "/" + (int) FuelCanisterItem.maxFuel));
+        pTooltipComponents.add(new TextComponent(new TranslatableComponent("tooltip.lootdebugs.fuel_canister.amount").getString() + ModUtils.ItemNBTHelper.getFloat(pStack, "fuelAmount") + "/" + (int) FuelCanisterItem.maxFuel));
         }
 
         if(Screen.hasShiftDown())

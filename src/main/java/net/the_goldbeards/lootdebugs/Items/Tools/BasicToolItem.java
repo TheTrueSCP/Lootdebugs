@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public abstract class BasicToolItem extends Item
 {
@@ -24,9 +24,9 @@ public abstract class BasicToolItem extends Item
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, getDwarfClassToUse()))
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, getDwarfClassToUse()))
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(getDwarfClassToUse()).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(getDwarfClassToUse()).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
             }
         }
 

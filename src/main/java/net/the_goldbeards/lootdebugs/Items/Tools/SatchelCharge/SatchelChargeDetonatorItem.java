@@ -9,13 +9,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public class SatchelChargeDetonatorItem extends BasicAllClassItem
 {
@@ -28,7 +27,7 @@ public class SatchelChargeDetonatorItem extends BasicAllClassItem
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
-        BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
+        BlockPos satchelPos = NbtUtils.readBlockPos(ModUtils.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
 
 
         if (pEntity instanceof Player player)
@@ -58,9 +57,9 @@ public class SatchelChargeDetonatorItem extends BasicAllClassItem
     {
         ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
 
-        if (UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, pPlayer, dwarfClassToUse)) {
+        if (ModUtils.DwarfClasses.canPlayerUseItem(pStack, pPlayer, dwarfClassToUse)) {
 
-            BlockPos satchelPos = NbtUtils.readBlockPos(UsefullStuff.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
+            BlockPos satchelPos = NbtUtils.readBlockPos(ModUtils.ItemNBTHelper.getTagCompound(pStack, "satchel_charge"));
 
             if (pLevel.getBlockEntity(satchelPos) instanceof SatchelChargeTile satchelChargeTile) {
                 satchelChargeTile.detonate(pPlayer);

@@ -13,7 +13,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -21,6 +23,7 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleTile;
 import net.the_goldbeards.lootdebugs.Entities.Tools.AbstractShootablePhysicsArrowLikeEntity;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
+import net.the_goldbeards.lootdebugs.init.ModItems;
 import org.jetbrains.annotations.NotNull;
 
 public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
@@ -147,6 +150,11 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     }
 
     @Override
+    public void onDespawn() {
+
+    }
+
+    @Override
     public InteractionResult interact(Player pPlayer, InteractionHand pHand)
     {
         Level pLevel = pPlayer.getLevel();
@@ -174,7 +182,8 @@ public class ZiplineEntity extends AbstractShootablePhysicsArrowLikeEntity
     @Override
     protected void onHitEntity(EntityHitResult pResult)
     {
-
+        level.addFreshEntity(new ItemEntity(level,pResult.getEntity().getX(),pResult.getEntity().getY(),pResult.getEntity().getZ(),new ItemStack(ModItems.ZIPLINE_AMMO.get(),1)));
+        this.discard();
     }
 
     @Override

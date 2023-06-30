@@ -63,7 +63,7 @@ public class ThrowFlarePacket
                     }
                     else
                     {
-                        player.displayClientMessage(new TranslatableComponent("player.class.flare.wrong_class"), true);
+                        player.displayClientMessage(new TranslatableComponent("message.lootdebugs.flare.no_dwarf"), true);
                     }
                 });
             }

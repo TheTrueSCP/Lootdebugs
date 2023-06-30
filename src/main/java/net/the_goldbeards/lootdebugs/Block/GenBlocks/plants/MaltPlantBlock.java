@@ -36,82 +36,28 @@ public class MaltPlantBlock extends BushBlock implements BonemealableBlock
     public static final IntegerProperty AGE = BlockStateProperties.AGE_1;
 
 
-    private static final VoxelShape PICKED = Shapes.or(
-            Block.box(3.75, 8, 3.5, 12.75, 12.3, 12.5),
+    private static final VoxelShape SHAPE_N_S = Shapes.or(
+            Block.box(3.5, 8, 3.5, 12.5, 12.3, 12.5),
             Block.box(1.5, 0, 4, 14.5, 5, 12),
             Block.box(4, 0, 1.5, 12, 5, 14.5),
             Block.box(2.5, 0, 2.5, 13.5, 8, 13.5)
+
     );
 
-    private static final VoxelShape GROWN = Shapes.or(
-            Block.box(3.75, 8, 3.5, 12.75, 12.3, 12.5),
-            Block.box(1.5, 0, 4, 14.5, 5, 12),
-            Block.box(4, 0, 1.5, 12, 5, 14.5),
-            Block.box(2.5, 0, 2.5, 13.5, 8, 13.5),
-            Block.box(1.75, 13.375, -1.75, 4, 15.625, -0.75),
-            Block.box(1.75, 13.375, -1, 6.25, 15.625, 0),
-            Block.box(4, 13.375, -0.25, 7, 15.625, 0.75),
-            Block.box(5.5, 13.375, 14.75, 6.5, 15.625, 15.75),
-            Block.box(5.5, 13.375, 0.5, 6.5, 15.625, 1.5),
-            Block.box(6.25, 13.375, 0.5, 10, 15.625, 2),
-            Block.box(11.5, 13.375, -1, 14.5, 15.625, 0.5),
-            Block.box(10, 13.375, -0.25, 11.5, 15.625, 1.25),
-            Block.box(14.5, 13.375, -0.25, 16, 15.625, 2.75),
-            Block.box(13.75, 13.375, 2.75, 15.25, 15.625, 4.25),
-            Block.box(13, 13.375, 11.75, 14, 15.625, 12.75),
-            Block.box(13, 13.375, 3.25, 14, 15.625, 4.25),
-            Block.box(12.25, 13.375, 4, 14.5, 15.625, 5),
-            Block.box(11.5, 13.375, 4.75, 13.75, 15.625, 5.75),
-            Block.box(10.75, 13.375, 5.5, 13, 15.625, 6.5),
-            Block.box(10, 13.375, 6.25, 12.25, 15.625, 7.25),
-            Block.box(-6.5, 13.375, 7.25, -4.25, 15.625, 8.75),
-            Block.box(-5.75, 13.375, 6.5, -3.5, 15.625, 7.5),
-            Block.box(-5, 13.375, 5.75, -2.75, 15.625, 6.75),
-            Block.box(-4.25, 13.375, 5, -0.5, 15.625, 6),
-            Block.box(1, 13.375, -2.5, 2.5, 15.625, -1.5),
-            Block.box(0.25, 13.375, -1.75, 1.75, 15.625, 3.5),
-            Block.box(-2.75, 13.375, 4.25, 1, 15.625, 5.25),
-            Block.box(-0.5, 13.375, 3.5, 1.75, 15.625, 4.5),
-            Block.box(-0.5, 13.375, 11.5, 1.75, 15.625, 12.5),
-            Block.box(-2.75, 13.375, 10.75, 1, 15.625, 11.75),
-            Block.box(0.25, 13.375, 12.5, 1.75, 15.625, 17.75),
-            Block.box(1, 13.375, 17.5, 2.5, 15.625, 18.5),
-            Block.box(-4.25, 13.375, 10, -0.5, 15.625, 11),
-            Block.box(-5, 13.375, 9.25, -2.75, 15.625, 10.25),
-            Block.box(10, 13.375, 7.25, 11.5, 15.625, 8.75),
-            Block.box(10, 13.375, 8.75, 12.25, 15.625, 9.75),
-            Block.box(10.75, 13.375, 9.5, 13, 15.625, 10.5),
-            Block.box(11.5, 13.375, 10.25, 13.75, 15.625, 11.25),
-            Block.box(12.25, 13.375, 11, 14.5, 15.625, 12),
-            Block.box(13.75, 13.375, 11.75, 15.25, 15.625, 13.25),
-            Block.box(14.5, 13.375, 13.25, 16, 15.625, 16.25),
-            Block.box(10, 13.375, 14.75, 11.5, 15.625, 16.25),
-            Block.box(11.5, 13.375, 15.5, 14.5, 15.625, 17),
-            Block.box(6.25, 13.375, 14, 10, 15.625, 15.5),
-            Block.box(4, 13.375, 15.5, 7, 15.625, 16.5),
-            Block.box(1.75, 13.375, 16, 6.25, 15.625, 17),
-            Block.box(1.75, 13.375, 16.75, 4, 15.625, 17.75),
-            Block.box(-5.75, 13.375, 8.5, -3.5, 15.625, 9.5),
-            Block.box(-0.5, 10.875, 5.5, 1, 11.875, 6.5),
-            Block.box(2.5, 10.875, 0.5, 4.75, 11.875, 2),
-            Block.box(1.75, 10.375, 2, 10.75, 11.875, 5.75),
-            Block.box(-0.5, 10.875, 9.5, 1, 11.875, 10.5),
-            Block.box(2.5, 10.875, 14, 4.75, 11.875, 15.5),
-            Block.box(10.75, 10.875, 2, 13, 11.875, 3.5),
-            Block.box(10.75, 10.875, 12.5, 13, 11.875, 14),
-            Block.box(1, 10.375, 5.75, 10, 11.875, 10.25),
-            Block.box(1.75, 10.375, 10.25, 10.75, 11.875, 14),
-            Block.box(-3.5, 10.625, 6.5, 1, 11.875, 9.5),
-            Block.box(1, 11.875, 1.25, 13, 14.875, 5.75),
-            Block.box(11.5, 11.875, 0.5, 14.5, 14.875, 3.5),
-            Block.box(1.75, 11.875, -0.25, 5.5, 14.875, 1.25),
-            Block.box(-0.5, 11.875, 4.75, 1, 14.875, 5.75),
-            Block.box(-0.5, 11.875, 10.25, 1, 14.875, 11.25),
-            Block.box(1.75, 11.875, 14.75, 5.5, 14.875, 16.25),
-            Block.box(11.5, 11.875, 12.5, 14.5, 14.875, 15.5),
-            Block.box(1, 11.875, 10.25, 13, 14.875, 14.75),
-            Block.box(-4.25, 11.875, 5.75, 10.75, 14.875, 10.25)
+    private static final VoxelShape EAST = Shapes.or(
+            Block.box(3.625, 8, 3.625, 12.625, 12.3, 12.625),
+            Block.box(4.125, 0, 1.375, 12.125, 5, 14.375),
+            Block.box(1.625, 0, 3.875, 14.625, 5, 11.875),
+            Block.box(2.625, 0, 2.375, 13.625, 8, 13.375)
     );
+
+    private static final VoxelShape WEST = Shapes.or(
+            Block.box(3.625, 8, 3.625, 12.625, 12.3, 12.625),
+            Block.box(4.125, 0, 1.375, 12.125, 5, 14.375),
+            Block.box(1.625, 0, 3.875, 14.625, 5, 11.875),
+            Block.box(2.625, 0, 2.375, 13.625, 8, 13.375)
+    );
+
 
 
 
@@ -125,18 +71,19 @@ public class MaltPlantBlock extends BushBlock implements BonemealableBlock
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-       return PICKED;
+
+        return SHAPE_N_S;
     }
 
     public boolean isRandomlyTicking(BlockState p_57284_) {
         return p_57284_.getValue(AGE) < 1;
     }
 
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
-        int i = state.getValue(AGE);
-        if (i < 1 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state,rand.nextInt(5) == 0)) {
-            worldIn.setBlock(pos, state.setValue(AGE, Integer.valueOf(1)), 2);
-            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
+        int i = pState.getValue(AGE);
+        if (i < 1 && pRandom.nextInt(0, 10) == 5) {
+            pLevel.setBlock(pPos, pState.setValue(AGE, Integer.valueOf(1)), 2);
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
         }
 
     }
@@ -149,7 +96,7 @@ public class MaltPlantBlock extends BushBlock implements BonemealableBlock
             return InteractionResult.PASS;
         } else if (i == 1) {
 
-            popResource(world, pos, new ItemStack(ModItems.MALT_STAR.get(), 1 + world.random.nextInt(1)));
+            popResource(world, pos, new ItemStack(ModItems.MALT_STAR.get(), 1));
             world.playSound((Player)null, pos, ModSounds.VEGETATION_PICKED.get(), SoundSource.BLOCKS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
             world.setBlock(pos, state.setValue(AGE, Integer.valueOf(0)), 2);
             return InteractionResult.sidedSuccess(world.isClientSide);

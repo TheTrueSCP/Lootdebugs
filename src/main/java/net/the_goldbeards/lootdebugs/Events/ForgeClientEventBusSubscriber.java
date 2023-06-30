@@ -21,6 +21,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.DrawSelectionEvent;
+import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -40,7 +41,7 @@ import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.ModEffects;
 import net.the_goldbeards.lootdebugs.util.ModTags;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.*;
 
@@ -87,19 +88,23 @@ public class ForgeClientEventBusSubscriber
         Player player = getPlayer();
 
 
-        if(player != null) {
-
-            player.getCapability(FlareDataCap.FLARE_DATA).ifPresent(flareCap ->
+        if(player != null)
+        {
+            if(ModUtils.DwarfClasses.isPlayerDwarf(player))
             {
-                event.getLeft().add(new TranslatableComponent("gui.lootdebugs.player.flares").getString() +": " + flareCap.getStoredFlares() + "/" + 4);
-            });
 
-            player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap -> {
+                player.getCapability(FlareDataCap.FLARE_DATA).ifPresent(flareCap ->
+                {
+                    event.getLeft().add(new TranslatableComponent("gui.lootdebugs.player.flares").getString() + ": " + flareCap.getStoredFlares() + "/" + 4);
+                });
 
-                IClassData.Classes dwarfClass = classCap.getDwarfClass();
-                event.getLeft().add(UsefullStuff.DwarfClasses.getClassColor(dwarfClass) + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClass).getString());
+                player.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap -> {
 
-            });
+                    IClassData.Classes dwarfClass = classCap.getDwarfClass();
+                    event.getLeft().add(ModUtils.DwarfClasses.getClassColor(dwarfClass) + ModUtils.DwarfClasses.getClassTranslate(dwarfClass).getString());
+
+                });
+            }
         }
     }
 
@@ -140,11 +145,11 @@ public class ForgeClientEventBusSubscriber
             if(!stack.isEmpty() && stack.getItem() instanceof DrillsItem)
             {
 
-                if(player instanceof Player &&!player.isShiftKeyDown() && !UsefullStuff.ItemNBTHelper.getBoolean(stack, "onBlockMode"))
+                if(player instanceof Player &&!player.isShiftKeyDown() && !ModUtils.ItemNBTHelper.getBoolean(stack, "onBlockMode"))
                 {
                     //Render for every Block which is breaking the block-break animation
                     ImmutableList<BlockPos> blocks = ((DrillsItem)stack.getItem()).getExtraBlocksDug(world, (Player)player, event.getTarget());
-                    UsefullStuff.BlockHelpers.drawAdditionalBlockbreak(event, (Player)player, blocks);
+                    ModUtils.BlockHelpers.drawAdditionalBlockbreak(event, (Player)player, blocks);
                 }
             }
         }
@@ -152,11 +157,6 @@ public class ForgeClientEventBusSubscriber
 
 
     //GoldLootbugEffect
-
-    //Block
-    //ToDo:only on client
-    //ToDo:minerel sound mono
-    //Todo:ziline not rendering
     @SubscribeEvent
     public static void playerLootbugGoldEffect(PlayerInteractEvent.RightClickBlock event)
     {
@@ -203,5 +203,21 @@ public class ForgeClientEventBusSubscriber
                 level.setBlock(event.getPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void renderDrunkness(EntityViewRenderEvent.CameraSetup event) {
+
+        if(Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) && Minecraft.getInstance().options.screenEffectScale > 0)
+        {
+            float screenEffectsScale = Minecraft.getInstance().options.screenEffectScale;
+            float amp = Minecraft.getInstance().player.getEffect(ModEffects.DRUNKNESS.get()).getAmplifier() + 1;
+            float wobbleX = (float) Math.sin(event.getPartialTicks() * 1.5 * screenEffectsScale * amp);
+            float wobbleY = (float) Math.cos(event.getPartialTicks() * 1.5 * screenEffectsScale * amp);
+
+            event.setRoll(event.getRoll() + wobbleX);
+            event.setYaw(event.getYaw() + wobbleY);
+        }
+
     }
 }

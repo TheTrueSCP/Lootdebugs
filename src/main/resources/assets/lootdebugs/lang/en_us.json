@@ -83,7 +83,7 @@
     "item.lootdebugs.zipline_launcher": "Zipline Launcher",
 
 
-    "item.lootdebugs.zipline_gun": "Zipline Gun",
+    "item.lootdebugs.zipline": "Zipline",
     "item.lootdebugs.nitra_on_a_stick": "Nitra on a Stick",
     "item.lootdebugs.liquid_morkite_bucket": "Liquid Morkite Bucket",
     "item.lootdebugs.company_standard_pickaxe": "Company Standard Pickaxe",
@@ -98,6 +98,8 @@
     "item.lootdebugs.platform_gun_ammo": "Compressed Plascrete Foam",
     "item.lootdebugs.flare_gun_ammo": "Flare",
     "item.lootdebugs.turret_ammo": "Turret Ammo",
+    "item.lootdebugs.turret": "Turret",
+    "item.lootdebugs.turret_wrench": "Turret Wrench",
     "item.lootdebugs.ommoran_hearthstone_locator": "Ommoran Hearthstone Locator",
 
     "item.lootdebugs.zipline_ammo": "Zipline Ammo",
@@ -159,6 +161,8 @@
 
     "item.lootdebugs.red_sugar_item": "Chunk of Red Sugar",
 
+    "item.lootdebugs.logo": "Lootdebugs Logo",
+
 
     "entity.lootdebugs.lootbug_golden": "Lootbug golden",
     "entity.lootdebugs.lootbug": "Lootbug",
@@ -173,23 +177,30 @@
     "class.lootdebugs.player.gunner": "Gunner",
     "class.lootdebugs.player.thetruescp": "TheTrueSCP",
     "class.lootdebugs.player.monsieurhannes": "Monsieur Hannes",
-    "class.lootdebugs.player.carl": "Carl",
-    "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your'e just a leaf lover",
+    "class.lootdebugs.player.karl": "Karl",
+
+    "message.lootdebugs.beer.no_longer_dwarf": "You now no longer dwarf, Karl would be disappointed. Shame on you!",
+
+    "message.lootdebugs.armor.no_dwarf": "You must be a Dwarf to wear this armor, your are just a leaf lover",
+    "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your are just a leaf lover",
+    "message.lootdebugs.flare.no_dwarf": "You You must be a Dwarf to throw a flare, your are just a leaf lover",
 
     "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
 
     "message.lootdebugs.block.old.lloyd": "Old lloyd block, mine and replace it to fix it",
 
-    "message.lootdebugs.tool.locator.not_found": "Ommoran not found, use item to research",
+    "message.lootdebugs.tool.locator.resetted" : "Resetted locator, searching for new Ommoran Hearthstone...",
+    "message.lootdebugs.tool.locator.no_ommoran" : "Could not find an Ommoran. Right click at a different location and try again",
+
     "message.lootdebugs.tool.wrong_class_0": "Wrong Class, you must be",
     "message.lootdebugs.tool.wrong_class_1": "to use this tool",
     "message.lootdebugs.tool.no_fuel": "No Fuel in Inventory",
-    "message.lootdebugs.tool.ommoran_locator.searching": "Searching for Hearhstone...",
     "message.lootdebugs.tool.on_block_drill_mode_off": "On block drill mode off",
     "message.lootdebugs.tool.on_block_drill_mode_on": "On block drill mode on",
     "message.lootdebugs.tool.not_on_ground": "You must be on solid ground to use this item",
     "message.lootdebugs.tool.satchel_charge.ready": "Satchel Charge ready",
     "message.lootdebugs.tool.satchel_charge.detonated": "DETONATED",
+    "message.lootdebugs.tool.temperature": "Temperature:",
 
 
     "message.lootdebugs.zipline_block.link_invalid": "Linked pos invalid",
@@ -197,8 +208,13 @@
     "message.lootdebugs.zipline_move.change_direction.2": "to change direction",
     "message.lootdebugs.zipline_entity.hit_again_discard": "Hit again to destroy zipline",
 
+    "tooltip.lootdebugs.fuel_refinery.function" : "The fuel refinery takes the same fuel as the furnace (includes morkite and oil shale)",
+
+
+    "tooltip.lootdebugs.ommoran_hearthstone_locator.research": "Use the item like a compass to search for Hearthstones, right click to restart searching",
     "tooltip.lootdebugs.fuel_canister.refuel": "You can refuel this at the fuel refinery",
     "tooltip.lootdebugs.fuel_canister.amount": "Fuel:",
+    "tooltip.lootdebugs.turret_ammo.amount" : "Ammo:",
     "tooltip.lootdebugs.more_information": "Press SHIFT to see more information",
     "tooltip.lootdebugs.drills.on_block_drill_mode": "Use the item (right-click) to change the drill-mode",
     "tooltip.lootdebugs.liquid.amount.with.capacity": "%s / %s mB",

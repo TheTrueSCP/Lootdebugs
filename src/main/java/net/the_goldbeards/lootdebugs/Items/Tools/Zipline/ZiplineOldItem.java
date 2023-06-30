@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 @Deprecated(forRemoval = true, since = "2.1")
 public class ZiplineOldItem extends Item
@@ -24,30 +24,30 @@ public class ZiplineOldItem extends Item
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
 
-        if(!UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.setsecond"))
+        if(!ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.setsecond"))
         {
-            UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.ziplineitem.setsecond", false);
+            ModUtils.ItemNBTHelper.putBoolean(pStack, "lootdebugs.ziplineitem.setsecond", false);
         }
 
         if(pEntity.isShiftKeyDown())
         {
-            UsefullStuff.ItemNBTHelper.putBoolean(pStack, "lootdebugs.ziplineitem.setsecond", false);
+            ModUtils.ItemNBTHelper.putBoolean(pStack, "lootdebugs.ziplineitem.setsecond", false);
         }
 
         //ONLY for displaying linking/too far messages on screen
-        if(UsefullStuff.ItemNBTHelper.getBoolean(pStack, "lootdebugs.ziplineitem.setsecond"))
+        if(ModUtils.ItemNBTHelper.getBoolean(pStack, "lootdebugs.ziplineitem.setsecond"))
         {
             if(pEntity instanceof Player player &&
-                    UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.x") &&
-                    UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.y") &&
-                    UsefullStuff.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.z"))
+                    ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.x") &&
+                    ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.y") &&
+                    ModUtils.ItemNBTHelper.hasKey(pStack, "lootdebugs.ziplineitem.linkpos.z"))
             {
                 String pos =
-                            UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.x") + " "
-                        +  UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.y") + " "
-                        + UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.z");
+                            ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.x") + " "
+                        +  ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.y") + " "
+                        + ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.z");
 
-                BlockPos linkedBlockPos = new BlockPos(UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.x"), UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.y"), UsefullStuff.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.z"));//create blockpos
+                BlockPos linkedBlockPos = new BlockPos(ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.x"), ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.y"), ModUtils.ItemNBTHelper.getFloat(pStack, "lootdebugs.ziplineitem.linkpos.z"));//create blockpos
 
 
                 if(player.blockPosition().closerThan(linkedBlockPos, 31D))
@@ -69,32 +69,32 @@ public class ZiplineOldItem extends Item
 
         ItemStack ziplineItemStack = pPlayer.getItemInHand(pUsedHand);
 
-        if(!UsefullStuff.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.setsecond"))
+        if(!ModUtils.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.setsecond"))
         {
             return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
         }
 
-        if(!UsefullStuff.ItemNBTHelper.getBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond"))
+        if(!ModUtils.ItemNBTHelper.getBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond"))
         {
           //  ZiplineEntity ziplineEntityFirst = new ZiplineEntity(pPlayer, pLevel, null, false, ziplineItemStack);
           //  ziplineEntityFirst.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
          //   pLevel.addFreshEntity(ziplineEntityFirst);
-            UsefullStuff.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", true);
+            ModUtils.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", true);
         }
         else
         {
-            if(UsefullStuff.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.x") &&
-                    UsefullStuff.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.y") &&//If blockpos exists
-                    UsefullStuff.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.z"))
+            if(ModUtils.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.x") &&
+                    ModUtils.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.y") &&//If blockpos exists
+                    ModUtils.ItemNBTHelper.hasKey(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.z"))
             {
-                BlockPos linkedBlockPos = new BlockPos(UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.x"), UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.y"), UsefullStuff.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.z"));//create blockpos
+                BlockPos linkedBlockPos = new BlockPos(ModUtils.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.x"), ModUtils.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.y"), ModUtils.ItemNBTHelper.getFloat(ziplineItemStack, "lootdebugs.ziplineitem.linkpos.z"));//create blockpos
 
                 if(pPlayer.blockPosition().closerThan(linkedBlockPos, 31D)) {
                 //    ZiplineEntity ziplineEntitySecond = new ZiplineEntity(pPlayer, pLevel, linkedBlockPos, true, ziplineItemStack);//enable linking with secondPlace and give linking coords.
                 //    ziplineEntitySecond.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
                 //    pLevel.addFreshEntity(ziplineEntitySecond);
-                    UsefullStuff.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", false);
+                    ModUtils.ItemNBTHelper.putBoolean(ziplineItemStack, "lootdebugs.ziplineitem.setsecond", false);
                 }
             }
         }

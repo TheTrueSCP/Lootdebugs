@@ -1,0 +1,11 @@
+{
+  "name": "The Class Changer",
+  "icon": "lootdebugs:class_changer",
+  "category": "lootdebugs:getting_started",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This thing can make a real dwarf out of you. So "
+    }
+  ]
+}

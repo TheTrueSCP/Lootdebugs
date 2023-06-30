@@ -5,7 +5,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.LightBlock.LightBlockTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlockTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlockTile;
@@ -42,10 +41,6 @@ public class ModTileEntities
     public static final RegistryObject<BlockEntityType<ShieldEmitterBlockTile>> SHIELD_EMITTER_BLOCK_ENTITY =
             BLOCK_ENTITYS.register("shield_emitter_block_entity", () ->
                     BlockEntityType.Builder.of(ShieldEmitterBlockTile::new, ModBlocks.SHIELD_EMITTER_BLOCK.get()).build(null));
-
-    public static final RegistryObject<BlockEntityType<LightBlockTile>> LIGHT_BLOCK_ENTITY =
-            BLOCK_ENTITYS.register("light_block_entity", () ->
-                    BlockEntityType.Builder.of(LightBlockTile::new, ModBlocks.LIGHT_BLOCK.get()).build(null));
 
     public static final RegistryObject<BlockEntityType<FuelRefineryTile>> FUEL_PRESS_ENTITY =
             BLOCK_ENTITYS.register("fuel_refinery_entity", () ->

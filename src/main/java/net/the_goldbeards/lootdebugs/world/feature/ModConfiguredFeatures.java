@@ -1,24 +1,27 @@
 package net.the_goldbeards.lootdebugs.world.feature;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.LakeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SpringConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.material.Fluids;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModFeatures;
 import net.the_goldbeards.lootdebugs.init.ModFluids;
@@ -53,7 +56,7 @@ public class ModConfiguredFeatures
 
 
     public static final Holder<? extends ConfiguredFeature<OreConfiguration, ?>> NITRA_ORE = FeatureUtils.register("nitra_ore_configured",
-            Feature.ORE, new OreConfiguration(OVERWORLD_NITRA_ORES, 12, 0.0F));
+            Feature.ORE, new OreConfiguration(OVERWORLD_NITRA_ORES, 8, 0.0F));
 
     public static final Holder<? extends ConfiguredFeature<OreConfiguration, ?>> MORKITE_ORE = FeatureUtils.register("morkite_ore_configured",
             Feature.ORE, new OreConfiguration(OVERWORLD_MORKITE_ORES, 8, 0.0f));
@@ -62,7 +65,7 @@ public class ModConfiguredFeatures
             Feature.ORE, new OreConfiguration(OVERWORLD_DYSTRUM_ORES, 6, 0.0f));
 
     public static final Holder<? extends ConfiguredFeature<OreConfiguration, ?>> OIL_SHALE_ORE = FeatureUtils.register("oil_shale_configured",
-            Feature.ORE, new OreConfiguration(OVERWORLD_OIL_SHALE_ORES, 17, 0.0f));
+            Feature.ORE, new OreConfiguration(OVERWORLD_OIL_SHALE_ORES, 4, 0.0f));
 
 
 
@@ -83,7 +86,8 @@ public class ModConfiguredFeatures
 
 
     public static final Holder<? extends ConfiguredFeature<SimpleIngredientsConfiguration, ?>> RED_SUGAR = FeatureUtils.register("red_sugar_configured",//Set, which plant has more weight
-            ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())))));
+            ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(  PlacementUtils.inlinePlaced(Feature.BLOCK_COLUMN, BlockColumnConfiguration.simple(BiasedToBottomInt.of(2, 3), BlockStateProvider.simple(ModBlocks.RED_SUGAR.get())), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesBlock(Blocks.AIR, BlockPos.ZERO), BlockPredicate.wouldSurvive(ModBlocks.RED_SUGAR.get().defaultBlockState(), BlockPos.ZERO))))));
+
 
     public static final Holder<? extends ConfiguredFeature<SimpleIngredientsConfiguration, ?>> MINERALS = FeatureUtils.register("minerals_configured",//Set, which plant has more weight
             ModFeatures.SIMPLE_INGEREDIENT_GENERATION.get(), new SimpleIngredientsConfiguration(

@@ -107,7 +107,7 @@ public abstract class BeerItem extends BlockItem
     }
 
     @Override
-    public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @javax.annotation.Nullable net.minecraft.nbt.CompoundTag nbt) {
+    public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
     }
 

@@ -16,7 +16,7 @@ public class ModTags
 
         public static final TagKey<Block> NEED_COMPANY_STANDARD_TOOL = createTag("need_company_standard_tool");
 
-        public static final TagKey<Block> PLATFORMGUN_REPLACEABLE_BLOCKS = createTag("platformgun_replaceable_blocks");
+        public static final TagKey<Block> REPLACEABLE_BLOCKS = createTag("platformgun_replaceable_blocks");
 
         public static final TagKey<Block> SHIELD_BLOCK_REPLACEABLE_BLOCKS = createTag("shield_block_replaceable_blocks");
 
@@ -42,7 +42,7 @@ public class ModTags
 
         public static final TagKey<Item> LOOTBUG_TEMPTATION_ITEMS = createTag("lootbug/lootbug_temptation_items");
 
-        public static final TagKey<Item> LOOTBUG_CONSUMABLE_ITEMS = createTag("lootbug/consumable_item_items");
+        public static final TagKey<Item> LOOTBUG_CONSUMABLE_ITEMS = createTag("lootbug/lootbug_consumable_items");
 
 
         public static final TagKey<Item> LIQUID_FUEL = createTag("fuelrefinery/liquid_fuel");

@@ -4,12 +4,14 @@ package net.the_goldbeards.lootdebugs.client.model.Entities;// Made with Blockbe
 
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.gui.screens.inventory.BookEditScreen;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BookItem;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
@@ -27,6 +29,7 @@ public class LootbugOldModel<T extends LootbugOldEntity> extends AgeableListMode
 		this.Tail1 = root.getChild("Tail1");
 		this.Face = root.getChild("Face");
 		this.Body = root.getChild("Body");
+
 	}
 
 	public static LayerDefinition createBodyLayer() {

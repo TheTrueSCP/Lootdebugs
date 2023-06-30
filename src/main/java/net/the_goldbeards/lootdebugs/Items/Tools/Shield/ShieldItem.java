@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.the_goldbeards.lootdebugs.Entities.Tools.ShieldEntity;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.UsefullStuff;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public class ShieldItem extends BlockItem {
 
@@ -39,9 +39,9 @@ public class ShieldItem extends BlockItem {
     {
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
+            if(!ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, dwarfClassToUse)) //TheTrueSCP
             {
-                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + UsefullStuff.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
+                player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.wrong_class_0").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString() + " " + new TranslatableComponent("message.lootdebugs.tool.wrong_class_1").getString()), true);
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -52,7 +52,7 @@ public class ShieldItem extends BlockItem {
 
         ItemStack pUsedStack = pContext.getItemInHand();
 
-        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(pUsedStack, pContext.getPlayer(), dwarfClassToUse))
+        if(!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pContext.getPlayer(), dwarfClassToUse))
         {
             return InteractionResult.FAIL;
         }
@@ -130,7 +130,7 @@ public class ShieldItem extends BlockItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
 
-        if(!UsefullStuff.DwarfClasses.canPlayerUseItem(itemInHand, pPlayer, dwarfClassToUse))
+        if(!ModUtils.DwarfClasses.canPlayerUseItem(itemInHand, pPlayer, dwarfClassToUse))
         {
             return InteractionResultHolder.pass(itemInHand);
         }

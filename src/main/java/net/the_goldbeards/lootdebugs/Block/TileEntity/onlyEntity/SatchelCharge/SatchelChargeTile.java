@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import org.jetbrains.annotations.Nullable;
@@ -16,6 +17,7 @@ public class SatchelChargeTile extends BlockEntity {
 
     public SatchelChargeTile( BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModTileEntities.SATCHEL_CHARGE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
+
     }
 
     public void tick()

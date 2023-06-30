@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lootdebugs:block/lootbug_gold" , "y":  180},
+    "facing=south": { "model": "lootdebugs:block/lootbug_gold", "y":  0},
+    "facing=west": { "model": "lootdebugs:block/lootbug_gold", "y":  90},
+    "facing=east": { "model": "lootdebugs:block/lootbug_gold", "y":  270}
+  }
+}
