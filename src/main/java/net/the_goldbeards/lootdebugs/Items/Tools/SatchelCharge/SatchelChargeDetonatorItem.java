@@ -1,6 +1,7 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.TextComponent;
@@ -56,6 +57,17 @@ public class SatchelChargeDetonatorItem extends BasicAllClassItem
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand)
     {
         ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
+
+
+        if(pPlayer.getMainHandItem() != pStack)
+        {
+            return InteractionResultHolder.pass(pStack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pStack);
+        }
 
         if (ModUtils.DwarfClasses.canPlayerUseItem(pStack, pPlayer, dwarfClassToUse)) {
 

@@ -1,0 +1,16 @@
+{
+  "name": "The Class Changer",
+  "icon": "lootdebugs:class_changer",
+  "category": "lootdebugs:blocks",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:class_changer",
+      "text": "  If you look into it, you can see four classes you can choose on if them:$(br)$(list2)$(l:classes/driller)$(#fff300)Driller$()$(list2)$(l:classes/scout)$(#4165b0)Scout$()$(list2)$(l:classes/engineer)$(#ff0000)Engineer$()$(list2)$(l:classes/gunner)$(#3f793a)Gunner$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": ")If you click on one of them, you will become a dwarf and unlock all the $(l:abilities)abilities$() with it. Also, there is a special creative-only class which can do everything."
+    }
+  ]
+}

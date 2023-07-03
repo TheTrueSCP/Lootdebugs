@@ -1,5 +1,5 @@
 {
-    "itemGroup.lootbuggroup": "Lootdebugs",
+    "itemGroup.lootdebugsgroup": "Lootdebugs",
 
     "keyGroup.lootdebugs": "Lootdebugs",
     "key.lootdebugs.rock_and_stone": "Salute",
@@ -18,7 +18,8 @@
     "block.lootdebugs.class_changer": "Class Changer",
     "block.lootdebugs.satchel_charge": "Satchel Charge",
     "block.lootdebugs.shield_emitter_block": "Shield",
-    "block.lootdebugs.zipline_block": "Zipline",
+    "block.lootdebugs.zipline_pole_block": "Zipline Pole",
+
 
     "block.lootdebugs.boolo_cap": "Boolo Cap",
     "block.lootdebugs.apoca_bloom": "Apoca Bloom",
@@ -166,6 +167,10 @@
 
     "entity.lootdebugs.lootbug_golden": "Lootbug golden",
     "entity.lootdebugs.lootbug": "Lootbug",
+    "entity.lootdebugs.turret": "Turret",
+    "entity.lootdebugs.flare": "Flare",
+
+
 
 
     "gui.lootdebugs.player.flares": "Flares",
@@ -183,11 +188,14 @@
 
     "message.lootdebugs.armor.no_dwarf": "You must be a Dwarf to wear this armor, your are just a leaf lover",
     "message.lootdebugs.tool.no_dwarf": "You must be a Dwarf to use this tool, your are just a leaf lover",
-    "message.lootdebugs.flare.no_dwarf": "You You must be a Dwarf to throw a flare, your are just a leaf lover",
+    "message.lootdebugs.flare.no_dwarf": "You must be a Dwarf to throw a flare, your are just a leaf lover",
 
     "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
 
     "message.lootdebugs.block.old.lloyd": "Old lloyd block, mine and replace it to fix it",
+
+    "message.lootdebugs.tool.turret.attack.neutral": "Turret is now attacking neutrals and enemys",
+    "message.lootdebugs.tool.turret.attack.enemy": "Turret is now only attacking enemys",
 
     "message.lootdebugs.tool.locator.resetted" : "Resetted locator, searching for new Ommoran Hearthstone...",
     "message.lootdebugs.tool.locator.no_ommoran" : "Could not find an Ommoran. Right click at a different location and try again",
@@ -201,6 +209,7 @@
     "message.lootdebugs.tool.satchel_charge.ready": "Satchel Charge ready",
     "message.lootdebugs.tool.satchel_charge.detonated": "DETONATED",
     "message.lootdebugs.tool.temperature": "Temperature:",
+    "message.lootdebugs.tool.temperature.overheated" : "!!TOOL OVERHEATED!!",
 
 
     "message.lootdebugs.zipline_block.link_invalid": "Linked pos invalid",
@@ -249,6 +258,7 @@
     "tools.subtitle.shoot": "Tool Shoot",
     "tools.subtitle.foam.harden": "Platform Gun Shoot",
     "tools.subtitle.drills": "Driller Drills",
+    "tools.subtitle.drills.overheat": "Drills overheated",
     "tools.subtitle.subtitle.pickaxe.powerattack": "Powerattack performed",
 
     "tools.subtitle.ping.destroy": "Destroy It",

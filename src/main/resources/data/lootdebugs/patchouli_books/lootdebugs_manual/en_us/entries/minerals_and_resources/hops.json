@@ -1,0 +1,17 @@
+{
+  "name": "Hops",
+  "icon": "lootdebugs:malt_star",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Hops are the main ingredients for $(l:brewing)Brewing$(). They can be harvested when grown by righ-clicking and regrow after time. They can be found between -60 and 30."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/resources/hops/barley_plant.png", "lootdebugs:textures/lootdebugs_manual/blocks/resources/hops/yeast_plant.png", "lootdebugs:textures/lootdebugs_manual/blocks/resources/hops/malt_plant.png", "lootdebugs:textures/lootdebugs_manual/blocks/resources/hops/starch_plant.png"],
+      "title": "Hops",
+      "text": "Barley Plant, Yeast Plant, Malt Star and Starch Plant in the depths"
+    }
+  ]
+}

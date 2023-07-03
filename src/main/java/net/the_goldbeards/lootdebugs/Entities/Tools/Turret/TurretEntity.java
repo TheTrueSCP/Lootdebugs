@@ -4,6 +4,7 @@ package net.the_goldbeards.lootdebugs.Entities.Tools.Turret;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -18,13 +19,20 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipBlockStateContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Column;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretAmmoItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
@@ -39,32 +47,45 @@ public class TurretEntity extends Entity
 {
     public static int defaultAmmo = 200;
 
+    public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Engineer;
+
     private static final EntityDataAccessor<Integer> AMMO = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.INT);
 
     private static final EntityDataAccessor<Optional<BlockPos>> TARGET_POS = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+    private static final EntityDataAccessor<Boolean> ATTACK_NEUTRAL = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private static int searchRadiusInBlocks = 10;
-    private static float shootCooldownTicks = 10;
+    private static int searchRadiusInBlocks = 40;
+    private static float shootCooldownTicks = 5;
 
+    private Player owner;
     private float shootCooldown;
     private static final Predicate<LivingEntity> ENEMY_PREDECATE = (p_30636_) -> {
         return p_30636_ instanceof Monster;
     };
 
-    private static final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).ignoreLineOfSight().selector(ENEMY_PREDECATE);
+    private static final Predicate<LivingEntity> ENEMY_AND_NEUTRAL_PREDECATE = (p_30636_) -> {
+        return p_30636_ instanceof Mob;
+    };
+
+    private static final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE);
+
+    private static final TargetingConditions ENEMY_AND_NEUTRAL_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_AND_NEUTRAL_PREDECATE);
 
     public TurretEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public TurretEntity( Level pLevel) {
+    public TurretEntity(Level pLevel, Player owner)
+    {
         super(ModEntities.TURRET_ENTITY.get(), pLevel);
+        setOwner(owner);
     }
 
     protected void defineSynchedData()
     {
         this.entityData.define(AMMO, 0);
         this.entityData.define(TARGET_POS, Optional.empty());
+        this.entityData.define(ATTACK_NEUTRAL, true);
     }
 
     @Override
@@ -78,7 +99,7 @@ public class TurretEntity extends Entity
             {
                 addAmmo(10);
 
-                if(!pPlayer.isCrouching())
+                if(!pPlayer.isCreative())
                 {
                     TurretAmmoItem.ShrinkAmmo(pPlayer.getItemInHand(pHand), 10);
                 }
@@ -88,14 +109,27 @@ public class TurretEntity extends Entity
             {
                 addAmmo(1);
 
-                if(!pPlayer.isCrouching())
+                if(!pPlayer.isCreative())
                 {
                     TurretAmmoItem.ShrinkAmmo(pPlayer.getItemInHand(pHand), 1);
                 }
                 return InteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.PASS;
+            boolean oldAttackNeutral = getAttackNeutral();
+            setAttackNeutral(!oldAttackNeutral);
+
+            System.out.println(getAttackNeutral());
+
+            if (getAttackNeutral())
+            {
+                pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.turret.attack.neutral"), true);
+            } else {
+                pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.turret.attack.enemy"), true);
+            }
+
+
+        return InteractionResult.SUCCESS;
     }
 
 
@@ -103,8 +137,15 @@ public class TurretEntity extends Entity
         super.tick();
         if (!this.level.isClientSide)
         {
+            if(getOwner() != null)
+            {
+                if(!ModUtils.DwarfClasses.isPlayerClass(getOwner(), dwarfClassToUse))
+                {
+                    this.dropTurret();
+                }
+            }
 
-            LivingEntity target = level.getNearestEntity(level.getEntitiesOfClass(LivingEntity.class, getSearchBound(this.blockPosition())), ENEMY_TARGETING, null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
+            LivingEntity target = level.getNearestEntity(level.getEntitiesOfClass(LivingEntity.class, getSearchBound(this.blockPosition())), getTargeting(), null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
 
             this.setCustomName(new TextComponent("" + getAmmo()));
             this.setCustomNameVisible(true);
@@ -114,7 +155,7 @@ public class TurretEntity extends Entity
                 this.entityData.set(TARGET_POS, Optional.of(target.blockPosition()));
                 shootCooldown = shootCooldownTicks;
 
-                if(canShoot())
+                if(canShoot(level, this))
                 {
                     BulletEntity bulletEntity = new BulletEntity(level);
                     bulletEntity.setPos(this.position().x, this.position().y + 1f, this.position().z);
@@ -149,10 +190,118 @@ public class TurretEntity extends Entity
 
     }
 
-    private static AABB getSearchBound(BlockPos pos)
+    private void dropTurret()
     {
-        return new AABB(pos.getX() - searchRadiusInBlocks, pos.getY() - searchRadiusInBlocks, pos.getZ() - searchRadiusInBlocks, pos.getX() + searchRadiusInBlocks, pos.getY() + searchRadiusInBlocks, pos.getZ() + searchRadiusInBlocks);
+        ItemStack turretItemStack = new ItemStack(ModItems.TURRET.get(), 1);
+
+        ModUtils.ItemNBTHelper.putInt(turretItemStack, "ammo", getAmmo());
+
+        ItemEntity turretItemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), turretItemStack);
+
+        this.level.addFreshEntity(turretItemEntity);
+
+        this.discard();
     }
+
+
+    public float getTurretYRot()
+    {
+        Optional<BlockPos> targetBlockPosOptional = this.entityData.get(TARGET_POS);
+
+        if(targetBlockPosOptional.isPresent() && canShoot(level, this))
+        {
+            BlockPos targetBlockPos = targetBlockPosOptional.get();
+                double radian = Math.toRadians(calculateYAngleFromBlockPos(this.blockPosition().south(), this.blockPosition(), targetBlockPos));
+
+                return (float) radian;
+        }
+        return 0f;
+    }
+
+    public float getTurretXRot()
+    {
+        Optional<BlockPos> targetBlockPosOptional = this.entityData.get(TARGET_POS);
+
+        if(targetBlockPosOptional.isPresent() && canShoot(level, this))
+        {
+            BlockPos targetBlockPos = targetBlockPosOptional.get();
+
+            if(!isBlockBetween(level, this.eyeBlockPosition(), targetBlockPos.above()))
+            {
+
+                double radian = Math.toRadians(calculateXAngleFromBlockPos(this.blockPosition(), targetBlockPos));
+
+                return (float) radian;
+
+            }
+        }
+        return 0f;
+    }
+
+     /**
+     * @param angelOrientation the null anchor, where the angle should come from(null-line)     Example:            nullLine:    |
+     *
+     * @param mainBlockPos where the angle come from (turret)                                                       mainPos:     x       targetPos: *
+     *
+     * @param targetPos where the angle should relate to     (north)                                   Output: 90°
+     * @return
+     */
+    public static double calculateYAngleFromBlockPos(BlockPos angelOrientation, BlockPos mainBlockPos, BlockPos targetPos) {
+
+        if(mainBlockPos.getX() == targetPos.getX() && mainBlockPos.getZ() == targetPos.getZ())
+        {
+            return 0.0f;
+        }
+
+        // Calculate the vectors between the points
+    double[] vector1 = { angelOrientation.getX() - mainBlockPos.getX(), angelOrientation.getZ() - mainBlockPos.getZ() };
+    double[] vector2 = { targetPos.getX() - mainBlockPos.getX(), targetPos.getZ() - mainBlockPos.getZ() };
+
+    // Calculate the dot product
+    double dotProduct = vector1[0] * vector2[0] + vector1[1] * vector2[1];
+
+    // Calculate the magnitudes of the vectors
+    double magnitude1 = Math.sqrt(vector1[0] * vector1[0] + vector1[1] * vector1[1]);
+    double magnitude2 = Math.sqrt(vector2[0] * vector2[0] + vector2[1] * vector2[1]);
+
+    // Calculate the cosine of the angle using the dot product and magnitudes
+    double cosTheta = dotProduct / (magnitude1 * magnitude2);
+
+    // Calculate the angle in radians using the arccosine function
+    double angleRad = Math.acos(cosTheta);
+
+    // Convert the angle from radians to degrees
+    double angleDeg = Math.toDegrees(angleRad);
+
+    if(((mainBlockPos.getX()) - (targetPos.getX())) < 0)
+    {
+        angleDeg = 360 - angleDeg;
+    }
+
+    return angleDeg;
+}
+
+    /**
+     * @param mainBlockPos where the angle come from (turret)
+     *
+     * @param targetPos where the angle should relate to (height)
+     * @return
+     */
+    public static double calculateXAngleFromBlockPos(BlockPos mainBlockPos, BlockPos targetPos) {
+
+        if(mainBlockPos.getX() == targetPos.getX() && mainBlockPos.getZ() == targetPos.getZ() && targetPos.getY() < mainBlockPos.getY())
+        {
+            return 0.0f;
+        }
+
+        double d0 = targetPos.getX() - mainBlockPos.getX();
+        double d1 = targetPos.getY() - mainBlockPos.getY();
+        double d2 = targetPos.getZ() - mainBlockPos.getZ();
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        return !(Math.abs(d1) > (double)1.0E-5F) && !(Math.abs(d3) > (double)1.0E-5F) ? 0.0f : (float)(-(Mth.atan2(d1, d3) * (double)(180F / (float)Math.PI)));
+    }
+
+
 
     //Entity Stuff
 
@@ -164,6 +313,11 @@ public class TurretEntity extends Entity
 
         d0 *= 64.0D;
         return pDistance < d0 * d0;
+    }
+
+    private static AABB getSearchBound(BlockPos pos)
+    {
+        return new AABB(pos.getX() - searchRadiusInBlocks, pos.getY() - searchRadiusInBlocks, pos.getZ() - searchRadiusInBlocks, pos.getX() + searchRadiusInBlocks, pos.getY() + searchRadiusInBlocks, pos.getZ() + searchRadiusInBlocks);
     }
 
     @Override
@@ -188,91 +342,13 @@ public class TurretEntity extends Entity
 
             if(ModUtils.DwarfClasses.canPlayerDo(ModUtils.DwarfClasses.getPlayerClass(player), IClassData.Classes.Engineer) && itemInHand.is(ModItems.TURRET_WRENCH.get()))
             {
-                ItemStack turretItemStack = new ItemStack(ModItems.TURRET.get(), 1);
-
-                ModUtils.ItemNBTHelper.putInt(turretItemStack, "ammo", getAmmo());
-
-                ItemEntity turretItemEntity = new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), turretItemStack);
-
-                this.level.addFreshEntity(turretItemEntity);
-
-                this.discard();
+                this.dropTurret();
             }
         }
 
         return false;
     }
 
-    public float getTurretXRot()
-    {
-        Optional<BlockPos> targetBlockPosOptional = this.entityData.get(TARGET_POS);
-
-        if(targetBlockPosOptional.isPresent())
-        {
-            BlockPos targetBlockPos = targetBlockPosOptional.get();
-
-            Optional<Float> xRotOptional = getXRotFromPos(targetBlockPos);
-            if(xRotOptional.isPresent())
-            {
-                System.out.println(6.30f/360 * xRotOptional.get());
-                return 6.30f/360 * xRotOptional.get();
-            }
-        }
-        return 0;
-    }
-
-    public float getTurretYRot()
-    {
-        Optional<BlockPos> targetBlockPosOptional = this.entityData.get(TARGET_POS);
-
-        if(targetBlockPosOptional.isPresent())
-        {
-            BlockPos targetBlockPos = targetBlockPosOptional.get();
-
-
-            System.out.println(getYRotFromPosWithRotation(targetBlockPos));
-            // return 6.30f/360 * getYRotFromPosWithRotation(targetBlockPos);
-            return 0;
-        }
-        return 4f;
-    }
-
-
-    public Optional<Float> getXRotFromPos(BlockPos lookPos) {
-        double d0 = lookPos.getX() - this.getX();
-        double d1 = lookPos.getY() - this.getY();
-        double d2 = lookPos.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        return !(Math.abs(d1) > (double)1.0E-5F) && !(Math.abs(d3) > (double)1.0E-5F) ? Optional.empty() : Optional.of((float)(-(Mth.atan2(d1, d3) * (double)(180F / (float)Math.PI))));
-    }
-
-    public Optional<Float> getYRotFromPos(BlockPos lookPos)
-    {
-        double d0 = lookPos.getX() - this.getX();
-        double d1 = lookPos.getZ() - this.getZ();
-        return !(Math.abs(d1) > (double)1.0E-5F) && !(Math.abs(d0) > (double)1.0E-5F) ? Optional.empty() : Optional.of((float)(-Mth.atan2(d1, d0) * (double)(180F / (float)Math.PI)) + 90f);
-    }
-
-    public float getYRotFromPosWithRotation(BlockPos lookPos)
-    {
-        float turretRotPositive = Math.abs(this.getXRot());
-        Optional<Float> optionalYRotFromPos = getYRotFromPos(lookPos);
-
-        if(optionalYRotFromPos.isPresent())
-        {
-            System.out.println("turretRotpos" + turretRotPositive);
-            float yRotFromPos = optionalYRotFromPos.get();
-            if(yRotFromPos < 0)
-            {
-                return yRotFromPos + (turretRotPositive * -1);
-            }
-            else if(yRotFromPos > 0)
-            {
-                return yRotFromPos + turretRotPositive;
-            }
-        }
-        return 0;
-    }
 
     public float getBrightness() {
         return 1.0F;
@@ -296,21 +372,20 @@ public class TurretEntity extends Entity
         return new ClientboundAddEntityPacket(this);
     }
 
-    protected static float lerpRotation(float p_37274_, float p_37275_) {
-        while(p_37275_ - p_37274_ < -180.0F) {
-            p_37274_ -= 360.0F;
+    public static boolean canShoot(Level level, TurretEntity turret)
+    {
+        Optional<BlockPos> optionalTargetPos = turret.entityData.get(TARGET_POS);
+        if (optionalTargetPos.isPresent())
+        {
+            return turret.getAmmo() >= 1 && !isBlockBetween(level, optionalTargetPos.get(), turret.eyeBlockPosition());
         }
 
-        while(p_37275_ - p_37274_ >= 180.0F) {
-            p_37274_ += 360.0F;
-        }
-
-        return Mth.lerp(0.2F, p_37274_, p_37275_);
+        return false;
     }
 
-    public boolean canShoot()
+    private static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2)
     {
-        return getAmmo() >= 1;
+        return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), (blockState -> {return !blockState.isAir();}))).getType() == HitResult.Type.BLOCK;
     }
 
     public void addAmmo(int amount)
@@ -328,6 +403,20 @@ public class TurretEntity extends Entity
         this.entityData.set(AMMO, getAmmo() - amount);
     }
 
+    public TargetingConditions getTargeting()
+    {
+        return getAttackNeutral() ? ENEMY_AND_NEUTRAL_TARGETING : ENEMY_TARGETING;
+    }
+
+    public void setAttackNeutral(boolean setAttackNeutral)
+
+    {this.entityData.set(ATTACK_NEUTRAL, setAttackNeutral);}
+
+    public boolean getAttackNeutral()
+    {
+        return this.entityData.get(ATTACK_NEUTRAL);
+    }
+
     public void setAmmo(int amount)
     {
         this.entityData.set(AMMO, amount);
@@ -336,5 +425,15 @@ public class TurretEntity extends Entity
     public int getAmmo()
     {
         return this.entityData.get(AMMO);
+    }
+
+    public void setOwner(Player owner)
+    {
+        this.owner = owner;
+    }
+
+    public Player getOwner()
+    {
+        return owner;
     }
 }

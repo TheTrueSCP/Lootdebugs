@@ -1,0 +1,12 @@
+{
+  "name": "Satchel Charge",
+  "icon": "lootdebugs:satchel_charge",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:satchel_charge",
+      "text": "A little thing with big consequences: It can easily destroy a lot of blocks and only leaves ash behind. Triggered remotely with a $(l:tools/satchel_charge_detonator)Detonator$()."
+    }
+    ]
+}

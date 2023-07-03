@@ -127,8 +127,8 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
                     {
                         LE.setGlowingTag(true);
 
-                        level.playSound(null,  pResult.getEntity().blockPosition(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 1,1);
-                        level.playSound(null, this.getOwner().blockPosition(),entityPingSound(LE), SoundSource.PLAYERS, 1, ModUtils.DwarfClasses.getSalutePitch(getDwarfClass()));
+                        level.playSound(null,  pResult.getEntity().blockPosition(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 0.5f,1);
+                        level.playSound(null, this.getOwner().blockPosition(),entityPingSound(LE), SoundSource.PLAYERS, 0.5f, ModUtils.DwarfClasses.getSalutePitch(getDwarfClass()));
 
                         if (pingItem != null) {
                             if (pingItem.getItem() instanceof PingItem) {

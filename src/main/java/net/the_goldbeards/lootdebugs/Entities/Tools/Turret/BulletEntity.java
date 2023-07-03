@@ -41,7 +41,11 @@ public class BulletEntity extends AbstractShootablePhysicsArrowLikeEntity
             this.discard();
             return;
         }
-        super.onHitEntity(pResult);
+
+
+        pResult.getEntity().hurt(ModDamageSources.BULLET, 4);
+        this.discard();
+
     }
 
     @Override

@@ -31,6 +31,11 @@
       }
     }
   },
+  "rewards": {
+    "loot": [
+      "lootdebugs:laser_pointer"
+    ]
+  },
   "requirements": [
     [
       "class_changer"

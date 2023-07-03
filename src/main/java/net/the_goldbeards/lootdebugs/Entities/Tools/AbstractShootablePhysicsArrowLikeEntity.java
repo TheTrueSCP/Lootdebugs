@@ -240,7 +240,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     protected void onHitEntity(EntityHitResult pResult)
     {
         this.discard();
-        pResult.getEntity().hurt(DamageSource.GENERIC, 2);
+        pResult.getEntity().hurt(DamageSource.GENERIC, 0.5f);
     }
 
     /**

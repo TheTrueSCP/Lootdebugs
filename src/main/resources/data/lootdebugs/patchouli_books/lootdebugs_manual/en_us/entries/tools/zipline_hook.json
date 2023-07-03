@@ -1,0 +1,12 @@
+{
+  "name": "Zipline Hook",
+  "icon": "lootdebugs:zipline",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:zipline",
+      "text": "Creates with the $(l:blocks/zipline_pole)Zipline Pole$() a $(l:tools/zipline)Zipline$(). Can be right-clicked to hook onto the zipline."
+    }
+    ]
+}

@@ -30,4 +30,9 @@ public class LeafLoverSpecialItem extends BeerItem {
 
         super.addEffects(entityLiving);
     }
+
+    @Override
+    public boolean addDrunkness() {
+        return false;
+    }
 }

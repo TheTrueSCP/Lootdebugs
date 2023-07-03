@@ -23,7 +23,7 @@ public abstract class BasicAllClassItem extends Item
 
         if(pEntity instanceof Player player && pIsSelected)
         {
-            if(ModUtils.DwarfClasses.canPlayerUseItem(pStack, player, IClassData.Classes.LeafLover))
+            if(!ModUtils.DwarfClasses.isPlayerDwarf(player))
             {
                 player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.no_dwarf").getString()), true);
                 ModUtils.ItemNBTHelper.putBoolean(pStack, "lootdebugs.tool.usable", false);

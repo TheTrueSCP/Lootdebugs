@@ -1,0 +1,12 @@
+{
+  "name": "Satchel Charge Detonator",
+  "icon": "lootdebugs:satchel_charge_detonator",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:satchel_charge_detonator",
+      "text": "A little thing which can be used to detonate $(l:tools/satchel_charge)Satchel Charge$()s. Will be given when satchel charge was placed or thrown."
+    }
+    ]
+}

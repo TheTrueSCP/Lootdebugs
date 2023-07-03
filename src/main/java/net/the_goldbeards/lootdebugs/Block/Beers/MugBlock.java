@@ -286,4 +286,6 @@ public class MugBlock extends BasicRotatableBlock implements SimpleWaterloggedBl
         super.createBlockStateDefinition(builder);
     }
 
+
+
 }

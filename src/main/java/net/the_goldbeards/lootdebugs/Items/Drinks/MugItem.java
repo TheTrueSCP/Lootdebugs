@@ -31,7 +31,7 @@ public class MugItem extends BlockItem {
 
     @Override
     public int getItemStackLimit(ItemStack stack) {
-        return 64;
+        return 4;
     }
 
 

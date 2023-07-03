@@ -89,7 +89,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
                 {
                     if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.armor.no_dwarf").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -170,7 +170,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
                 {
                     if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.armor.no_dwarf").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -248,7 +248,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
                 {
                     if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.armor.no_dwarf").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }
@@ -327,7 +327,7 @@ public abstract class ModGunnerMK1ArmorItem extends ArmorItem {
                 {
                     if(!ModUtils.DwarfClasses.canPlayerUseItem(stack, player, dwarfClassToUse))
                     {
-                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("tool.wrong_class").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
+                        player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.armor.no_dwarf").getString() + " " + ModUtils.DwarfClasses.getClassTranslate(dwarfClassToUse).getString()), true);
                         return false;
                     }
                 }

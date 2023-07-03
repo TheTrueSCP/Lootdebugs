@@ -165,7 +165,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> RED_SUGAR = registryBlock("red_sugar",
-            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).lightLevel((state) -> 8).sound(ModSoundTypes.GENERIC_MINERAL).instabreak()),true);
+            () -> new RedSugarBlock(BlockBehaviour.Properties.of(Material.STONE).lightLevel((state) -> 15).sound(ModSoundTypes.GENERIC_MINERAL).instabreak()),true);
 
     public static final RegistryObject<Block> OIL_SHALE = registryBlock("oil_shale",
             () -> new Block(BlockBehaviour.Properties.of(Material.AMETHYST).strength(4f).requiresCorrectToolForDrops().lightLevel((state) -> 8)),false);

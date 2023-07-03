@@ -1,0 +1,17 @@
+{
+  "name": "Dystrum",
+  "icon": "lootdebugs:raw_dystrum",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Dystrum is rare mineral which can be used to craft several Deep Rock Galactic Tools. It can be found between -60 and 20."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/ores/dystrum/dystrum.png", "lootdebugs:textures/lootdebugs_manual/blocks/ores/dystrum/dystrum_deepslate.png"],
+      "title": "Dystrum Veins",
+      "text": "Dystrum and deepslate dystrum in the depths"
+    }
+  ]
+}

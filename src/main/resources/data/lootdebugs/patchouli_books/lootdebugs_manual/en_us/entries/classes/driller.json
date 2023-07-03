@@ -1,0 +1,13 @@
+{
+  "name": "Driller",
+  "icon": "lootdebugs:drills",
+  "category": "lootdebugs:classes",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:mk1_company_standard_driller_chestplate",
+      "title": "Driller Armor",
+      "text": "The drillers main ability is to drill very fast through blocks. Either with his $(l:tools/reinforced_powerdrills)Reinforced Power-drills$() or with his $(l:tools/satchel_charge)C4$()."
+    }
+    ]
+}

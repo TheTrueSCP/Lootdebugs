@@ -3,6 +3,8 @@ package net.the_goldbeards.lootdebugs.Events;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +15,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.EventBus;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,7 +39,9 @@ import net.the_goldbeards.lootdebugs.capability.Salute.ISaluteData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.ModEffects;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
+import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
 import net.the_goldbeards.lootdebugs.world.LootModifierer.OmmoranLocatorFromVillageChest;
 
 import javax.annotation.Nonnull;
@@ -172,7 +180,47 @@ public class MiscEventBusSubscriber
 
         }
 
+        @SubscribeEvent
+        public static void preserveDwarfClass(PlayerEvent.Clone event)
+        {
+            event.getOriginal().reviveCaps();
+
+            System.out.println(event.getOriginal().blockPosition());
+
+            event.getOriginal().getCapability(ClassDataCap.CLASS_DATA).ifPresent(oldClass ->
+            {
+                event.getPlayer().getCapability(ClassDataCap.CLASS_DATA).ifPresent(newClass ->
+                {
+                    newClass.setDwarfClass(oldClass.getDwarfClass());
+                });
+            });
+            event.getOriginal().invalidateCaps();
+        }
+
+        @SubscribeEvent
+        public static void engineerJump(LivingEvent.LivingJumpEvent event)
+        {
+            if(event.getEntityLiving() instanceof Player player)
+            {
+                if(player.getMainHandItem().is(ModItems.PLATFORM_GUN.get()))
+                player.setDeltaMovement(player.getDeltaMovement().x, player.getDeltaMovement().y * 2, player.getDeltaMovement().z);
+            }
+        }
+
+        @SubscribeEvent
+        public static void scoutReduceFallDamage(LivingFallEvent event)
+        {
+            if(event.getEntityLiving() instanceof Player player)
+            {
+            if(player.getMainHandItem().is(ModItems.GRAPPLING_HOOK.get()))
+            {
+                event.setDistance(event.getDistance() / 2);
+            }
+
+            }
+        }
     }
+
 
     @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public class BothSides

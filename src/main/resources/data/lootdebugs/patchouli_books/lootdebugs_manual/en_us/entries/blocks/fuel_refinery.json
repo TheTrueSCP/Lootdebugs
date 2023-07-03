@@ -1,0 +1,16 @@
+{
+  "name": "Fuel Refinery",
+  "icon": "lootdebugs:fuel_refinery",
+  "category": "lootdebugs:blocks",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:fuel_refinery",
+      "text": "A big machine, which produces $(l:tools/fuel_canister)Fuel$() from:$(#0E0D0D)$(list1)Coal$() $(#009b94)$(list1)Morkite$() $(#009b94)$(list1)Liquid Morkite$() $(#141330)$(list1)Oil Shale$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)How to use the Refinery$() $(br)$(list2)1. Put your items into the slots, which are meant to be processed$() $(br)$(list2)2. Press the Refine Button, the refinery will know the right amount to refine$() $(br)$(list2)3. Insert the fuel canister item into the slot under the tank$() $(br)$(list2)4. Press Refill to refill the tank, the refinery will calculate the right amount to fill in$()."
+    }
+    ]
+}

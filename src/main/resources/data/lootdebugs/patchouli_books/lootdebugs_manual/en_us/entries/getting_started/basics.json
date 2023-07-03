@@ -1,0 +1,18 @@
+{
+  "name": "The Basics",
+  "icon": "lootdebugs:equipment_table",
+  "category": "lootdebugs:getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)MISSION III$()$(br2) Now its time to finally do something to be a dwarf. you next goal is the $(l:blocks/class_changer)Class Changer$(). For that you will need again some minerals and sand to make Glass Panes. More details on $(l:getting_started/how_to_become_a_dwarf)the next side."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/equipment_table.png"],
+      "title": "The Equipment Table",
+      "text": "The most important block."
+    }
+  ]
+}

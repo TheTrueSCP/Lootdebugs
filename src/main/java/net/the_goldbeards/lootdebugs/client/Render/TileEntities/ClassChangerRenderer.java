@@ -17,6 +17,7 @@ public ClassChangerRenderer(BlockEntityRendererProvider.Context context)
 {
 
 }
+
     @Override
     public void render(ClassChangerTile pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay)
     {

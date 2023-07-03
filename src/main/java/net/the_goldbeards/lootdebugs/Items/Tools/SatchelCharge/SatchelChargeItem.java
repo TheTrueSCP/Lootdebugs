@@ -2,6 +2,7 @@ package net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -47,6 +48,15 @@ public class SatchelChargeItem extends BlockItem {
 
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
 
+        if(pPlayer.getMainHandItem() != stack)
+        {
+            return InteractionResultHolder.pass(stack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(stack);
+        }
 
         if (ModUtils.DwarfClasses.canPlayerUseItem(stack, pPlayer, dwarfClassToUse))
         {

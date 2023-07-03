@@ -1,0 +1,12 @@
+{
+  "name": "Flare Gun",
+  "icon": "lootdebugs:flare_gun",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:flare_gun",
+      "text": "High speed flare catapult which shoots $(l:ammo/flare_gun_ammo)improved flares$() over big distances."
+    }
+    ]
+}

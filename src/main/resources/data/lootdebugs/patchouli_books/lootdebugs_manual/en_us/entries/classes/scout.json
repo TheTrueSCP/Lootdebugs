@@ -1,0 +1,13 @@
+{
+  "name": "Scout",
+  "icon": "lootdebugs:grappling_hook",
+  "category": "lootdebugs:classes",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:mk1_company_standard_scout_chestplate",
+      "title": "Gunner Armor",
+      "text": "The Scouts main ability is to support the team with illumination around the cave with his great $(l:tools/flare_gun)Flare Gun$()! Also, to get around the cave quickly, the scout have the awesome $(l:tools/grappling_hook)Grappling Hook$()!"
+    }
+  ]
+}

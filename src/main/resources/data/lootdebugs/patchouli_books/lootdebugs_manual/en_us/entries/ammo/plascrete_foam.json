@@ -1,0 +1,12 @@
+{
+  "name": "Plascrete Foam",
+  "icon": "lootdebugs:platform_gun_ammo",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:platform_gun_ammo",
+      "text": "High compressed foam which expands when shot by the $(l:tools/platform_gun)Platform Gun$()."
+    }
+    ]
+}

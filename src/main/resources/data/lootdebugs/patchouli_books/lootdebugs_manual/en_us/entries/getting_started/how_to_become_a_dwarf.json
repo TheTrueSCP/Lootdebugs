@@ -1,0 +1,17 @@
+{
+  "name": "How to become a dwarf",
+  "icon": "lootdebugs:class_changer",
+  "category": "lootdebugs:getting_started",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Congratulation Miners, you have proven yourself to be a part of the Deep Rock Galactic Family! Now it's the time where you say goodbye to your old life. When you $(l:blocks/class_changer)use the item$(), you will be a real dwarf and part of Deep Rock Galactic!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Rock and Stone, Brother!",
+      "images": ["lootdebugs:textures/lootdebugs_manual/items/company_standard_pickaxe.png"]
+    }
+  ]
+}

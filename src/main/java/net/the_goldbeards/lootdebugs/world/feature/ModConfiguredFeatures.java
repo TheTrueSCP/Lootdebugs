@@ -65,7 +65,7 @@ public class ModConfiguredFeatures
             Feature.ORE, new OreConfiguration(OVERWORLD_DYSTRUM_ORES, 6, 0.0f));
 
     public static final Holder<? extends ConfiguredFeature<OreConfiguration, ?>> OIL_SHALE_ORE = FeatureUtils.register("oil_shale_configured",
-            Feature.ORE, new OreConfiguration(OVERWORLD_OIL_SHALE_ORES, 4, 0.0f));
+            Feature.ORE, new OreConfiguration(OVERWORLD_OIL_SHALE_ORES, 6, 0.0f));
 
 
 

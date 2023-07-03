@@ -1,0 +1,16 @@
+{
+  "name": "Turret",
+  "icon": "lootdebugs:turret",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:turret",
+      "text": "The turret automatically aims and shoot at enemies."
+    },
+    {
+      "type": "patchouli:text",
+      "text": " Can be refueled by right clicking the turret with $(l:ammo/turret_ammo)turret ammo$(). With right-click, you can change the targeting conditions. Also, as engineer, you can dismantle the turret by hitting the turret with the $(l:tools/turret_wrench)turret-wrench$(). The turret will still hold the ammo after it was dismantled."
+    }
+    ]
+}

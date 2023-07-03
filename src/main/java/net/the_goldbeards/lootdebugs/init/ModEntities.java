@@ -67,7 +67,11 @@ public class ModEntities {
             ENTITY_TYPES.register("bullet", () -> EntityType.Builder.<BulletEntity>of(BulletEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "bullet").toString()));
 
     public static final RegistryObject<EntityType<TurretEntity>> TURRET_ENTITY =
-            ENTITY_TYPES.register("turret", () -> EntityType.Builder.<TurretEntity>of(TurretEntity::new, MobCategory.MISC).sized(1.5f, 1.5f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "turret").toString()));
+            ENTITY_TYPES.register("turret", () -> EntityType.Builder.<TurretEntity>of(TurretEntity::new, MobCategory.MISC).sized(1.0f, 1.0f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "turret").toString()));
+
+    public static final RegistryObject<EntityType<ResupplyDropEntity>> RESUPPLY_DROP_ENTITY =
+            ENTITY_TYPES.register("resupply_drop", () -> EntityType.Builder.<ResupplyDropEntity>of(ResupplyDropEntity::new, MobCategory.MISC).sized(1.0f, 2f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "resupply_drop").toString()));
+
 
 
     //Weapons

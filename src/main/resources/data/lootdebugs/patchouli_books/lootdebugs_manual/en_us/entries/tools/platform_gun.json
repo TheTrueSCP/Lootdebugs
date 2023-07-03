@@ -1,0 +1,12 @@
+{
+  "name": "Platform Gun",
+  "icon": "lootdebugs:platform_gun",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:platform_gun",
+      "text": "When provided with $(l:ammo/plascrete_foam)Compressed Plascrete Foam$(), the Platform gun shoots big chunk of plascrete which forms to a big platform. Also, the plascrete decrease fall-damage."
+    }
+    ]
+}

@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public enum ModArmorMaterials implements ArmorMaterial {
 
 
-    MK1_COMPANY_STANDARD_DRILLER("company_standard", 33, new int[]{3, 6, 8, 3}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> {
+    MK1_COMPANY_STANDARD_DRILLER("company_standard", 33, new int[]{2, 5, 6, 2}, 0, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0F, 0.0F, () -> {
         return Ingredient.of(ModItems.BISMOR_INGOT.get());
     });
 

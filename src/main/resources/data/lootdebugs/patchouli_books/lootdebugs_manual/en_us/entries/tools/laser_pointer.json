@@ -1,0 +1,12 @@
+{
+  "name": "Laser Pointer",
+  "icon": "lootdebugs:laser_pointer",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:laser_pointer",
+      "text": "High tec device to point something out in the world for your team-colleagues."
+    }
+    ]
+}

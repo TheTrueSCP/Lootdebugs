@@ -2,6 +2,8 @@ package net.the_goldbeards.lootdebugs.Effects;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -26,18 +28,23 @@ public class ExplosiveDiarrhoeaEffect extends MobEffect {
         Vec3 entityPos = pLivingEntity.position();
         Level level = pLivingEntity.getLevel();
 
-        int randValue = rand.nextInt(0,50);//Create rand value, to get rand explosive trigger
-        if(randValue == 11)
-        {
+        int randValue = rand.nextInt(0, 50);//Create rand value, to get rand explosive trigger
+        if (randValue == 11) {
 
-          // Minecraft.getInstance().level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
-            level.playSound(null, entityPos.x(), entityPos.y(), entityPos.z(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1,1);
+            if(level instanceof ServerLevel serverLevel && pLivingEntity instanceof ServerPlayer serverPlayer)
+            {
+                serverLevel.sendParticles(ParticleTypes.EXPLOSION, entityPos.x, entityPos.y(), entityPos.z(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            }
 
-            Vec3 randMove = new Vec3(rand.nextInt(2),rand.nextInt(1,3),rand.nextInt(2));//Set Random numbers for move
+            // Minecraft.getInstance().level.addParticle(ParticleTypes.EXPLOSION,entityPos.x(), entityPos.y(), entityPos.z(), 1,1,1);
+            level.playSound(null, entityPos.x(), entityPos.y(), entityPos.z(), SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1, 1);
+
+            Vec3 randMove = new Vec3(rand.nextInt(2), rand.nextInt(1, 3), rand.nextInt(2));//Set Random numbers for move
             pLivingEntity.setDeltaMovement(randMove);
 
 
         }
+
 
 
     }

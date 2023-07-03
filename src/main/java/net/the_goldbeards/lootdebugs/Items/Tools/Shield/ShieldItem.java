@@ -2,6 +2,7 @@ package net.the_goldbeards.lootdebugs.Items.Tools.Shield;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
@@ -129,6 +130,16 @@ public class ShieldItem extends BlockItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemInHand = pPlayer.getItemInHand(pUsedHand);
+
+        if(pPlayer.getMainHandItem() != itemInHand)
+        {
+            return InteractionResultHolder.pass(itemInHand);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(itemInHand);
+        }
 
         if(!ModUtils.DwarfClasses.canPlayerUseItem(itemInHand, pPlayer, dwarfClassToUse))
         {

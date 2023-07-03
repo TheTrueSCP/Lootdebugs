@@ -1,0 +1,12 @@
+{
+  "name": "Grappling Hook",
+  "icon": "lootdebugs:grappling_hook",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:grappling_hook",
+      "text": "A little thing with strong power: With the Grappling Hook you can swing around the cave easily like once karl did."
+    }
+    ]
+}

@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.PlatformGun;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -44,6 +45,16 @@ public class PlatformGunItem extends BasicToolItem
 
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
+        if(pPlayer.getMainHandItem() != pUsedStack)
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
         if(!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse()))
         {
             return InteractionResultHolder.pass(pUsedStack);
@@ -55,7 +66,7 @@ public class PlatformGunItem extends BasicToolItem
         if (!foam.isEmpty()  || pPlayer.isCreative()) {
 
             FoamEntity foamEntity = new FoamEntity(pPlayer, pLevel);
-            foamEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 5.0F, 0.0F);
+            foamEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 9.0F, 0.0F);
             pPlayer.playSound(ModSounds.TOOL_FOAM_HARDEN.get(), 1, 1);
             pLevel.addFreshEntity(foamEntity);
 

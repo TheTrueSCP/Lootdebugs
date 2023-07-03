@@ -68,8 +68,10 @@ public class FoamEntity extends ThrowableProjectile {
 
 
 
-    private void placeBlocks(BlockPos HitPos, boolean mkII)
+    private void placeBlocksold(BlockPos HitPos, boolean mkII)
     {
+
+
         BlockPos pPos = HitPos;
 
         BlockPos poseast = pPos.east(1);
@@ -143,6 +145,44 @@ public class FoamEntity extends ThrowableProjectile {
 
         //central
         placeBlock(pPos, level, mkII);
+    }
+
+    private void placeBlocks(BlockPos hitPos, boolean mkII)
+    {
+        //Square
+        int diameter = 5;
+        if(diameter % 2 == 0)
+        {
+            diameter+= 1;
+        }
+
+        int forStart = diameter / 2 * -1;
+        int forEnd = diameter / 2;
+
+        for(int x = forStart; x <= forEnd; x++)
+        {
+            for(int y = forStart; y <= forEnd; y++)
+            {
+                placeBlock(hitPos.north(x).east(y), level, mkII);
+            }
+        }
+
+        //Additional things
+        placeBlock(hitPos.north(3).east(-1), level, mkII);
+        placeBlock(hitPos.north(3).east(0), level, mkII);
+        placeBlock(hitPos.north(3).east(1), level, mkII);
+
+        placeBlock(hitPos.south(3).east(-1), level, mkII);
+        placeBlock(hitPos.south(3).east(0), level, mkII);
+        placeBlock(hitPos.south(3).east(1), level, mkII);
+
+        placeBlock(hitPos.north(1).east(3), level, mkII);
+        placeBlock(hitPos.north(0).east(3), level, mkII);
+        placeBlock(hitPos.north(-1).east(3), level, mkII);
+
+        placeBlock(hitPos.north(1).west(3), level, mkII);
+        placeBlock(hitPos.north(0).west(3), level, mkII);
+        placeBlock(hitPos.north(-1).west(3), level, mkII);
     }
 
     //only one block

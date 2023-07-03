@@ -157,7 +157,6 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
 
 
-
     //Ores
     public static final RegistryObject<Item> NITRA = ITEMS.register("nitra",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));

@@ -1,0 +1,12 @@
+{
+  "name": "Fuel Canister",
+  "icon": "lootdebugs:fuel_canister",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:fuel_canister",
+      "text": "High energetic fuel compressed in the $(l:blocks/fuel_refinery)Fuel-refinery$() to feed the $(l:tools/reinforced_powerdrills)Reinforced Power-drills$(). Can also be used as fuel in furnaces(only the fuel will be consumed)."
+    }
+    ]
+}

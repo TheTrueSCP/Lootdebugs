@@ -1,0 +1,12 @@
+{
+  "name": "Turret Ammo",
+  "icon": "lootdebugs:turret_ammo",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:turret_ammo",
+      "text": "High speed bullets for the $(l:tools/turret)Turret$()."
+    }
+    ]
+}

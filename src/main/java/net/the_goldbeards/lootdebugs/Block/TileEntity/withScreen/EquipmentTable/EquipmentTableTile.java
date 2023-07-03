@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable;
 
+import mezz.jei.api.constants.RecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,10 +11,16 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -28,9 +35,7 @@ import java.util.Optional;
 
 public class EquipmentTableTile extends BlockEntity implements MenuProvider {
 
-
-    private boolean isDeleted = true;
-    private final ItemStackHandler itemHandler = new ItemStackHandler(10)
+    public final ItemStackHandler itemHandler = new ItemStackHandler(10)
     {
         @Override
         protected void onContentsChanged(int slot) {
@@ -48,6 +53,7 @@ public class EquipmentTableTile extends BlockEntity implements MenuProvider {
     public Component getDisplayName() {
         return new TextComponent("Equipment Table");
     }
+
 
     @Nullable
     @Override
@@ -112,6 +118,26 @@ public class EquipmentTableTile extends BlockEntity implements MenuProvider {
         return match.isPresent();
     }
 
+    private static boolean hasRecipeVanilla(EquipmentTableTile entity) {
+        Level level = entity.level;
+
+        CraftingContainer inventory = new CraftingContainer(new AbstractContainerMenu(null, -1) {
+            @Override
+            public boolean stillValid(Player pPlayer) {
+                return false;
+            }
+        }, 3, 3);
+
+        for (int i = 0; i < entity.itemHandler.getSlots() - 1; i++) {
+            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<CraftingRecipe> match = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, inventory, level);
+
+
+        return match.isPresent();
+    }
+
 
 
     public <E extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, EquipmentTableTile pEquipmentTableTile)
@@ -119,7 +145,15 @@ public class EquipmentTableTile extends BlockEntity implements MenuProvider {
 
         if(hasRecipe(pEquipmentTableTile))
         {
-           craftItem(pEquipmentTableTile);
+            craftItem(pEquipmentTableTile);
+        }
+        else if(hasRecipeVanilla(pEquipmentTableTile))
+        {
+            craftItemVanilla(pEquipmentTableTile);
+        }
+        else
+        {
+            pEquipmentTableTile.itemHandler.setStackInSlot(9, ItemStack.EMPTY);
         }
 
 
@@ -137,35 +171,49 @@ public class EquipmentTableTile extends BlockEntity implements MenuProvider {
         Optional<EquipmentTableRecipe> match = level.getRecipeManager()
                 .getRecipeFor(EquipmentTableRecipe.Type.INSTANCE, inventory, level);
 
-
-
-
-        if(entity.isDeleted && match.isPresent()) {
-            entity.itemHandler.setStackInSlot(0, new ItemStack(match.get().getResultItem().getItem(),
-                    1));
-
-            entity.isDeleted = false;
+        if(match.isPresent())
+        {
+            entity.itemHandler.setStackInSlot(9, new ItemStack(match.get().getResultItem().getItem(),
+                    match.get().getResultItem().getCount()));
         }
-
-        if(match.isPresent() && entity.itemHandler.getStackInSlot(0).isEmpty()) {
-            entity.itemHandler.extractItem(1,1, false);
-            entity.itemHandler.extractItem(2,1, false);
-            entity.itemHandler.extractItem(3,1, false);
-            entity.itemHandler.extractItem(4,1, false);
-            entity.itemHandler.extractItem(5,1, false);
-            entity.itemHandler.extractItem(6,1, false);
-            entity.itemHandler.extractItem(7,1, false);
-            entity.itemHandler.extractItem(8,1, false);
-            entity.itemHandler.extractItem(9,1, false);
-
-           entity.isDeleted = true;
-
-        }
-
-
-
-
     }
 
+    private static void craftItemVanilla(EquipmentTableTile entity) {
 
+        Level level = entity.level;
+
+        CraftingContainer inventory = new CraftingContainer(new AbstractContainerMenu(null, -1) {
+            @Override
+            public boolean stillValid(Player pPlayer) {
+                return false;
+            }
+        }, 3, 3);
+
+        for (int i = 0; i < entity.itemHandler.getSlots() - 1; i++) {
+            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<CraftingRecipe> match = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, inventory, level);
+
+
+
+        if(match.isPresent())
+        {
+            entity.itemHandler.setStackInSlot(9, new ItemStack(match.get().getResultItem().getItem(),
+                    match.get().getResultItem().getCount()));
+        }
+    }
+
+    public static void removeIngredients(IItemHandler itemHandler, int count)
+    {
+        itemHandler.extractItem(0,count, false);
+        itemHandler.extractItem(1,count, false);
+        itemHandler.extractItem(2,count, false);
+        itemHandler.extractItem(3,count, false);
+        itemHandler.extractItem(4,count, false);
+        itemHandler.extractItem(5,count, false);
+        itemHandler.extractItem(6,count, false);
+        itemHandler.extractItem(7,count, false);
+        itemHandler.extractItem(8,count, false);
+    }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "Morkite",
+  "icon": "lootdebugs:morkite",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Morkite is rare mineral which can be used to create fuel in the $(l:blocks/fuel_refinery)Fuel Refinery$(). It can be found between -60 and 30."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/ores/morkite/morkite.png", "lootdebugs:textures/lootdebugs_manual/blocks/ores/morkite/morkite_deepslate.png"],
+      "title": "Morkite Veins",
+      "text": "Morkite and deepslate morkite in the depths"
+    }
+  ]
+}

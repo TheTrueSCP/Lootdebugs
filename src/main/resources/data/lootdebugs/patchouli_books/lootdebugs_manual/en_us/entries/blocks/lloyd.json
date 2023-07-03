@@ -1,0 +1,16 @@
+{
+  "name": "Lloyd",
+  "icon": "lootdebugs:lloyd",
+  "category": "lootdebugs:blocks",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:lloyd",
+      "text": "Lloyd is an old drone which brews you beer if you give him the right ingredients. More about that under $(l:brewing)Brewing$()."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/lloyd.png"]
+    }
+  ]
+}

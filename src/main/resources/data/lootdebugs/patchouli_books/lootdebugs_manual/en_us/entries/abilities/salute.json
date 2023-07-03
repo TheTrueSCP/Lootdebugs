@@ -1,0 +1,17 @@
+{
+  "name": "Salute",
+  "icon": "lootdebugs:company_standard_pickaxe",
+  "category": "lootdebugs:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Flare",
+      "text": "If you are a $(l:classes)Dwarf$(), you can salute the $(k:lootdebugs.rock_and_stone)$()-key. Then you Dwarf will salute to Karl and to your other team-mates. Every dwarf has his own voice. $(br2)ROCK  AND  STONE!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Rock and Stone, Brother!",
+      "images": ["lootdebugs:textures/lootdebugs_manual/items/company_standard_pickaxe.png"]
+    }
+    ]
+}

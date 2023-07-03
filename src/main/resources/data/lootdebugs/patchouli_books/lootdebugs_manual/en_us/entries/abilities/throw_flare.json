@@ -1,0 +1,16 @@
+{
+  "name": "Throw Flare",
+  "icon": "lootdebugs:flare_gun_ammo",
+  "category": "lootdebugs:abilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Flare",
+      "text": "If you are a $(l:classes)Dwarf$(), you can throw this flare with the $(k:lootdebugs.throw_flare)$()-key.  Then the flare will fall and will emmit light for 1:30 Minutes. Every class have its own flare color."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:flare"
+    }
+    ]
+}

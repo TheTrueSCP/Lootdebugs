@@ -3,13 +3,11 @@ package net.the_goldbeards.lootdebugs.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.recipe.EquipmentTableRecipe;
 import net.the_goldbeards.lootdebugs.recipe.LloydRecipe;
@@ -38,11 +36,12 @@ public class JEILootdebugsPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
 
-        List<EquipmentTableRecipe> recipes = rm.getAllRecipesFor(EquipmentTableRecipe.Type.INSTANCE);
-        registration.addRecipes(new RecipeType<>(EquipmentTableRecipeCategory.UID, EquipmentTableRecipe.class), recipes);
+        List<EquipmentTableRecipe> equipmentTableRecipes = rm.getAllRecipesFor(EquipmentTableRecipe.Type.INSTANCE);
+        registration.addRecipes(new RecipeType<>(EquipmentTableRecipeCategory.UID, EquipmentTableRecipe.class), equipmentTableRecipes);
 
-        List<LloydRecipe> recipes1 = rm.getAllRecipesFor(LloydRecipe.Type.INSTANCE);
-        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID, LloydRecipe.class), recipes1);
+        List<LloydRecipe> lloydRecipes = rm.getAllRecipesFor(LloydRecipe.Type.INSTANCE);
+        registration.addRecipes(new RecipeType<>(PubRecipeCategory.UID, LloydRecipe.class), lloydRecipes);
+
 
     }
 

@@ -1,0 +1,17 @@
+{
+  "name": "Oil Shale",
+  "icon": "lootdebugs:oil_shale",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Oil Shale is a high energetic mineral which can be used to create fuel in the $(l:blocks/fuel_refinery)Fuel Refinery$(). It can be found between -60 and -20."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/ores/oil_shale/oil_shale.png"],
+      "title": "Oil Shale Veins",
+      "text": "Oil Shale in the depths"
+    }
+  ]
+}

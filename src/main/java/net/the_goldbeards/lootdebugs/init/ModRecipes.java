@@ -20,6 +20,7 @@ public class ModRecipes
     public static final RegistryObject<RecipeSerializer<LloydRecipe>> BEER_BREWING_SERIALIZER =
             SERIALIZERS.register("pub_brewing", () -> LloydRecipe.Serializer.INSTANCE);
 
+
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
     }

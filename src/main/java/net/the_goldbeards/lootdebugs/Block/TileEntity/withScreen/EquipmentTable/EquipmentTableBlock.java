@@ -53,8 +53,8 @@ public class EquipmentTableBlock extends BaseEntityBlock  {
             Block.box(-0.5, 13, -0.5, 16.5, 15.5, 16.5)
     );
 
-    private VoxelShape SHAPE_UPPER = Shapes.or(Block.box(-1, -0.05000000000000071, -1, 17, 15.95, 17)
-    );
+    private VoxelShape SHAPE_UPPER = Shapes.or(Block.box(-1, 13.95, -1, 17, 15.95, 17), Block.box(-0.20000000000000018, -0.5, -0.20000000000000018, 16.2, 14, 16.2));
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

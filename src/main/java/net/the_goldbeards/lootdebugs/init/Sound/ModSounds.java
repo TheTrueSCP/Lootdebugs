@@ -54,6 +54,9 @@ public class ModSounds
 
     public static final RegistryObject<SoundEvent> DRILLS = registerSoundEvent("tools.drills");
 
+    public static final RegistryObject<SoundEvent> DRILLS_OVERHEAT = registerSoundEvent("tools.drills.overheat");
+
+
     public static final RegistryObject<SoundEvent> TOOL_FOAM_HARDEN = registerSoundEvent("tools.foam.harden");
 
     public static final RegistryObject<SoundEvent> POWERATTACK = registerSoundEvent("tools.pickaxe.powerattack");

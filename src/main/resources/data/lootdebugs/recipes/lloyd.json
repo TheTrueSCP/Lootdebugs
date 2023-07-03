@@ -3,22 +3,22 @@
     "ingredients":
     [
         {
-            "item": "lootdebugs:cropper_ingot"
+            "item":"minecraft:iron_ingot"
         },
         {
             "item": "lootdebugs:dystrum_ingot"
         },
         {
-            "item": "lootdebugs:cropper_ingot"
+            "item": "minecraft:iron_ingot"
         },
         {
-            "item": "lootdebugs:cropper_ingot"
+            "item": "minecraft:gold_ingot"
         },
         {
             "item": "lootdebugs:power_cell"
         },
         {
-            "item": "lootdebugs:cropper_ingot"
+            "item": "minecraft:gold_ingot"
         },
         {
             "item": "minecraft:iron_ingot"

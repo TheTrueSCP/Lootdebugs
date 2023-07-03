@@ -1,0 +1,17 @@
+{
+  "name": "Red Sugar",
+  "icon": "lootdebugs:red_sugar_item",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Red sugar is a very sweet mineral which can also be eaten to refill your $(#ff0000)health$() instantly. It can be found between -60 and 40."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/resources/red_sugar/red_sugar.png"],
+      "title": "Red sugar pole",
+      "text": "Sweet Red Sugar in the depths"
+    }
+  ]
+}

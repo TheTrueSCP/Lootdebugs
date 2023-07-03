@@ -615,3 +615,41 @@ Record:85 (Tech and Tools Update)
 -fixed starch plant voxelshape
 -fixed flintlockes delight voxelshape
 -fixed oily oaf voxelshape
+-added drills overheat mechanic
+-fixed satchel charge ash texture
+-fixed satchel charge item display
+-fixed bismor, cropper and dystrum loottable
+-added drills overheat particle and sounds
+-tweaked power cell recipe
+-tweaked lloyd recipe
+-tweaked jet recipe
+-fixed drills do not block drop
+-fixed hops pick sound
+-fixed nira and morkite loottable
+-cahnged lloyd can now make up to 4 items
+-leaf lover special removed drunkness
+-fixed lloyd recipe match barley/emerald bug
+-tweaked satchel charge recipe
+-removed raw items to ore recipes
+-fixed powerattack to loud
+-changed platform gun ammo recipe
+-fixed zipline ammo
+-added turret targeting mode
+-tweaked laser pointer recipe
+-fixed flare gun velocity
+-fixed flare gun ammo recipe
+-removed grappling hook cooldown
+-tweaked armor material
+-fixed armor translation bugs
+-changed shoot flares life time
+-added turret dismantle when player not engineer anymore
+-changed flare lifes
+-added lootdebugs manual
+-tweaked platform gun ammo
+-fixed turret can only be placed when player is engineer
+-added turret raycast
+-fixed equipment table not delete item when recipe not match anymore
+-added equipment table now can craft also crafting table recipes
+-fixed equipment table shift-click handling
+-added gun turret rotation
+-made lootbug items glow

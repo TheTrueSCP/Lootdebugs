@@ -1,0 +1,17 @@
+{
+  "name": "Brewing Beer",
+  "icon": "lootdebugs:mug",
+  "category": "lootdebugs:brewing",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/oily_oaf.png"],
+      "title": "Enjoy It!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)How to use Lloyd$() $(br)$(list2)1. Put water into the upmost slot$() and up to 4 mugs into the lowest slot $(br)$(list2)2. add the right amount of each $(l:brewing/getting_ingredients)Ingredient$() into the four middle slots(the amount can you see in Just Enough Items)$() $(br)$(list2)3. Press the button and wait until the brew process is done$() $(br)$(list2)4. Enjoy your Beer!$()."
+    }
+    ]
+}

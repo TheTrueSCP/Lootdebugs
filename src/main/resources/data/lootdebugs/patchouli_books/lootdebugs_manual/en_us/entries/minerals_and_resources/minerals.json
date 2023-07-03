@@ -1,0 +1,17 @@
+{
+  "name": "Bismor and Cropper Ore",
+  "icon": "lootdebugs:raw_bismor",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cropper and Bismor are common minerals which can be used to craft the most of the Deep Rock Galactic Tools. It can be found between -60 and 30."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/ores/cropper_bismor_ore/bismor_ore.png", "lootdebugs:textures/lootdebugs_manual/blocks/ores/cropper_bismor_ore/cropper_ore.png"],
+      "title": "Bismor and Cropper ore",
+      "text": "Bismor and Cropper ore blocks in the depths"
+    }
+  ]
+}

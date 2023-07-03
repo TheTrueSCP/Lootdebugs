@@ -193,7 +193,7 @@ public class LloydTile extends BlockEntity implements MenuProvider, WorldlyConta
 
             entity.itemHandler.extractItem(5,1, false);
             entity.itemHandler.setStackInSlot(5, new ItemStack(match.get().getResultItem().getItem(),
-                    match.get().getResultItem().getCount()));
+                    inventory.getItem(5).getCount()));
 
         }
     }

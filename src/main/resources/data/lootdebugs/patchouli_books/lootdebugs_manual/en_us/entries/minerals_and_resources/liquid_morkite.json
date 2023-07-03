@@ -1,0 +1,17 @@
+{
+  "name": "Liquid Morkite",
+  "icon": "lootdebugs:liquid_morkite_bucket",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Liquid morkite is created when morkite is exposed to high pressure without comming in contract with water. Because of this special circumstances, the $(l:blocks/fuel_refinery)Fuel Refinery$() can extract out of that liquid morkite an extreme amount of fuel. Because of its rarity and the special circumstances, Deep Rock Galacitc have no information where it can be found."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/resources/liquid_morkite/liquid_morkite.png"],
+      "title": "Liquid Morkite Spring",
+      "text": "Liquid Morkite in the depths"
+    }
+  ]
+}

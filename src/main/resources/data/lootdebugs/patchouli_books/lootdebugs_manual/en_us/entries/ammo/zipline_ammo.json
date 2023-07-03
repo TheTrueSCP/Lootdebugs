@@ -1,0 +1,12 @@
+{
+  "name": "Zipline Ammo",
+  "icon": "lootdebugs:zipline_ammo",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:zipline_ammo",
+      "text": "Ultra fast high tec string extender to create a connection between to points when shot."
+    }
+    ]
+}

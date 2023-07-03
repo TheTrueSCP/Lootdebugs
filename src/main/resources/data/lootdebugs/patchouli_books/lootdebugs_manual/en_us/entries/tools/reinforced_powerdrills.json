@@ -1,0 +1,12 @@
+{
+  "name": "Reinforced Power-drills",
+  "icon": "lootdebugs:drills",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:drills",
+      "text": "A sharp drill-head and a 40PS Fuel Engine form this monster. It can drill easily through all variants of stone as long it have $(l:tools/fuel_canister)Fuel$(). Also, because of the special material of the drill-head, it cannot drill through Ores."
+    }
+    ]
+}

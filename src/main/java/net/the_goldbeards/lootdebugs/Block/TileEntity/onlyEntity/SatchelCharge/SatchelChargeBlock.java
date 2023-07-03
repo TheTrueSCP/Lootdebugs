@@ -3,6 +3,7 @@ package net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -21,6 +23,8 @@ import net.the_goldbeards.lootdebugs.init.ModBlocks;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.Random;
 
 public class SatchelChargeBlock extends BaseEntityBlock {
@@ -235,12 +239,23 @@ public class SatchelChargeBlock extends BaseEntityBlock {
         if (!pLevel.isClientSide)
         {
             pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(), 2);
-            Explosion explosion = pLevel.explode(null, pPos.getX(), pPos.getY(), pPos.getZ(), 10.0F, Explosion.BlockInteraction.BREAK);
+
+            ExplosionDamageCalculator explosionDamageCalculator = new ExplosionDamageCalculator()
+            {
+                @Override
+                public Optional<Float> getBlockExplosionResistance(Explosion pExplosion, BlockGetter pReader, BlockPos pPos, BlockState pState, FluidState pFluid) {
+                    return Optional.of(1.0f);
+                }
+            };
+
+            Explosion explosion = pLevel.explode(null, DamageSource.explosion((Explosion) null), explosionDamageCalculator, pPos.getX(), pPos.getY(), pPos.getZ(), 10.0f, false, Explosion.BlockInteraction.DESTROY);
+
 
             List<BlockPos> explodedBlocks = explosion.getToBlow();
 
             for(int i = 0; i < explodedBlocks.size(); i++)
             {
+
                 if(pLevel.getBlockState(explodedBlocks.get(i).below()).isCollisionShapeFullBlock(pLevel, explodedBlocks.get(i).below()))
                 pLevel.setBlock(explodedBlocks.get(i), ModBlocks.SATCHEL_CHARGE_ASH.get().defaultBlockState(), 3);
             }

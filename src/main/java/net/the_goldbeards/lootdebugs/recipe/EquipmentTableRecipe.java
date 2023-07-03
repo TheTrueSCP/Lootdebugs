@@ -27,25 +27,27 @@ public class EquipmentTableRecipe implements Recipe<SimpleContainer>
         this.recipeItems = recipeItems;
     }
 
+
+
     @Override
     public boolean matches(SimpleContainer pContainer, net.minecraft.world.level.Level pLevel) {
-        if(recipeItems.get(0).test(pContainer.getItem(1)))
+        if(recipeItems.get(0).test(pContainer.getItem(0)))
         {
-            if(recipeItems.get(1).test(pContainer.getItem(2)))
+            if(recipeItems.get(1).test(pContainer.getItem(1)))
             {
-                if(recipeItems.get(2).test(pContainer.getItem(3)))
+                if(recipeItems.get(2).test(pContainer.getItem(2)))
                 {
-                    if(recipeItems.get(3).test(pContainer.getItem(4)))
+                    if(recipeItems.get(3).test(pContainer.getItem(3)))
                     {
-                        if(recipeItems.get(4).test(pContainer.getItem(5)))
+                        if(recipeItems.get(4).test(pContainer.getItem(4)))
                         {
-                            if(recipeItems.get(5).test(pContainer.getItem(6)))
+                            if(recipeItems.get(5).test(pContainer.getItem(5)))
                             {
-                                if(recipeItems.get(6).test(pContainer.getItem(7)))
+                                if(recipeItems.get(6).test(pContainer.getItem(6)))
                                 {
-                                    if(recipeItems.get(7).test(pContainer.getItem(8)))
+                                    if(recipeItems.get(7).test(pContainer.getItem(7)))
                                     {
-                                        if(recipeItems.get(8).test(pContainer.getItem(9)))
+                                        if(recipeItems.get(8).test(pContainer.getItem(8)))
                                         {
                                             return true;
                                         }

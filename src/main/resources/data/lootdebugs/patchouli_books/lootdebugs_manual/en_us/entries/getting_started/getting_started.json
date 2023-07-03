@@ -1,0 +1,27 @@
+{
+  "name": "Welcome Potential Miner",
+  "icon": "lootdebugs:company_standard_pickaxe",
+  "category": "lootdebugs:getting_started",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Hello potential miner and welcome in the Deep Rock Galactic Family! You are one of the luckily dwarfs which were chosen to (maybe) become a real dwarf. Here, you will learn everything about this."
+    },
+    {
+      "type": "patchouli:text",
+      "text": " $(l)MISSION I$()$(br2)So, welcome to your first mission! You mission is to get some minerals. At least $(br)$(#ceae99)$(list1)5 iron ores$() $(#f9b600)$(list1)2 raw bismor$() $(#cfd517)$(list1)1 raw cropper$(). $(br2)To find these Minerals, $(o)Deep Rock Galactic$() provides you with $(l:minerals)information$() where to find all these minerals."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)MISSION II$()$(br2)Found it? Good work, miner! Now, smelt the stuff in (blast) furnace into ingots. Now you can use your crafting table to craft a $(l:blocks/equipment_table)Equipment Table$()."
+    },
+    {
+      "type": "patchouli:smelting",
+      "recipe": "lootdebugs:bismor_smelting",
+      "recipe2": "lootdebugs:cropper_smelting",
+      "text": "$(o)We hope you are that smart to know how to make iron$()"
+    }
+  ]
+}

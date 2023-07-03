@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.PingTool;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +23,13 @@ public class PingItem extends BasicAllClassItem {
     {
 
         ItemStack pStack = pPlayer.getItemInHand(pUsedHand);
+
+        if(pPlayer.getMainHandItem() != pStack && !Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pStack);
+        }
+
+
 
         if(canUseItem(pStack))
         {

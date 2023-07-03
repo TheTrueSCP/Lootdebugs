@@ -2,6 +2,8 @@ package net.the_goldbeards.lootdebugs.Entities.Mob;
 
 import com.mojang.serialization.Codec;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.entity.layers.SpiderEyesLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -245,8 +248,17 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
             } else {
                 this.setClimbing(false);
             }
-        } else {
-            this.setClimbing(this.horizontalCollision);
+        }
+
+        if(this.getControllingPassenger() != null)
+        {
+            if(Screen.hasShiftDown())
+            { this.setClimbing(this.horizontalCollision);
+            }
+            else
+            {
+                this.setClimbing(false);
+            }
         }
         this.travel(this, this.steering, pTravelVector);
     }
@@ -266,7 +278,8 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     @Override
     protected void pickUpItem(ItemEntity pItemEntity) {
         super.pickUpItem(pItemEntity);
-        if (pItemEntity.getItem().is(ModTags.Items.LOOTBUG_BREEDING_ITEMS)) {
+        if (pItemEntity.getItem().is(ModTags.Items.LOOTBUG_BREEDING_ITEMS))
+        {
             if (this.inventory.add(pItemEntity.getItem())) {
                 pItemEntity.discard();
             }
@@ -281,7 +294,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
     @Override
     public boolean wantsToPickUp(ItemStack pStack) {
-        return true;
+        return pStack.is(ModTags.Items.LOOTBUG_BREEDING_ITEMS);
     }
     // Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
     //use this to react to sunlight and start to burn.

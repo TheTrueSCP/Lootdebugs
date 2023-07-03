@@ -1,0 +1,12 @@
+{
+  "name": "Shield",
+  "icon": "lootdebugs:shield",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:shield",
+      "text": "High technological tool which emits, when placed or thrown, a high energetic beam which pushes all of the bad things away and give dwarfs inside shield regeneration."
+    }
+    ]
+}

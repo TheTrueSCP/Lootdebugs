@@ -29,6 +29,14 @@ public class ShootFlareEntity extends AbstractShootablePhysicsArrowLikeEntity {
         super(ModEntities.SHOOT_FLARE.get(), pShooter, pLevel);
     }
 
+    @Override
+    protected void tickDespawn() {
+        ++this.life;
+        if (this.life >= 6000) {
+            this.onDespawn();
+            this.discard();
+        }
+    }
 
     @Override
     public boolean isPickable() {

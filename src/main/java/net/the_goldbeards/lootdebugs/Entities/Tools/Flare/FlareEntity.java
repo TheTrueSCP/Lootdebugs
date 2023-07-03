@@ -188,7 +188,14 @@ removeLight();
 
     }
 
-
+    @Override
+    protected void tickDespawn() {
+        ++this.life;
+        if (this.life >= 1800) {
+            this.onDespawn();
+            this.discard();
+        }
+    }
 
     @Override
     public void kill() {

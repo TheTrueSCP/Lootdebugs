@@ -2,13 +2,13 @@
   "type": "lootdebugs:equipment_crafting",
   "ingredients": [
     {
-      "item": "minecraft:clay"
+      "item": "minecraft:clay_ball"
     },
     {
       "item": "minecraft:gunpowder"
     },
     {
-      "item": "minecraft:clay"
+      "item": "minecraft:clay_ball"
     },
     {
       "item": "minecraft:gunpowder"
@@ -20,13 +20,13 @@
       "item": "minecraft:gunpowder"
     },
     {
-      "item": "minecraft:clay"
+      "item": "minecraft:clay_ball"
     },
     {
       "item": "minecraft:gunpowder"
     },
     {
-      "item": "minecraft:clay"
+      "item": "minecraft:clay_ball"
     }
   ],
   "output": {

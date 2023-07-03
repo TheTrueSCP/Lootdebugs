@@ -3,8 +3,12 @@ package net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class PlascreteFoamMKI extends Block
@@ -22,10 +26,9 @@ public class PlascreteFoamMKI extends Block
 
     }
 
-
-
-
-
-
+    @Override
+    public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
+        return true;
+    }
 
 }

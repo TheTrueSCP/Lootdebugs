@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.FlareGun;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -38,6 +39,15 @@ public class FlareGunItem extends BasicToolItem
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack pUsedStack = pPlayer.getItemInHand(pHand);
 
+        if(pPlayer.getMainHandItem() != pUsedStack)
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
 
         if(!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse())) //TheTrueSCP
         {
@@ -54,7 +64,7 @@ public class FlareGunItem extends BasicToolItem
 
             ShootFlareEntity shootFlareEntity = new ShootFlareEntity(pPlayer, pLevel);
 
-            shootFlareEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 4.0F, 0.0F);
+            shootFlareEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 9.0F, 0.0F);
             pPlayer.playSound(ModSounds.TOOL_FOAM_HARDEN.get(), 1, 1);
             pLevel.addFreshEntity(shootFlareEntity);
 

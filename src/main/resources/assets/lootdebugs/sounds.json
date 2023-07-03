@@ -150,17 +150,17 @@
   {
     "subtitle": "vegetation.subtitle.general.pick",
     "sounds": [
-      "lootdebugs:blocks/vegetation/hops_pick_up_1",
-      "lootdebugs:blocks/vegetation/hops_pick_up_2",
-      "lootdebugs:blocks/vegetation/hops_pick_up_3",
-      "lootdebugs:blocks/vegetation/hops_pick_up_4",
-      "lootdebugs:blocks/vegetation/hops_pick_up_5",
-      "lootdebugs:blocks/vegetation/hops_pick_up_6",
-      "lootdebugs:blocks/vegetation/hops_pick_up_7",
-      "lootdebugs:blocks/vegetation/hops_pick_up_8",
-      "lootdebugs:blocks/vegetation/hops_pick_up_9",
-      "lootdebugs:blocks/vegetation/hops_pick_up_10",
-      "lootdebugs:blocks/vegetation/hops_pick_up_11"
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_1",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_2",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_3",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_4",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_5",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_6",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_7",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_8",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_9",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_10",
+      "lootdebugs:blocks/vegetation/pick/hops_pick_up_11"
     ]
   },
   
@@ -407,10 +407,16 @@
   "tools.drills": {
     "subtitle": "tools.subtitle.drills",
     "sounds": [
-      "lootdebugs:tools/drills"
+      "lootdebugs:tools/drills/drills_drill"
     ]
   },
 
+  "tools.drills.overheat": {
+    "subtitle": "tools.subtitle.drills.overheat",
+    "sounds": [
+      "lootdebugs:tools/drills/drills_overheat_1"
+    ]
+  },
   
   "tools.foam.harden": {
     "subtitle": "tools.subtitle.foam.harden",

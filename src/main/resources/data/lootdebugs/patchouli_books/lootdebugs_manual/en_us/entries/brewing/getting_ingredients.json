@@ -1,0 +1,17 @@
+{
+  "name": "Getting Ingredients",
+  "icon": "lootdebugs:barley_bulb",
+  "category": "lootdebugs:brewing",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/resources/hops/barley_plant.png"],
+      "title": "Barley Bulb"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "If you want to $(l:brewing/brewing_beers)Brew$(), you need $(l:minerals_and_resources/hops)Hops$() to get the right taste into your Beer. To get the mug, you must yourself a mug in your crafting table."
+    }
+    ]
+}

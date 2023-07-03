@@ -1,18 +1,25 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.Lloyd.*;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModResultSlot;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModSlot;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
+import net.the_goldbeards.lootdebugs.recipe.EquipmentTableRecipe;
+
+import java.util.Optional;
 
 public class EquipmentTableContainer extends AbstractContainerMenu {
 
@@ -43,19 +50,20 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new ModResultSlot(handler, 0, 124, 35));
 
-            this.addSlot(new ModSlot(handler, 1, 30, 17));
-            this.addSlot(new ModSlot(handler, 2, 48, 17));
-            this.addSlot(new ModSlot(handler, 3, 66, 17));
+            this.addSlot(new ModSlot(handler, 0, 30, 17));
+            this.addSlot(new ModSlot(handler, 1, 48, 17));
+            this.addSlot(new ModSlot(handler, 2, 66, 17));
 
-            this.addSlot(new ModSlot(handler, 4, 30, 35));
-            this.addSlot(new ModSlot(handler, 5, 48, 35));
-            this.addSlot(new ModSlot(handler, 6, 66, 35));
+            this.addSlot(new ModSlot(handler, 3, 30, 35));
+            this.addSlot(new ModSlot(handler, 4, 48, 35));
+            this.addSlot(new ModSlot(handler, 5, 66, 35));
 
-            this.addSlot(new ModSlot(handler, 7, 30, 53));
-            this.addSlot(new ModSlot(handler, 8, 48, 53));
-            this.addSlot(new ModSlot(handler, 9, 66, 53));
+            this.addSlot(new ModSlot(handler, 6, 30, 53));
+            this.addSlot(new ModSlot(handler, 7, 48, 53));
+            this.addSlot(new ModSlot(handler, 8, 66, 53));
+
+            this.addSlot(new ModResultSlot(handler, 9, 124, 35));
         });
     }
 
@@ -68,14 +76,21 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
         ItemStack copyOfSourceStack = sourceStack.copy();
 
         // Check if the slot clicked is one of the vanilla container slots
-        if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+        if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT)
+        {
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                    + TE_INVENTORY_SLOT_COUNT, false))
+            {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
+
+
             }
         } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
             // This is a TE slot so merge the stack into the players inventory
+
+            sourceStack.setCount(getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel()));
+
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
                 return ItemStack.EMPTY;
             }
@@ -89,6 +104,14 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
         } else {
             sourceSlot.setChanged();
         }
+
+        if(sourceSlot instanceof ModResultSlot slot)
+        {
+            System.out.println("result slot" + getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel()));
+            slot.removeIngredients(getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel()));
+        }
+
+
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
@@ -111,6 +134,53 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    public static int getMaxPossibleItemOutput(IItemHandler itemHandler, Level level)
+    {
+        int itemAmount = 0;
+
+        while(true)
+        {
+            CraftingContainer inventory2 = new CraftingContainer(new AbstractContainerMenu(null, -1) {
+                @Override
+                public boolean stillValid(Player pPlayer) {
+                    return false;
+                }
+            }, 3, 3);
+
+
+            for (int i = 0; i < itemHandler.getSlots() - 1; i++)
+            {
+                ItemStack addStack = itemHandler.getStackInSlot(i).copy();
+                addStack.setCount(addStack.getCount() - itemAmount);
+                inventory2.setItem(i, addStack);
+            }
+
+
+            SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+            for (int i = 0; i < itemHandler.getSlots(); i++)
+            {
+                ItemStack addStack = itemHandler.getStackInSlot(i).copy();
+                addStack.setCount(addStack.getCount() - itemAmount);
+                inventory.setItem(i, addStack);
+            }
+
+            Optional<EquipmentTableRecipe> match = level.getRecipeManager()
+                    .getRecipeFor(EquipmentTableRecipe.Type.INSTANCE, inventory, level);
+
+            Optional<CraftingRecipe> match2 = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, inventory2, level);
+
+            if(!match.isPresent() && !match2.isPresent())
+            {
+                return itemAmount;
+            }
+            else
+            {
+                itemAmount++;
+            }
+        }
+
     }
 }
 

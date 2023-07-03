@@ -1,0 +1,12 @@
+{
+  "name": "Turret Ammo",
+  "icon": "lootdebugs:flare_gun_ammo",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:shoot_flare",
+      "text": "High energy flares too illuminate the surrounding area."
+    }
+    ]
+}

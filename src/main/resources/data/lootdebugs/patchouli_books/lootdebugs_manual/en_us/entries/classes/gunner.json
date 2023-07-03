@@ -1,0 +1,13 @@
+{
+  "name": "Gunner",
+  "icon": "lootdebugs:zipline",
+  "category": "lootdebugs:classes",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:mk1_company_standard_gunner_chestplate",
+      "title": "Gunner Armor",
+      "text": "The Gunners main ability is to support the team with $(l:tools/zipline)Ziplines$() all over the caves and very cozy, long lasting $(l:tools/shield)Shields$()."
+    }
+  ]
+}

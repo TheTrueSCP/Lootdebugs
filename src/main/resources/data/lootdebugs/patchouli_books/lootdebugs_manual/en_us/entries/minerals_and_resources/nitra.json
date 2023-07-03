@@ -1,0 +1,17 @@
+{
+  "name": "Nitra",
+  "icon": "lootdebugs:nitra",
+  "category": "lootdebugs:minerals_and_resources",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Nitra is common mineral wihch can be used to craft ammo. It can be found between -60 and 60."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/ores/nitra/nitra.png", "lootdebugs:textures/lootdebugs_manual/blocks/ores/nitra/nitra_deepslate.png"],
+      "title": "Nitra Veins",
+      "text": "Nitra and deepslate nitra in the depths"
+    }
+  ]
+}

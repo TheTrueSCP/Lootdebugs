@@ -1,0 +1,15 @@
+{
+  "name": "Zipline Pole",
+  "icon": "lootdebugs:zipline",
+  "category": "lootdebugs:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A pole which is usually connected to a $(l:tools/zipline_hook)zipline hook$() to build a $(l:tools/zipline)zipline$()."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/zipline_pole.png"]
+    }
+    ]
+}

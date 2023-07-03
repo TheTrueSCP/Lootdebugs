@@ -46,19 +46,19 @@ import net.the_goldbeards.lootdebugs.util.ModUtils;
 import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.*;
 
 @Mod.EventBusSubscriber(modid = LootDebugsMain.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class ForgeClientEventBusSubscriber
-{
+public class ForgeClientEventBusSubscriber {
 
+    private static float swingAngle = 0.0f;
+    private static float DEFAULT_SWING_SPEED = 1.0f; // Adjust the swing speed here
+    private static final float MAX_SWING_ANGLE = 15.0f;
 
-    public static Player getPlayer()
-    {
+    public static Player getPlayer() {
         return Minecraft.getInstance().player;
     }
 
     //Key
     @SubscribeEvent
-    public static void onKeyEvent(InputEvent.KeyInputEvent event)
-    {
+    public static void onKeyEvent(InputEvent.KeyInputEvent event) {
         if (ROCK_AND_STONE.isDown()) {
 
 
@@ -66,32 +66,27 @@ public class ForgeClientEventBusSubscriber
 
             player.getCapability(SaluteDataCap.SALUTE_DATA).ifPresent(saluteCap ->
             {
-                        PacketHandler.send(PacketDistributor.SERVER.noArg(), new RockAndStonePacket());
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new RockAndStonePacket());
             });
         }
 
-        if (THROW_FLARE.isDown())
-        {
+        if (THROW_FLARE.isDown()) {
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ThrowFlarePacket());
         }
 
-        if (CHANGE_DIRECTION.isDown())
-        {
+        if (CHANGE_DIRECTION.isDown()) {
             PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeDirectionPacket());
         }
     }
 
     //UI
     @SubscribeEvent
-    public static void drawTextEvent(RenderGameOverlayEvent.Text event)
-    {
+    public static void drawTextEvent(RenderGameOverlayEvent.Text event) {
         Player player = getPlayer();
 
 
-        if(player != null)
-        {
-            if(ModUtils.DwarfClasses.isPlayerDwarf(player))
-            {
+        if (player != null) {
+            if (ModUtils.DwarfClasses.isPlayerDwarf(player)) {
 
                 player.getCapability(FlareDataCap.FLARE_DATA).ifPresent(flareCap ->
                 {
@@ -111,23 +106,20 @@ public class ForgeClientEventBusSubscriber
 
     //Drills
     @SubscribeEvent
-    public static void handleUnderwaterDrill(PlayerEvent.HarvestCheck ev)
-    {
-        if(!(ev.getEntityLiving() instanceof Player player))
+    public static void handleUnderwaterDrill(PlayerEvent.HarvestCheck ev) {
+        if (!(ev.getEntityLiving() instanceof Player player))
             return;
         ItemStack drill = player.getInventory().getSelected();
-        if(!(drill.getItem() instanceof DrillsItem drillItem))
+        if (!(drill.getItem() instanceof DrillsItem drillItem))
             return;
-        if(player.isEyeInFluid(FluidTags.WATER))
+        if (player.isEyeInFluid(FluidTags.WATER))
             ev.setCanHarvest(false);
     }
 
 
     @SubscribeEvent
-    public static void renderAdditionalBlockBounds(DrawSelectionEvent.HighlightBlock event)
-    {
-        if(event.getTarget().getType()== HitResult.Type.BLOCK && event.getCamera().getEntity() instanceof LivingEntity player)
-        {
+    public static void renderAdditionalBlockBounds(DrawSelectionEvent.HighlightBlock event) {
+        if (event.getTarget().getType() == HitResult.Type.BLOCK && event.getCamera().getEntity() instanceof LivingEntity player) {
             PoseStack transform = event.getPoseStack();
             MultiBufferSource buffer = event.getMultiBufferSource();
             BlockHitResult rtr = event.getTarget();
@@ -142,14 +134,12 @@ public class ForgeClientEventBusSubscriber
             Level world = player.level;
 
             transform.popPose();
-            if(!stack.isEmpty() && stack.getItem() instanceof DrillsItem)
-            {
+            if (!stack.isEmpty() && stack.getItem() instanceof DrillsItem) {
 
-                if(player instanceof Player &&!player.isShiftKeyDown() && !ModUtils.ItemNBTHelper.getBoolean(stack, "onBlockMode"))
-                {
+                if (player instanceof Player && !player.isShiftKeyDown() && !ModUtils.ItemNBTHelper.getBoolean(stack, "onBlockMode")) {
                     //Render for every Block which is breaking the block-break animation
-                    ImmutableList<BlockPos> blocks = ((DrillsItem)stack.getItem()).getExtraBlocksDug(world, (Player)player, event.getTarget());
-                    ModUtils.BlockHelpers.drawAdditionalBlockbreak(event, (Player)player, blocks);
+                    ImmutableList<BlockPos> blocks = ((DrillsItem) stack.getItem()).getExtraBlocksDug(world, (Player) player, event.getTarget());
+                    ModUtils.BlockHelpers.drawAdditionalBlockbreak(event, (Player) player, blocks);
                 }
             }
         }
@@ -158,28 +148,22 @@ public class ForgeClientEventBusSubscriber
 
     //GoldLootbugEffect
     @SubscribeEvent
-    public static void playerLootbugGoldEffect(PlayerInteractEvent.RightClickBlock event)
-    {
+    public static void playerLootbugGoldEffect(PlayerInteractEvent.RightClickBlock event) {
 
         Level level = event.getWorld();
-        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()))
-        {
-            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
-            {
+        if (event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get())) {
+            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS)) {
                 level.setBlock(event.getPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
             }
         }
     }
 
     @SubscribeEvent
-    public static void playerLootbugGoldEffect(PlayerInteractEvent.LeftClickBlock event)
-    {
+    public static void playerLootbugGoldEffect(PlayerInteractEvent.LeftClickBlock event) {
 
         Level level = event.getWorld();
-        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()))
-        {
-            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
-            {
+        if (event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get())) {
+            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS)) {
                 level.setBlock(event.getPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
             }
         }
@@ -188,36 +172,42 @@ public class ForgeClientEventBusSubscriber
     //Entity
 
     @SubscribeEvent
-    public static void playerLootbugGoldEffect(PlayerInteractEvent.EntityInteract event)
-    {
+    public static void playerLootbugGoldEffect(PlayerInteractEvent.EntityInteract event) {
 
         Level level = event.getWorld();
         AABB aabb = event.getTarget().getType().getDimensions().makeBoundingBox(event.getTarget().position());
 
 
         //for loops aabb -> minX to maxX... level.getBlockstate([forloop values]).setBlock(Blocks.GOLD_BLOCK);
-        if(event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()) && event.getEntity().getType() != EntityType.PLAYER)
-        {
-            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS))
-            {
+        if (event.getPlayer().hasEffect(ModEffects.LOOTBUG_TOUCH.get()) && event.getEntity().getType() != EntityType.PLAYER) {
+            if (level.getBlockState(event.getPos()).is(ModTags.Blocks.GOLD_BLOCK_REPLACEABLE_BLOCKS)) {
                 level.setBlock(event.getPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
             }
         }
     }
 
+
     @SubscribeEvent
     public static void renderDrunkness(EntityViewRenderEvent.CameraSetup event) {
 
-        if(Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) && Minecraft.getInstance().options.screenEffectScale > 0)
-        {
+        if (Minecraft.getInstance().player.hasEffect(ModEffects.DRUNKNESS.get()) && Minecraft.getInstance().options.screenEffectScale > 0) {
             float screenEffectsScale = Minecraft.getInstance().options.screenEffectScale;
-            float amp = Minecraft.getInstance().player.getEffect(ModEffects.DRUNKNESS.get()).getAmplifier() + 1;
-            float wobbleX = (float) Math.sin(event.getPartialTicks() * 1.5 * screenEffectsScale * amp);
-            float wobbleY = (float) Math.cos(event.getPartialTicks() * 1.5 * screenEffectsScale * amp);
 
-            event.setRoll(event.getRoll() + wobbleX);
-            event.setYaw(event.getYaw() + wobbleY);
+            float drunknessAmp = Minecraft.getInstance().player.getEffect(ModEffects.DRUNKNESS.get()).getAmplifier();
+
+
+
+            float swingSpeedModifier = 0.3f * drunknessAmp * screenEffectsScale;
+            float swingAngelModifier = 0.2f * drunknessAmp * screenEffectsScale;//max is 1
+
+            swingAngle += DEFAULT_SWING_SPEED * swingSpeedModifier;
+            if (swingAngle >= MAX_SWING_ANGLE * swingAngelModifier || swingAngle <= -MAX_SWING_ANGLE * swingAngelModifier) {
+                DEFAULT_SWING_SPEED *= -1;
+            }
+
+            // Modify the field of view
+            event.setRoll(event.getRoll() + swingAngle); // You can adjust the field of view or any other camera properties here
+
         }
-
     }
 }

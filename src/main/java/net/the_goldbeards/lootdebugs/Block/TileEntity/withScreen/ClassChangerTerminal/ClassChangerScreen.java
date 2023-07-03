@@ -29,6 +29,7 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
     private ClassChangerButton[] buttons = new ClassChangerButton[6];
 
+
     private static final ResourceLocation GUI = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_changer/class_changer_gui.png");
     private static final ResourceLocation GUNNER_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_changer/button_gunner.png");
     private static final ResourceLocation SCOUT_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_changer/button_scout.png");
@@ -37,6 +38,8 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
     private static final ResourceLocation THE_TRUE_SCP_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_changer/button_thetruescp.png");
     private static final ResourceLocation MONSIEUR_HANNES_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/class_changer/button_monsieurhannes.png");
+
+    private static final ResourceLocation CONTINUE_BUTTON = new ResourceLocation(LootDebugsMain.MOD_ID, "textures/gui/recipe_button.png");
 
     public ClassChangerScreen(ClassChangerContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -95,14 +98,14 @@ public class ClassChangerScreen extends AbstractContainerScreen<ClassChangerCont
 
         }
 
-       /* if(player.isCreative())//Carl
+        if(player.isCreative())//Karl
         {
             this.addRenderableWidget(new BasicButton(this.leftPos + 140, this.height / 2 - 30, 20, 18, 0, 0, 19, CONTINUE_BUTTON,(p_98484_) -> {
 
-                PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Carl));
+                PacketHandler.send(PacketDistributor.SERVER.noArg(), new ChangeClassPacket(IClassData.Classes.Karl));
 
             }));
-        }*/
+        }
     }
 
     @Override

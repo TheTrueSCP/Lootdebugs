@@ -1,17 +1,10 @@
 package net.the_goldbeards.lootdebugs.Events;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -33,9 +26,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.gui.IIngameOverlay;
-import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,15 +37,16 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydScre
 import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugGoldenRender;
-import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugOldRender;
-import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Entites.LootbugRender;
+import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugGoldenRender;
+import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugOldRender;
+import net.the_goldbeards.lootdebugs.client.Render.Entites.LootbugRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.*;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.BulletRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Turret.TurretRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineMoveRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRender;
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
+import net.the_goldbeards.lootdebugs.client.Render.ResupplyDropRender;
 import net.the_goldbeards.lootdebugs.client.Render.TileEntities.ClassChangerRenderer;
 import net.the_goldbeards.lootdebugs.client.model.Armor.DrillerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.EngineerMK1ArmorModel;
@@ -113,7 +104,7 @@ public class ModClientEventBusSubscriber
         event.registerEntityRenderer(ModEntities.STRING_ANCHOR_ENTITY.get(), ZiplineStringRender::new);
         event.registerEntityRenderer(ModEntities.BULLET_ENTITY.get(), BulletRender::new);
         event.registerEntityRenderer(ModEntities.TURRET_ENTITY.get(), TurretRender::new);
-
+        event.registerEntityRenderer(ModEntities.RESUPPLY_DROP_ENTITY.get(), ResupplyDropRender::new);
 
         //Weapons
         event.registerEntityRenderer(ModEntities.SATCHEL_CHARGE.get(), SatchelChargeRender::new);

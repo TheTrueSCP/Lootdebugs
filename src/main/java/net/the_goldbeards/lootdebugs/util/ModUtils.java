@@ -349,6 +349,11 @@ public class ModUtils
 
             String playerClass = playerClassWrapper.pClass;
 
+            if(playerClass == null)
+            {
+                return false;
+            }
+
             if(playerClass.equals(dwarfClassToUse.name()))
             {
                 return true;
@@ -358,6 +363,10 @@ public class ModUtils
                 return true;
             }
             else if(playerClass.equals("MonsieurHannes") && dwarfClassToUse == IClassData.Classes.Scout)
+            {
+                return true;
+            }
+            else if(playerClass.equals("Karl"))
             {
                 return true;
             }

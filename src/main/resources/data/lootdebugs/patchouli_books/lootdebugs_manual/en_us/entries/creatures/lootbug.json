@@ -1,0 +1,16 @@
+{
+  "name": "The Lootbug",
+  "icon": "lootdebugs:lootbug_spawn_egg",
+  "category": "lootdebugs:creatures",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)Behold$(), the mighty Lootbug. The Lootbug eat minerals all the day, crawls around and making cute sounds. Can be ridden with a $(l:tools/nitra_on_a_stick)Nitra on a Stick$(). Press Shift to climb walls."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:lootbug"
+    }
+  ]
+}

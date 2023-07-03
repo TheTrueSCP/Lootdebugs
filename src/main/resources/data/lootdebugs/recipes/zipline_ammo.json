@@ -31,7 +31,8 @@
         }
     ],
     "output": {
-        "item": "lootdebugs:zipline_ammo"
+        "item": "lootdebugs:zipline_ammo",
+        "count": 8
     }
 
 }

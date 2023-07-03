@@ -1,0 +1,16 @@
+{
+  "name": "The Golden Lootbug",
+  "icon": "lootdebugs:lootbug_golden_spawn_egg",
+  "category": "lootdebugs:creatures",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Like the normal $(l:creatures/lootbug)Lootbug$(), but he ate so much minerals, that his skin transformed into gold, should be filled with a lot of minerals."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:lootbug_golden"
+    }
+  ]
+}

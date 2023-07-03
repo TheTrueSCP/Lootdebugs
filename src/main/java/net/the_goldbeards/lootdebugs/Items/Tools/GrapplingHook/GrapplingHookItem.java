@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.GrapplingHook;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,13 +42,6 @@ public class GrapplingHookItem extends BasicToolItem
         {
             if(pLevel.getEntity((int) ModUtils.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")) != null)
             {
-                if(pLivingEntity instanceof Player player)
-                {
-                    if(!player.isCreative())
-                    {
-                        player.getCooldowns().addCooldown(this, 60);//Add cooldown when release hook
-                    }
-                }
 
                 pLevel.getEntity((int) ModUtils.ItemNBTHelper.getFloat(pStack,"lootdebugs.grapplinghook.grapplinghookhookentity.id")).kill();
 
@@ -93,6 +87,16 @@ public class GrapplingHookItem extends BasicToolItem
     {
         ItemStack pingItemStack = pEntity.getItemInHand(pUsedHand);
         ItemStack pUsedStack = pEntity.getItemInHand(pUsedHand);
+
+        if(pEntity.getMainHandItem() != pUsedStack)
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
 
         if (!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pEntity, dwarfClassToUse)) {
             return InteractionResultHolder.pass(pUsedStack);

@@ -1,5 +1,6 @@
 package net.the_goldbeards.lootdebugs.Items.Tools.Zipline;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -45,6 +46,16 @@ public class ZiplineItem extends BasicToolItem
 
         ItemStack pUsedStack = pPlayer.getItemInHand(pUsedHand);
 
+        if(pPlayer.getMainHandItem() != pUsedStack)
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
+        if(Screen.hasShiftDown())
+        {
+            return InteractionResultHolder.pass(pUsedStack);
+        }
+
         if (!ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse())) {
             return InteractionResultHolder.pass(pUsedStack);
         }
@@ -60,7 +71,7 @@ public class ZiplineItem extends BasicToolItem
 
                 //Shoots zipline entity with blocklink to current player pos
                 ZiplineEntity ziplineEntity = new ZiplineEntity(pPlayer, pLevel, linkPos, pPlayer.getDirection().getOpposite());
-                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 3.0F, 0.0F);
+                ziplineEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 9.0F, 0.0F);
                 pLevel.addFreshEntity(ziplineEntity);
 
                 ziplineEntity.setPos(ziplineEntity.getX(), ziplineEntity.getY() - 0.5f, ziplineEntity.getZ());

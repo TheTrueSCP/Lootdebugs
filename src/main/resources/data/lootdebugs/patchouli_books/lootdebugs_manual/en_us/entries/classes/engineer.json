@@ -1,0 +1,13 @@
+{
+  "name": "Engineer",
+  "icon": "lootdebugs:turret",
+  "category": "lootdebugs:classes",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:mk1_company_standard_engineer_chestplate",
+      "title": "Engineer Armor",
+      "text": "The engineers main ability is to place with the $(l:tools/platform_gun) Platform Gun$() platforms and climb these up with double jump-height like he normally would. Also, he have a $(l:tools/turret)automatic turrets$() which attacks enemies over long distances(40 Blocks)."
+    }
+  ]
+}

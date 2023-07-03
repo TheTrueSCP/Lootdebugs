@@ -7,10 +7,10 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:sand"
+      "item": "minecraft:clay_ball"
     },
     "=": {
-      "item": "lootdebugs:dystrum_ingot"
+      "item": "minecraft:white_concrete_powder"
     },
     "H": {
       "item": "lootdebugs:nitra"
@@ -21,6 +21,6 @@
   },
   "result": {
     "item": "lootdebugs:platform_gun_ammo",
-    "count": 8
+    "count": 16
   }
 }

@@ -7,12 +7,14 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -33,6 +35,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.ForgeHooks;
 import net.the_goldbeards.lootdebugs.Items.Fuel.FuelDiggingItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 import org.jetbrains.annotations.Nullable;
@@ -45,32 +48,14 @@ public class DrillsItem extends FuelDiggingItem
 		super(pProperties);
 	}
 
-	@Override
-	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+	public static float fuelConsumeEachBlock = 1f;
+	public static float fuelConsumeEachEntity = 2f;
 
-		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-
-		if(!canToolBeUsed(stack, pPlayer) || !haveFuel(stack))
-		{
-			return InteractionResultHolder.pass(stack);
-		}
-
-		//Switch Between On Block Mode/Normal Mode
-
-			boolean onBlockMode = stack.getOrCreateTag().getBoolean("onBlockMode");
-			stack.getOrCreateTag().putBoolean("onBlockMode", !onBlockMode);
-			if(onBlockMode)
-			{
-				pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_off"), true);
-			}
-			else
-			{
-				pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_on"), true);
-
-			}
-
-		return super.use(pLevel, pPlayer, pUsedHand);
-	}
+	public static float maxTemp = 100;
+	public static float minTemp = 0;
+	public static float tempDecreaseAmount = 0.2f;
+	public static float tempDecreaseAmountOverheated = tempDecreaseAmount / 2;
+	public static float tempIncreaseAmount = 2f;
 
 	@Override
 	public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected)
@@ -88,8 +73,43 @@ public class DrillsItem extends FuelDiggingItem
 				}
 				else
 				{
-					player.displayClientMessage(new TextComponent(new TranslatableComponent("message.lootdebugs.tool.temperature").getString() + " " +  ModUtils.ItemNBTHelper.getFloat(pStack, "temperature") + "/100"),true);
+					if(isOverheated(pStack))
+					{
+						player.displayClientMessage(new TextComponent(ChatFormatting.RED + new TranslatableComponent("message.lootdebugs.tool.temperature").getString() + " " + Math.round(ModUtils.ItemNBTHelper.getFloat(pStack, "temperature")) + "/" + maxTemp), true);
+					}
+					else {
+						player.displayClientMessage(new TextComponent(new TranslatableComponent("message.lootdebugs.tool.temperature").getString() + " " + Math.round(ModUtils.ItemNBTHelper.getFloat(pStack, "temperature")) + "/" + maxTemp), true);
+					}
 				}
+			}
+
+
+			//Temperature Handling
+			if(getTemp(pStack) >= maxTemp)
+			{
+				if(pLevel instanceof ServerLevel serverLevel && player instanceof ServerPlayer serverPlayer)
+				{
+					serverLevel.playSound(null, player.blockPosition(), ModSounds.DRILLS_OVERHEAT.get(), SoundSource.PLAYERS, 1, 1);
+					serverLevel.sendParticles(ParticleTypes.SMOKE, player.getX(), player.getY(), player.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+				}
+
+
+				ModUtils.ItemNBTHelper.putBoolean(pStack,"isoverheated", true);
+			}
+
+			if(isOverheated(pStack))
+			{
+				decreaseTemperature(pStack, tempDecreaseAmountOverheated);
+			}
+			else
+			{
+				decreaseTemperature(pStack, tempDecreaseAmount);
+
+			}
+
+			if(getTemp(pStack) <= minTemp)
+			{
+				ModUtils.ItemNBTHelper.putBoolean(pStack, "isoverheated", false);
 			}
 		}
 
@@ -97,9 +117,30 @@ public class DrillsItem extends FuelDiggingItem
 	}
 
 	@Override
-	public IClassData.Classes getDwarfClassToUse()
-	{
-		return IClassData.Classes.Driller;
+	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+
+		ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+
+		if(!canToolBeUsed(stack, pPlayer) || !canDrill(stack))
+		{
+			return InteractionResultHolder.pass(stack);
+		}
+
+		//Switch Between On Block Mode/Normal Mode
+
+		boolean onBlockMode = stack.getOrCreateTag().getBoolean("onBlockMode");
+		stack.getOrCreateTag().putBoolean("onBlockMode", !onBlockMode);
+		if(onBlockMode)
+		{
+			pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_off"), true);
+		}
+		else
+		{
+			pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.on_block_drill_mode_on"), true);
+
+		}
+
+		return super.use(pLevel, pPlayer, pUsedHand);
 	}
 
 	@Override
@@ -122,7 +163,7 @@ public class DrillsItem extends FuelDiggingItem
 			return false;
 		}
 
-		if(!haveFuel(stack) && !player.getAbilities().instabuild)
+		if(!canDrill(stack) && !player.getAbilities().instabuild)
 		{
 			return false;
 		}
@@ -158,16 +199,15 @@ public class DrillsItem extends FuelDiggingItem
 			if(!state.isAir() && state.getDestroyProgress(player, world, pos) != 0)
 			{
 
-				if (stack.getItem() instanceof DrillsItem && haveFuel(stack) && canToolBeUsed(stack, player)) {
+				if (stack.getItem() instanceof DrillsItem && canDrill(stack) && canToolBeUsed(stack, player)) {
 					ModUtils.ItemNBTHelper.rotateDrills(world, stack);//Play Anim
 				}
 
 				int xpDropEvent = ForgeHooks.onBlockBreakEvent(world, ((ServerPlayer)player).gameMode.getGameModeForPlayer(), (ServerPlayer)player, pos);
 				if(xpDropEvent < 0)
-				if(xpDropEvent < 0)
 					continue;
 
-				if(player.getAbilities().instabuild)//Creative Mode
+				if(player.isCreative())//Creative Mode
 				{
 					if(block.onDestroyedByPlayer(state, world, pos, player, false, state.getFluidState()))
 					{
@@ -177,7 +217,7 @@ public class DrillsItem extends FuelDiggingItem
 				else//Survival Mode
 				{
 					BlockEntity te = world.getBlockEntity(pos);
-					//implicitly damages head
+
 					stack.mineBlock(world, state, pos, player);
 					if(block.onDestroyedByPlayer(state, world, pos, player, true, state.getFluidState()))
 					{
@@ -187,6 +227,7 @@ public class DrillsItem extends FuelDiggingItem
 
 						if(world instanceof ServerLevel)
 							block.popExperience((ServerLevel)world, pos, xpDropEvent);
+
 					}
 				}
 
@@ -194,21 +235,9 @@ public class DrillsItem extends FuelDiggingItem
 				((ServerPlayer)player).connection.send(new ClientboundBlockUpdatePacket(world, pos));
 			}
 		}
+
 		return false;
 
-	}
-
-	public boolean canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
-	{
-		return ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse());
-	}
-
-	/**
-	 * only use when you already saved the playerclass into the stack == if you called canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
-	 */
-	public boolean canToolBeUsed(ItemStack pUsedStack)
-	{
-		return ModUtils.DwarfClasses.canItemBeUsed(pUsedStack, getDwarfClassToUse());
 	}
 
 	@Override
@@ -228,7 +257,8 @@ public class DrillsItem extends FuelDiggingItem
 				}
 				if(living instanceof Player player)
 				{
-					consumeFuel(player, FUEL, 1);//Consume fuel for every block which mined
+					consumeFuel(player, FUEL, fuelConsumeEachBlock);//Consume fuel for every block which mined
+					riseTemperature(stack, tempIncreaseAmount);
 				}
 			}
 		}
@@ -242,27 +272,53 @@ public class DrillsItem extends FuelDiggingItem
 //Calls after a block was broken by the drills
 	}
 
-	//When the drill cannot be used and/or has no fuel, the item is useless
-	@Override
-	public float getDestroySpeed(ItemStack pStack, BlockState pState) {
 
-		//If the block is breakable, the drills can be used and have fuel
-		if(haveFuel(pStack) && canToolBeUsed(pStack) && !isNoBreakableBlock(pState))
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity)
+	{
+		if(canDrill(stack))
 		{
-			return 30;//The drills can mine the block
+			consumeFuel(player,FUEL , fuelConsumeEachEntity);
+			entity.hurt(DamageSource.playerAttack(player), 4);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void riseTemperature(ItemStack pStack, float increaseAmount)
+	{
+		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
+		float newTemp = 0;
+		if(oldTemp + increaseAmount > maxTemp)
+		{
+			newTemp = maxTemp;
+		}
+		else
+		{
+			newTemp = oldTemp + increaseAmount;
 		}
 
-		//The drill cant drill
-		return 0;
+		ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", newTemp);
 	}
 
-	@Override
-	public Tier getHarvestLevel(ItemStack stack, @Nullable Player player) {
-		if(haveFuel(stack) && canToolBeUsed(stack))
-			return Tiers.NETHERITE;
-		return null;
-	}
+	public void decreaseTemperature(ItemStack pStack, float decreaseAmount)
+	{
+		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
+		float newTemp = 0;
+		if(oldTemp - decreaseAmount < minTemp)
+		{
+			newTemp = minTemp;
+		}
+		else
+		{
+			newTemp = oldTemp - decreaseAmount;
+		}
 
+		ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", newTemp);
+	}
 
 	//calculate the blocks
 	public ImmutableList<BlockPos> getExtraBlocksDug(Level world, Player player, HitResult rtr)
@@ -317,9 +373,37 @@ public class DrillsItem extends FuelDiggingItem
 		return b.build();
 	}
 
+	@Override
+	public float getDestroySpeed(ItemStack pStack, BlockState pState) {
+
+		//If the block is breakable, the drills can be used and have fuel
+		if(canDrill(pStack) && canToolBeUsed(pStack) && !isNoBreakableBlock(pState))
+		{
+			return 30;//The drills can mine the block
+		}
+
+		//The drill cant drill
+		return 0;
+	}
+
+	@Override
+	public Tier getHarvestLevel(ItemStack stack, @Nullable Player player) {
+		if(canDrill(stack) && canToolBeUsed(stack))
+			return Tiers.NETHERITE;
+		return null;
+	}
+
 	private boolean haveFuel(ItemStack pStack)
 	{
 		return ModUtils.ItemNBTHelper.getBoolean(pStack,"havefuelininventory");
+	}
+
+	private boolean canDrill(ItemStack pStack)
+	{
+		boolean haveFuel = haveFuel(pStack);
+		boolean isOverheated = ModUtils.ItemNBTHelper.getBoolean(pStack,"isoverheated");
+
+		return haveFuel && !isOverheated;
 	}
 
 	private boolean isNoBreakableBlock(BlockState block)
@@ -342,8 +426,22 @@ public class DrillsItem extends FuelDiggingItem
 	}
 
 	@Override
+	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+
+		pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.drills.on_block_drill_mode"));
+
+		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+	}
+
+	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
 		return true;
+	}
+
+
+	@Override
+	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
+		return false;
 	}
 
 	//Disable Reequipanim
@@ -352,53 +450,39 @@ public class DrillsItem extends FuelDiggingItem
 		return false;
 	}
 
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity)
+	public boolean canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
 	{
-		if(haveFuel(stack))
-		{
-			consumeFuel(player,FUEL , 2);
-			entity.hurt(DamageSource.playerAttack(player), 4);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return ModUtils.DwarfClasses.canPlayerUseItem(pUsedStack, pPlayer, getDwarfClassToUse());
 	}
 
-	@Override
-	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-
-		pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.drills.on_block_drill_mode"));
-
-		super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-	}
-
-	public void riseTemperature(ItemStack pStack)
+	/**
+	 * only use when you already saved the playerclass into the stack == if you called canToolBeUsed(ItemStack pUsedStack, Player pPlayer)
+	 */
+	public boolean canToolBeUsed(ItemStack pUsedStack)
 	{
-		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
-		ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", oldTemp + 0.1f);
+		return ModUtils.DwarfClasses.canItemBeUsed(pUsedStack, getDwarfClassToUse());
 	}
 
-	public void decreaseTemperature(ItemStack pStack)
-	{
-		float oldTemp = ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
-
-		if(oldTemp > 0)
-		{
-			ModUtils.ItemNBTHelper.putFloat(pStack, "temperature", oldTemp + 0.5f);
-		}
-
-	}
-
-	@Override
-	public boolean shouldCauseBlockBreakReset(ItemStack oldStack, ItemStack newStack) {
-		return false;
-	}
 
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
 		return 1;
 	}
+
+	@Override
+	public IClassData.Classes getDwarfClassToUse()
+	{
+		return IClassData.Classes.Driller;
+	}
+
+	public float getTemp(ItemStack pStack)
+	{
+		return ModUtils.ItemNBTHelper.getFloat(pStack, "temperature");
+	}
+
+	public boolean isOverheated(ItemStack pStack)
+	{
+		return ModUtils.ItemNBTHelper.getBoolean(pStack,"isoverheated");
+	}
+
 }

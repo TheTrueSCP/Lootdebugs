@@ -1,0 +1,12 @@
+{
+  "name": "Zipline",
+  "icon": "lootdebugs:zipline",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:zipline",
+      "text": "When the zipline is loaded with a $(l:ammo/zipline_ammo)round of ziplines$(), it can shoot an zipline across the cave. To hook onto the zipline, just interact with the pole or the hook/arrow. When you hooked on the zipline, you can change the direction with the $(k:lootdebugs.zipline.change_direction)$() key. If you want to remove the zipline, hit the $(l:tools/zipline_hook)zipline hook$() twice or mine the $(l:blocks/zipline_pole)zipline pole$()."
+    }
+    ]
+}

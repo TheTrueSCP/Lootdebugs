@@ -32,7 +32,7 @@ public class LloydRecipe implements Recipe<SimpleContainer>
 
     @Override
     public boolean matches(SimpleContainer pContainer, net.minecraft.world.level.Level pLevel) {
-        if(counts[0] == pContainer.getItem(1).getCount() && isEmeraldOrBarley(pContainer))//wenn emerald true, dann checke ob in container emerald und adserrum
+        if(counts[0] == pContainer.getItem(1).getCount() && isEmeraldOrBarley(pContainer, 0))//wenn emerald true, dann checke ob in container emerald und adserrum
         {
             if(counts[1] == pContainer.getItem(2).getCount())
             {
@@ -48,13 +48,17 @@ public class LloydRecipe implements Recipe<SimpleContainer>
         return false;
     }
 
-    private boolean isEmeraldOrBarley(SimpleContainer pContainer)
+    private boolean isEmeraldOrBarley(SimpleContainer pContainer, int countsSlot)
     {
         if(pContainer.getItem(1).is(Items.EMERALD) && emerald)
         {
             return true;
         }
-        else return pContainer.getItem(1).is(ModItems.BARLEY_BULB.get()) && !emerald;
+        else if(pContainer.getItem(1).is(ModItems.BARLEY_BULB.get()) && !emerald)
+        {
+            return true;
+        }
+        else return counts[countsSlot] == 0;
 
 
     }

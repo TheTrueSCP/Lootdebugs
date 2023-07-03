@@ -1,0 +1,16 @@
+{
+  "name": "The Equipment Table",
+  "icon": "lootdebugs:equipment_table",
+  "category": "lootdebugs:blocks",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Equipment Table is the most important thing in the mod. The table is shaped like a regular crafting table, but only in this table you are able to create all the Deep Rock Galactic themed items and blocks. Also, it can be used as normal crafting table."
+    },
+    {
+      "type": "patchouli:image",
+      "title": "The Equipment Table",
+      "images": ["lootdebugs:textures/lootdebugs_manual/blocks/equipment_table.png"]
+    }
+  ]
+}
