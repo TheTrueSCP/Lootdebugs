@@ -20,7 +20,8 @@ import net.the_goldbeards.lootdebugs.Block.GenBlocks.OreBlocks;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.RedSugarBlock;
 import net.the_goldbeards.lootdebugs.Block.GenBlocks.plants.*;
 import net.the_goldbeards.lootdebugs.Block.GlyphidShitBlock;
-import net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone.HearthstoneBlock;
+import net.the_goldbeards.lootdebugs.Block.OmmoranHeartstone.HeartstoneBlock;
+import net.the_goldbeards.lootdebugs.Block.OmmoranHeartstone.HeartstoneDefenderBlock;
 import net.the_goldbeards.lootdebugs.Block.TestBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.ZiplinePoleBlock;
@@ -173,10 +174,10 @@ public class ModBlocks {
 
 
     //Ommoran Hearhstone
-    public static final RegistryObject<Block> OMMORAN_HEARTHSTONE = registryBlock("ommoran_hearthstone",
-            () -> new HearthstoneBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().lightLevel((state) -> 30)), false);
+    public static final RegistryObject<Block> OMMORAN_HEARTSTONE = registryBlock("ommoran_hearthstone",
+            () -> new HeartstoneBlock(BlockBehaviour.Properties.of(Material.METAL).instabreak().lightLevel((state) -> 30)), false);
 
-    public static final RegistryObject<Block> OMMORAN_LAYER_4_INNERST = registryBlock("ommoran_layer_4_innerst",
+    public static final RegistryObject<Block> OMMORAN_LAYER_4 = registryBlock("ommoran_layer_4_innerst",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(100f).lightLevel((state) -> 12)), true);
 
     public static final RegistryObject<Block> OMMORAN_LAYER_3 = registryBlock("ommoran_layer_3",
@@ -185,11 +186,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> OMMORAN_LAYER_2 = registryBlock("ommoran_layer_2",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(200f).lightLevel((state) -> 9)), true);
 
-    public static final RegistryObject<Block> OMMORAN_LAYER_1_OUTERST = registryBlock("ommoran_layer_1_outerst",
+    public static final RegistryObject<Block> OMMORAN_LAYER_1 = registryBlock("ommoran_layer_1_outerst",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(300f).lightLevel((state) -> 6)),true);
 
-   // public static final RegistryObject<Block> HEARTHSTONE_DEFENDER = registryBlock("hearthstone_defender",
-       //     () -> new HearthstoneDefenderBlock(BlockBehaviour.Properties.of(Material.METAL)), false);
+    public static final RegistryObject<Block> OMMORAN_BED = registryBlock("ommoran_bed",
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(300f).lightLevel((state) -> 3)),true);
+
+    public static final RegistryObject<Block> HEARTSTONE_DEFENDER = registryBlock("ommoran_heartstone_defender",
+            () -> new HeartstoneDefenderBlock(BlockBehaviour.Properties.of(Material.METAL)), true);
 
     //TileEnititys
 

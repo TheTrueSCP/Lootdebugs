@@ -1,4 +1,4 @@
-package net.the_goldbeards.lootdebugs.Block.OmmoranHearthstone;
+package net.the_goldbeards.lootdebugs.Block.OmmoranHeartstone;
 
 
 import net.minecraft.core.BlockPos;
@@ -19,13 +19,13 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class HearthstoneBlock extends Block implements SimpleWaterloggedBlock {
+public class HeartstoneBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 
 
-    public HearthstoneBlock(Properties properties) {
+    public HeartstoneBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
     }

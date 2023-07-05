@@ -1,11 +1,11 @@
 {
   "name": "Ommoran Hearthstone Locator",
-  "icon": "lootdebugs:ommoran_hearthstone_locator",
+  "icon": "lootdebugs:ommoran_heartstone_locator",
   "category": "lootdebugs:tools",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "lootdebugs:ommoran_hearthstone_locator",
+      "item": "lootdebugs:ommoran_heartstone_locator",
       "text": "High tec device to collect and determine the location of the electromagnetic waves from the Ommoran Hearthstone."
     }
     ]

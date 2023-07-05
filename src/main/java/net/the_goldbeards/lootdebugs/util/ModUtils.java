@@ -20,10 +20,12 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipBlockStateContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.fluids.FluidStack;
@@ -33,6 +35,7 @@ import net.the_goldbeards.lootdebugs.mixin.accessors.client.PlayerControllerAcce
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.WorldRendererAccess;
 
 import java.util.Collection;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 
@@ -322,6 +325,16 @@ public class ModUtils
             }
         }
 
+        public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2)
+        {
+            return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), (blockState -> {return !blockState.isAir();}))).getType() == HitResult.Type.BLOCK;
+        }
+
+        public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> exceptions)
+        {
+            return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), exceptions)).getType() == HitResult.Type.BLOCK;
+        }
+
         public static boolean isBlockTag(Block block, TagKey<Block> tagKey)
         {
             return block.defaultBlockState().is(tagKey);
@@ -391,11 +404,6 @@ public class ModUtils
                 return IClassData.Classes.valueOf(playerClassWrapper.pClass);
             }
             return IClassData.Classes.LeafLover;
-        }
-
-        public static boolean canPlayerInteract(Player player)
-        {
-            return !canPlayerDo(getPlayerClass(player), IClassData.Classes.LeafLover);
         }
         
         public static boolean canPlayerUseItem(ItemStack pStack, Player pPlayer, IClassData.Classes dwarfClassToUse)

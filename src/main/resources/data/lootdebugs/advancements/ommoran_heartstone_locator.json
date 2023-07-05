@@ -5,10 +5,10 @@
       "item": "lootdebugs:ommoran_hearthstone_locator"
     },
     "title": {
-      "translate": "advancements.pickup.ommoran_hearthstone_locator.title"
+      "translate": "advancements.pickup.ommoran_heartstone_locator.title"
     },
     "description": {
-      "translate": "advancements.pickup.ommoran_hearthstone_locator.description"
+      "translate": "advancements.pickup.ommoran_heartstone_locator.description"
     },
     "frame": "task",
     "show_toast": true,

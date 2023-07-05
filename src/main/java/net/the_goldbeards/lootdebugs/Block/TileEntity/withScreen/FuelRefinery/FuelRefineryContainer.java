@@ -1,6 +1,5 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery;
 
-import net.minecraft.commands.arguments.coordinates.Coordinates;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -153,6 +152,21 @@ public class FuelRefineryContainer extends AbstractContainerMenu /*implements Wo
     public FluidStack getFluidStack()
     {
         return fluidStack;
+    }
+
+    public static int[] getLiquidSlots()
+    {
+        return new int[] {1, 2};
+    }
+
+    public static int[] getSolidSlots()
+    {
+        return new int[] {3, 4};
+    }
+
+    public static int getOutputSlot()
+    {
+        return 0;
     }
 }
 

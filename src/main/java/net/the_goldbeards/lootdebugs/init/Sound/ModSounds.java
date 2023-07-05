@@ -96,7 +96,7 @@ public class ModSounds
 
     public static final RegistryObject<SoundEvent> MARK_SOUND = registerSoundEvent("tools.ping.mark.sound");
 
-    public static final RegistryObject<SoundEvent> MARK_OMMORAN_HEARTHSTONE = registerSoundEvent("tools.ping.ommoran_hearthstone");
+    public static final RegistryObject<SoundEvent> MARK_OMMORAN_HEARTHSTONE = registerSoundEvent("tools.ping.ommoran_heartstone");
 
 
     //Ping Entitys
@@ -107,6 +107,11 @@ public class ModSounds
     public static final RegistryObject<SoundEvent> PING_LOOTBUG_PACIFIST = registerSoundEvent("tools.ping.lootbug.pacifist");
 
     public static final RegistryObject<SoundEvent> PING_MAGGOT = registerSoundEvent("tools.ping.maggot");
+
+
+    //Supply Pod
+    public static final RegistryObject<SoundEvent> SUPPLY_POD_IMPACT = registerSoundEvent("tools.supply_pod.impact");
+
 
 
 

@@ -1,11 +1,9 @@
-package net.the_goldbeards.lootdebugs.Entities.Mob.Layer;
+package net.the_goldbeards.lootdebugs.client.Render.Layer;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;

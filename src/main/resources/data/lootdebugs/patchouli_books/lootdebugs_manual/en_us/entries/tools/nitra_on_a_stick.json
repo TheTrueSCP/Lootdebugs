@@ -6,7 +6,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "lootdebugs:nitra_on_a_stick",
-      "text": "Can be used to ride $(l:creatures/lootbug)Lootbugs$() by sitting on them. Press Shift to toggle wall-climb"
+      "text": "Can be used to ride $(l:creatures/lootbug)Lootbugs$() by sitting on them. Press Shift to toggle wall-climb."
     }
     ]
 }

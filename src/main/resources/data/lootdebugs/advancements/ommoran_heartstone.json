@@ -5,10 +5,10 @@
       "item": "lootdebugs:ommoran_hearthstone"
     },
     "title": {
-      "translate": "advancements.pickup.ommoran_hearthstone.title"
+      "translate": "advancements.pickup.ommoran_heartstone.title"
     },
     "description": {
-      "translate": "advancements.pickup.ommoran_hearthstone.description"
+      "translate": "advancements.pickup.ommoran_heartstone.description"
     },
     "frame": "goal",
     "show_toast": true,

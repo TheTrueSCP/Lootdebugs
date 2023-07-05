@@ -1,8 +1,12 @@
 {
   "replace": false,
   "values": [
-    "lootdebugs:liquid_morkite_bucket",
-    "minecraft:lava_bucket"
+    {
+      "replace": false,
+      "values": [
+        "lootdebugs:liquid_morkite_bucket"
+      ]
+    }
 
   ]
 }

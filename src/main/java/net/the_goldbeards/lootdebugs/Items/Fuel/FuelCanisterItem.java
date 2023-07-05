@@ -7,7 +7,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -102,5 +101,14 @@ public class FuelCanisterItem extends Item
     @Override
     public int getItemStackLimit(ItemStack stack) {
         return 1;
+    }
+
+    public static ItemStack getFullFuel()
+    {
+        ItemStack fuel = new ItemStack(ModItems.FUEL_CANISTER.get(), 1);
+
+        ModUtils.ItemNBTHelper.putFloat(fuel, "fuelAmount", maxFuel);
+
+        return fuel;
     }
 }

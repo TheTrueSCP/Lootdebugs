@@ -1,0 +1,12 @@
+{
+  "name": "Turret Wrench",
+  "icon": "lootdebugs:wrench",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:wrench",
+      "text": "Can be used to dismantle the $(l:tools/turret)turret$() and the $(tools/resupply_pod)Resupply Pod$()."
+    }
+    ]
+}

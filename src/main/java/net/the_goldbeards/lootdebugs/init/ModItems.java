@@ -24,9 +24,10 @@ import net.the_goldbeards.lootdebugs.Items.Tools.CompanyStandardPickaxe.CompanyP
 import net.the_goldbeards.lootdebugs.Items.Tools.Drills.DrillsItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.FlareGun.FlareGunItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.GrapplingHook.GrapplingHookItem;
-import net.the_goldbeards.lootdebugs.Items.Tools.OmmoranHearthstoneLocator.OmmoranHearthstoneLocator;
+import net.the_goldbeards.lootdebugs.Items.Tools.OmmoranHearthstoneLocator.OmmoranHeartstoneLocator;
 import net.the_goldbeards.lootdebugs.Items.Tools.PingTool.PingItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.PlatformGun.PlatformGunItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.ResupplyCaller.ResupplyCallerItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeDetonatorItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.SatchelCharge.SatchelChargeItem;
 import net.the_goldbeards.lootdebugs.Items.Tools.Shield.ShieldItem;
@@ -54,14 +55,15 @@ public class ModItems
 public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
         () -> new Item(new Item.Properties()));
 
+
     public static final RegistryObject<Item> MINING_SHANTY = ITEMS.register("mining_shanty",
             () -> new RecordItem(15, ModSounds.MINING_SHANTY, new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> JET = ITEMS.register("jet",
             () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> OMMORAN_HEARTHSTONE_LOCATOR = ITEMS.register("ommoran_hearthstone_locator",
-            () -> new OmmoranHearthstoneLocator( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+    public static final RegistryObject<Item> OMMORAN_HEARTSTONE_LOCATOR = ITEMS.register("ommoran_heartstone_locator",
+            () -> new OmmoranHeartstoneLocator( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Ammo
     public static final RegistryObject<Item> PLATFORM_GUN_AMMO = ITEMS.register("platform_gun_ammo",
@@ -81,7 +83,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
     //Buckets
     public static final RegistryObject<Item> LIQUID_MORKITE_BUCKET = ITEMS.register("liquid_morkite_bucket",
-            () -> new BucketItem(ModFluids.LIQUID_MORKITE, new Item.Properties().craftRemainder(BUCKET).stacksTo(1).tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new BucketItem(ModFluids.LIQUID_MORKITE,new Item.Properties().craftRemainder(BUCKET).stacksTo(1).tab(ModGroup.LOOTDEBUGS_TAB)));
 
 
     //Nothing
@@ -129,8 +131,11 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
     public static final RegistryObject<Item> TURRET = ITEMS.register("turret",
             () -> new TurretItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
-    public static final RegistryObject<Item> TURRET_WRENCH = ITEMS.register("turret_wrench",
+    public static final RegistryObject<Item> WRENCH = ITEMS.register("wrench",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+
+    public static final RegistryObject<Item> RESUPPLY_CALLER = ITEMS.register("resupply_caller",
+            () -> new ResupplyCallerItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Toolparts
 
@@ -261,8 +266,8 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
 
     //Manual ItemBlock Registration
-    public static final RegistryObject<Item> OMM0RAN_HEARTHSTONE = ITEMS.register("ommoran_hearthstone",
-            () -> new BlockItem(ModBlocks.OMMORAN_HEARTHSTONE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+    public static final RegistryObject<Item> OMM0RAN_HEARTSTONE = ITEMS.register("ommoran_hearthstone",
+            () -> new BlockItem(ModBlocks.OMMORAN_HEARTSTONE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> GLYPHID_SHIT = ITEMS.register("glyphid_shit",
             () -> new BlockItem(ModBlocks.GLYPHID_SHIT.get(), new Item.Properties()));

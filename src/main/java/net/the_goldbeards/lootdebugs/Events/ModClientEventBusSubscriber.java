@@ -48,6 +48,7 @@ import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineRe
 import net.the_goldbeards.lootdebugs.client.Render.Projectiles.Zipline.ZiplineStringRender;
 import net.the_goldbeards.lootdebugs.client.Render.ResupplyDropRender;
 import net.the_goldbeards.lootdebugs.client.Render.TileEntities.ClassChangerRenderer;
+import net.the_goldbeards.lootdebugs.client.Render.TileEntities.HearthstoneDefenderRender;
 import net.the_goldbeards.lootdebugs.client.model.Armor.DrillerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.EngineerMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Armor.GunnerMK1ArmorModel;
@@ -55,6 +56,7 @@ import net.the_goldbeards.lootdebugs.client.model.Armor.ScoutMK1ArmorModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugModel;
 import net.the_goldbeards.lootdebugs.client.model.Entities.LootbugOldModel;
 import net.the_goldbeards.lootdebugs.client.model.Projectiles.*;
+import net.the_goldbeards.lootdebugs.client.model.ResupplyDropModel;
 import net.the_goldbeards.lootdebugs.client.model.TurretModel;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
@@ -112,6 +114,7 @@ public class ModClientEventBusSubscriber
         //TileEntities
 
         event.registerBlockEntityRenderer(ModTileEntities.CLASS_CHANGER_ENTITY.get(), ClassChangerRenderer::new);
+        event.registerBlockEntityRenderer(ModTileEntities.HEARTSTONE_DEFENDER_ENTITY.get(), HearthstoneDefenderRender::new);
 
     }
 
@@ -152,6 +155,8 @@ public class ModClientEventBusSubscriber
         event.registerLayerDefinition(ShieldEmitterModel.LAYER_LOCATION, ShieldEmitterModel::createBodyLayer);
 
         event.registerLayerDefinition(TurretModel.LAYER_LOCATION, TurretModel::createBodyLayer);
+
+        event.registerLayerDefinition(ResupplyDropModel.LAYER_LOCATION, ResupplyDropModel::createBodyLayer);
     }
 
 
@@ -179,7 +184,7 @@ public class ModClientEventBusSubscriber
     public static void registerItemProperties(final FMLClientSetupEvent event)
     {
 
-        ItemProperties.register(ModItems.OMMORAN_HEARTHSTONE_LOCATOR.get(), new ResourceLocation(LootDebugsMain.MOD_ID,"ommoran_angle"), new ClampedItemPropertyFunction()
+        ItemProperties.register(ModItems.OMMORAN_HEARTSTONE_LOCATOR.get(), new ResourceLocation(LootDebugsMain.MOD_ID,"ommoran_angle"), new ClampedItemPropertyFunction()
         {
             private final CompassWobble wobble = new CompassWobble();
 
@@ -305,14 +310,14 @@ public class ModClientEventBusSubscriber
     @SubscribeEvent
     public static void setRenderLayer(final FMLClientSetupEvent event)
     {
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_HEARTHSTONE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_HEARTSTONE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.SHIELD_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.SHIELD_EMITTER_BLOCK.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.NITRA_ORE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_1_OUTERST.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_1.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_2.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_3.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_4_INNERST.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.OMMORAN_LAYER_4.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.SATCHEL_CHARGE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.EQUIPMENT_TABLE.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.FUEL_REFINERY.get(), RenderType.translucent());

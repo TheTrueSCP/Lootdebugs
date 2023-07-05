@@ -20,17 +20,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class OmmoranHearthstoneLocator extends BasicAllClassItem
+public class OmmoranHeartstoneLocator extends BasicAllClassItem
 {
 
-    public OmmoranHearthstoneLocator(Properties pProperties) {
+    public OmmoranHeartstoneLocator(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
 
-        pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.ommoran_hearthstone_locator.research"));
+        pTooltipComponents.add(new TranslatableComponent("tooltip.lootdebugs.ommoran_heartstone_locator.research"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
@@ -87,7 +87,7 @@ public class OmmoranHearthstoneLocator extends BasicAllClassItem
         if (findBlockPos != null)
         {
 
-            if (!serverLevel.getBlockState(findBlockPos).is(ModBlocks.OMMORAN_HEARTHSTONE.get()))
+            if (!serverLevel.getBlockState(findBlockPos).is(ModBlocks.OMMORAN_HEARTSTONE.get()))
             {
                 for (int x = -50; x < 50; x++)
                 {
@@ -97,7 +97,7 @@ public class OmmoranHearthstoneLocator extends BasicAllClassItem
                         {
                             BlockPos locatePos = new BlockPos(findBlockPos.getX() + (x), findBlockPos.getY() + (y), findBlockPos.getZ() + (z));
 
-                            if (serverLevel.getBlockState(locatePos).getBlock() == ModBlocks.OMMORAN_HEARTHSTONE.get()) {
+                            if (serverLevel.getBlockState(locatePos).getBlock() == ModBlocks.OMMORAN_HEARTSTONE.get()) {
                                 return locatePos;
                             }
                         }

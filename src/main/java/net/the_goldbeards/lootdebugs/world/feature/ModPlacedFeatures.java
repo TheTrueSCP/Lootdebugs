@@ -16,7 +16,7 @@ public class ModPlacedFeatures
 
     //Ores
     public static final Holder<PlacedFeature> NITRA_ORE_PLACED = PlacementUtils.register("nitra_ore_placed",
-            ModConfiguredFeatures.NITRA_ORE, ModOrePlacement.commonOrePlacement(5,  // VeinsPerChunk
+            ModConfiguredFeatures.NITRA_ORE, ModOrePlacement.commonOrePlacement(7,  // VeinsPerChunk
                     HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(120))));
 
 

@@ -227,7 +227,7 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
         map.put(Blocks.POTTED_BROWN_MUSHROOM, ModSounds.PING_MUSHROOM.get());
         map.put(Blocks.POTTED_RED_MUSHROOM, ModSounds.PING_MUSHROOM.get());
 
-        map.put(ModBlocks.OMMORAN_HEARTHSTONE.get(), ModSounds.MARK_OMMORAN_HEARTHSTONE.get());
+        map.put(ModBlocks.OMMORAN_HEARTSTONE.get(), ModSounds.MARK_OMMORAN_HEARTHSTONE.get());
 
         return map;
     }

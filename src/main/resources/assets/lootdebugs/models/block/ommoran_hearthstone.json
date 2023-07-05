@@ -1,8 +1,8 @@
 {
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "lootdebugs:block/ommoran_hearthstone",
-		"particle": "lootdebugs:block/ommoran_hearthstone"
+		"0": "lootdebugs:block/ommoran_heartstone",
+		"particle": "lootdebugs:block/ommoran_heartstone"
 	},
 	"elements": [
 		{

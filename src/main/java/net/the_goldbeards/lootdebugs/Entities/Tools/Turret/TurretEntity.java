@@ -20,19 +20,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ClipBlockStateContext;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.levelgen.Column;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretAmmoItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
@@ -40,8 +34,11 @@ import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import static net.the_goldbeards.lootdebugs.util.ModUtils.BlockHelpers.isBlockBetween;
 
 public class TurretEntity extends Entity
 {
@@ -51,10 +48,13 @@ public class TurretEntity extends Entity
 
     private static final EntityDataAccessor<Integer> AMMO = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.INT);
 
+    @Nullable
+    private int targetID;
+
     private static final EntityDataAccessor<Optional<BlockPos>> TARGET_POS = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
     private static final EntityDataAccessor<Boolean> ATTACK_NEUTRAL = SynchedEntityData.defineId(TurretEntity.class, EntityDataSerializers.BOOLEAN);
 
-    private static int searchRadiusInBlocks = 40;
+    private static int searchRadiusInBlocks = 20;
     private static float shootCooldownTicks = 5;
 
     private Player owner;
@@ -340,7 +340,7 @@ public class TurretEntity extends Entity
         {
             ItemStack itemInHand = player.getMainHandItem();
 
-            if(ModUtils.DwarfClasses.canPlayerDo(ModUtils.DwarfClasses.getPlayerClass(player), IClassData.Classes.Engineer) && itemInHand.is(ModItems.TURRET_WRENCH.get()))
+            if(ModUtils.DwarfClasses.canPlayerDo(ModUtils.DwarfClasses.getPlayerClass(player), IClassData.Classes.Engineer) && itemInHand.is(ModItems.WRENCH.get()))
             {
                 this.dropTurret();
             }
@@ -381,11 +381,6 @@ public class TurretEntity extends Entity
         }
 
         return false;
-    }
-
-    private static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2)
-    {
-        return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), (blockState -> {return !blockState.isAir();}))).getType() == HitResult.Type.BLOCK;
     }
 
     public void addAmmo(int amount)

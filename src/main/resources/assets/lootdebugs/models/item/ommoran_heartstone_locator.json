@@ -1,0 +1,41 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "lootdebugs:item/locator_on"
+    },
+    "overrides": [
+        { "predicate": { "lootdebugs:ommoran_angle": 0.000000 }, "model": "lootdebugs:item/ommoran_heartstone_locator" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.015625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_side" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.046875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.078125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.109375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.140625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.171875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.203125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.234375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.265625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.296875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.328125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.359375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.390625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.421875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.453125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.484375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.515625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.546875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.578125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.609375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.640625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.671875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.703125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.734375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.765625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.796875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.828125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.859375 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.890625 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.921875 }, "model": "lootdebugs:item/ommoran_heartstone_locator_off" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.953125 }, "model": "lootdebugs:item/ommoran_heartstone_locator_side" },
+        { "predicate": { "lootdebugs:ommoran_angle": 0.984375 }, "model": "lootdebugs:item/ommoran_heartstone_locator" }
+    ]
+}

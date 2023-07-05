@@ -1,0 +1,12 @@
+{
+  "name": "Nitra on a Stick",
+  "icon": "lootdebugs:resupply_caller",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "lootdebugs:resupply_caller",
+      "text": "Can be used to call a $(tools/resupply_pod)Resupply Pod$() from the Space Rig."
+    }
+    ]
+}

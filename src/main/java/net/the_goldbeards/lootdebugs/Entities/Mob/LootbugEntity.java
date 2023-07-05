@@ -1,9 +1,6 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob;
 
-import com.mojang.serialization.Codec;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.entity.layers.SpiderEyesLayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -14,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,31 +23,24 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.Vec3;
-import net.the_goldbeards.lootdebugs.Entities.Mob.Goals.GoToWantedItemGoal;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Inventory.Inventory;
-import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import net.the_goldbeards.lootdebugs.util.ModTags;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
-import java.util.function.IntFunction;
-import java.util.stream.Collectors;
 
 public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideable {
 
@@ -132,7 +121,9 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
             }
 
             return InteractionResult.SUCCESS;
-        } else if (playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS)) {
+        }
+        else if (playerIn.getItemInHand(hand).is(ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS))
+        {
             inventory.add(new ItemStack(playerIn.getItemInHand(hand).getItem(), 1));
             playerIn.getItemInHand(hand).shrink(1);
             petting();

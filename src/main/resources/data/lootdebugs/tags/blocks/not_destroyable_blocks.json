@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bedrock",
+    "minecraft:obsidian",
+
+    "lootdebugs:ommoran_layer_1_outerst",
+    "lootdebugs:ommoran_layer_2",
+    "lootdebugs:ommoran_layer_3",
+    "lootdebugs:ommoran_layer_4_innerst"
+
+  ]
+}

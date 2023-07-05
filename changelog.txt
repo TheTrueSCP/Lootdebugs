@@ -653,3 +653,26 @@ Record:85 (Tech and Tools Update)
 -fixed equipment table shift-click handling
 -added gun turret rotation
 -made lootbug items glow
+-changed satchel charge ash to block
+-added supply drop
+-added supply drop item
+-fixed supply drop model
+-added supply drop drop
+-fixed supply drop sank in ground
+-added ommoran hearthstone defender
+-added ommoran hearthstone defender beam
+-fixed supply drop movement bug
+-Renamed turret_wrench to wrench
+-fixed nitra on a stick patchouli naming bug
+-fixed patchouli naming bug
+-added missing entity translations
+-renamed turret wrench to wrench
+-added supply pod to patchouli
+-fixed heartstone defender targeting
+-added ommoran bed
+-changed ommoran layer names
+-added golden lootbug eye glowing
+-added liquid morkite collector
+-added resupply give player health
+-fixed ommoran heartstone naming bug
+-fixed ommoran bed model bug

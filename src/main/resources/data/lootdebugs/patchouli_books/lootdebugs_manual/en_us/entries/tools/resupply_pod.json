@@ -1,0 +1,12 @@
+{
+  "name": "Resupply Pod",
+  "icon": "lootdebugs:resupply_caller",
+  "category": "lootdebugs:tools",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "lootdebugs:resupply_pod",
+      "text": "Can you provide wih ammo, cost Nitra and can be called with the $(tools/resupply_caller)REsupply Caller$(). Can be dismantled with a $(tools/wrench)Wrench$() with a chance to get some scrap back."
+    }
+    ]
+}

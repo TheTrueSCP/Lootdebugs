@@ -70,7 +70,7 @@ public class ModEntities {
             ENTITY_TYPES.register("turret", () -> EntityType.Builder.<TurretEntity>of(TurretEntity::new, MobCategory.MISC).sized(1.0f, 1.0f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "turret").toString()));
 
     public static final RegistryObject<EntityType<ResupplyDropEntity>> RESUPPLY_DROP_ENTITY =
-            ENTITY_TYPES.register("resupply_drop", () -> EntityType.Builder.<ResupplyDropEntity>of(ResupplyDropEntity::new, MobCategory.MISC).sized(1.0f, 2f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "resupply_drop").toString()));
+            ENTITY_TYPES.register("resupply_pod", () -> EntityType.Builder.<ResupplyDropEntity>of(ResupplyDropEntity::new, MobCategory.MISC).sized(1.0f, 2f).build(new ResourceLocation(LootDebugsMain.MOD_ID, "resupply_drop").toString()));
 
 
 

@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 
 public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
 {
-    private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(AbstractShootablePhysicsArrowLikeEntity.class, EntityDataSerializers.BYTE);
     @Nullable
     BlockState lastState;
     public boolean inGround;
@@ -74,7 +73,6 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     }
 
     protected void defineSynchedData() {
-        this.entityData.define(ID_FLAGS, (byte)0);
     }
 
 
@@ -201,7 +199,7 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
             this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
             float f = 0.99F;
             float f1 = 0.05F;
-            if (this.isInWater()) {
+            if (this.isInWater() && shouldInteractWithWater()) {
                 for(int j = 0; j < 4; ++j) {
                     float f2 = 0.25F;
                     this.level.addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
@@ -221,6 +219,11 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
         }
     }
 
+    protected boolean shouldInteractWithWater()
+    {
+        return true;
+    }
+
     protected boolean shouldFall() {
         return this.inGround && this.level.noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
     }
@@ -235,7 +238,10 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     }
 
 
-    public abstract void onDespawn();
+    protected void onDespawn()
+    {
+
+    }
     @Override
     protected void onHitEntity(EntityHitResult pResult)
     {
@@ -345,36 +351,15 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     }
 
 
-    private void setFlag(int p_36738_, boolean p_36739_) {
-        byte b0 = this.entityData.get(ID_FLAGS);
-        if (p_36739_) {
-            this.entityData.set(ID_FLAGS, (byte)(b0 | p_36738_));
-        } else {
-            this.entityData.set(ID_FLAGS, (byte)(b0 & ~p_36738_));
-        }
-
-    }
-
-    /**
-     * Whether the arrow has a stream of critical hit particles flying behind it.
-     */
-
-    /**
-     * Whether the arrow was shot from a crossbow.
-     */
-
     protected float getWaterInertia() {
         return 0.6F;
     }
 
-    /**
-     * Sets if this arrow can noClip
-     */
 
-    private void startFalling() {
+    protected void startFalling() {
         this.inGround = false;
         Vec3 vec3 = this.getDeltaMovement();
-        this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
+        this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * getFallSpeedModifier()), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
         this.life = 0;
     }
 
@@ -384,10 +369,16 @@ public abstract class AbstractShootablePhysicsArrowLikeEntity extends Projectile
     public boolean isNoPhysics() {
         if (!this.level.isClientSide) {
             return this.noPhysics;
-        } else {
-            return (this.entityData.get(ID_FLAGS) & 2) != 0;
         }
+        return false;
     }
+
+    protected float getFallSpeedModifier()
+    {
+        return 0.05f;
+    }
+
+
 
     @Override
     public boolean isPickable() {

@@ -21,6 +21,7 @@ import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefiner
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncFluidPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncItemStackPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.Lloyd.LloydBrewBeerPacket;
+import net.the_goldbeards.lootdebugs.Network.TileEntity.OmmoranHeartstoneDefender.OmmoranHeartstoneDefenderEntitySyncPacket;
 
 public class PacketHandler
 {
@@ -80,6 +81,8 @@ public class PacketHandler
 
 
         net.messageBuilder(LloydBrewBeerPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(LloydBrewBeerPacket::decode).encoder(LloydBrewBeerPacket::encode).consumer(LloydBrewBeerPacket::handle).add();
+
+        net.messageBuilder(OmmoranHeartstoneDefenderEntitySyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT).decoder(OmmoranHeartstoneDefenderEntitySyncPacket::decode).encoder(OmmoranHeartstoneDefenderEntitySyncPacket::encode).consumer(OmmoranHeartstoneDefenderEntitySyncPacket::handle).add();
 
 
         return id;

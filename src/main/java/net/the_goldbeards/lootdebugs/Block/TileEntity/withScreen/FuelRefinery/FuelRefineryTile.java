@@ -28,6 +28,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.LiquidMorkiteCollector.IFuelCountRefinery;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncFluidPacket;
 import net.the_goldbeards.lootdebugs.Network.TileEntity.FuelRefinery.FuelRefinerySyncItemStackPacket;
@@ -86,7 +87,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
     }
 
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(5)
+    public final ItemStackHandler itemHandler = new ItemStackHandler(5)
     {
         @Override
         protected void onContentsChanged(int slot)
@@ -240,9 +241,8 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
         for(int i = 1; i < fuelRefineryTile.itemHandler.getSlots(); i++)
         {
-           if(itemFluidAmount().get(fuelRefineryTile.itemHandler.getStackInSlot(i).getItem()) != null)
-           {
-               int fuelAmountSingle = itemFluidAmount().get(fuelRefineryTile.itemHandler.getStackInSlot(i).getItem());
+
+               int fuelAmountSingle = getFuelAmountSingle(fuelRefineryTile.itemHandler.getStackInSlot(i));
 
                int removeItemCount = 0;
 
@@ -262,7 +262,6 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
                {
                    fuelRefineryTile.itemHandler.setStackInSlot(i, new ItemStack(Items.BUCKET, 1));
                }
-           }
         }
 
         fuelRefineryTile.fluid_tank.fill(new FluidStack(ModFluids.FUEL.get(), finalFuel), IFluidHandler.FluidAction.EXECUTE);
@@ -270,8 +269,6 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
 
     public static Map<Item, Integer> itemFluidAmount() {
         Map<Item, Integer> fuelAmountItems = Maps.newLinkedHashMap();
-
-        fuelAmountItems.put(ModItems.LIQUID_MORKITE_BUCKET.get(), (int) FuelCanisterItem.maxFuel);
 
         fuelAmountItems.put(Items.COAL, 16);
         fuelAmountItems.put(Items.COAL_BLOCK, 160);
@@ -297,9 +294,9 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
     //Canister
     public static void fillCanister(FuelRefineryTile fuelRefineryTile)//Call via Button
     {
-            if(fuelRefineryTile.itemHandler.getStackInSlot(0).is(ModItems.FUEL_CANISTER.get()))
+            if(fuelRefineryTile.itemHandler.getStackInSlot(FuelRefineryContainer.getOutputSlot()).is(ModItems.FUEL_CANISTER.get()))
             {
-                ItemStack fuel = fuelRefineryTile.itemHandler.getStackInSlot(0);
+                ItemStack fuel = fuelRefineryTile.itemHandler.getStackInSlot(FuelRefineryContainer.getOutputSlot());
 
                 if(ModUtils.ItemNBTHelper.hasKey(fuel, "fuelAmount"))
                 {
@@ -314,6 +311,20 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
                 }
 
             }
+    }
+
+    private static int getFuelAmountSingle(ItemStack pStack)
+    {
+        if(itemFluidAmount().get(pStack.getItem()) != null)
+        {
+            return itemFluidAmount().get(pStack.getItem());
+        }
+        else if(pStack.getItem() instanceof IFuelCountRefinery iFuelCountRefinery)
+        {
+            return iFuelCountRefinery.getFuelCountRefinery(pStack);
+        }
+
+        return 0;
     }
 
     public void setFluid(FluidStack stack) {

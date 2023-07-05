@@ -1,11 +1,8 @@
 package net.the_goldbeards.lootdebugs.capability.Class;
 
-import com.mojang.serialization.Codec;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.animal.horse.Llama;
-import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -15,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.function.IntFunction;
 
 public class IClassData implements ICapabilitySerializable<CompoundTag>
 {
@@ -116,7 +112,18 @@ public class IClassData implements ICapabilitySerializable<CompoundTag>
     @Override
     public void deserializeNBT(CompoundTag nbt)
     {
-    setDwarfClass(Classes.valueOf(nbt.getString("dwarfClass")));
+        Classes readDwarfClass;
+        try
+        {
+            readDwarfClass = Classes.valueOf(nbt.getString("dwarfClass"));
+        }
+        catch (IllegalArgumentException ignored)
+        {
+            readDwarfClass = Classes.LeafLover;
+        }
+
+
+    setDwarfClass(readDwarfClass);
     setDwarfChangeCooldown(nbt.getInt("dwarfChangeCooldown"));
 
     }

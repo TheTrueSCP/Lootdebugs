@@ -15,13 +15,14 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-public class EquipmentTableVanillaCraftingImporterRecipe implements Recipe<SimpleContainer>{
+public class EquipmentTableRecipe_EXPERIMENTAL implements Recipe<SimpleContainer>{
 
 
     static int MAX_WIDTH = 3;
@@ -32,21 +33,22 @@ public class EquipmentTableVanillaCraftingImporterRecipe implements Recipe<Simpl
     final NonNullList<Ingredient> recipeItems;
     final ItemStack result;
     private final ResourceLocation id;
+
     final String group;
 
-    public EquipmentTableVanillaCraftingImporterRecipe(ResourceLocation pId, String pGroup, int pWidth, int pHeight, NonNullList<Ingredient> pRecipeItems, ItemStack pResult) {
+    public EquipmentTableRecipe_EXPERIMENTAL(ResourceLocation pId, String pGroup, int pWidth, int pHeight, NonNullList<Ingredient> pRecipeItems, ItemStack pResult) {
         this.id = pId;
-        this.group = pGroup;
         this.width = pWidth;
         this.height = pHeight;
         this.recipeItems = pRecipeItems;
         this.result = pResult;
+        this.group = pGroup;
     }
 
-    public static class Type implements RecipeType<EquipmentTableVanillaCraftingImporterRecipe> {
+    public static class Type implements RecipeType<EquipmentTableRecipe_EXPERIMENTAL> {
         private Type() { }
         public static final Type INSTANCE = new Type();
-        public static final String ID = "crafting_shaped";
+        public static final String ID = "equipment_crafting";
     }
 
 
@@ -133,6 +135,72 @@ public class EquipmentTableVanillaCraftingImporterRecipe implements Recipe<Simpl
     public int getHeight() {
         return this.height;
     }
+
+
+    public static class Serializer implements RecipeSerializer<EquipmentTableRecipe_EXPERIMENTAL> {
+        private static final ResourceLocation ID = new ResourceLocation(LootDebugsMain.MOD_ID, "equipment_crafting");
+
+        public static final EquipmentTableRecipe_EXPERIMENTAL.Serializer INSTANCE = new EquipmentTableRecipe_EXPERIMENTAL.Serializer();
+
+        public EquipmentTableRecipe_EXPERIMENTAL fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
+            String s = GsonHelper.getAsString(pJson, "group", "");
+            Map<String, Ingredient> map = EquipmentTableRecipe_EXPERIMENTAL.keyFromJson(GsonHelper.getAsJsonObject(pJson, "key"));
+            String[] astring = EquipmentTableRecipe_EXPERIMENTAL.shrink(EquipmentTableRecipe_EXPERIMENTAL.patternFromJson(GsonHelper.getAsJsonArray(pJson, "pattern")));
+            int i = astring[0].length();
+            int j = astring.length;
+            NonNullList<Ingredient> nonnulllist = EquipmentTableRecipe_EXPERIMENTAL.dissolvePattern(astring, map, i, j);
+            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
+            return new EquipmentTableRecipe_EXPERIMENTAL(pRecipeId, s, i, j, nonnulllist, itemstack);
+        }
+
+        public EquipmentTableRecipe_EXPERIMENTAL fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+            int i = pBuffer.readVarInt();
+            int j = pBuffer.readVarInt();
+            String s = pBuffer.readUtf();
+            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i * j, Ingredient.EMPTY);
+
+            for (int k = 0; k < nonnulllist.size(); ++k) {
+                nonnulllist.set(k, Ingredient.fromNetwork(pBuffer));
+            }
+
+            ItemStack itemstack = pBuffer.readItem();
+            return new EquipmentTableRecipe_EXPERIMENTAL(pRecipeId, s, i, j, nonnulllist, itemstack);
+        }
+
+        public void toNetwork(FriendlyByteBuf pBuffer, EquipmentTableRecipe_EXPERIMENTAL pRecipe) {
+            pBuffer.writeVarInt(pRecipe.width);
+            pBuffer.writeVarInt(pRecipe.height);
+
+            for (Ingredient ingredient : pRecipe.recipeItems) {
+                ingredient.toNetwork(pBuffer);
+            }
+            pBuffer.writeUtf(pRecipe.group);
+            pBuffer.writeItem(pRecipe.result);
+        }
+
+
+        @Override
+        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
+            return INSTANCE;
+        }
+
+        @Nullable
+        @Override
+        public ResourceLocation getRegistryName() {
+            return ID;
+        }
+
+        @Override
+        public Class<RecipeSerializer<?>> getRegistryType() {
+            return Serializer.castClass(RecipeSerializer.class);
+        }
+
+        @SuppressWarnings("unchecked") // Need this wrapper, because generics
+        private static <G> Class<G> castClass(Class<?> cls) {
+            return (Class<G>)cls;
+        }
+    }
+
 
 
     static NonNullList<Ingredient> dissolvePattern(String[] pPattern, Map<String, Ingredient> pKeys, int pPatternWidth, int pPatternHeight) {
@@ -265,70 +333,5 @@ public class EquipmentTableVanillaCraftingImporterRecipe implements Recipe<Simpl
 
         map.put(" ", Ingredient.EMPTY);
         return map;
-    }
-
-    public static class Serializer implements RecipeSerializer<EquipmentTableVanillaCraftingImporterRecipe> {
-        private static final ResourceLocation ID = new ResourceLocation("minecraft", "crafting_shaped");
-
-        public static final EquipmentTableVanillaCraftingImporterRecipe.Serializer INSTANCE = new EquipmentTableVanillaCraftingImporterRecipe.Serializer();
-
-        public EquipmentTableVanillaCraftingImporterRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
-            String s = GsonHelper.getAsString(pJson, "group", "");
-            Map<String, Ingredient> map = EquipmentTableVanillaCraftingImporterRecipe.keyFromJson(GsonHelper.getAsJsonObject(pJson, "key"));
-            String[] astring = EquipmentTableVanillaCraftingImporterRecipe.shrink(EquipmentTableVanillaCraftingImporterRecipe.patternFromJson(GsonHelper.getAsJsonArray(pJson, "pattern")));
-            int i = astring[0].length();
-            int j = astring.length;
-            NonNullList<Ingredient> nonnulllist = EquipmentTableVanillaCraftingImporterRecipe.dissolvePattern(astring, map, i, j);
-            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-            return new EquipmentTableVanillaCraftingImporterRecipe(pRecipeId, s, i, j, nonnulllist, itemstack);
-        }
-
-        public EquipmentTableVanillaCraftingImporterRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
-            int i = pBuffer.readVarInt();
-            int j = pBuffer.readVarInt();
-            String s = pBuffer.readUtf();
-            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i * j, Ingredient.EMPTY);
-
-            for (int k = 0; k < nonnulllist.size(); ++k) {
-                nonnulllist.set(k, Ingredient.fromNetwork(pBuffer));
-            }
-
-            ItemStack itemstack = pBuffer.readItem();
-            return new EquipmentTableVanillaCraftingImporterRecipe(pRecipeId, s, i, j, nonnulllist, itemstack);
-        }
-
-        public void toNetwork(FriendlyByteBuf pBuffer, EquipmentTableVanillaCraftingImporterRecipe pRecipe) {
-            pBuffer.writeVarInt(pRecipe.width);
-            pBuffer.writeVarInt(pRecipe.height);
-            pBuffer.writeUtf(pRecipe.group);
-
-            for (Ingredient ingredient : pRecipe.recipeItems) {
-                ingredient.toNetwork(pBuffer);
-            }
-
-            pBuffer.writeItem(pRecipe.result);
-        }
-
-
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
-            return INSTANCE;
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getRegistryName() {
-            return ID;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType() {
-            return Serializer.castClass(RecipeSerializer.class);
-        }
-
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
-        }
     }
 }

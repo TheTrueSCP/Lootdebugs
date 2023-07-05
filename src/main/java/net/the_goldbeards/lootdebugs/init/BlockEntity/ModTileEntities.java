@@ -5,6 +5,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.HeartstoneDefender.HeartstoneDefenderTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.SatchelCharge.SatchelChargeTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldBlockTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Shield.ShieldEmitterBlockTile;
@@ -54,9 +55,9 @@ public class ModTileEntities
             BLOCK_ENTITYS.register("zipline_pole_entity", () ->
                     BlockEntityType.Builder.of(ZiplinePoleTile::new, ModBlocks.ZIPLINE_POLE_BLOCK.get()).build(null));
 
-    // public static final RegistryObject<BlockEntityType<HearhstoneDefenderTile>> HEARTHSTONE_DEFENDER_ENTITY =
-    //        BLOCK_ENTITYS.register("hearthstone_defender_entity", () ->
-    //                BlockEntityType.Builder.of(HearhstoneDefenderTile::new, ModBlocks.HEARTHSTONE_DEFENDER.get()).build(null));
+     public static final RegistryObject<BlockEntityType<HeartstoneDefenderTile>> HEARTSTONE_DEFENDER_ENTITY =
+            BLOCK_ENTITYS.register("heartstone_defender_entity", () ->
+                    BlockEntityType.Builder.of(HeartstoneDefenderTile::new, ModBlocks.HEARTSTONE_DEFENDER.get()).build(null));
 
     public static void register (IEventBus eventBus)
     {

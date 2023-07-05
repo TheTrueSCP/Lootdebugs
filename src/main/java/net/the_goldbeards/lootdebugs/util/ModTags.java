@@ -22,6 +22,7 @@ public class ModTags
 
         public static final TagKey<Block> GOLD_BLOCK_REPLACEABLE_BLOCKS = createTag("gold_block_replaceable_blocks");
 
+        public static final TagKey<Block> NOT_DESTROYABLE_BLOCKS = createTag("not_destroyable_blocks");
 
 
         private static TagKey<Block> createTag(String name)

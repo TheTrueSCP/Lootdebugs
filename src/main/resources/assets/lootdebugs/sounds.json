@@ -378,14 +378,14 @@
     ]
   },
 
-  "tools.ping.ommoran_hearthstone": {
-    "subtitle": "tools.subtitle.ping.ommoran_hearthstone",
+  "tools.ping.ommoran_heartstone": {
+    "subtitle": "tools.subtitle.ping.ommoran_heartstone",
     "sounds": [
-      "lootdebugs:tools/ping/ommoran_hearthstone/ommoran_hearthstone_01",
-      "lootdebugs:tools/ping/ommoran_hearthstone/ommoran_hearthstone_02",
-      "lootdebugs:tools/ping/ommoran_hearthstone/ommoran_hearthstone_03",
-      "lootdebugs:tools/ping/ommoran_hearthstone/ommoran_hearthstone_04",
-      "lootdebugs:tools/ping/ommoran_hearthstone/ommoran_hearthstone_05"
+      "lootdebugs:tools/ping/ommoran_heartstone/ommoran_heartstone_01",
+      "lootdebugs:tools/ping/ommoran_heartstone/ommoran_heartstone_02",
+      "lootdebugs:tools/ping/ommoran_heartstone/ommoran_heartstone_03",
+      "lootdebugs:tools/ping/ommoran_heartstone/ommoran_heartstone_04",
+      "lootdebugs:tools/ping/ommoran_heartstone/ommoran_heartstone_05"
     ]
   },
 
@@ -422,6 +422,22 @@
     "subtitle": "tools.subtitle.foam.harden",
     "sounds": [
       "lootdebugs:tools/platform_gun/plascrete_foam_harden"
+    ]
+  },
+
+  "tools.supply_pod.ambient": {
+    "subtitle": "tools.subtitle.supply_pod.ambient",
+    "sounds": [
+      "lootdebugs:tools/supply_pod/supply_pod_ambient"
+    ]
+  },
+  "tools.supply_pod.impact": {
+    "subtitle": "tools.subtitle.supply_pod.impact",
+    "sounds": [
+      "lootdebugs:tools/supply_pod/impact/supply_pod_impact_01",
+      "lootdebugs:tools/supply_pod/impact/supply_pod_impact_02",
+      "lootdebugs:tools/supply_pod/impact/supply_pod_impact_03",
+      "lootdebugs:tools/supply_pod/impact/supply_pod_impact_04"
     ]
   }
 }
