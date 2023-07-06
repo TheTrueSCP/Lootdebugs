@@ -44,7 +44,7 @@ public abstract class BeerItem extends BlockItem
         {
           addEffects(entityLiving);
           if(addDrunkness()) {//If add drunknes, add drunkness
-              addDrunkness(entityLiving);
+              addDrunkness(entityLiving, stack);
           }
         }
         if (entityLiving instanceof ServerPlayer) {
@@ -75,7 +75,7 @@ public abstract class BeerItem extends BlockItem
         }
         return livingEntity.getEffect(ModEffects.DRUNKNESS.get()).getAmplifier();//instead, return the Amp
     }
-    public void addDrunkness(LivingEntity entityLiving)
+    public void addDrunkness(LivingEntity entityLiving, ItemStack pStack)
     {
         entityLiving.addEffect(new MobEffectInstance(ModEffects.DRUNKNESS.get(),6000,getDrunkenAmplifier(entityLiving) + 1));//Add drunkness and increase the amp for confusion
     }

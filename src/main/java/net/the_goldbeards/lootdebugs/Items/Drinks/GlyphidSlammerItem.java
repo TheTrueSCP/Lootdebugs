@@ -3,6 +3,7 @@ package net.the_goldbeards.lootdebugs.Items.Drinks;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 public class GlyphidSlammerItem extends BeerItem
@@ -20,10 +21,10 @@ public class GlyphidSlammerItem extends BeerItem
     }
 
     @Override
-    public void addDrunkness(LivingEntity entityLiving) {
+    public void addDrunkness(LivingEntity entityLiving, ItemStack pStack) {
 
         entityLiving.addEffect(new MobEffectInstance(MobEffects.CONFUSION,6000,getDrunkenAmplifier(entityLiving) + 2));
 
-        super.addDrunkness(entityLiving);
+        super.addDrunkness(entityLiving, pStack);
     }
 }

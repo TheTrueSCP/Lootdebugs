@@ -394,6 +394,19 @@ public class ModUtils
             }
         }
 
+        public static boolean isOnlyPlayerClass(Player pPlayer, IClassData.Classes classes)
+        {
+
+            var playerClassWrapper = new Object(){String pClass;};
+
+            pPlayer.getCapability(ClassDataCap.CLASS_DATA).ifPresent(classCap ->
+            {
+                playerClassWrapper.pClass = classCap.getDwarfClass().name();
+            });
+
+            return IClassData.Classes.valueOf(playerClassWrapper.pClass) == classes;
+        }
+
         public static IClassData.Classes getPlayerClass(Player player)
         {
             var playerClassWrapper = new Object(){String pClass;};

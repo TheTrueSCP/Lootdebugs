@@ -11,7 +11,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": " $(l)MISSION I$()$(br2)So, welcome to your first mission! You mission is to get some minerals. At least $(br)$(#ceae99)$(list1)5 iron ores$() $(#f9b600)$(list1)2 raw bismor$() $(#cfd517)$(list1)1 raw cropper$(). $(br2)To find these Minerals, $(o)Deep Rock Galactic$() provides you with $(l:minerals)information$() where to find all these minerals."
+      "text": " $(l)MISSION I$()$(br2)So, welcome to your first mission! You mission is to get some minerals. At least $(br)$(#ceae99)$(list1)5 iron ores$() $(#f9b600)$(list1)2 raw bismor$() $(#cfd517)$(list1)1 raw cropper$(). $(br2)To find these Minerals, $(o)Deep Rock Galactic$() provides you with $(l:minerals_and_resources)information$() where to find all these minerals."
     },
     {
       "type": "patchouli:text",

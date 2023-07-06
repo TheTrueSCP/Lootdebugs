@@ -682,3 +682,5 @@ Record:85 (Tech and Tools Update)
 -added turret standby fucntion
 -added turret targeting saves over item drop
 -fixed turret menu item not rendering
+-added leaf lover special immunity to karl
+-added lootbugs touch when karl drinks a blackout stout
