@@ -685,3 +685,5 @@ Record:85 (Tech and Tools Update)
 -added leaf lover special immunity to karl
 -added lootbugs touch when karl drinks a blackout stout
 -fixed ommoran heartstone lcoator
+
+example?
