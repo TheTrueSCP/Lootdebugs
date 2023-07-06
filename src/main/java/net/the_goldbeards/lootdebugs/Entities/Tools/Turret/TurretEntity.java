@@ -159,7 +159,7 @@ public class TurretEntity extends Entity
                         BulletEntity bulletEntity = new BulletEntity(level);
                         bulletEntity.setPos(this.position().x, this.position().y + 1f, this.position().z);
 
-                        Vec3 shootVec = new Vec3((bulletEntity.getX() - target.getX()) * -1, (bulletEntity.getY() - target.getY()) * -1, (bulletEntity.getZ() - target.getZ()) * -1);//calculate Movement from Entity to hook
+                        Vec3 shootVec = new Vec3((bulletEntity.getX() - target.getX()) * -1, (bulletEntity.getY() - target.blockPosition().getY()) * -1, (bulletEntity.getZ() - target.getZ()) * -1);//calculate Movement from Entity to hook
 
                         level.addFreshEntity(bulletEntity);
 
@@ -176,6 +176,11 @@ public class TurretEntity extends Entity
                     setTargetID(0);
                 }
             }
+            else
+            {
+                this.setCustomNameVisible(false);
+            }
+
 
             if(shootCooldown > 0)
             {
@@ -222,6 +227,12 @@ public class TurretEntity extends Entity
     public float getTurretXRot()
     {
         Entity target = level.getEntity(getTargetID());
+
+        if(getTargetingConditions() == null)
+        {
+            return (float) Math.toRadians(45);
+        }
+
         if(target != null && canShoot(level, this))
         {
             if(!isBlockBetween(level, this.eyeBlockPosition(), target.blockPosition().above()))
@@ -384,7 +395,7 @@ public class TurretEntity extends Entity
         Entity target = level.getEntity(turret.getTargetID());
         if (target != null)
         {
-            return turret.getAmmo() >= 1 && !isBlockBetween(level, target.blockPosition().above(), turret.eyeBlockPosition());
+            return turret.getAmmo() >= 1 && !isBlockBetween(level, target.blockPosition(), turret.eyeBlockPosition());
         }
 
         return false;

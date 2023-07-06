@@ -686,3 +686,6 @@ Record:85 (Tech and Tools Update)
 -added lootbugs touch when karl drinks a blackout stout
 -fixed ommoran heartstone lcoator
 -changed ommoran heartstone
+-added turret targeting settings screen
+-added turret barrel looks down if the turret is offline
+-fixed turret shooting at entity which cannot be reached
