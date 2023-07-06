@@ -60,6 +60,16 @@ public class OmmoranHeartstoneLocator extends BasicAllClassItem
                         player.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.locator.no_ommoran"), true);
                     }
                 }
+                else
+                {
+                    if(!pLevel.getBlockState(NbtUtils.readBlockPos(pStack.getTag().getCompound("OmmoranPos"))).is(ModBlocks.OMMORAN_HEARTSTONE.get()))
+                    {
+                        if(pEntity instanceof Player player)
+                        {
+                            player.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.locator.no_ommoran"), true);
+                        }
+                    }
+                }
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pItemSlot, pIsSelected);
