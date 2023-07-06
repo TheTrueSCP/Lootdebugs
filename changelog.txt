@@ -689,3 +689,4 @@ Record:85 (Tech and Tools Update)
 -added turret targeting settings screen
 -added turret barrel looks down if the turret is offline
 -fixed turret shooting at entity which cannot be reached
+-added turret skip entities which cant be reached

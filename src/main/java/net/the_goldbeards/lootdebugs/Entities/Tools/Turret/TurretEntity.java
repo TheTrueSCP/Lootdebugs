@@ -69,9 +69,14 @@ public class TurretEntity extends Entity
         return p_30636_ instanceof Mob;
     };
 
-    private static final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE);
+    private final Predicate<LivingEntity> CAN_REACH_PREDECATE = (livingEntity) -> {
+        return !isBlockBetween(livingEntity.level, livingEntity.blockPosition(), this.blockPosition());
+    };
 
-    private static final TargetingConditions ENEMY_AND_NEUTRAL_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_AND_NEUTRAL_PREDECATE);
+
+    private final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE).selector(CAN_REACH_PREDECATE);
+
+    private final TargetingConditions ENEMY_AND_NEUTRAL_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_AND_NEUTRAL_PREDECATE).selector(CAN_REACH_PREDECATE);
 
     public TurretEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -235,7 +240,7 @@ public class TurretEntity extends Entity
 
         if(target != null && canShoot(level, this))
         {
-            if(!isBlockBetween(level, this.eyeBlockPosition(), target.blockPosition().above()))
+            if(!isBlockBetween(level, this.eyeBlockPosition(), target.blockPosition()))
             {
 
                 double radian = Math.toRadians(calculateXAngleFromBlockPos(this.position(), target.position()));
