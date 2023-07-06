@@ -220,7 +220,7 @@
     "message.lootdebugs.block.old.lloyd": "Old lloyd block, mine and replace it to fix it",
 
     "message.lootdebugs.tool.locator.resetted" : "Resetted locator, searching for new Ommoran Heartstone...",
-    "message.lootdebugs.tool.locator.no_ommoran" : "Could not find an Ommoran. Right click at a different location and try again",
+    "message.lootdebugs.tool.locator.no_ommoran" : "Could not find an Ommoran Heartstone. Right click at a different location and try again",
 
     "message.lootdebugs.tool.wrong_class_0": "Wrong Class, you must be",
     "message.lootdebugs.tool.wrong_class_1": "to use this tool",
