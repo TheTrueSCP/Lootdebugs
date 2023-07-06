@@ -29,6 +29,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.fluids.FluidStack;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.PlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.PlayerControllerAccess;
@@ -349,6 +351,9 @@ public class ModUtils
             {
                classCap.setDwarfClass(newClass);
             });
+
+            PacketHandler.sendToClients(new PlayerClassSyncPacket(newClass));
+
         }
 
         public static boolean isPlayerClass(Player pPlayer, IClassData.Classes dwarfClassToUse)

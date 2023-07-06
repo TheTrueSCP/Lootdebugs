@@ -1,12 +1,6 @@
 {
   "replace": false,
   "values": [
-    {
-      "replace": false,
-      "values": [
-        "lootdebugs:liquid_morkite_bucket"
-      ]
-    }
-
+    "lootdebugs:liquid_morkite_bucket"
   ]
 }

@@ -327,6 +327,7 @@ public class FuelRefineryTile extends BlockEntity implements MenuProvider {
         return 0;
     }
 
+
     public void setFluid(FluidStack stack) {
         this.fluid_tank.setFluid(stack);
     }

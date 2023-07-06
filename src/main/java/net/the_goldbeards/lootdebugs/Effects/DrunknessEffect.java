@@ -1,16 +1,8 @@
 package net.the_goldbeards.lootdebugs.Effects;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.util.ModDamageSources;
@@ -31,13 +23,13 @@ public class DrunknessEffect extends MobEffect
         Vec3 entityPos = pLivingEntity.position();
         Level level = pLivingEntity.getLevel();
 
-        if(amp > 4)
+        if(amp > 6)
         {
             pLivingEntity.hurt(ModDamageSources.TOODRUNKIN, Float.MAX_VALUE);
             return;
         }
 
-        if(pLivingEntity.isOnGround() && pLivingEntity.isAlive())
+        if(pLivingEntity.isOnGround() && pLivingEntity.isAlive() && amp > 1)
         {
 
             pLivingEntity.setDeltaMovement(calculateDrunknessDeltaMovement(pLivingEntity.getDeltaMovement(), pLivingEntity.getRandom(), amp + 1));

@@ -11,6 +11,8 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.ChangeClassPacket;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.PlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.Entity.Turret.TurretRemovePacket;
+import net.the_goldbeards.lootdebugs.Network.Entity.Turret.TurretTargetingSyncPacket;
 import net.the_goldbeards.lootdebugs.Network.Entity.Zipline.ChangeDirectionPacket;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.Flare.FlareCountSyncPacket;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.Flare.ThrowFlarePacket;
@@ -68,6 +70,8 @@ public class PacketHandler
     public static int registerEntityMessages(SimpleChannel net, int id)
     {
         net.messageBuilder(ChangeDirectionPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(buffer -> new ChangeDirectionPacket()).encoder((packet, buf) -> {}).consumer(ChangeDirectionPacket::handle).add();
+        net.messageBuilder(TurretTargetingSyncPacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(TurretTargetingSyncPacket::decode).encoder(TurretTargetingSyncPacket::encode).consumer(TurretTargetingSyncPacket::handle).add();
+        net.messageBuilder(TurretRemovePacket.class, id++, NetworkDirection.PLAY_TO_SERVER).decoder(TurretRemovePacket::decode).encoder(TurretRemovePacket::encode).consumer(TurretRemovePacket::handle).add();
 
         return id;
     }

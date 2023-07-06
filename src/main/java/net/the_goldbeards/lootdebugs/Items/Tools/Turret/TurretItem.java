@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.TurretEntity;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
-import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public class TurretItem extends Item {
@@ -30,11 +29,22 @@ public class TurretItem extends Item {
 
              turretEntity.setYRot(0);
 
-            if (ModUtils.ItemNBTHelper.hasKey(usedStack, "ammo")) {
+            if (ModUtils.ItemNBTHelper.hasKey(usedStack, "ammo"))
+            {
                 int ammo = ModUtils.ItemNBTHelper.getInt(usedStack, "ammo");
                 turretEntity.setAmmo(ammo);
-            } else {
+            } else
+            {
                 turretEntity.setAmmo(TurretEntity.defaultAmmo);
+            }
+
+            if (ModUtils.ItemNBTHelper.hasKey(usedStack, "targetingMode"))
+            {
+                TurretEntity.TargetingModes targetingMode = TurretEntity.TargetingModes.byId(ModUtils.ItemNBTHelper.getInt(usedStack, "targetingMode"));
+                turretEntity.setTargetingMode(targetingMode);
+            } else
+            {
+                turretEntity.setTargetingMode(TurretEntity.TargetingModes.PASSIVE);
             }
 
             pContext.getLevel().addFreshEntity(turretEntity);
@@ -42,6 +52,11 @@ public class TurretItem extends Item {
 
             return InteractionResult.SUCCESS;
         }
+        else
+        {
+
+        }
+
         return InteractionResult.PASS;
     }
 

@@ -49,8 +49,12 @@ import static net.the_goldbeards.lootdebugs.Events.ModClientEventBusSubscriber.*
 public class ForgeClientEventBusSubscriber {
 
     private static float swingAngle = 0.0f;
-    private static float DEFAULT_SWING_SPEED = 1.0f; // Adjust the swing speed here
+    private static float yawAngle = 0.0f;
+    private static float DEFAULT_SWING_SPEED = 1.0f;
+    private static float DEFAULT_YAW_SPEED = 0.5f;
     private static final float MAX_SWING_ANGLE = 15.0f;
+    private static final float MAX_YAW_ANGLE = 15.0f;
+
 
     public static Player getPlayer() {
         return Minecraft.getInstance().player;
@@ -205,9 +209,14 @@ public class ForgeClientEventBusSubscriber {
                 DEFAULT_SWING_SPEED *= -1;
             }
 
+            yawAngle += DEFAULT_YAW_SPEED * swingSpeedModifier;
+            if (yawAngle >= MAX_YAW_ANGLE * swingAngelModifier || yawAngle <= -MAX_YAW_ANGLE * swingAngelModifier) {
+                DEFAULT_YAW_SPEED *= -1;
+            }
+
             // Modify the field of view
             event.setRoll(event.getRoll() + swingAngle); // You can adjust the field of view or any other camera properties here
-
+            event.setYaw(event.getYaw() + yawAngle);
         }
     }
 }

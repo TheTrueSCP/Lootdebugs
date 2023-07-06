@@ -676,3 +676,9 @@ Record:85 (Tech and Tools Update)
 -added resupply give player health
 -fixed ommoran heartstone naming bug
 -fixed ommoran bed model bug
+-fixed dwarf class sync with client bug
+-added turret targeting screen
+-added turret remove buttom
+-added turret standby fucntion
+-added turret targeting saves over item drop
+-fixed turret menu item not rendering

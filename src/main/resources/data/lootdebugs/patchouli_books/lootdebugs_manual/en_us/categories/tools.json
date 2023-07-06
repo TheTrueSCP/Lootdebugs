@@ -1,6 +1,6 @@
 {
   "name": "Tools",
   "description": "Everything about Tools, press shift to switch use priority to offhand",
-  "icon": "lootdebugs:turret_wrench",
+  "icon": "lootdebugs:wrench",
   "sortnum": 3
 }

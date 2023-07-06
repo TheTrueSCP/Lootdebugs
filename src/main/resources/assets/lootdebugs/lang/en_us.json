@@ -191,7 +191,10 @@
     "entity.lootdebugs.zipline_move": "Zipline Mover",
 
 
-
+    "slot.lootdebugs.turret.enemy": "Enemy Targeting",
+    "slot.lootdebugs.turret.passive": "Turret Standby",
+    "slot.lootdebugs.turret.neutral_and_enemy": "Neutral/Enemy Targeting",
+    "slot.lootdebugs.turret.remove": "Dismantle Turret",
 
 
 
@@ -215,9 +218,6 @@
     "message.action.salute.must_be_dwarf": "You must be a DWARF to Salute, you Leaf Lover",
 
     "message.lootdebugs.block.old.lloyd": "Old lloyd block, mine and replace it to fix it",
-
-    "message.lootdebugs.tool.turret.attack.neutral": "Turret is now attacking neutrals and enemys",
-    "message.lootdebugs.tool.turret.attack.enemy": "Turret is now only attacking enemys",
 
     "message.lootdebugs.tool.locator.resetted" : "Resetted locator, searching for new Ommoran Heartstone...",
     "message.lootdebugs.tool.locator.no_ommoran" : "Could not find an Ommoran. Right click at a different location and try again",

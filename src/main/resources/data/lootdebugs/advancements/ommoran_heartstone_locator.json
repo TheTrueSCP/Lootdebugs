@@ -2,7 +2,7 @@
   "parent": "lootdebugs:lootdebugs",
   "display": {
     "icon": {
-      "item": "lootdebugs:ommoran_hearthstone_locator"
+      "item": "lootdebugs:ommoran_heartstone_locator"
     },
     "title": {
       "translate": "advancements.pickup.ommoran_heartstone_locator.title"
@@ -16,13 +16,13 @@
     "hidden": false
   },
   "criteria": {
-    "hearthstone_locator": {
+    "heartstone_locator": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "lootdebugs:ommoran_hearthstone_locator"
+              "lootdebugs:ommoran_heartstone_locator"
             ]
 
 
@@ -33,7 +33,7 @@
   },
   "requirements": [
     [
-      "hearthstone_locator"
+      "heartstone_locator"
     ]
   ]
 }
