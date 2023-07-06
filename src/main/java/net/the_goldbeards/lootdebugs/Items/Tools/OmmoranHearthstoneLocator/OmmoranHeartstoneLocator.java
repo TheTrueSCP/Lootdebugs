@@ -53,7 +53,7 @@ public class OmmoranHeartstoneLocator extends BasicAllClassItem
             }
             else
             {
-                if(NbtUtils.readBlockPos(ModUtils.ItemNBTHelper.getTagCompound(pStack, "OmmoranPos")) == null)
+                if(!ModUtils.ItemNBTHelper.hasKey(pStack, "OmmoranPos"))
                 {
                     if(pEntity instanceof Player player)
                     {
@@ -80,7 +80,8 @@ public class OmmoranHeartstoneLocator extends BasicAllClassItem
     }
 
     @Nullable
-    private BlockPos searchOmmoran(ServerLevel serverLevel, ItemStack pStack, BlockPos searchPos) {
+    private BlockPos searchOmmoran(ServerLevel serverLevel, ItemStack pStack, BlockPos searchPos)
+    {
         BlockPos findBlockPos = serverLevel.findNearestMapFeature(ModConfiguredStructureTags.OMMORAN_HEARTHSTONE, searchPos, 100, false);
 
 

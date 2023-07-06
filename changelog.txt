@@ -684,6 +684,3 @@ Record:85 (Tech and Tools Update)
 -fixed turret menu item not rendering
 -added leaf lover special immunity to karl
 -added lootbugs touch when karl drinks a blackout stout
-a
-
-BEISPIEL U COCK
