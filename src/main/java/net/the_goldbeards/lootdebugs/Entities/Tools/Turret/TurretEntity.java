@@ -4,6 +4,7 @@ package net.the_goldbeards.lootdebugs.Entities.Tools.Turret;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.Packet;
@@ -38,6 +39,7 @@ import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import static net.the_goldbeards.lootdebugs.util.ModUtils.BlockHelpers.isBlockBetween;
@@ -72,6 +74,11 @@ public class TurretEntity extends Entity
     private final Predicate<LivingEntity> CAN_REACH_PREDECATE = (livingEntity) -> {
         return !isBlockBetween(livingEntity.level, livingEntity.blockPosition(), this.blockPosition());
     };
+
+    private final Predicate<Entity> CAN_REACH_ENTITY_PREDECATE = (entity) -> {
+        return !isBlockBetween(entity.level, entity.blockPosition(), this.blockPosition());
+    };
+
 
 
     private final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE).selector(CAN_REACH_PREDECATE);
@@ -125,7 +132,7 @@ public class TurretEntity extends Entity
                 }
             }
 
-            if(pPlayer.getLevel() instanceof ClientLevel)
+            else if(pPlayer.getLevel() instanceof ClientLevel)
             {
                 Minecraft.getInstance().setScreen(new TurretTargetingScreen(this, getTargetingMode()));
             }
@@ -150,38 +157,73 @@ public class TurretEntity extends Entity
 
             if(getTargetingConditions() != null)
             {
-                LivingEntity target = level.getNearestEntity(level.getEntitiesOfClass(LivingEntity.class, getSearchBound(this.blockPosition())), getTargetingConditions(), null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
+                LivingEntity nearestTarget = level.getNearestEntity(level.getEntitiesOfClass(LivingEntity.class, getSearchBound(this.blockPosition())), getTargetingConditions(), null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
+
+                List<Entity> nearEntities = level.getEntities((Entity) null, getSearchBound(this.blockPosition()));
+
+                List<LivingEntity> nearPingedLivingEntities = NonNullList.create();
+
+                for(Entity entity : nearEntities)//filter for pinged entities and convert to living entity
+                {
+                    if(entity instanceof LivingEntity livingEntity)
+                    {
+                        if(livingEntity.hasGlowingTag())
+                        {
+                            nearPingedLivingEntities.add(livingEntity);
+                        }
+                    }
+                }
+
+                LivingEntity nearestPingedMob = level.getNearestEntity(nearPingedLivingEntities, getTargetingConditions(), null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
+
+
 
                 this.setCustomName(new TextComponent("" + getAmmo()));
                 this.setCustomNameVisible(true);
 
-                if (shootCooldown <= 0 && target != null) {
+                if(shootCooldown <= 0)
+                {
+                    //get target, if pinged mob is present, use this instead
+                    LivingEntity target = null;
 
-                    setTargetID(target.getId());
-                    shootCooldown = shootCooldownTicks;
+                    if(nearestPingedMob != null)
+                    {
+                        target = nearestPingedMob;
+                    }
 
-                    if (canShoot(level, this)) {
-                        BulletEntity bulletEntity = new BulletEntity(level);
-                        bulletEntity.setPos(this.position().x, this.position().y + 1f, this.position().z);
+                    if(nearestTarget != null && target == null)
+                    {
+                        target = nearestTarget;
+                    }
 
-                        Vec3 shootVec = new Vec3((bulletEntity.getX() - target.getX()) * -1, (bulletEntity.getY() - target.blockPosition().getY()) * -1, (bulletEntity.getZ() - target.getZ()) * -1);//calculate Movement from Entity to hook
+                    //if some target present
+                    if(target != null)
+                    {
+                        setTargetID(target.getId());
+                        shootCooldown = shootCooldownTicks;
 
-                        level.addFreshEntity(bulletEntity);
+                        if (canShoot(level, this)) {
+                            BulletEntity bulletEntity = new BulletEntity(level);
+                            bulletEntity.setPos(this.position().x, this.position().y + 1f, this.position().z);
 
-                        level.playSound(null, this.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.NEUTRAL, 1, 1);
+                            Vec3 shootVec = new Vec3((bulletEntity.getX() - target.getX()) * -1, (bulletEntity.getY() - target.blockPosition().getY()) * -1, (bulletEntity.getZ() - target.getZ()) * -1);//calculate Movement from Entity to hook
 
-                        bulletEntity.setDeltaMovement(bulletEntity.getDeltaMovement().add(shootVec));//Normalize Vec cause the vec would be to fast
+                            level.addFreshEntity(bulletEntity);
 
-                        shrinkAmmo(1);
+                            level.playSound(null, this.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.NEUTRAL, 1, 1);
+
+                            bulletEntity.setDeltaMovement(bulletEntity.getDeltaMovement().add(shootVec));//Normalize Vec cause the vec would be to fast
+
+                            shrinkAmmo(1);
+                        }
+                    }
+                    else
+                    {
+                        setTargetID(0);
                     }
                 }
-
-                if(target == null)
-                {
-                    setTargetID(0);
-                }
             }
-            else
+            else//passive
             {
                 this.setCustomNameVisible(false);
             }
@@ -235,7 +277,7 @@ public class TurretEntity extends Entity
 
         if(getTargetingConditions() == null)
         {
-            return (float) Math.toRadians(45);
+            return (float) Math.toRadians(35);
         }
 
         if(target != null && canShoot(level, this))

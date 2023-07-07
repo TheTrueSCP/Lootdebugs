@@ -1,6 +1,5 @@
 package net.the_goldbeards.lootdebugs;
 
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -19,13 +18,14 @@ import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
-import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
+import net.the_goldbeards.lootdebugs.capability.Ping.PingDataCap;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModTileEntities;
 import net.the_goldbeards.lootdebugs.init.*;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.util.BetterBrewingRecipe;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import org.apache.logging.log4j.LogManager;
@@ -85,6 +85,7 @@ public class LootDebugsMain
         FlareDataCap.register(event);
         ClassDataCap.register(event);
         SaluteDataCap.register(event);
+        PingDataCap.register(event);
     }
 
     private void setup(final FMLCommonSetupEvent event)

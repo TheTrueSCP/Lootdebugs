@@ -1,17 +1,13 @@
 package net.the_goldbeards.lootdebugs.client.model;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.animal.Sheep;
-import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.TurretEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
@@ -174,6 +170,7 @@ public class TurretModel <T extends TurretEntity> extends EntityModel<T>
         body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
         stand.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
+
 
 
 

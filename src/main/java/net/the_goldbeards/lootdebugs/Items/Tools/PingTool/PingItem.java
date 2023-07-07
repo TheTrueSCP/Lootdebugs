@@ -9,6 +9,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.PingEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.PingClasses.PingPlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
+import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 public class PingItem extends BasicAllClassItem {
@@ -47,7 +50,8 @@ public class PingItem extends BasicAllClassItem {
                     } else if (pLevel.getEntity((int) ModUtils.ItemNBTHelper.getFloat(pingItemStack, "lootdebugs.pingitem.pingentity.id")) instanceof LivingEntity LE) {
 
                         LE.setGlowingTag(false);
-
+                        ModUtils.PingClasses.setPlayerPingClass(LE, IPingData.PingClasses.None);
+                        PacketHandler.sendToClients(new PingPlayerClassSyncPacket(LE.getId(), IPingData.PingClasses.None));
                     }
                 }
 
@@ -61,6 +65,7 @@ public class PingItem extends BasicAllClassItem {
         }
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
     }
+
 
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {

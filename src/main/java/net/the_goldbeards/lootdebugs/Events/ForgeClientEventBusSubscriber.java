@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,11 +20,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.DrawSelectionEvent;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,6 +37,7 @@ import net.the_goldbeards.lootdebugs.Network.Capabillity.RockAndStone.RockAndSto
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
+import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
 import net.the_goldbeards.lootdebugs.init.ModEffects;
 import net.the_goldbeards.lootdebugs.util.ModTags;
@@ -218,5 +218,20 @@ public class ForgeClientEventBusSubscriber {
             event.setRoll(event.getRoll() + swingAngle); // You can adjust the field of view or any other camera properties here
             event.setYaw(event.getYaw() + yawAngle);
         }
+    }
+
+    @SubscribeEvent
+    public static void RenderPingColorPre(RenderLivingEvent.Pre event)
+    {
+        Entity entity = event.getEntity();
+            if (ModUtils.PingClasses.getPlayerPingClass(entity) != IPingData.PingClasses.None)
+            {
+                IPingData.PingClasses pingClass = ModUtils.PingClasses.getPlayerPingClass(entity);
+
+                PlayerTeam dummyTeam = new PlayerTeam(entity.level.getScoreboard(), "dummy_team");
+                dummyTeam.setColor(ModUtils.PingClasses.getPlayerPingColor(pingClass));
+
+                entity.level.getScoreboard().addPlayerToTeam(entity.getStringUUID(), dummyTeam);
+            }
     }
 }

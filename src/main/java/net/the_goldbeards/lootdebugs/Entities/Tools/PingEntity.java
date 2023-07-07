@@ -18,11 +18,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.the_goldbeards.lootdebugs.Items.Tools.PingTool.PingItem;
-import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
+import net.the_goldbeards.lootdebugs.Network.Capabillity.PingClasses.PingPlayerClassSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
@@ -120,11 +122,14 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
 
         if(!level.isClientSide())
         {
-            if (this.getOwner() != null) {
+            if (this.getOwner() != null)
+            {
                 if (!pResult.getEntity().is(this.getOwner()))
                 {
                     if (pResult.getEntity() instanceof LivingEntity LE)
                     {
+                        ModUtils.PingClasses.setPlayerPingClass(LE, ModUtils.PingClasses.getPlayerPingByPlayerClass(getDwarfClass()));
+                        PacketHandler.sendToClients(new PingPlayerClassSyncPacket(LE.getId(), ModUtils.PingClasses.getPlayerPingByPlayerClass(getDwarfClass())));
                         LE.setGlowingTag(true);
 
                         level.playSound(null,  pResult.getEntity().blockPosition(), ModSounds.MARK_SOUND.get(), SoundSource.PLAYERS, 0.5f,1);
@@ -153,7 +158,10 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult)
     {
+        ModUtils.PingClasses.setPlayerPingClass(this, ModUtils.PingClasses.getPlayerPingByPlayerClass(getDwarfClass()));
+        PacketHandler.sendToClients(new PingPlayerClassSyncPacket(this.getId(), ModUtils.PingClasses.getPlayerPingByPlayerClass(getDwarfClass())));
         this.setGlowingTag(true);
+
         this.lastState = this.level.getBlockState(blockHitResult.getBlockPos());
         super.onHitBlock(blockHitResult);
         if(!level.isClientSide())

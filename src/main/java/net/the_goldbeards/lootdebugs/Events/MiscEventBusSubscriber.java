@@ -1,26 +1,20 @@
 package net.the_goldbeards.lootdebugs.Events;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.EventBus;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
@@ -29,19 +23,18 @@ import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugGoldenEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.PlayerClassSyncPacket;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.Flare.FlareCountSyncPacket;
-import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.Network.Capabillity.RockAndStone.RockAndStoneSyncPacket;
+import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Flare.FlareDataCap;
 import net.the_goldbeards.lootdebugs.capability.Flare.IFlareData;
+import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
 import net.the_goldbeards.lootdebugs.capability.Salute.ISaluteData;
 import net.the_goldbeards.lootdebugs.capability.Salute.SaluteDataCap;
-import net.the_goldbeards.lootdebugs.init.ModEffects;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
 import net.the_goldbeards.lootdebugs.util.Config.LootdebugsServerConfig;
-import net.the_goldbeards.lootdebugs.util.ModUtils;
 import net.the_goldbeards.lootdebugs.world.LootModifierer.OmmoranLocatorFromVillageChest;
 
 import javax.annotation.Nonnull;
@@ -70,6 +63,16 @@ public class MiscEventBusSubscriber
             }
 
         }
+
+        @SubscribeEvent
+        public static void attachCapabilityToEntities(AttachCapabilitiesEvent<Entity> event) {
+            ResourceLocation CAPABILITY_PING = new ResourceLocation(LootDebugsMain.MOD_ID, "ping_player_class");
+
+            if (event.getObject() instanceof LivingEntity) {
+                event.addCapability(CAPABILITY_PING, new IPingData());
+            }
+        }
+
 
         //Player
         @SubscribeEvent

@@ -18,6 +18,8 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipBlockStateContext;
@@ -33,6 +35,8 @@ import net.the_goldbeards.lootdebugs.Network.Capabillity.ChangeClass.PlayerClass
 import net.the_goldbeards.lootdebugs.Network.PacketHandler;
 import net.the_goldbeards.lootdebugs.capability.Class.ClassDataCap;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
+import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
+import net.the_goldbeards.lootdebugs.capability.Ping.PingDataCap;
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.PlayerControllerAccess;
 import net.the_goldbeards.lootdebugs.mixin.accessors.client.WorldRendererAccess;
 
@@ -610,6 +614,61 @@ public class ModUtils
         {
             return getPlayerClass(player) != IClassData.Classes.LeafLover;
         }
+    }
+
+    public static class PingClasses
+    {
+        public static IPingData.PingClasses getPlayerPingClass(Entity entity)
+        {
+            var playerClassWrapper = new Object(){
+                IPingData.PingClasses pingPlayerClass = IPingData.PingClasses.None;};
+
+
+            entity.getCapability(PingDataCap.PING_DATA).ifPresent(classCap ->
+            {
+                playerClassWrapper.pingPlayerClass = classCap.getPingPlayerClass();
+            });
+
+            return playerClassWrapper.pingPlayerClass;
+        }
+
+        public static IPingData.PingClasses getPlayerPingByPlayerClass(IClassData.Classes dwarfClass)
+        {
+            switch (dwarfClass)
+            {
+                case Scout -> {return IPingData.PingClasses.Scout;}
+                case Driller -> {return IPingData.PingClasses.Driller;}
+                case Gunner -> {return IPingData.PingClasses.Gunner;}
+                case Engineer -> {return IPingData.PingClasses.Engineer;}
+                default -> {return IPingData.PingClasses.None;}
+
+
+
+            }
+        }
+
+        public static ChatFormatting getPlayerPingColor(IPingData.PingClasses pingClass)
+        {
+            switch (pingClass)
+            {
+                case Scout -> {return ChatFormatting.BLUE;}
+                case Engineer -> {return ChatFormatting.RED;}
+                case Driller -> {return ChatFormatting.YELLOW;}
+                case Gunner -> {return ChatFormatting.GREEN;}
+                default -> {return ChatFormatting.BLACK;}
+            }
+        }
+
+        public static void setPlayerPingClass(Entity entity, IPingData.PingClasses pingPlayerClass)
+        {
+            entity.getCapability(PingDataCap.PING_DATA).ifPresent(classCap ->
+            {
+                classCap.setPingPlayerClass(pingPlayerClass);
+            });
+        }
+
+
+
     }
 
     public static class Math
