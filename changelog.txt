@@ -693,3 +693,4 @@ Record:85 (Tech and Tools Update)
 -added turret target entities with ping first
 -added ping player capiblility
 -added ping now render color
+-removed turret wrench from creative inventory

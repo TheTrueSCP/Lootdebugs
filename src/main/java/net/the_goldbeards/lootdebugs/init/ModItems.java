@@ -60,26 +60,26 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new RecordItem(15, ModSounds.MINING_SHANTY, new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> JET = ITEMS.register("jet",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> OMMORAN_HEARTSTONE_LOCATOR = ITEMS.register("ommoran_heartstone_locator",
-            () -> new OmmoranHeartstoneLocator( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new OmmoranHeartstoneLocator(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Ammo
     public static final RegistryObject<Item> PLATFORM_GUN_AMMO = ITEMS.register("platform_gun_ammo",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> TURRET_AMMO = ITEMS.register("turret_ammo",
-            () -> new TurretAmmoItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new TurretAmmoItem(new Item.Properties()));
 
     public static final RegistryObject<Item> FLARE_GUN_AMMO = ITEMS.register("flare_gun_ammo",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> ZIPLINE_AMMO = ITEMS.register("zipline_ammo",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> FUEL_CANISTER = ITEMS.register("fuel_canister",
-            () -> new FuelCanisterItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new FuelCanisterItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     //Buckets
     public static final RegistryObject<Item> LIQUID_MORKITE_BUCKET = ITEMS.register("liquid_morkite_bucket",
@@ -107,13 +107,13 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new PlatformGunItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> FLARE_GUN = ITEMS.register("flare_gun",
-            () -> new FlareGunItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new FlareGunItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> GRAPPLING_HOOK = ITEMS.register("grappling_hook",
-            () -> new GrapplingHookItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new GrapplingHookItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> LASER_POINTER = ITEMS.register("laser_pointer",
-            () -> new PingItem( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new PingItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> SATCHEL_CHARGE = ITEMS.register("satchel_charge",
             () -> new SatchelChargeItem(ModBlocks.SATCHEL_CHARGE.get(), new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
@@ -164,10 +164,10 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
 
     //Ores
     public static final RegistryObject<Item> NITRA = ITEMS.register("nitra",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> MORKITE = ITEMS.register("morkite",
-            () -> new Item( new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
+            () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> DYSTRUM_INGOT = ITEMS.register("dystrum_ingot",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
