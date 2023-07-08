@@ -19,7 +19,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipBlockStateContext;
@@ -337,6 +336,11 @@ public class ModUtils
         }
 
         public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> exceptions)
+        {
+            return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), exceptions)).getType() == HitResult.Type.BLOCK;
+        }
+
+        public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> exceptions, boolean exclude)
         {
             return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), exceptions)).getType() == HitResult.Type.BLOCK;
         }

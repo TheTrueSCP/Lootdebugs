@@ -1,15 +1,10 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableTile;
-import org.jetbrains.annotations.NotNull;
 
 public class ModResultSlot extends SlotItemHandler
 {
@@ -34,13 +29,12 @@ public class ModResultSlot extends SlotItemHandler
     public void removeIngredients(int count)
     {
         EquipmentTableTile.removeIngredients(itemHandler, count);
-
     }
 
     @Override
     public void onTake(Player pPlayer, ItemStack pStack) {
 
-        removeIngredients(pStack.getCount());
+        removeIngredients(1);
 
         super.onTake(pPlayer, pStack);
     }

@@ -14,17 +14,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
+import net.the_goldbeards.lootdebugs.util.ModTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Random;
 
 public class SatchelChargeBlock extends BaseEntityBlock {
@@ -244,6 +243,11 @@ public class SatchelChargeBlock extends BaseEntityBlock {
             {
                 @Override
                 public Optional<Float> getBlockExplosionResistance(Explosion pExplosion, BlockGetter pReader, BlockPos pPos, BlockState pState, FluidState pFluid) {
+
+                    if(pState.is(ModTags.Blocks.NOT_DESTROYABLE_BLOCKS))
+                    {
+                        return Optional.of(100000.0f);
+                    }
                     return Optional.of(1.0f);
                 }
             };

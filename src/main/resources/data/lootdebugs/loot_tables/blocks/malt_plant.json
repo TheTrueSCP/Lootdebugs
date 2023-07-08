@@ -1,12 +1,20 @@
 {
-  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lootdebugs:malt_star"
+          "name": "lootdebugs:malt_star",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "lootdebugs:malt_plant",
+              "properties": {
+                "age": 1
+              }
+            }
+          ]
         }
       ]
     }

@@ -1,10 +1,12 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools;
 
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 
 import javax.annotation.Nullable;
@@ -43,5 +45,11 @@ public class GrapplingHookHookEntity extends AbstractShootablePhysicsArrowLikeEn
     @Override
     public void onDespawn() {
 
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult pResult) {
+        this.discard();
+        pResult.getEntity().hurt(DamageSource.GENERIC, 0);
     }
 }

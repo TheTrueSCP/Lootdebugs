@@ -1,12 +1,20 @@
 {
-  "type": "minecraft:block",
   "pools": [
     {
       "rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lootdebugs:barley_bulb"
+          "name": "lootdebugs:barley_bulb",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "lootdebugs:barley_plant",
+              "properties": {
+                "age": 1
+              }
+            }
+          ]
         }
       ]
     }

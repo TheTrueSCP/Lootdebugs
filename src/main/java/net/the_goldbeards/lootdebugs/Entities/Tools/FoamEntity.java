@@ -5,12 +5,16 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.util.ModTags;
+import net.the_goldbeards.lootdebugs.util.ModUtils;
+
+import java.util.function.Predicate;
 
 public class FoamEntity extends ThrowableProjectile {
 
@@ -23,6 +27,21 @@ public class FoamEntity extends ThrowableProjectile {
         super(ModEntities.FOAM.get(), pShooter, pLevel);
 
     }
+
+    private final Predicate<BlockState> CHECK_PLACE_BLOCK_BETWEEN = ((blockState) ->
+    {
+        if(blockState.isAir())
+        {
+            return false;
+        }
+
+        if(blockState.is(ModBlocks.PLASCRETE_FOAM_MKI.get()) || blockState.is(ModBlocks.PLASCRETE_FOAM_MKII.get()))
+        {
+            return false;
+        }
+
+        return true;
+    });
 
     @Override
     protected void onHitEntity(EntityHitResult pResult)
@@ -65,88 +84,6 @@ public class FoamEntity extends ThrowableProjectile {
         }
     }
 
-
-
-
-    private void placeBlocksold(BlockPos HitPos, boolean mkII)
-    {
-
-
-        BlockPos pPos = HitPos;
-
-        BlockPos poseast = pPos.east(1);
-        BlockPos poseast1 = pPos.east(2);//
-//                                           #x#
-        BlockPos poswest = pPos.west(1);// xxXxx
-        BlockPos poswest1 = pPos.west(2);// #X#
-
-        BlockPos posnorth = pPos.north(1);
-        BlockPos posnorth1 = pPos.north(2);
-
-        BlockPos possouth = pPos.south(1);
-        BlockPos possouth1 = pPos.south(2);
-
-
-        BlockPos northeast = pPos.east(1).north(1);
-
-        BlockPos northwest = pPos.west(1).north(1);
-
-        BlockPos southwest = pPos.west(1).south(1);
-
-        BlockPos southeast = pPos.east(1).south(1);
-
-
-        BlockPos north_northeast = pPos.east(1).north(2);
-        BlockPos north_northwest = pPos.west(1).north(2);
-
-        BlockPos south_southwest = pPos.west(1).south(2);
-        BlockPos south_southeast = pPos.east(1).south(2);
-
-        BlockPos east_eastnord = pPos.east(2).north(1);
-        BlockPos east_eastsouth = pPos.east(2).south(1);
-
-        BlockPos west_westsouth = pPos.west(2).south(1);
-        BlockPos west_westnord = pPos.west(2).north(1);
-
-
-        //Inner Ring
-
-        placeBlock(posnorth, level, mkII);
-        placeBlock(posnorth1, level, mkII);
-
-        placeBlock(poseast, level, mkII);
-        placeBlock(poseast1, level, mkII);
-
-        placeBlock(possouth, level, mkII);
-        placeBlock(possouth1, level, mkII);
-
-        placeBlock(poswest, level, mkII);
-        placeBlock(poswest1, level, mkII);
-
-        //Middlering
-        placeBlock(northeast, level, mkII);
-        placeBlock(northwest, level, mkII);
-        placeBlock(southeast, level, mkII);
-        placeBlock(southwest, level, mkII);
-
-        //outer Ring
-
-        placeBlock(north_northeast, level, mkII);
-        placeBlock(north_northwest, level, mkII);
-
-        placeBlock(south_southeast, level, mkII);
-        placeBlock(south_southwest, level, mkII);
-
-        placeBlock(east_eastnord, level, mkII);
-        placeBlock(east_eastsouth, level, mkII);
-
-        placeBlock(west_westsouth, level, mkII);
-        placeBlock(west_westnord, level, mkII);
-
-        //central
-        placeBlock(pPos, level, mkII);
-    }
-
     private void placeBlocks(BlockPos hitPos, boolean mkII)
     {
         //Square
@@ -163,32 +100,32 @@ public class FoamEntity extends ThrowableProjectile {
         {
             for(int y = forStart; y <= forEnd; y++)
             {
-                placeBlock(hitPos.north(x).east(y), level, mkII);
+                placeBlock(hitPos.north(x).east(y), hitPos, level, mkII);
             }
         }
 
         //Additional things
-        placeBlock(hitPos.north(3).east(-1), level, mkII);
-        placeBlock(hitPos.north(3).east(0), level, mkII);
-        placeBlock(hitPos.north(3).east(1), level, mkII);
+        placeBlock(hitPos.north(3).east(-1), hitPos, level, mkII);
+        placeBlock(hitPos.north(3).east(0), hitPos, level, mkII);
+        placeBlock(hitPos.north(3).east(1), hitPos, level, mkII);
 
-        placeBlock(hitPos.south(3).east(-1), level, mkII);
-        placeBlock(hitPos.south(3).east(0), level, mkII);
-        placeBlock(hitPos.south(3).east(1), level, mkII);
+        placeBlock(hitPos.south(3).east(-1), hitPos, level, mkII);
+        placeBlock(hitPos.south(3).east(0), hitPos, level, mkII);
+        placeBlock(hitPos.south(3).east(1), hitPos, level, mkII);
 
-        placeBlock(hitPos.north(1).east(3), level, mkII);
-        placeBlock(hitPos.north(0).east(3), level, mkII);
-        placeBlock(hitPos.north(-1).east(3), level, mkII);
+        placeBlock(hitPos.north(1).east(3), hitPos, level, mkII);
+        placeBlock(hitPos.north(0).east(3), hitPos, level, mkII);
+        placeBlock(hitPos.north(-1).east(3), hitPos, level, mkII);
 
-        placeBlock(hitPos.north(1).west(3), level, mkII);
-        placeBlock(hitPos.north(0).west(3), level, mkII);
-        placeBlock(hitPos.north(-1).west(3), level, mkII);
+        placeBlock(hitPos.north(1).west(3), hitPos, level, mkII);
+        placeBlock(hitPos.north(0).west(3), hitPos, level, mkII);
+        placeBlock(hitPos.north(-1).west(3), hitPos, level, mkII);
     }
 
     //only one block
-    private void placeBlock(BlockPos pPos, Level pLevel, boolean mkII)
+    private void placeBlock(BlockPos pPos, BlockPos origin, Level pLevel, boolean mkII)
     {
-        if (pLevel.isEmptyBlock(pPos)|| pLevel.getBlockState(pPos).is(ModTags.Blocks.REPLACEABLE_BLOCKS))
+        if ((pLevel.isEmptyBlock(pPos)|| pLevel.getBlockState(pPos).is(ModTags.Blocks.REPLACEABLE_BLOCKS)) && (!ModUtils.BlockHelpers.isBlockBetween(pLevel, pPos, origin, CHECK_PLACE_BLOCK_BETWEEN)))
         {
 
             if(pLevel.getEntities(this, new AABB(pPos)).isEmpty() || pLevel.getEntities(this, new AABB(pPos)).contains(this))

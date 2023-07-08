@@ -694,3 +694,8 @@ Record:85 (Tech and Tools Update)
 -added ping player capiblility
 -added ping now render color
 -removed turret wrench from creative inventory
+-fixed equipemnt table crafting algorithm
+-fixed harvested plants still dropped hopes when mined
+-added ping glows in the dark
+-fixed satchel charge also destroyed bedrock and obsidian
+-added new ommoran heartstone jigsaw structure

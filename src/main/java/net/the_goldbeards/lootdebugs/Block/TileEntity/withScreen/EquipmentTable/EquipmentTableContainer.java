@@ -1,10 +1,14 @@
 package net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable;
 
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -12,13 +16,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.Lloyd.*;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModResultSlot;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.parts.slot.ModSlot;
 import net.the_goldbeards.lootdebugs.init.BlockEntity.ModMenuTypes;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
 import net.the_goldbeards.lootdebugs.recipe.EquipmentTableRecipe;
 
+import java.util.List;
 import java.util.Optional;
 
 public class EquipmentTableContainer extends AbstractContainerMenu {
@@ -75,6 +79,49 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
+
+        if(sourceSlot instanceof ModResultSlot slot)
+        {
+            int maxPossibleOutput = getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel());
+
+            ItemStack matchingRecipe = getMatchingRecipe(this.blockEntity.itemHandler, this.blockEntity.getLevel());
+
+            System.out.println(matchingRecipe.getCount()+ " " + maxPossibleOutput);
+
+            int itemTransferCount = matchingRecipe.getCount() * maxPossibleOutput;
+
+            int itemTransferCountCopy = itemTransferCount;
+
+            List<ItemStack> addItems = NonNullList.create();
+
+            System.out.println("itemtransfercount" + itemTransferCount);
+
+            while(itemTransferCountCopy > 0)
+            {
+                if (itemTransferCountCopy >= 64) {
+                    addItems.add(new ItemStack(matchingRecipe.getItem(), 64));
+                    itemTransferCountCopy -= 64;
+                } else
+                {
+                    addItems.add(new ItemStack(matchingRecipe.getItem(), itemTransferCountCopy));
+                    itemTransferCountCopy -= itemTransferCountCopy;
+                }
+            }
+
+
+            System.out.println("addItemsCount: " + addItems.size());
+
+
+            for (ItemStack itemStack : addItems)
+            {
+                playerIn.addItem(itemStack);
+            }
+
+            slot.removeIngredients(maxPossibleOutput);
+
+            return ItemStack.EMPTY;
+        }
+
         // Check if the slot clicked is one of the vanilla container slots
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT)
         {
@@ -105,14 +152,6 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
             sourceSlot.setChanged();
         }
 
-        if(sourceSlot instanceof ModResultSlot slot)
-        {
-            System.out.println("result slot" + getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel()));
-            slot.removeIngredients(getMaxPossibleItemOutput(this.blockEntity.itemHandler, this.blockEntity.getLevel()));
-        }
-
-
-        sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
 
@@ -181,6 +220,47 @@ public class EquipmentTableContainer extends AbstractContainerMenu {
             }
         }
 
+    }
+
+    public static ItemStack getMatchingRecipe(IItemHandler itemHandler, Level level)
+    {
+        CraftingContainer inventory2 = new CraftingContainer(new AbstractContainerMenu(null, -1) {
+            @Override
+            public boolean stillValid(Player pPlayer) {
+                return false;
+            }
+        }, 3, 3);
+
+
+        for (int i = 0; i < itemHandler.getSlots() - 1; i++)
+        {
+            ItemStack addStack = itemHandler.getStackInSlot(i).copy();
+            inventory2.setItem(i, addStack);
+        }
+
+
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++)
+        {
+            ItemStack addStack = itemHandler.getStackInSlot(i).copy();
+            inventory.setItem(i, addStack);
+        }
+
+        Optional<EquipmentTableRecipe> match = level.getRecipeManager()
+                .getRecipeFor(EquipmentTableRecipe.Type.INSTANCE, inventory, level);
+
+        Optional<CraftingRecipe> match2 = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, inventory2, level);
+
+        if(match.isPresent())
+        {
+            return match.get().getResultItem();
+        }
+        if(match2.isPresent())
+        {
+            return match2.get().getResultItem();
+        }
+
+        return ItemStack.EMPTY;
     }
 }
 
