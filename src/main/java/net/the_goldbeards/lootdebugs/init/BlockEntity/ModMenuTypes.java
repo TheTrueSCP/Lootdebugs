@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryContainer;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Jukebox.JukeboxContainer;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydContainer;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 
@@ -30,6 +31,9 @@ public class ModMenuTypes
 
     public static final RegistryObject<MenuType<ClassChangerContainer>> CLASS_CHANGER_CONTAINER =
             registerMenuType(ClassChangerContainer::new, "class_changer_container");
+
+    public static final RegistryObject<MenuType<JukeboxContainer>> JUKEBOX_CONTAINER =
+            registerMenuType(JukeboxContainer::new, "jukebox_container");
 
 
 

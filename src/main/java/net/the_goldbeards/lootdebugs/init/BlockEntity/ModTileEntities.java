@@ -13,6 +13,7 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryTile;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Jukebox.JukeboxTile;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydTile;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.init.ModBlocks;
@@ -58,6 +59,10 @@ public class ModTileEntities
      public static final RegistryObject<BlockEntityType<HeartstoneDefenderTile>> HEARTSTONE_DEFENDER_ENTITY =
             BLOCK_ENTITYS.register("heartstone_defender_entity", () ->
                     BlockEntityType.Builder.of(HeartstoneDefenderTile::new, ModBlocks.HEARTSTONE_DEFENDER.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<JukeboxTile>> JUKEBOX_ENTITY =
+            BLOCK_ENTITYS.register("jukebox_entity", () ->
+                    BlockEntityType.Builder.of(JukeboxTile::new, ModBlocks.JUKEBOX.get()).build(null));
 
     public static void register (IEventBus eventBus)
     {

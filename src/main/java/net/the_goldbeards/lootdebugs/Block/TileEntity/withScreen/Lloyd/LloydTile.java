@@ -8,7 +8,6 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,7 +31,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class LloydTile extends BlockEntity implements MenuProvider, WorldlyContainer {
+public class LloydTile extends BlockEntity implements MenuProvider{
 
 
     //Itemhandler
@@ -48,9 +47,6 @@ public class LloydTile extends BlockEntity implements MenuProvider, WorldlyConta
     //Variables
     protected final ContainerData data;
     public boolean isBrewing = false;
-    private static final int[] SLOTS_FOR_UP = new int[]{0};//Water
-    private static final int[] SLOTS_FOR_DOWN = new int[]{ 5};///Bucket and Beer
-    private static final int[] SLOTS_FOR_SIDES = new int[]{1,2,3,4};
     private int progress = 0;
     private int maxProgress = 200;
 
@@ -220,137 +216,6 @@ public class LloydTile extends BlockEntity implements MenuProvider, WorldlyConta
     private void resetProgress()
     {
         this.progress = 0;
-    }
-
-    //Hopperstuff
-    @Override
-    public int[] getSlotsForFace(Direction pSide) {
-        if(pSide == Direction.DOWN)
-        {
-            return SLOTS_FOR_DOWN;
-        }
-        else
-        {
-            return pSide == Direction.UP ? SLOTS_FOR_UP : SLOTS_FOR_SIDES;
-        }
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @org.jetbrains.annotations.Nullable Direction pDirection) {
-        if(pIndex == 0 && pItemStack.is(Items.WATER_BUCKET))
-        {
-            return true;
-        }
-        else if(pIndex == 1 && pItemStack.is(ModItems.BARLEY_BULB.get()) || pIndex == 1 && pItemStack.is(Items.EMERALD))
-        {
-            return true;
-        }
-        else if(pIndex == 2 && pItemStack.is(ModItems.YEAST_CONE.get()))
-        {
-            return true;
-        }
-        else if(pIndex == 3 && pItemStack.is(ModItems.MALT_STAR.get()))
-        {
-            return true;
-        }
-        else if(pIndex == 4 && pItemStack.is(ModItems.STARCH_NUT.get()))
-        {
-            return true;
-        }
-        else if(pIndex == 5 && pItemStack.is(ModItems.MUG.get()))
-        {
-            return true;
-        }
-        else
-        {
-
-            return false;
-        }
-    }
-
-
-    @Override
-    public boolean canPlaceItem(int pIndex, ItemStack pStack) {
-        return canPlaceItemThroughFace(pIndex, pStack, null);
-    }
-
-
-
-    @Override
-    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        if(pIndex == 0 && pStack.is(Items.BUCKET))
-        {
-            return true;
-        }
-        else if(pIndex == 5 && !pStack.is(ModItems.MUG.get()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    @Override
-    public int getContainerSize() {
-        return this.itemHandler.getSlots();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        for(int i = 0; i < this.itemHandler.getSlots(); i++) {
-            if (!this.itemHandler.getStackInSlot(i).isEmpty()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public ItemStack getItem(int pIndex) {
-        return this.itemHandler.getStackInSlot(pIndex);
-    }
-
-    @Override
-    public ItemStack removeItem(int pIndex, int pCount) {
-        return this.itemHandler.extractItem(pIndex, pCount, false);
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int pIndex) {
-        return this.itemHandler.extractItem(pIndex, this.itemHandler.getStackInSlot(pIndex).getCount(), false);
-    }
-
-    @Override
-    public void setItem(int pIndex, ItemStack pStack)
-    {
-        this.itemHandler.insertItem(pIndex, pStack, false);
-        if (pStack.getCount() > this.getMaxStackSize())
-        {
-            pStack.setCount(this.getMaxStackSize());
-        }
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        if (this.level.getBlockEntity(this.worldPosition) != this) {
-            return false;
-        } else {
-            return pPlayer.distanceToSqr((double)this.worldPosition.getX() + 0.5D, (double)this.worldPosition.getY() + 0.5D, (double)this.worldPosition.getZ() + 0.5D) <= 64.0D;
-        }
-    }
-
-
-    @Override
-    public void clearContent()
-    {
-        for (int i = 0; i < this.itemHandler.getSlots(); i++)
-        {
-
-            this.itemHandler.extractItem(i, this.itemHandler.getStackInSlot(i).getCount(),false);
-        }
     }
 
 }

@@ -28,6 +28,7 @@ import net.the_goldbeards.lootdebugs.Block.TileEntity.onlyEntity.Zipline.Zipline
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.ClassChangerTerminal.ClassChangerBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.EquipmentTable.EquipmentTableBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.FuelRefinery.FuelRefineryBlock;
+import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Jukebox.JukeboxBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.LloydBlock;
 import net.the_goldbeards.lootdebugs.Block.TileEntity.withScreen.Lloyd.OldLloydBlock;
 import net.the_goldbeards.lootdebugs.Block.Tools.PlatformGun.PlascreteFoamMKI;
@@ -191,6 +192,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> OMMORAN_BED = registryBlock("ommoran_bed",
             () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(300f).lightLevel((state) -> 3)),true);
+
+    public static final RegistryObject<Block> JUKEBOX = registryBlock("jukebox",
+            () -> new JukeboxBlock(BlockBehaviour.Properties.of(Material.METAL)), true);
 
     public static final RegistryObject<Block> HEARTSTONE_DEFENDER = registryBlock("ommoran_heartstone_defender",
             () -> new HeartstoneDefenderBlock(BlockBehaviour.Properties.of(Material.METAL)), true);

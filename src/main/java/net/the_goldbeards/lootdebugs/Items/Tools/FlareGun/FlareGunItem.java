@@ -9,9 +9,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
-import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.init.Sound.ModSounds;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.function.Predicate;
