@@ -32,6 +32,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretAmmoItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
+import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
 import net.the_goldbeards.lootdebugs.client.Screens.TurretTargetingScreen;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
@@ -73,10 +74,6 @@ public class TurretEntity extends Entity
 
     private final Predicate<LivingEntity> CAN_REACH_PREDECATE = (livingEntity) -> {
         return !isBlockBetween(livingEntity.level, livingEntity.blockPosition(), this.blockPosition());
-    };
-
-    private final Predicate<Entity> CAN_REACH_ENTITY_PREDECATE = (entity) -> {
-        return !isBlockBetween(entity.level, entity.blockPosition(), this.blockPosition());
     };
 
 
@@ -159,7 +156,9 @@ public class TurretEntity extends Entity
             {
                 LivingEntity nearestTarget = level.getNearestEntity(level.getEntitiesOfClass(LivingEntity.class, getSearchBound(this.blockPosition())), getTargetingConditions(), null, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ());
 
+                //search for pinged entities
                 List<Entity> nearEntities = level.getEntities((Entity) null, getSearchBound(this.blockPosition()));
+
 
                 List<LivingEntity> nearPingedLivingEntities = NonNullList.create();
 
@@ -167,7 +166,7 @@ public class TurretEntity extends Entity
                 {
                     if(entity instanceof LivingEntity livingEntity)
                     {
-                        if(livingEntity.hasGlowingTag())
+                        if(ModUtils.PingClasses.getPlayerPingClass(livingEntity) != IPingData.PingClasses.None)
                         {
                             nearPingedLivingEntities.add(livingEntity);
                         }
@@ -191,7 +190,7 @@ public class TurretEntity extends Entity
                         target = nearestPingedMob;
                     }
 
-                    if(nearestTarget != null && target == null)
+                    else
                     {
                         target = nearestTarget;
                     }

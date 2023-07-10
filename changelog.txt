@@ -701,3 +701,5 @@ Record:85 (Tech and Tools Update)
 -added new ommoran heartstone jigsaw structure
 -removed lloyd vanilla hopper mechanic
 -fixed gradle crash -> replaced mod core
+-optimized and fixed turret ping search mechanic
+-added trailer music
