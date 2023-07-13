@@ -703,3 +703,7 @@ Record:85 (Tech and Tools Update)
 -fixed gradle crash -> replaced mod core
 -optimized and fixed turret ping search mechanic
 -added trailer music
+-fixed turret not displaying a message if player place turret without engineer class
+-fixed ores cannot be mined when pinged
+-fixed resupply pod positioning
+-fixed turret also attacks player

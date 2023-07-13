@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyDropEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyPod.ResupplyDropEntity;
 import net.the_goldbeards.lootdebugs.LootDebugsMain;
 import net.the_goldbeards.lootdebugs.client.model.ResupplyDropModel;
 

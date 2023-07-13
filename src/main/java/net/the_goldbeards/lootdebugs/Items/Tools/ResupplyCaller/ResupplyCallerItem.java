@@ -6,13 +6,11 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyDropEntity;
+import net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyPod.ResupplyDropEntity;
 import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
 import net.the_goldbeards.lootdebugs.init.ModItems;
-import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.function.Predicate;
 

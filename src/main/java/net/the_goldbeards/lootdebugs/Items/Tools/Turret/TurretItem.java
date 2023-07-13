@@ -6,20 +6,28 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.TurretEntity;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicAllClassItem;
+import net.the_goldbeards.lootdebugs.Items.Tools.BasicToolItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
-public class TurretItem extends Item {
+public class TurretItem extends BasicToolItem {
     public TurretItem(Properties pProperties) {
         super(pProperties);
     }
 
     public static IClassData.Classes dwarfClassToUse = IClassData.Classes.Engineer;
 
+
+    @Override
+    public IClassData.Classes getDwarfClassToUse() {
+        return dwarfClassToUse;
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext pContext)
     {
-        if(ModUtils.DwarfClasses.isPlayerClass(pContext.getPlayer(), dwarfClassToUse)) {
+        if(canUseItem(pContext.getPlayer())) {
 
             TurretEntity turretEntity = new TurretEntity(pContext.getLevel(), pContext.getPlayer());
             ItemStack usedStack = pContext.getItemInHand();

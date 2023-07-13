@@ -1,6 +1,5 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob;
 
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -32,6 +31,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.the_goldbeards.lootdebugs.Entities.Mob.Goals.GoToWantedItemGoal;
 import net.the_goldbeards.lootdebugs.Entities.Mob.Inventory.Inventory;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
@@ -68,7 +68,7 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
-        //this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 100));
+       // this.goalSelector.addGoal(1, new GoToWantedItemGoal(this, ModTags.Items.LOOTBUG_CONSUMABLE_ITEMS, 20));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, TEMPTATION_ITEMS, false));
         //   this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -243,13 +243,14 @@ public class LootbugEntity extends Animal implements ItemSteerable, PlayerRideab
 
         if(this.getControllingPassenger() != null)
         {
-            if(Screen.hasShiftDown())
+            //Todo fix only on client side
+            /*if(Screen.hasShiftDown())
             { this.setClimbing(this.horizontalCollision);
             }
             else
             {
                 this.setClimbing(false);
-            }
+            }*/
         }
         this.travel(this, this.steering, pTravelVector);
     }

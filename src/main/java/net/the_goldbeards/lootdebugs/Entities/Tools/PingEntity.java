@@ -1,12 +1,14 @@
 package net.the_goldbeards.lootdebugs.Entities.Tools;
 
 import com.google.common.collect.Maps;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.the_goldbeards.lootdebugs.Items.Tools.PingTool.PingItem;
@@ -287,5 +290,30 @@ public class PingEntity extends AbstractShootablePhysicsArrowLikeEntity {
     @Override
     public void onDespawn() {
 
+    }
+
+    @Override
+    public boolean isAttackable() {
+        return  false;
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity pTarget) {
+        return super.canHitEntity(pTarget);
+    }
+
+    @Override
+    public boolean skipAttackInteraction(Entity pEntity) {
+        return true;
+    }
+
+    @Override
+    public boolean mayInteract(Level pLevel, BlockPos pPos) {
+        return false;
+    }
+
+    @Override
+    public boolean isPickable() {
+        return false;
     }
 }

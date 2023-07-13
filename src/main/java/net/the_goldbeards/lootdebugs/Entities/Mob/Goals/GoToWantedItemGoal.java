@@ -1,6 +1,7 @@
 package net.the_goldbeards.lootdebugs.Entities.Mob.Goals;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -32,30 +33,62 @@ public class GoToWantedItemGoal extends Goal
     @Override
     public boolean canUse()
     {
-        return !getNearWantedItems(mob, itemDistance, items).isEmpty();
+        return getNearestItem(this.mob, itemDistance, items) != null;
     }
 
     @Override
     public void tick()
     {
-        if(!getNearWantedItems(mob, itemDistance, items).isEmpty())
+        if(getNearestItem(this.mob, itemDistance, items) != null)
         {
-            this.mob.getLookControl().setLookAt(getNearWantedItems(mob, itemDistance, items).get(0), (float) (this.mob.getMaxHeadYRot() + 20), (float) this.mob.getMaxHeadXRot());
-            this.mob.getNavigation().moveTo(getNearWantedItems(mob, itemDistance, items).get(0), 1.2f);
+            System.out.println("wannago");
+            this.mob.getLookControl().setLookAt(getNearestItem(this.mob, itemDistance, items), (float) (this.mob.getMaxHeadYRot() + 20), (float) this.mob.getMaxHeadXRot());
+            this.mob.getNavigation().moveTo(getNearestItem(this.mob, itemDistance, items), 1.2f);
         }
+        }
+
+        @Nullable
+        private ItemEntity getNearestItem(Entity mob, int pRange, TagKey<Item> wantedItems)
+        {
+            List<ItemEntity> wantedNearItems = getNearWantedItems(mob, pRange, wantedItems);
+
+
+            if(wantedNearItems.size() > 0)
+            {
+                ItemEntity nearestItem = wantedNearItems.get(0);
+
+
+                for (ItemEntity itemEntity : wantedNearItems)
+                {
+                    if(mob.position().distanceTo(itemEntity.position()) < mob.position().distanceTo(nearestItem.position()))
+                    {
+                        nearestItem = itemEntity;
+                    }
+                }
+
+                return nearestItem;
+            }
+
+
+            return null;
         }
 
     private List<ItemEntity> getNearWantedItems(Entity entity, int pRange, TagKey<Item> wantedItems)
     {
-        List<ItemEntity> wantedItemEntitiesInRange = new ArrayList<>();
+        List<ItemEntity> wantedItemEntitiesInRange = NonNullList.create();
         List<ItemEntity> nearItems = getNearItems(entity, pRange);
 
-        if(nearItems.size() >= 1)
+        System.out.println(nearItems.size());
+
+        if(nearItems.size() > 0)
         {
             for (int i = 0; i < nearItems.size() - 1; i++)
             {
+                System.out.println(nearItems.size() + " " + nearItems.get(i).getItem());
+                if (nearItems.get(i).getItem().is(wantedItems))
+                {
 
-                if (nearItems.get(i).getItem().is(wantedItems)) {
+                    System.out.println(nearItems.get(i));
                     wantedItemEntitiesInRange.add(nearItems.get(i));
                 }
 
@@ -64,23 +97,24 @@ public class GoToWantedItemGoal extends Goal
         return wantedItemEntitiesInRange;
     }
 
-    @Nullable
     private List<ItemEntity> getNearItems(Entity pEntity, int pRange)
     {
-        List<ItemEntity> itemEntitiesInRange = new ArrayList<>();
         Level level = pEntity.getLevel();
-        List<Entity> nearEntities = level.getEntities(pEntity, searchBound(pEntity, pRange));
+        List<Entity> nearEntities = level.getEntities((ItemEntity)null, searchBound(pEntity, pRange), (entity) ->{return entity instanceof ItemEntity;});
 
-        for(int i = 0; i < nearEntities.size() - 1; i++)
+        for(Entity entity : nearEntities)
         {
-
-
-            if(nearEntities.get(i) instanceof ItemEntity itemEntity)
+            if(entity instanceof ItemEntity itemEntity)
             {
-                itemEntitiesInRange.add(itemEntity);
+                List<ItemEntity> itemEntities = NonNullList.create();
+
+                itemEntities.add(itemEntity);
+
+                return itemEntities;
             }
         }
-        return itemEntitiesInRange;
+
+        return NonNullList.create();
 
     }
 

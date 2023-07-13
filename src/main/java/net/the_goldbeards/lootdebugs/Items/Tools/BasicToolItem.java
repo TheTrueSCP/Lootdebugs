@@ -39,6 +39,16 @@ public abstract class BasicToolItem extends Item
     public abstract IClassData.Classes getDwarfClassToUse();
 
 
+    public boolean canUseItem(Player player)
+    {
+        return ModUtils.DwarfClasses.getPlayerClass(player) == getDwarfClassToUse();
+    }
+
+    public boolean canUseItem(IClassData.Classes dwarfClass)
+    {
+        return dwarfClass == getDwarfClassToUse();
+    }
+
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
         return UseAnim.NONE;

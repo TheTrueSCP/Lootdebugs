@@ -335,9 +335,9 @@ public class ModUtils
             return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), (blockState -> {return !blockState.isAir();}))).getType() == HitResult.Type.BLOCK;
         }
 
-        public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> exceptions)
+        public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> shouldTarget)
         {
-            return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), exceptions)).getType() == HitResult.Type.BLOCK;
+            return level.isBlockInLine(new ClipBlockStateContext(Vec3.atCenterOf(pos1), Vec3.atCenterOf(pos2), shouldTarget)).getType() == HitResult.Type.BLOCK;
         }
 
         public static boolean isBlockBetween(Level level, BlockPos pos1, BlockPos pos2, Predicate<BlockState> exceptions, boolean exclude)

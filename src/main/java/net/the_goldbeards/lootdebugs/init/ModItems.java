@@ -70,7 +70,7 @@ public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> TURRET_AMMO = ITEMS.register("turret_ammo",
-            () -> new TurretAmmoItem(new Item.Properties()));
+            () -> new TurretAmmoItem(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));
 
     public static final RegistryObject<Item> FLARE_GUN_AMMO = ITEMS.register("flare_gun_ammo",
             () -> new Item(new Item.Properties().tab(ModGroup.LOOTDEBUGS_TAB)));

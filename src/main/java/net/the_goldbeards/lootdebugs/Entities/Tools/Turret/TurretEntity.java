@@ -2,7 +2,6 @@ package net.the_goldbeards.lootdebugs.Entities.Tools.Turret;
 
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -28,14 +27,16 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.the_goldbeards.lootdebugs.Items.Tools.Turret.TurretAmmoItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.capability.Ping.IPingData;
-import net.the_goldbeards.lootdebugs.client.Screens.TurretTargetingScreen;
+
 import net.the_goldbeards.lootdebugs.init.ModEntities;
 import net.the_goldbeards.lootdebugs.init.ModItems;
+import net.the_goldbeards.lootdebugs.util.ModTags;
 import net.the_goldbeards.lootdebugs.util.ModUtils;
 
 import java.util.Arrays;
@@ -72,15 +73,28 @@ public class TurretEntity extends Entity
         return p_30636_ instanceof Mob;
     };
 
+    private final Predicate<BlockState> BLOCK_EXCEPTIONS_PREDECATE = (blockState) -> {
+        if(blockState.is(ModTags.Blocks.REPLACEABLE_BLOCKS))
+        {
+            return false;
+        }
+        else if(blockState.isAir())
+        {
+            return false;
+        }
+
+        return true;
+    };
+
     private final Predicate<LivingEntity> CAN_REACH_PREDECATE = (livingEntity) -> {
-        return !isBlockBetween(livingEntity.level, livingEntity.blockPosition(), this.blockPosition());
+        return !isBlockBetween(livingEntity.level, livingEntity.blockPosition(), this.blockPosition(), BLOCK_EXCEPTIONS_PREDECATE);
     };
 
 
 
-    private final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE).selector(CAN_REACH_PREDECATE);
+    private final TargetingConditions ENEMY_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_PREDECATE.and(CAN_REACH_PREDECATE));
 
-    private final TargetingConditions ENEMY_AND_NEUTRAL_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_AND_NEUTRAL_PREDECATE).selector(CAN_REACH_PREDECATE);
+    private final TargetingConditions ENEMY_AND_NEUTRAL_TARGETING = TargetingConditions.forCombat().range(searchRadiusInBlocks).selector(ENEMY_AND_NEUTRAL_PREDECATE.and(CAN_REACH_PREDECATE));
 
     public TurretEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -129,9 +143,9 @@ public class TurretEntity extends Entity
                 }
             }
 
-            else if(pPlayer.getLevel() instanceof ClientLevel)
+            else if(level.isClientSide() && pPlayer.getLevel().isClientSide())
             {
-                Minecraft.getInstance().setScreen(new TurretTargetingScreen(this, getTargetingMode()));
+            //    Minecraft.getInstance().setScreen(new TurretTargetingScreen(this, getTargetingMode()));
             }
         }
 
@@ -164,11 +178,11 @@ public class TurretEntity extends Entity
 
                 for(Entity entity : nearEntities)//filter for pinged entities and convert to living entity
                 {
-                    if(entity instanceof LivingEntity livingEntity)
+                    if(entity instanceof Mob mob)
                     {
-                        if(ModUtils.PingClasses.getPlayerPingClass(livingEntity) != IPingData.PingClasses.None)
+                        if(ModUtils.PingClasses.getPlayerPingClass(mob) != IPingData.PingClasses.None)
                         {
-                            nearPingedLivingEntities.add(livingEntity);
+                            nearPingedLivingEntities.add(mob);
                         }
                     }
                 }
@@ -188,10 +202,12 @@ public class TurretEntity extends Entity
                     if(nearestPingedMob != null)
                     {
                         target = nearestPingedMob;
+                        System.out.println("poingnear");
                     }
 
                     else
                     {
+                        System.out.println("Nearest");
                         target = nearestTarget;
                     }
 

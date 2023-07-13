@@ -167,6 +167,7 @@ public class ModClientEventBusSubscriber
         MenuScreens.register(ModMenuTypes.EQUIPMENT_TERMINAL_CONTAINER.get(), EquipmentTableScreen::new);
         MenuScreens.register(ModMenuTypes.FUEL_REFINERY_CONTAINER.get(), FuelRefineryScreen::new);
         MenuScreens.register(ModMenuTypes.CLASS_CHANGER_CONTAINER.get(), ClassChangerScreen::new);
+
     }
 
     @SubscribeEvent

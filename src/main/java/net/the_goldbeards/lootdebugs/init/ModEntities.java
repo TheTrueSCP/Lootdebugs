@@ -13,6 +13,7 @@ import net.the_goldbeards.lootdebugs.Entities.Mob.LootbugOldEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.FlareEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Flare.ShootFlareEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.*;
+import net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyPod.ResupplyDropEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.BulletEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Turret.TurretEntity;
 import net.the_goldbeards.lootdebugs.Entities.Tools.Zipline.ZiplineEntity;

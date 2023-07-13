@@ -1,4 +1,4 @@
-package net.the_goldbeards.lootdebugs.Entities.Tools;
+package net.the_goldbeards.lootdebugs.Entities.Tools.ResupplyPod;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.entity.PartEntity;
 import net.the_goldbeards.lootdebugs.Items.Fuel.FuelCanisterItem;
 import net.the_goldbeards.lootdebugs.capability.Class.IClassData;
 import net.the_goldbeards.lootdebugs.init.ModEntities;
@@ -45,6 +47,14 @@ import java.util.List;
 
 public class ResupplyDropEntity extends Projectile {
 
+    private final ResupplyArmPart arm0;
+    private final ResupplyArmPart arm1;
+    private final ResupplyArmPart arm2;
+    private final ResupplyArmPart arm3;
+
+    private final ResupplyArmPart[] subEntities;
+    
+    
     private static final int initialSupplyCount = 4;
 
     @Nullable
@@ -53,21 +63,42 @@ public class ResupplyDropEntity extends Projectile {
 
     private static final EntityDataAccessor<Integer> TARGET_HEIGHT = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.INT);
 
-    private static final EntityDataAccessor<Integer> SUPPLY_COUNT = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Boolean> SUPPLY_ARM_0 = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SUPPLY_ARM_1 = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SUPPLY_ARM_2 = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SUPPLY_ARM_3 = SynchedEntityData.defineId(ResupplyDropEntity.class, EntityDataSerializers.BOOLEAN);
 
 
     public ResupplyDropEntity(EntityType<? extends ResupplyDropEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+
+        this.arm0 = new ResupplyArmPart(this, "arm_0", 0, 1, 1);
+        this.arm1 = new ResupplyArmPart(this, "arm_1", 1,1, 1);
+        this.arm2 = new ResupplyArmPart(this, "arm_2", 2, 1, 1);
+        this.arm3 = new ResupplyArmPart(this, "arm_3", 3,1, 1);
+
+        this.subEntities = new ResupplyArmPart[]{this.arm0, this.arm1, this.arm2, this.arm3};
+        
         inGround = false;
         setTargetHeight(-40);
     }
 
     public ResupplyDropEntity(Level pLevel, int targetHeight, Player caller, BlockPos dropPos) {
         super(ModEntities.RESUPPLY_DROP_ENTITY.get(), pLevel);
+        
+        this.arm0 = new ResupplyArmPart(this, "arm_0", 0, 1, 1);
+        this.arm1 = new ResupplyArmPart(this, "arm_1", 1,1, 1);
+        this.arm2 = new ResupplyArmPart(this, "arm_2", 2, 1, 1);
+        this.arm3 = new ResupplyArmPart(this, "arm_3", 3,1, 1);
+
+        this.subEntities = new ResupplyArmPart[]{this.arm0, this.arm1, this.arm2, this.arm3};
+
         inGround = false;
         setTargetHeight(targetHeight);
         setOwner(caller);
-        this.setPos(dropPos.getX(), dropPos.getY(), dropPos.getZ());
+        this.setPos(dropPos.getX() + 0.5f, dropPos.getY() + 0.5f, dropPos.getZ() + 0.5f
+        );
     }
 
     public void lerpTo(double pX, double pY, double pZ, float pYaw, float pPitch, int pPosRotationIncrements, boolean pTeleport) {
@@ -139,10 +170,16 @@ public class ResupplyDropEntity extends Projectile {
             }
 
             this.setPos(d7, d2, d3);
+            for(ResupplyArmPart resupplyArmPart : subEntities)
+            {
+                resupplyArmPart.setPos(this.position().add(resupplyArmPart.id, 0, 0));
+            }
         }
 
         this.checkInsideBlocks();
+
     }
+
 
 
     @Override
@@ -160,7 +197,11 @@ public class ResupplyDropEntity extends Projectile {
     @Override
     protected void defineSynchedData() {
         this.entityData.define(TARGET_HEIGHT, 0);
-        this.entityData.define(SUPPLY_COUNT, initialSupplyCount);
+        this.entityData.define(SUPPLY_ARM_0, true);
+        this.entityData.define(SUPPLY_ARM_1, true);
+        this.entityData.define(SUPPLY_ARM_2, true);
+        this.entityData.define(SUPPLY_ARM_3, true);
+
     }
 
     @Override
@@ -245,27 +286,13 @@ public class ResupplyDropEntity extends Projectile {
         return false;
     }
 
-    @Override
-    public InteractionResult interact(Player pPlayer, InteractionHand pHand) {
-
-        if(ModUtils.DwarfClasses.isPlayerDwarf(pPlayer))
+    public void handlePlayerInteract(Player pPlayer)
+    {
+        for (ItemStack pStack : getRefillItems(ModUtils.DwarfClasses.getPlayerClass(pPlayer)))
         {
-            if (shrinkSupplyCount(1)) {
-                for (ItemStack pStack : getRefillItems(ModUtils.DwarfClasses.getPlayerClass(pPlayer)))
-                {
-                    pPlayer.heal(10);
-                    pPlayer.addItem(pStack);
-                }
-                return InteractionResult.SUCCESS;
-            }
+            pPlayer.heal(10);
+            pPlayer.addItem(pStack);
         }
-        else
-        {
-            pPlayer.displayClientMessage(new TranslatableComponent("message.lootdebugs.tool.resupply_pod.no_dwarf"), true);
-        }
-
-
-        return super.interact(pPlayer, pHand);
     }
 
     private List<ItemStack> getRefillItems(IClassData.Classes dwarfClass)
@@ -313,7 +340,11 @@ public class ResupplyDropEntity extends Projectile {
 
         pCompound.putBoolean("inGround", this.inGround);
 
-        pCompound.putInt("supplyCount", getSupplyCount());
+        pCompound.putBoolean("arm_active_0", getSupplyArmState(0));
+        pCompound.putBoolean("arm_active_1", getSupplyArmState(1));
+        pCompound.putBoolean("arm_active_2", getSupplyArmState(2));
+        pCompound.putBoolean("arm_active_3", getSupplyArmState(3));
+
 
         pCompound.putInt("targetHeight", getTargetHeight());
     }
@@ -326,7 +357,25 @@ public class ResupplyDropEntity extends Projectile {
 
         this.inGround = pCompound.getBoolean("inGround");
 
-        setSupplyCount(pCompound.getInt("supplyCount"));
+        if(pCompound.contains("arm_active_0"))
+        {
+            setSupplyArmState(0, pCompound.getBoolean("arm_active_0"));
+        }
+
+        if(pCompound.contains("arm_active_1"))
+        {
+            setSupplyArmState(1, pCompound.getBoolean("arm_active_1"));
+        }
+
+        if(pCompound.contains("arm_active_2"))
+        {
+            setSupplyArmState(2, pCompound.getBoolean("arm_active_2"));
+        }
+
+        if(pCompound.contains("arm_active_3"))
+        {
+            setSupplyArmState(3, pCompound.getBoolean("arm_active_3"));
+        }
 
         setTargetHeight(pCompound.getInt("targetHeight"));
     }
@@ -381,48 +430,85 @@ public class ResupplyDropEntity extends Projectile {
         return this.entityData.get(TARGET_HEIGHT);
     }
 
-    private boolean shrinkSupplyCount(int amount)
+    public void clearArm(int armID)
     {
-        if(getSupplyCount() - amount >= 0)
+        setSupplyArmState(armID, false);
+    }
+
+    public void setSupplyArmState(int armID, boolean armState)
+    {
+        switch (armID)
         {
-            setSupplyCount(getSupplyCount() - amount);
-            return true;
+            case 0 -> {
+               this.entityData.set(SUPPLY_ARM_0, armState);
+            }
+            case 1 -> {
+                this.entityData.set(SUPPLY_ARM_1, armState);
+            }
+            case 2 -> {
+                this.entityData.set(SUPPLY_ARM_2, armState);
+            }
+            case 3 -> {
+                this.entityData.set(SUPPLY_ARM_3, armState);
+            }
+        }
+    }
+
+    public boolean getSupplyArmState(int armID)
+    {
+        switch (armID)
+        {
+            case 0 -> {
+                return this.entityData.get(SUPPLY_ARM_0);
+            }
+            case 1 -> {
+                return this.entityData.get(SUPPLY_ARM_1);
+            }
+            case 2 -> {
+                return this.entityData.get(SUPPLY_ARM_2);
+            }
+            case 3 -> {
+                return this.entityData.get(SUPPLY_ARM_3);
+            }
         }
         return false;
     }
 
-    private void setSupplyCount(int supplyCount)
-    {
-        this.entityData.set(SUPPLY_COUNT, supplyCount);
-    }
-
-    private int getSupplyCount()
-    {
-        return this.entityData.get(SUPPLY_COUNT);
-    }
-
     public boolean arm0Visible()
     {
-        return getSupplyCount() >= 1;
+        return getSupplyArmState(0);
     }
 
     public boolean arm1Visible()
     {
-        return getSupplyCount() >= 2;
+        return getSupplyArmState(1);
     }
 
     public boolean arm2Visible()
     {
-        return getSupplyCount() >= 3;
+        return getSupplyArmState(2);
     }
 
     public boolean arm3Visible()
     {
-        return getSupplyCount() >= 4;
+        return getSupplyArmState(3);
     }
 
     @Override
     public boolean updateFluidHeightAndDoFluidPushing(TagKey<Fluid> pFluidTag, double pMotionScale) {
        return false;
     }
+
+    @Override
+    public boolean isMultipartEntity() {
+        return true;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public PartEntity<?>[] getParts() {
+        return subEntities;
+    }
+
+
 }
